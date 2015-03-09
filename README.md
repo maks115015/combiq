@@ -1,2 +1,2 @@
 # combiq
-Combiq.ru helps you to revise questions for developer's interview.
+Combiq.ru helps you to revise knowledges for developer's interview.
