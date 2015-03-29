@@ -1,0 +1,5013 @@
+﻿[
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "hccFVACaSGCDwEj7Ius-1w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как работает HashMap при попытке сохранить в нее два элемента по ключам с одинаковым hashCode но для которых equals == false?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "8MPoU39IRf6PSu5X8J08qw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Из чего состоит переключение контекста процессора между потоками и процессами? сколько оно стоит?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nk5EdXutQBKrGTkDLy9e6g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "concurrency"
+            ],
+            "title": "Почему у HashMap многопоточный вариант — ConcurrentHashMap, а у TreeMap — ConcurrentSkipListMap (сменилось внутреннее устройство с дерева на SkipList)?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "mkA1L88DQUG7MkjqacQ9zw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "TreeMap — реализовано как бинарное сбалансированное дерево поиска. Что означает «поиска»? Нарисуйте бинарное сбалансированное дерево, но не «поиска».",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "GtR2tCfuTVWTlaiDvLxs4w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В чем проявляется «сортированность» SortedMap, кроме того, что toString() выводит все по порядку?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "mwMCHCnHRvyhPdkRsZ3m2w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Если у меня есть коллекция и порожденный итератор, изменится ли итератор, если я вызову collection.remove(..)?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-wm-6f2_Q1OfEoJyRQ23kg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как перебрать элементы LinkedList в обратном порядке не используя медленный get(index)?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "dksgOvrZQH-__2AJuZXxZw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "HashMap может выродиться в список даже для ключей с разным hashCode. Как это возможно?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "z8Q8QQt7TlqI61CxrEmdLQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В WeakHashMap используются WeakReferences. А почему бы не создать PhantomHashMap на PhantomReferences?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Jg9TvsyZRxeSZ-PYPYyWww",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Почему нельзя использовать byte[] в качестве ключа в HashMap?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "DxjUWS-lQymTsiG-OPTVqQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как перебрать все ключи Map учитывая, что Map — это не Iterable?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Is3afclXSi-pZo8Hc4SZXw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "В классе String все поля финальные. Можно ли убрать ключевое слово финал? Ведь сеттеров все равно нет — следовательно поля нельзя переустановить.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "_9vLvFAHTDCJPhxHtBk4vA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое кооперативная многозадачность и она ли в Java. Если да, то какие преимущества. Если нет, то какая тогда в Java?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "T_9KN3llRhqdmHhJEPgCAQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Объясните смысл выражения «data race free программа является sequential consistent».",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "AjZ6cstHQLuZpbGSBUgGcw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое — Планировщик потоков? Предположите алгоритм работы.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "dcLbyISeTRyl3GP6x0kVnQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "LinkedHashSet — что это еще за «зверь»? Что в нем от LinkedList, а что от HashSet?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "gwEI1-6KQVSHlHLoa_AkrQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В чем разница между классами java.util.Collection и java.util.Collections?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "FM4hrqRyTDOTWoS9DbxUmw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое «зеленый потоки» и они ли в Java (в HotSpot JVM 7)?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "jgLPKG9qSe-qu-VxUrKJlA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Сравните интерфейсы java.util.Queue и java.util.Deque.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "_lFf9dlaSPivcaTM3FcdYw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Сделайте HashMap из HashSet (HashSet<Map.Entry<K, V>>).",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "PBCWp7DnQVe_Mn3DD5ABzg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Как согласовать упорядоченность Stream-ов и возможность параллельной обработки элементов (filter, map, flatMap)?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Aqw4p-2JR0ic0wx1S-2GMw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Реализуйте ограниченную блокирующую очередь на synchronized/Object.wait()/.notify()/.notifyAll()",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "60Usw9hQTqSmRsv7_9FEAQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое ordering, visibility, atomicity, happend-before, mutual exclusion на примере synchronize.",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "LOzf6ndmSniKnnCymjpmTQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое «рандеву»? При помощи каких классов в Java его можно организовать?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "LmPCP8MaT3ytf0Fxm16fBQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о идиоме многопоточного проектирования Private mutex.",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-oRG8uqnSgiVeFLmfJthCQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Thread affinity? Можно ли сделать в Java?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "8bl4Tz-jTyeW3C12tSdZkw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем разница между Thread.sleep() и Thread.yeild()?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "xAvnSO7-RdevvDDjqknLyQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "атомарно ли ++ для volatile переменной?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "qjeT_dj4SaCBPWTuENfqtw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В чем разница между Queue и BlockingQueue?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "M5zN0ULMTaarvD_a2wnj4A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "паттерны"
+            ],
+            "title": "Что можете сказать про MVC? Нарисуйте диаграмму и объясните, как MVC работает.",
+            "level": 2,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "u0VRpiu4T5WswAZdHpatBQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о API класса CountDownLatch и возможный сценарий использования.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-IR62zZDQCmE5UNw0y8N5g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем отличие методов sheduleAtFixedRate() от sheduleAtFixedDelay() класса SheduledThreadPool?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "gf3DnmGzT2Op7JzFUUjHOg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Реализуйте свой вариант CountDownLatch используя Semaphore.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ZG6_-QpeScuENfzPvjvXgw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Говорят, что Future/CompletableFuture — это монада. Что скажете?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "_Td2NdVqRS-fv50CbY6jBg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Объясните, что такое Internal iteration и External iteration.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "0LCikHrBRSC4pZZluTPPHQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что это за свойство — «reentrancy»?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "DphFDgrMSaCdjmxFu1HJdQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое «poison message»?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "9FcVCx81REqVGCiz4blzxw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Есть некоторый метод, который исполняет операцию i++. Переменная i типа int. Предполагается, что код будет исполнятся в многопоточной среде. Следует ли синхронизировать блок?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "XKbQEGTfR7CcPtgoNq_4Jw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency",
+                "core"
+            ],
+            "title": "Почему методы wait и notify объявлены у класса Object взамен Thread?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Yi3O9j7uRjuqkRDmFtbBCQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "алгоритмы"
+            ],
+            "title": "Какие алгоритмы сортировки Вам известны? Какие вообще знаете алгоритмы?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "QR2ykbmtSnKJm_y-XKeseg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что означает ключевое слово native? Объясните в деталях.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "_IpDVialSDavut3Jbgmn_Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое метод equals(). Чем он отличается от операции ==.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "NslO6OIFTEGKPhj-40WkIQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency",
+                "core"
+            ],
+            "title": "Какая разница между sleep() и wait()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Lhi8lGVmTKyvp0XzW9BhfA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Task stealing?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "O0-EWvUrTJCKA_dN0WPWCw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое сериализация?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "zEUGurzWRYuNzWYmnNLGSg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какие стандартные инструменты Java вы бы использовали для реализации пула потоков?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nmFQBCmWRSabNXssD0zy3w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое Error? В каком случае используется Error. Приведите пример Error’а.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "jdrYQxbURHGjmAVR5UGqUQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "swing"
+            ],
+            "title": "Что такое Event Dispatch Thread (поток обработки событий)? Как он работает?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "qFvzeAscRkK4mFysjiVZuw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Всегда ли исполняется блок finally?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "GUUnNCEhTNWQbBJUSp7ugQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что служит в качестве mutex, если метод объявлен synchronized?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Jq-im0APQlaAGBEETZfxuQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Возможно ли использование блока try-finally (без catch)?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "SsAGcSIDSeKYCZFposyPsw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какие типы классов бывают в java (вложенные… и.т.д.)",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "5p4yHv4BSTuMyFvkBqLyKg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "В чем отличие Serializable от Externalizable.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "e7VBtp5rT92mfTGLbN4osw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что означает ключевое слово final?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "LOe91-WhSDy9Rn8LQUBmeg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "web"
+            ],
+            "title": "Особенности передачи данных каждым типом запросов.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-2shOzEMS5Cx7B0S6t-3tA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Каковы различия между JDK и JRE?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "BYKgSd2jRnGmSLXy6ZEIpA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "orm"
+            ],
+            "title": "Что такое lazy-initialization (в Hibernate)?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "eD-jqRTbQA6jqTy_jia5VA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "J2EE",
+                "servlets"
+            ],
+            "title": "Что такое сервлет?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-0VcxLAGTuODDaF36lWEpg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "network"
+            ],
+            "title": "Что такое сокет.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "MtligfgZT1uVssNVUVDurg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое Generics?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "wwuOKr10Rm24rMQzZhJuOg",
+        "_score": 1,
+        "_source": {
+            "hasAnswer": true,
+            "tags": [
+                "core"
+            ],
+            "title": "Базовый класс в Java, как известно, Object. Какие его методы Вы можете назвать?",
+            "level": 1,
+            "answer": {
+                "markdown": "Object это базовый класс для всех остальных объектов в Java. Любой класс, который вы определяете, явным или неявным образом наследуется от класса Object.\r\n\r\nПолный перечень методов класса Object лучше всего смотреть в JavaDoc-ах [здесь](http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html). Сигнатуры методов лучше знать наизусть.\r\n\r\n## clone\r\n\r\n    protected Object clone() throws CloneNotSupportedException\r\n    \r\nМетод создает и возвращает копию объекта. Если вы хотите сделать объекты своего класса клонируемыми, то вы должны реализовать в своем классе интерфейс [Cloneable](http://docs.oracle.com/javase/7/docs/api/java/lang/Cloneable.html). В этом интерфейсе нет ни одного метода, это интерфейс-маркер, он служит лишь признаком для виртуальной машины, что объекты могут быть клонированы. Если проверка не выполняется успешно, метод порождает ошибку [CloneNotSupportedException](http://docs.oracle.com/javase/7/docs/api/java/lang/CloneNotSupportedException.html).\r\n\r\nПри вызове, если интерфейс [Cloneable](http://docs.oracle.com/javase/7/docs/api/java/lang/Cloneable.html) реализован, то порождается новый объект от того же класса, от которого был создан исходный объект. При этом копирование выполняется на уровне виртуальной машины, *никакие конструкторы не вызываются*. Затем значения всех полей, объявленных, унаследованных либо объявленных в родительских классах, копируются. Полученный объект возвращается в качестве клона.\r\n\r\nОбратите внимание, что сам класс Object не реализует интерфейс [Cloneable](http://docs.oracle.com/javase/7/docs/api/java/lang/Cloneable.html), а потому попытка вызова `new Object().clone()` будет приводить к ошибке. Метод `clone()` предназначен скорее для использования в наследниках, которые могут обращаться к нему с помощью выражения `super.clone()`. \r\n\r\nДля чего может потребоваться переопределить метод `clone()`? Примитивные поля копируются по значению. Изменение поля в исходном объекте не сказывается на полях клона. А вот ссылочные поля копируются по ссылке, оба объекта ссылаются на одну и ту же область памяти (исходный объект). Поэтому изменения, происходящие с исходным объектом, сказываются на клонированном. Если вас не устраивает такое поведение, то метод `clone()` нужно переопределить и создавать копии ссылочных объектов самостоятельно.\r\n\r\n## equals\r\n\r\n    public boolean equals(Object obj)\r\n    \r\nПри использовании оператора `==` объекты сравниваются по ссылке. Метод `equals()` же позволяет сравнивать объекто по **значению**. Сравнивается состояние объекта, у которого вызывается этот метод, с передаваемым аргументом.\r\n\r\nТема про сравнение объектов настолько обширна, и ее настолько часто спрашивают, что мы рекомендуем вам ознакомиться со статьями [Сравнение объектов: теория](http://www.skipy.ru/technics/objCompTh.html) и [Сравнение объектов: практика](http://www.skipy.ru/technics/objCompPr.html).\r\n\r\n## hashCode\r\n\r\n    public int hashCode()\r\n    \r\nВызов этого метода позволит вам получить целочисленное представление состояния объекта. Это как-будто бы слепок объекта. В идеале каждый объект должен возвращать уникальное значение. При этом, если объекты равны *по значению*, то и значения их хэш-кодов должны быть равны, а если объекты не равны, то значения хэш-кодов должны отличаться. Это требование не строгое, но от того насколько оно хорошо выполняется, как минимум, будет зависеть производительность стандартной библиотеки коллекций Java.\r\n\r\nВопросы по методу `hashCode()` всегда идут в паре с вопросами по методу `equls()`. Поэтому мы опять  рекомендуем вам ознакомиться со статьями [Сравнение объектов: теория](http://www.skipy.ru/technics/objCompTh.html) и [Сравнение объектов: практика](http://www.skipy.ru/technics/objCompPr.html).\r\n\r\n## finalize\r\n\r\n    protected void finalize() throws Throwable\r\n    \r\nМетод вызывается при уничтожении объекта автоматическим сборщиком мусора (garbage collector). В классе Object он ничего не делает, однако в классе-наследнике позволяет описать все действия, необходимые для корректного удаления объекта, такие как закрытие соединений с БД, сетевых соединений, снятие блокировок на файлы и т.д. В обычном режиме напрямую этот метод вызывать не нужно, он отработает автоматически.\r\n\r\nОбратите внимание, что использовать этот метод для освобождения ресурсов все-таки не рекомендуется. К сожалению, JVM не гарантирует вызов этого метода при уничтожении. Все ваши ресурсы вам нужно закрывать явным образом, не полагаясь на JVM. Кстати, существует достаточно много вопросов плана *В каких случаях метод finalize не отработает?*\r\n\r\n## getClass\r\n\r\n    public final Class<?> getClass()\r\n    \r\nМетод возвращает объект класса `Class`, который описывает класс (имя, методы, поля), от которого был порожден этот объект.\r\n\r\n## wait, notify, notifyAll\r\n\r\n    public final void wait() throws InterruptedException\r\n    public final void wait(long timeout) throws InterruptedException\r\n    public final void wait(long timeout, int nanos) throws InterruptedException\r\n    public final void notify()\r\n    public final void notifyAll()\r\n    \r\nЭти методы служат для поддержки многопоточности. Обычно в этом вопросе не требуется как-то отдельно уточнять для чего именно. Тема многопоточности обширна и достаточно сложна для уровня Junior.\r\n\r\n## toString\r\n\r\n    public String toString()\r\n    \r\nМетод позволяет получить текстовое описание любого объекта. Создавая новый класс, данный метод можно переопределить и возвращать более подробное описание. Обычно используется для логирования объектов.\r\n    \r\n### Ссылки\r\n\r\n* [http://www.firststeps.ru/java/jhelp/r.php?2](http://www.firststeps.ru/java/jhelp/r.php?2)\r\n* [http://dr-magic.blogspot.ru/2009/01/java-se-1.html](http://dr-magic.blogspot.ru/2009/01/java-se-1.html)\r\n* [http://interviewinit.com/?p=270](http://interviewinit.com/?p=270)\r\n* [http://www.quizful.net/interview/java/class-object-methods](http://www.quizful.net/interview/java/class-object-methods)",
+                "duplicates": [],
+                "source": "<p>Object это базовый класс для всех остальных объектов в Java. Любой класс, который вы определяете, явным или неявным образом наследуется от класса Object.</p>\n<p>Полный перечень методов класса Object лучше всего смотреть в JavaDoc-ах <a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html\">здесь</a>. Сигнатуры методов лучше знать наизусть.</p>\n<h2>clone</h2>\n<pre><code>protected Object clone() throws CloneNotSupportedException\n</code></pre>\n<p>Метод создает и возвращает копию объекта. Если вы хотите сделать объекты своего класса клонируемыми, то вы должны реализовать в своем классе интерфейс <a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/Cloneable.html\">Cloneable</a>. В этом интерфейсе нет ни одного метода, это интерфейс-маркер, он служит лишь признаком для виртуальной машины, что объекты могут быть клонированы. Если проверка не выполняется успешно, метод порождает ошибку <a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/CloneNotSupportedException.html\">CloneNotSupportedException</a>.</p>\n<p>При вызове, если интерфейс <a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/Cloneable.html\">Cloneable</a> реализован, то порождается новый объект от того же класса, от которого был создан исходный объект. При этом копирование выполняется на уровне виртуальной машины, <em>никакие конструкторы не вызываются</em>. Затем значения всех полей, объявленных, унаследованных либо объявленных в родительских классах, копируются. Полученный объект возвращается в качестве клона.</p>\n<p>Обратите внимание, что сам класс Object не реализует интерфейс <a href=\"http://docs.oracle.com/javase/7/docs/api/java/lang/Cloneable.html\">Cloneable</a>, а потому попытка вызова <code>new Object().clone()</code> будет приводить к ошибке. Метод <code>clone()</code> предназначен скорее для использования в наследниках, которые могут обращаться к нему с помощью выражения <code>super.clone()</code>.</p>\n<p>Для чего может потребоваться переопределить метод <code>clone()</code>? Примитивные поля копируются по значению. Изменение поля в исходном объекте не сказывается на полях клона. А вот ссылочные поля копируются по ссылке, оба объекта ссылаются на одну и ту же область памяти (исходный объект). Поэтому изменения, происходящие с исходным объектом, сказываются на клонированном. Если вас не устраивает такое поведение, то метод <code>clone()</code> нужно переопределить и создавать копии ссылочных объектов самостоятельно.</p>\n<h2>equals</h2>\n<pre><code>public boolean equals(Object obj)\n</code></pre>\n<p>При использовании оператора <code>==</code> объекты сравниваются по ссылке. Метод <code>equals()</code> же позволяет сравнивать объекто по <strong>значению</strong>. Сравнивается состояние объекта, у которого вызывается этот метод, с передаваемым аргументом.</p>\n<p>Тема про сравнение объектов настолько обширна, и ее настолько часто спрашивают, что мы рекомендуем вам ознакомиться со статьями <a href=\"http://www.skipy.ru/technics/objCompTh.html\">Сравнение объектов: теория</a> и <a href=\"http://www.skipy.ru/technics/objCompPr.html\">Сравнение объектов: практика</a>.</p>\n<h2>hashCode</h2>\n<pre><code>public int hashCode()\n</code></pre>\n<p>Вызов этого метода позволит вам получить целочисленное представление состояния объекта. Это как-будто бы слепок объекта. В идеале каждый объект должен возвращать уникальное значение. При этом, если объекты равны <em>по значению</em>, то и значения их хэш-кодов должны быть равны, а если объекты не равны, то значения хэш-кодов должны отличаться. Это требование не строгое, но от того насколько оно хорошо выполняется, как минимум, будет зависеть производительность стандартной библиотеки коллекций Java.</p>\n<p>Вопросы по методу <code>hashCode()</code> всегда идут в паре с вопросами по методу <code>equls()</code>. Поэтому мы опять  рекомендуем вам ознакомиться со статьями <a href=\"http://www.skipy.ru/technics/objCompTh.html\">Сравнение объектов: теория</a> и <a href=\"http://www.skipy.ru/technics/objCompPr.html\">Сравнение объектов: практика</a>.</p>\n<h2>finalize</h2>\n<pre><code>protected void finalize() throws Throwable\n</code></pre>\n<p>Метод вызывается при уничтожении объекта автоматическим сборщиком мусора (garbage collector). В классе Object он ничего не делает, однако в классе-наследнике позволяет описать все действия, необходимые для корректного удаления объекта, такие как закрытие соединений с БД, сетевых соединений, снятие блокировок на файлы и т.д. В обычном режиме напрямую этот метод вызывать не нужно, он отработает автоматически.</p>\n<p>Обратите внимание, что использовать этот метод для освобождения ресурсов все-таки не рекомендуется. К сожалению, JVM не гарантирует вызов этого метода при уничтожении. Все ваши ресурсы вам нужно закрывать явным образом, не полагаясь на JVM. Кстати, существует достаточно много вопросов плана <em>В каких случаях метод finalize не отработает?</em></p>\n<h2>getClass</h2>\n<pre><code>public final Class&lt;?&gt; getClass()\n</code></pre>\n<p>Метод возвращает объект класса <code>Class</code>, который описывает класс (имя, методы, поля), от которого был порожден этот объект.</p>\n<h2>wait, notify, notifyAll</h2>\n<pre><code>public final void wait() throws InterruptedException\npublic final void wait(long timeout) throws InterruptedException\npublic final void wait(long timeout, int nanos) throws InterruptedException\npublic final void notify()\npublic final void notifyAll()\n</code></pre>\n<p>Эти методы служат для поддержки многопоточности. Обычно в этом вопросе не требуется как-то отдельно уточнять для чего именно. Тема многопоточности обширна и достаточно сложна для уровня Junior.</p>\n<h2>toString</h2>\n<pre><code>public String toString()\n</code></pre>\n<p>Метод позволяет получить текстовое описание любого объекта. Создавая новый класс, данный метод можно переопределить и возвращать более подробное описание. Обычно используется для логирования объектов.</p>\n<h3>Ссылки</h3>\n<ul>\n<li><a href=\"http://www.firststeps.ru/java/jhelp/r.php?2\">http://www.firststeps.ru/java/jhelp/r.php?2</a></li>\n<li><a href=\"http://dr-magic.blogspot.ru/2009/01/java-se-1.html\">http://dr-magic.blogspot.ru/2009/01/java-se-1.html</a></li>\n<li><a href=\"http://interviewinit.com/?p=270\">http://interviewinit.com/?p=270</a></li>\n<li><a href=\"http://www.quizful.net/interview/java/class-object-methods\">http://www.quizful.net/interview/java/class-object-methods</a></li>\n</ul>\n"
+            },
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "tqXI1PqvQnKhg_O3fJz7pQ",
+        "_score": 1,
+        "_source": {
+            "title": "В чем суть Persistent Data Structures?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "AfgzLwuxQY6Vi-JHtG55BQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Расположите в виде иерархии следующий интерфейсы: List, Set, Map, SortedSet, SortedMap, Collection, Iterable, Iterator, NavigableSet, NavigableMap.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "wb7yTLClRyaQiC9ngAHmSg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Реализуйте симметрическую разность двух коллекций используя методы Collection (addAll(), removeAll(), retainAll())",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ELJDb5RaRcCPt-u0TjrQ2g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Принципы реализации многопоточных списков и кольцевого буфера. А неблокирующие?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "x1QWl3mITDeHrVsiK2jSgg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как и когда происходит увеличение количества корзин в HashMap?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "qn3pHIfaTtaCqxpAH-xhgQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Когда имеет смысл паралелить алгоритм (закон Амдала)?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "R4BhG3oXTUKYD1pWLsz20g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В каком случае может быть потерян элемент в HashMap?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "D_NsrIFKRO-1eCweAbueug",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "алгоритмы"
+            ],
+            "title": "Реализация сортировки пузырьком?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "3ToEGqLWRyCTs6eW2JQ2eQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "core"
+            ],
+            "title": "Максимальное число значений hashCode()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "CJj2-S_SSCGXRgAC9IywZg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Сравните Enumeration и Iterator.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "XqbF3ZGpSHuD4QHAE3SlWA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Объясните такую сигнатуру метода: Collections.min(Collection<? extends T> coll, Comparator<? super T> comp).",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "7HkV5CO9SReB_LhdE1DXpA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Будет ли работать HashMap если все ключи будут возвращать  public int hashCode() {return 42;}?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "iOSfLb-6R4CSrmdM04TOWw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Сделайте HashSet из HashMap (используйте только множество ключей, но не множество значений).",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "efmbpVT4QXmvNKYmVU6-vA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В WeakHashMap используются WeakReferences. А почему бы не создать SoftHashMap на SoftReferences?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "fAhkgHxCS-2tuBQ_14Wiwg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Могут ли у разных ссылок на один объектов в памяти (ref0 == ref1) быть ref0.equals(ref1) == false?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "cEHXgbO7QaqrfEnmpZA_7A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Что произойдет, если я вызову Iterator.next() не «спросив» Iterator.hasNext()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "X6nw2DMSRWmPwbZL0i9JVw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Могут ли у разных объектов в памяти (ref0 != ref1) быть ref0.hashCode() == ref1.hashCode()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "PVyHmdncQnSEJyIDj8IEGQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В чем разница между HashMap и WeakHashMap? Для чего нужна WeakHashMap?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ZF_S6dvZToKBp7E_ph9Kgg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Устройство TreeSet?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Vutq-_Y6T_-xsb5BeVKF1g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Сравните с точки зрения программиста — машину с четырехядерным процессором и двумя двухядерными процессорами.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-K5BgM2_RxO8RoJYqazm1w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Почему у интерфейса Comparator метод compare получает два аргумента, а у интерфейса Comparable метод compareTo получает один аргумент?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "WyD_eq87Q96FtBZWusZBjw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какие выигрыши может дать многопоточность на одноядерной машине?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "1wyhkq2HTBSCdn4HXMdOEg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите про иерархию кэшей L1/L2/L3? Что вызвало ее появление?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "QwckvEA8RYegBnR_13_hag",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Cache pollution? Плохо это или хорошо? Как с этим бороться?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "6XxwQqN3TcmWZlPjOfjCOg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Cache miss? Плохо это или хорошо? Как с этим бороться?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nguDN0cBTQWO1fOK0A3cEQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Кто кого расширяет Queue расширяет Deque или Deque расширяет Queue?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "9I9vc-nuS1an7VgOZhn5dw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Speculative Execution?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "m4PfGlJ7STmisifXc3KNkQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Memory Hierarchy?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "7_HfdVXYRcKdPfGuEAozJQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое ordering, visibility, atomicity, happend-before, mutual exclusion на примере volatile.",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "SK2lDbK7ThOqO-vbZGW4Kw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Перечислите все сценарии попадания в wait-set встроенного монитора",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "vI2YYupXQWOktASv2mgkRA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Напишите программу, которая демонстрирует False sharing.",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "tESAdkjHTVWqnDpPDjCXlw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Как сделать Safe Publishing используя AtomicBoolean?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ZcXZxGalTwOCMyi27hY28g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем преимущество ForkJoinPool над ThreadPoolExecutor?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "RuJAxSz2QmiEKee5CsLJrA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Почему Thread.stop()/destroy()/suspend()/resume() — deprecated?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "0maXxSkQTFG733Rfiyf1AA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какие гарантии на работу с volatile?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "T5uynfKlQfKBamTUSAV_5Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Safe Publishing?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "EzeQOzmQRtyQUf1LHv_LHw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое data-race?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "d8TFNN08TWa3whECUMMMNg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Как соотносятся свойства Stream-ов (immediate/terminal, lazy/eager, short-circuiting, ordered/unordered) с возможностью автоматического распараллеливания?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "7sM1JkKES_SRwMuiDD-dqQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем состоит критика архитектур с явным использованием потоков и блокировок с позиции неблокирующих алгоритмов?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "51qhf0aDTp-PLYQ-dgADCA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Говорят, что акторы — это легковесные потоки и их можно создавать десятки и сотни тысяч. Как это реализуется на JVM?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Tw47RDPPTeCRopP0ND5U0g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "concurrency"
+            ],
+            "title": "Как реализован CopyOnWriteList? В чем преимущества/недостатки в сравнении с Collections.synchronizedList(new ArrayList())?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "AlcnlZNhTM2pw4Oe59jm3g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какая функциональность появилась у ScheduledThreadPool в сравнении с ThreadPoolExecutor?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "4fYhZO2KS9GOrzZHqrI-lQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какое худшее время работы метода add() для ArrayList (O(1), O(log(N)), O(N), O(N*log(N)), O(N*N))?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "q0iG2KgmSBSKbObewOFq0g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какие преимущества STM над явным использованием блокировок?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "tbB2UiATRLCCIIOZNEdJ5A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Чем «занят» актор, когда нет входящих сообщений?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Q4mJtPqITNWE8Vxc9yejYw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Назовите отличия synchronize{} и ReentrantLock.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "s1rTKwfzRk-MFONkrYUDWA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Предположим в методе run возник RuntimeException, который не был пойман. Что случится с потоком? Есть ли способ узнать о том, что Exception произошел (не заключая все тело run в блок try-catch)? Есть ли способ восстановить работу потока после того как это произошло?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "zVOieRQuQ-mEFmIWS-CKRg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency",
+                "core"
+            ],
+            "title": "Что такое синхронизация? Блокировка на уровне объекта и блокировка на уровне класса?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "dYS9FQFJTciGsgZlc8Fing",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Объясните абстракцию и инкапсуляцию. Как они связаны?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "BP7trKBnT5eCfyvb99FnVw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core",
+                "gc"
+            ],
+            "title": "Что такое сборщик мусора? Можем ли мы вызвать его?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "I3atYM_xTS6ZElmNBQnaHQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Объясните ключевые слова transient и volatile в Java.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "0oL8KcrZQA-CbtfEg40mvg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Почему метод main() объявлен как public static void?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Olp1ilJeSNmKePR92KfHVg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "В Java передача по значению или по ссылке?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "BZxQ0RwxTxGHOszpR4Dk5g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Как StringBuffer экономит память?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "aNHBKjOnR6uXzRVP5WVOhA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какая разница между && и &?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "pvo9uW0bT-mUN0PGJ1nejQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Предположим вам необходимо создать свой собственный класс Exception. Какими мотивами вы будете руководствоваться при выборе типа исключения: checked/unchecked? ",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "jF2ITHtzS9uKdleq4N-zRQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Могли бы вы придумать ситуацию, когда блок finally не будет выполнен?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "JuDoEUqKTN-IglCObEpUcw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "web"
+            ],
+            "title": "Что такое Ajax? Как принципиально устроена эта технология?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "gCCsGtHGRB6YQo1sndQjOg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какие вы знаете способы запустить некоторое действие в отдельном потоке?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Au9vFrR9RB2auvObU2cEsw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Почему метод clone объявлен как protected? Что необходимо для реализации клонирования?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Peil_DwMRuKk4aSzCngLpA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое статический класс, какие особенности его использования?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "hCuGif1KSWCchNU4Rey6Ow",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "паттерны",
+                "web"
+            ],
+            "title": "Архитектура WEB-приложений. Расскажите о паттерне MVC.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "NLwrNZcWQjiAg0JaVw7lew",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какие особенности инициализации final переменных?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "8G3wRsBvRTuCjUH04RAGLQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Для чего используется ключевое слово volatile?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "kNx5JzrVS2CvFyaxvy_1_Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "db"
+            ],
+            "title": "Что такое первая нормальная форма и процесс нормализации? Какие бывают нормальные формы?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ztEu5epeQkyixqkVVp3BsA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "db"
+            ],
+            "title": "Чем отличается внутренний и внешний join.",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-ruO6x8hQcGApYf93FBY3w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "web",
+                "паттерны"
+            ],
+            "title": "В чем суть антипаттерна \"волшебный сервлет\"?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nqKxXVLTQo-wm1wRXp0Hjw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Как из программы на Java запустить другую программу?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "7d1IDoS9S0qekkZQ3iW80Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "jdbc"
+            ],
+            "title": "Этапы работы с базой данных с использованием JDBC?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "UE226DN-R36PZJ5AQ1CAoA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "ООП. Основные принципы ООП. Overloading и Overriding.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "tyir2-TWRMiw4BXVuRFvuQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "web"
+            ],
+            "title": "Чем апплет отличается от простого приложения?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "dwUMtB8RTUmVJFLIMh6U4Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "tools"
+            ],
+            "title": "Как работает система контроля версий?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "iSDC_8fuROejosDNHgDkrg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "web"
+            ],
+            "title": "Типы HTTP-запросов.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "c6WASGwcTYu0NuGW1h1g7A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "jdbc"
+            ],
+            "title": "Перечислите все классы и интерфейсы JDBC.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "WZJR1pTaSSCMMmSlW1ktmw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "jdbc"
+            ],
+            "title": "Чем отличается Statement от PreparedStatement?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "uR62wLlER3S1VgVtQLfIHA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое инкапсуляция?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "0sswAjAZQfid0pDPZjDw8w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Если у класса Point{int x, y;} «правильно» реализовать метод equals (return ref0.x == ref1.x && ref0.y == ref1.y), но сделать хэш-код в виде int hashCode() {return x;}, то будут ли корректно такие точки помещаться и извлекаться из HashSet?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "rZuQA9DgQkGTRgudDCRKyA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "алгоритмы"
+            ],
+            "title": "Предложите эффективный алгоритм удаления нескольких рядом стоящих элементов из середины списка, реализуемого ArrayList.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "eHAY4J8sSg-REThVn_S5Iw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как одним вызовом из List получить List со всеми элементами, кроме первых и последних 3-х?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "LOMWV6g_Qf-QZ8UFFFuLOw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "алгоритмы"
+            ],
+            "title": "Какими свойствами должно обладать бинарное отношения порядка, порождаемое реализацией Comparator/Comparable: коммутативность, ассоциативность, дистрибутивность, рефлексивность, транзитивность?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "C1hTWtknTyeuwD80L_61vw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "core"
+            ],
+            "title": "equals() порождает отношение эквивалентности. Какими из свойств обладает такое отношение: коммутативность, симметричность, рефлексивность, дистрибутивность, ассоциативность, транзитивность?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "iFUmWyaXRMGYXLe5trtI6g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "В equals требуется проверять, что аргумент (equals(Object that)) такого же типа как и сам объект. В чем разница между this.getClass() == that.getClass() и that instanceof MyClass?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ZKWoS-TlQXWQF2H13Ewy6g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "core"
+            ],
+            "title": "Для множеств еnum-ов есть специальный класс — java.util.EnumSet? Зачем? Чем авторов не устраивал HashSet или TreeSet?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "lNlIb3kLSUCqIh7Q9az0Ww",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Напишите НЕмногопоточную программу, которая заставляет коллекцию выбросить ConcurrentModificationException.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "KxZVg_VLT9ypI9w10po8aA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Если у меня есть коллекция и порожденный итератор, изменится ли коллекция, если я вызову iterator.remove()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "efpcAj-nTtqxH6ssFX6skg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Сколько выделяется элементов в памяти при вызове ArrayList.add()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "pWmCHTdKQWi-Kx-5WWYNzw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "LinkedList — это односвязный, двусвязный или четырехсвязный список?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "mdGKkMssQ7uAZuElLBIfSg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как одной строчкой преобразовать ArrayList в HashSet?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "AXipyPnzQkyZSlkkNXqDhQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Объясните такую сигнатуру метода: Collections.sort(List list, Comparator<? super T> c).",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "DIp8i_HpTu-034ecXB1jhg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "core"
+            ],
+            "title": "Почему нельзя написать «ArrayList<List> numbers = new ArrayList<ArrayList>();» но можно «List<ArrayList> numbers = new ArrayList<ArrayList>();»?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ASHBJhGBTViXW_i29ZZ_yw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Напишите программу, которая демонстрирует размер кэша L1.",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "tW8N_0eaRGeBeIwqE3E5IA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как между собой соотносятся интерфейсы SortedSet и NavigableSet?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "M5GJb2LKS8KHqHz-00DOvg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Cache line? В виде каких эффектов проявляется?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "0zgZDW0KTXeuE4afVObEJw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "LinkedHashMap — что это еще за «зверь»? Что в нем от LinkedList, а что от HashMap?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "L-S7BaIfTXaW6WQNoM0wpQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Чем отличается ArrayList от LinkedList?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "jTzeNvrxRfCzMZJSL9-uGQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В чем отличия TreeSet и HashSet?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "PWBzDzS1S3K6nTw2HPU6gA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "WeakRefferece, PhantomRefference и SoftReference?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "s67hiFJLQaSVBsoUzsZgVw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем проблема с Double Checked Locking? Как все-таки сделать потокозащищенный ленивый синглетон с дешевым доступом?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "TSi81fDpT6WzdJ8bmLbuqg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое ordering, visibility, atomicity, happend-before, mutual exclusion на примере AtomicInteger.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ox5uGjtuSHq4ZPQBQuJ3Ag",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Перечислите все сценарии попадания в blocking-set встроенного монитора",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "EZ53tkYnQoOwWqnoJNIakA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Thread.getState() возвращает экземпляр Thread.State. Какие возможны значения?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ZRZuXu2NRae_Z32BdVSVQA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о шаблоне многопоточного проектирования Producer/Consumer.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "qTLwToRWR9CzmsqhhrrEGg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "можно ли так реализовать equals(Object that) {return this.hashCode() == that.hashCode()}?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "MpyGkeRnRQOEfwFCEIZTww",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Сравните кооперативную и вытесняющую многозадачности.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "BloeF56_TeShRPnGjK9F6A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем разница между потоком и процессом?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "8XCNhHAVSJawh3bHB5ehlQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем разница между Multicore и Multisocket?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ZISrtVLaS8usxOIo_IkQyA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о модели рекурсивного параллелизма в сравнении с итеративным параллелизмом.",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "DdDjSbMSTV2nBwAQn5Xq3A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Есть ли какие-то happens-before гарантии при работе с ConcurrentMap? Между двумя put()? Между put() и get()? Между двумя get()?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "3fIFqpF7Q2i_47J0IMB2uA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Опишите как происходит параллельный collect, если потоков много, а результат один?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "WwoVvOIpTZm0fUGO8ZWV8g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о API класса Semaphore и возможный сценарий использования.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-Rk_PxEGSnOMqfNV80d1pw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о шаблоне многопоточного проектирования Master/Workers.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "DuMxj8Y2TpmnaaJSl7XcGw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Реализуйте простейший пул потоков фиксированного размера.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "5SwxYaCwQOq_Cp9Gh4e50Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Напишите программу, которая демонстрирует размер кэша L2.",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "eTrg44MKRRmMhRl8d_6b5Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Дайте определение и сравните Wait-freedom, Lock-freedom и Obstruction-freedom.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "PpRHGPxgQreSqJVfw3i38g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Memory padding?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "FRhLsc4LQ5W2r4D6nIkkrw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем разница между SMP и NUMA? Как это сказывается на программах?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "QW_ww9-YQkKjPGzC9SyA2Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какие недостатки STM над явным использованием блокировок?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-W91Hq3LQwqFb2OkXu0mqQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Реализуйте свой вариант CyclicBarrier используя Semaphore.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "j1D1-9rJTvCvBY8n5djI-g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Зачем используется AtomicFieldUpdater если у нас есть AtomicReference?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "0GFVpmoKSM2Rmdm6wG4tpA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Почему необходимо избегать метода finalize()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nTyWTT_cRfKwoZU2qTzZ3A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Расскажите про модификаторы доступа.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "fJ5P2_YxSEWhmCJWZ2Uvww",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое частичный порядок?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "tieE69uQQKGpxF8X0818eQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое ABA-проблема?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "dVAFEaMESoKaHIezHiWSoA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что используется в качестве mutex, если метод объявлен static synchronized? Можно ли создавать новые экземпляры класса, пока выполняется static synchronized метод?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "HUKh9g1GTRObHgknmjadpg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Нужно остсортировать миллион строк (java.lang.String). Что будет быстрее: добавить их в TreeSet, добавить их в коллецию и потом отсортировать, что-то другое?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "8dhZUBSZShew1ZlsJ1bgnQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое finalize? Зачем он нужен? Что Вы можете рассказать о сборщике мусора и алгоритмах его работы.",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "gEuug-wNTgiC13VFsvHT7g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "паттерны"
+            ],
+            "title": "Напишите Singleton... А с ленивой загрузкой. А если он должен быть потоко-безопасным? А в каких случаях ленивая загрузка хуже?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "vobMBqv3RB2vDpJshA45yQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какие особенности использования метода wait? При каких условиях поток может выйти из режима ожидания?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "2vM-_zcfQo6KITxTv-IXtQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Разъясните интерфейсы-маркеры.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "4wXXeYKXRUSKu6Idlg0AwQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое «fail-fast поведение»?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nlmcCN0SQliQTOUMzhe6UA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем суть архитектуры STM?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "B5QJ3fktRLKVFQ-ftyQOGg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что может Phaser?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "IkqG0YO8TRC4-JvempEWjA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Каким образом из вложенного класса получить доступ к полю внешнего класса.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "V6yp6WO3Q8ivD-nSzovWPg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "J2EE",
+                "servlets"
+            ],
+            "title": "Что такое сервлет, jsp, их отличие?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "gwU5fO0nSXq8ydoO9tt6gA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Возможна ли в Java перегрузка операторов? Если да, то как это можно сделать?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "H6jasaPrQn-OX1KX9N8ihg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "web"
+            ],
+            "title": "Общая схема взаимодействия клиента и сервера по HTTP-протоколу.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "RFPNtu56QuiRSbgJ9qSoVA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какая конструкция используется в Java для обработки исключений?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "WO6HMCuzQHOo4ZjaCTP9Wg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Длина типа int в байтах на 32-х и 64-х разрядных платформах.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "YV8yH7MhQfiHzGyaxPXzRQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "J2EE",
+                "servlets"
+            ],
+            "title": "Что такое фильтры и контекст-листенеры?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Q_OxqVHwS-qC4KWubIg9AA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "db"
+            ],
+            "title": "В чем смысл индекса СУБД, как они устроены, как хранятся? Как бы вы реализовали тот же функционал?",
+            "level": 2,
+            "companies": [
+                "sportmaster"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "TaybVuA1QPyujPxSLPseqg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "network"
+            ],
+            "title": "Клиентский сокет. Задачи, которые решает клиентский сокет.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "xpOmmVf4SLuiw-pKt3XQ7w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "web"
+            ],
+            "title": "Какова разница между методами forward и sendredirect?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "G1PlvVRNRV27gFhXDhL5MQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "swing"
+            ],
+            "title": "Для чего исользуется класс SwingWorkers?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "vwAJYJ6-QwmFeuqbXmpBhw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "jdbc"
+            ],
+            "title": "Как вызвать хранимую процедуру?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "zNnPUT0mS9-51_Nxk2uoKg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "jdbc"
+            ],
+            "title": "Как правильно закрыть Connection?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nzUYO9wmTvaNX62Bz8XLvQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "db"
+            ],
+            "title": "В чем разница между SQL и MySQL.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "dwDW8CLfQBmVzUPfH3bh8A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое autoboxing?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "t7A8Cm2qRuKCUEAV8ZVuOA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "jdbc"
+            ],
+            "title": "Как создать Connection?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "9lc2QqCXQiy1eNq9ygrMVw",
+        "_score": 1,
+        "_source": {
+            "hasAnswer": true,
+            "tags": [
+                "core"
+            ],
+            "title": "Какова цель сериализации?",
+            "level": 1,
+            "answer": {
+                "markdown": "Сериализация это преобразование объекта в последовательность байтов, так что \r\nобъект может быть сохранен на постоянное хранение или передан потоком через\r\nканал связи. Поток байт может быть десериализован — преобразован в копию \r\nоригинального объекта.\r\n\r\n%%% duplicate\r\nO0-EWvUrTJCKA_dN0WPWCw\r\n%%%",
+                "duplicates": [
+                    "O0-EWvUrTJCKA_dN0WPWCw"
+                ],
+                "source": "<p>Сериализация это преобразование объекта в последовательность байтов, так что\n<br  />объект может быть сохранен на постоянное хранение или передан потоком через\n<br  />канал связи. Поток байт может быть десериализован — преобразован в копию\n<br  />оригинального объекта.</p>\n"
+            }
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Obi5LG97S0SD29lE0v_7XQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "orm"
+            ],
+            "title": "Что такое ORM, как это перевести и как это должно работать?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "act4ab3bQTGwBzG4mLaXCA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какие есть оссобенности класса String? что делает метод intern()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "JrtR7OT7QOO4fZfBtdViuw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "К каким конструкциям Java применим модификатор static?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "6Q95TCxwSky_xgXVp45e1Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "orm"
+            ],
+            "title": "В чем преимущества и недостатки использования ORM.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "p_mEiaSxR9qum3R5VCTSAg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Можно ли перегрузить static метод?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ST5CHtIBTGK0vlp1DP5SgA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что означает ключевое поле static?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "9_NDB6-zStGRDmJvKIIO3A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "web"
+            ],
+            "title": "Какая разница между  web server и app server?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "o_6onjLvTr6nFnYsPqYSug",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Java Enumerations. Особенности.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nn923VL9S-CWymUrUgDAfg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое наследование?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "mT_v-OaFSgmpxi3UGMPLhg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Предположим, есть блок try-finally. В блоке try возникло исключение и выполнение переместилось в блок finally. В блоке finally тоже возникло исключение. Какое из двух исключений “выпадет” из блока try-finally? Что случится со вторым исключением?",
+            "level": 2,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "UhaoG9sZRYGCVOrok9A6bw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Объекты. Алгоритм инициализации объекта. Особенно интересно собеседующим все это дело применительно к наследованию.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "cx_GbqzGRBO6AkTy-nwE1g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что будет, если в static блоке кода возникнет исключительная ситуация?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "FzrFwTMsSf2KE1WqT4RuIw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какие особенности создания вложенных классов: простых и статических.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "TxvDhyuTQaeCpHNCY2xoGw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какие вы знаете способы прекратить выполнение потока?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "lAFGRqHPTfSyaiOcxwujsg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какие особенности инициализации final static переменных?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "1YEIZ4zsSAi_JGb-VJqf4A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Различия между интерфейсом и абстрактным классом?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "eXL421CFQ36gr0gC1duupw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Можно ли присвоить null к this ссылочной переменной?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-8zC2-NdQH-GWjl5zkUrQw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как переопределить equals() и hachCode() методы?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "G4kR4sGXSOuGnHV5z9fxYw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какие есть модификаторы (доступа и остальные)? Что такое volatile и transient? Для чего и в каких случаях можно было бы использовать default?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "EfD_JtJhTtO50jyWRsrnHw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Если у класса-родителя есть метод, объявленный как private, может ли наследник расширить его видимость? А если protected? А сузить видимость?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "LrkTBfXrQLaztMKMopa6ng",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "алгоритмы"
+            ],
+            "title": "Напишите функцию вычисления чисел Фибоначчи. Оцените сложность получившегося алгоритма.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "L1LK0TS4S1Ced-bU-3vYqA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Собственная реализация многопоточного HashMap в случае разных паттернов работы с ним?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "1bAR8QlhRumakUx8vqd0VQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Как можно остановить поток выполняющий код который не находится под нашим контролем?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "z2pvA7k0SWuMWyeSv_bxkg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "алгоритмы",
+                "core"
+            ],
+            "title": "Как можно реализовать кэш для приложения? Персистентный кэш?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "wcqYNXnFRM-Z7ooufHc9tg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": " Какой из модификаторов более строгий: protected или package-private?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "jpDgejOdQxS1NECNp-GHow",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Вложенные классы в Java.",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "6zYzzUCMQGSNROQIh64teA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Реализуйте стек Трейбера.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Fl6o3AB0SzuD6gA5iq0-3g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Я добавляю элемент в середину List-а: list.add(list.size()/2, newElem). Для кого эта операция медленнее — для ArrayList или для LinkedList?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "jHjXzwEUQ7mxR4V31hetjw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какое худшее время работы метода contain() для элемента, который есть в LinkedList (O(1), O(log(N)), O(N), O(N*log(N)), O(N*N))?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "6m3YCsWISgysyGjUrCCzUA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какое худшее время работы метода contain() для элемента, который есть в ArrayList (O(1), O(log(N)), O(N), O(N*log(N)), O(N*N))?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "APhRR2TTSW6pReVXTOnhzg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Оцените количество памяти на хранение одного примитива типа byte в ArrayList?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "riyTsqQUTCaKIQ-bs-Y-ug",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как одним вызовом копировать элементы из любой Collection в массив?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "HC3lpnSGR6qodgVTigwKpA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Что будет, если добавлять элементы в TreeSet по возрастанию?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "3yb7W_vQSTGRfiKljirFlA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Что вы обычно используете (ArrayList или LinkedList)? Почему?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "XZPoHbr6R7WTGQuFOo97rA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": " Как одной строчкой преобразовать HashSet в ArrayList? ",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "OvgwXjDiTr-RoEvF-YdTbw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как устроен CopyOnWriteArrayList. Зачем он так устроен? ",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "AuqAKOf3Q6i65GzIZf6bcw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "алгоритмы"
+            ],
+            "title": "Согласно Кнуту и Кормену существует две основных реализации хэш-таблицы: на основе открытой адресацией и на основе метода цепочек. Как реализована HashMap? Почему так сделали (по вашему мнению)? В чем минусы и плюсы Каждого подхода?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "yW3yKf98RZ6OdrlCIWIyxw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Класс String реализует Comparable и предоставляет «лексикографический порядок», а я хочу отсортировать строки в порядке длины. Что мне делать?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "eIRjKyrOSKyBYJhdyvF8Hw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В чем разница между HashMap и IdentityHashMap? Для чего нужна IdentityHashMap? Как может быть полезна для реализации сериализации или клонирования?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "J-qPDHMiThyjtcugAg8maw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Сколько переходов по ссылкам происходит, когда вы делаете HashMap.get(key) по ключу, который есть в таблице?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "yL9B9bEsRpmE3T5u0QKnxQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какое худшее время работы метода get(key) для ключа, которого нет в таблице (O(1), O(log(N)), O(N), O(N*log(N)), O(N*N))?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "zZWhLA-8Sj2_aXPgJHPlBw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как между собой связаны Iterable, Iterator и «for-each» введенный в Java 5?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "938Xr6edQ1iVvSvz9G6agQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Сколько выделяется элементов в памяти при вызове LinkedList.add()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "4IQ-YKRrQI2CJnEAqfhPng",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Роль equals и hashCode в HashMap?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "qni_I8I_S-OFStA3Wj2PGg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как устроена HashMap?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "sOlaqF-vT0-87iu6xKlDQQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "TreeMap — реализовано как бинарное сбалансированное дерево поиска. Что означает «бинарное»? Как связанно с B-деревьями? Это синонимы?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "9pnKoo9cSkmj-_FyvyZ59g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Почему Comparator.compare и Comparable.compareTo возвращают int, а не boolean? Ведь арифметические операторы >, <, >=, <= возвращают boolean.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "LPgrUT4wSfGSG1Da-WOFww",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Говорят, на LinkedHashMap легко сделать простенький кэш c «invalidation policy», знаете как?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "_CXGp2SkQDeVl1ePkRIQ6w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Приведите пример, когда какая-либо коллекция выбрасывает UnsupportedOperationException.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "q8SxAsP6QYeJXTUbRklqXg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "java.util.Stack — считается «устаревшим». Чем его рекомендуют заменять? Почему?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "vkd87S6mRT2daQ-pUnP1vQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Могут ли у разных объектов в памяти (ref0 != ref1) быть ref0.equals(ref1) == true?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "rDl-YZZYQjOHEkhfK9QaVA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как перебрать все значения Map учитывая, что Map — это не Iterable?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "cuzFZjhuRnmfzdKWaDXGUg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Сравните Iterator и ListIterator.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "4B3wheHnROGxRg1sPxXLcA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Вычисление hashCode у java.lang.String имеет data race — Вас это не пугает?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "uAGAWixHQIC6ubBsNCR5GA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как между собой соотносятся интерфейсы SortedMap и NavigableMap?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "l7ZcVi5wSSavuWl3AUAf8Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое False sharing? Плохо это или хорошо? Как с этим бороться?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "vYFVhDR2RTuTv_p5YjWd7g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какая коллекция реализует дисциплину обслуживания FIFO?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "D49LbiJiS8ehNUTU1QTa0w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Почему happens-before — это частичный порядок?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "9C4MLxlaSEucKkTcOM2_WQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Как сделать Safe Publishing используя volatile?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "WccoSMNmTVKLO4NbocXYKw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Различия в интерфейсах Runnable и Callable.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "S96NPksaQnSZtQ4Mk30NHQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Зачем добавили HahsMap если уже был Hashtable?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "A4joEvx6QZe_GhJvKhHttw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какая коллекция реализует дисциплину обслуживания FILO?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "boAnS3q_T9WMDh1vWGcugQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о противопоставлении архитектур на основе Mesage Passing и Shared Memory. В чем сильные и слабые стороны каждого из подходов?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "hx83DMusSXScFKab2iVWDw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Если акторы обмениваются сообщениями, а сообщения — это данные, то как решается проблема одновременного доступа к данным разными потоками?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "b-qfriCqSh6TgEV_FJRCqw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Реализуйте персистентный стек. К какому классу он относится (partially persistent, fully persistent или confluently persistent)?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "5UVNA6xlRf2nVvrMFMweVw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Есть ли какие-то happens-before гарантии при работе с BlockingQueue? Между двумя put()? Между put() и take()? Между двумя take()?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "otnDaQ-FTriAdLX3oTXrVQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Зачем два схожих интерфейса Comparator и Comparable?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "DxqPC8l3SbCh0Jv46MkZEQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что происходит при вызове Thread.interrupt()?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "_0YxKcUSR3iVB8baZVDr5w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Что позволяет сделать PriorityQueue?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "dPk0DIm0Sj-QQt8cPEo0aA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое отношение happens-before?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ZUUTSXHkSxKB3USLXsSrOg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Когда началась «Multicore Era»?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "hzor5jnmSkW1Cu7Io4g7iw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "concurrency"
+            ],
+            "title": "Какая оценка временной сложности выборки элемента из HashMap? Гарантирует ли HashMap указанную сложность выборки элемента?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "LB70FcPBRJ28jvqE_Vyq0Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Как отсортировать массив целых положительных чисел?",
+            "level": 1,
+            "companies": [
+                "yandex"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "eUAxq5SERc298DRR6UAGxw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какие плюсы и минусы у Persistent Data Structures перед «классическими» структурами?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "qxc75pYnQM6QIdByFIvDzQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о API класса CyclicBarrier и возможный сценарий использования.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ct2xdCUMTsyU2hu5pi9eQA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Как создать неизменяемый объект в Java? Перечислите все преимущества.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "s9bO8RZqQYOsAflD2OESbQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Почему существует два класса Date, один в java.util package а другой в java.sql?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "wY_6-5_FTXK-1bLAg6px9g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Различия между java.util.concurrent.Atomic*.compareAndSwap() и java.util.concurrent.Atomic*.weakCompareAndSwap().",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nIfDzLTrQj68wY_2Pza6nw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Отличие Thread.start() и Thread.run()?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "MGBugppRREu8FGmecplOCA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Memory wall?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "6zPESeHdSzuE3ZwTBe3LyA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Объясните работу HashMap. Как решена проблема дубликатов?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "4--NgDXRTvy_GExCqHl_Kw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Нарисуйте, как бы вы реализовывали Persistent Tree Map.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "l5gDXItqQYap5wXne2hNCA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем отличия CountDownLatch от CyclicBarrier?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "QPpb6MMETE66C5dI1kqoag",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В реализации класса ArrayList следующие поля: Object[] elementData, int size. Объясните, зачем хранить отдельно size, если всегда можно взять elementData.length?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "sC9wsqwVQ6GKyPo6PCKreg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Класс String реализует Comparable и предоставляет «лексикографический порядок». Приведите точное определение этого порядка.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "G290GtrxTLCZI-_yiEdHfQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Что произойдет, если я вызову Iterator.next() перед этим 10 раз вызвав Iterator.hasNext()? Я пропущу 9 элементов?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "vwTgn7SxRfeg6cz_sfKOcw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как происходит удаление элементов из ArrayList? Как меняется в этом случае размер ArrayList?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "-rCnZkOSQISuggY-wIU_HA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как перебрать все пары ключ-значение в Map учитывая, что Map — это не Iterable?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "DmA17C6PTFC_owv2EEe9oQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "TreeMap — реализовано как бинарное сбалансированное дерево поиска. Что означает «сбалансированное»? Какой алгоритм балансировки? В какой момент происходит «балансировка»? Нарисуйте два бинарных дерева поиска из одних и тех же элементов, но одно сбалансированное, а другое — нет.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "98FFt0viQvOCar8wxqQEBg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какое худшее время работы метода get(key) для ключа, который есть в таблице (O(1), O(log(N)), O(N), O(N*log(N)), O(N*N))?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "HLBkBt-3TzC0FONtb8QwxQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "core"
+            ],
+            "title": "Можно ли реализовать метод equals класса MyClass вот так  class MyClass {public boolean equals(MyClass that) {return this == that;}}?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nXOjgzHoQS2S1Yqyzscp7Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Необходимо добавить 1млн. элемент, какую структуру вы используете?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "hOS2X6EzTGmETh5FhvZOig",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Почему Map — это не Collection, в то время как List и Set являются Collection?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "YlRO0X6-RxGh3yxhCRRJyQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какое начальное количество корзин в HashMap?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "zKudYEVgSK2K7QPmgcHGxw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Что быстрее работает ArrayList или LinkedList?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Nj0LmooOSJiH4ukpQ40Wzg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Как между собой связаны Iterable и Iterator?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "4UHgxrRFS-ujVO0t61LjDQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Зачем добавили ArrayList если уже был Vector?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "z4_SN3fMRTe0a1sAbhIUqA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Есть конструкторы ConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel) и HashMap(int initialCapacity, float loadFactor). Как ConcurrentHashMap учитывает в своей структуре concurrencyLevel?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "sgtKV8jsSZyGHep_zDwO5A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что из данных вызовов создает happend-before: Thread.sleep(), Thread.join(), Thread.yield(), Thread.start(), Thread.run(), Thread.isAlive(), Thread.getState()?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "DFDQz2QgSnGiKnjW3CRH1A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Объясните такую сигнатуру метода: Collections.binarySearch(List<? extends Comparable<? super T>> list, T key).",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "oXtOCCarQyeeDUZfVDuKsg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections",
+                "core"
+            ],
+            "title": "Есть класса Point{int x, y;}. Почему хэш-код в виде 31 * x + y предпочтительнее чем x + y?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "z_F70nfXQAm_o9brArqD6Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Интерфейсы Comparator/Comparable должны определять полный порядок или частичный порядок?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "VzAxHZhnRi6WWSsTbGx1yw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Оцените количество памяти на хранение одного примитива типа byte в LinkedList?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "TOMzocd0TdCtdVs5Wn3Vgw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Объясните смысл параметров в конструкторе HashMap(int initialCapacity, float loadFactor).",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "lChymWQ-Thypd544RVr-sQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Сколько создается новых объектов, когда вы добавляете новые элемент в HashMap?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "KcJJtej3S1iRMCtPK5X_8Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Какое худшее время работы метода add() для LinkedList (O(1), O(log(N)), O(N), O(N*log(N)), O(N*N))?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "WtH5ax8dRiiBayRdJ0rauQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о идиоме многопоточного проектирования backoff protocol (expotential backoff).",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "cLun-kRTQjG5qnYU48drng",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Flynn's taxonomy, SISD/MISD/SIMD/MIMD? К какому классу относятся CPU? GPU?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "ljVIUWh0TRKLeYfKtlI48Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Перечислите все сценарии выхода из blocking-set встроенного монитора",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "iXrUd-S8STGdlZRwdRHFKw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Перечислите все сценарии выхода из wait-set встроенного монитора",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "sBmI7tYiQpGdRxcUSosfuw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В чем разница между классами java.util.Arrays и java.lang.reflect.Array?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "5Kk1ThWVTS2DpWExXfuc-Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Почему LinkedList реализует и List и Deque?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Zx4sWP_QR0qYGQV5nseEUg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Inter Thread Parallelism? Task Parallelism?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "kGe4dA5wQ92zrKCJMmPDqw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какие гарантии на работу с final?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "VSv684EwSa2zhOVy24nK2w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Branch Prediction?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "tFIwwGB7SMih6Oz7rjaDYw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Интерфейс ConcurrentMap — наследник интерфейса Map, однако там добавлены новые методы. Какие?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "j6ZRUaTvQAOv3oFIBT1tGw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о идиоме многопоточного проектирования Spin lock/Busy waiting.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "7J-CuznXRwKcv9ML_SvTTQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о шаблоне многопоточного проектирования Pipes-and-Filters, SEDA.",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "8V81OWjbQPebvRpVd716Uw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Перечислите все причины по которым может выскочить InterruptedException.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "5eDfY7GwThW5yF4rmjdYPQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Расскажите о взаимодействии synchronized/Object.wait()/.notify()/.notifyAll()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "myh2kJYKTjWz8SGIzvVlmg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Как сделать Safe Publishing используя synchronized?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "9Sb31oAURaW-TnbCAPvRwA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Различия между Thread.isInterrupded() и Thread.interrupded().",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "g7aawRtXSji7qVQwdGyt_A",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что происходит при вызове Thread.stop()?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "uv-XedtLRkOk4SQwn_5c5w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое Монитор?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "UYJZr55CSkqrHGcyC9t-bA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какое применение блока finally? Гарантирует этот блок выполнение своего кода? Когда finally блок не вызывается?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "8CBroqemS-WFLIRelCS1UQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Опишите как происходит параллельный reduce, если потоков много, а результат один?",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "7QYlu09-T7iOTVN7yNiOLQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "В чем разница между созданием строки как new() и литералом (при помощи двойных кавычек)?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "APuL57lvQW2K7oYlDgrKMQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "В чем отличия Collections.synchronizedMap(new HashMap()) от new ConcurrentHashMap()?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "9368_ycyQ_CdI_sZAEuRHQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое «condition waiting»? Примеры как добиться в Java.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "dV3bnM7sR6G39hK-7N_iEg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что такое «mutual exclusion»? Примеры как добиться в Java.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "MT_M2vSXTl6wAehh3OAHFw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Преимущества ScheduledThreadPool перед java.util.Timer.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "dXJfgICCQu-jv9NVhN_hCA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Что в SynchronousQueue уникально для BlockingQueue.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "B5c9Rn6AQ8qTl7Jv3TfcQQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Почему TransferQueue НЕ BlockingQueue?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "_dJaToZWSAq7sPqzaI498w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Объясните какие happens-before ребра образуются при работе с AtomicXYZ классами.",
+            "level": 3
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "akrZGXs5TYSKqoV2Hnlhcg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "swing"
+            ],
+            "title": "Как можно производить обработку событий клавиатуры в JTextField?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "KHs39uiHS6as0qDu9Du6JA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое полиморфизм? Какие проявления полиморфизма в Java Вы знаете?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "l39yC6DUTLm3zdFe7AumUQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Зачем нам AtomicIntegerArray если мы можем использовать AtomicInteger[]?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "7pvkTlzARiO1O3y1Xc7hGQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Реализуйте свой вариант монитора используя Semaphore.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "YiXFyc8pQUCwrrOyWqhNqw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "В чем различия между partially persistent, fully persistent и confluently persistent? ",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "l5F6dfLFR-KILf23qUOjyQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Различия между интерфейсами и абстрактными классами?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "8cqv5GBiS9OFCn5dFZ742g",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Как AtomicMarkableReference решает ABA-проблему?",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "Ltp2BL_-Q2GrhEjLWTFEMw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "jdbc"
+            ],
+            "title": "Разница между statement и prepared statement.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "j_kndhD5TFSKrc5cZT-pxw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Каким образом можно обратиться к локальной переменной метода из анонимного класса, объявленного в теле этого метода? Есть ли каке-нибудь ограничения для такой переменной?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "91n_ufYkQNeiz9oQ4Q2izg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что случится, если ваш класс, реализующий Serializable интерфейс содержит несериализуемый компонент? Как исправить это?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "nZef6cSMRP-GbEkj2i7H6w",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "collections"
+            ],
+            "title": "Почему HashMap не должна использоваться в многопоточном окружении? Может ли это вызвать бесконечный цикл?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "_HBI4HC1QFSUGzuMV71eCg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "паттерны"
+            ],
+            "title": "Знакомы ли Вам какие-либо паттерны проектирования? ",
+            "level": 1,
+            "companies": [
+                "epam",
+                "sportmaster"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "akRSI3_fQEiuk6fDnkXq5Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что такое исключение? Какие типы исключений Вы знаете, чем они отличаются?",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "C7d4oNSaS2a2jh3lro-9Gg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Напишите программу для создания deadlock в Java и исправьте его.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "X04rNEEuSH2Dq7UF3onMzw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Иерархия исключений и ошибок.",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "BQlThELITkmjPUBjvpK-Yg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "В чем отличе глубокого копирования от поверхностного копирования?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "044afcy7SGy6pJf-dbaAYw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "алгоритмы"
+            ],
+            "title": "Напишите функцию вычисления факториала. ",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "GFZfC82UQP6Nk7H1fbAkBA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "алгоритмы"
+            ],
+            "title": "Вам необходимо реализовать пул объектов, каждый из которых может генерировать сообщения, обрабатываемые всеми остальными объектами из пула. В произвольный момент времени могут появляться новые объекты и удаляться старые. Опишите, как вы будете решать эту задачу.",
+            "level": 2
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "u9JL4a5BTweuoV6E4gwRsQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Есть ли какие-либо рекомендации о том, какие поля следует использовать при подсчете hashCode?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "RbkBMp1gT8uVFnQ2y-RK3Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Можно ли вызвать в разных потоках два synchronized метода одного и того же объекта?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "qNDaSv1YTn-scPleQOSSEg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Какие ключевые слова Java, связанные с многопоточностью Вы знаете?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "8lD9cZ5jT-GyrTOoNAFo2Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Что будет, если единственный конструктор класса объявлен как final?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "2ju3-Uf8Q-2mT_PCGxhdbQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "concurrency"
+            ],
+            "title": "Для чего используется ключевое слово syhcronized?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "qDJuBBCYTwScaY5_KUZ5yA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Имеет ли смысл объявлять метод private final?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "DEw35qwGSdG72T4-51PJqw",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "алгоритмы"
+            ],
+            "title": "Посчитайте среднее массива.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "r3cG6axlRhm28DpjyrPlVg",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "алгоритмы"
+            ],
+            "title": "Переверните строку.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "2NgAfZYnTpCa_LR0AXFPMQ",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Предположим, есть метод, который может выбросить IOException и FileNotFoundException в какой последовательности должны идти блоки catch? Сколько блоков catch будет выполнено?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "RtBYYBSoRea0kKlpn2Ev_Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "swing"
+            ],
+            "title": "Как создать, в процессе выполнения программы, два обработчика событий на нажатие кнопки мыши и поочерёдно их менять.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "RtH0O8-5SD2To44iLjLF6Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "архитектура"
+            ],
+            "title": "Чем трехзвенное приложение отличается от двухзвенного?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "XDJcr_1pSx6VewWh6u_Y4Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Назовите несколько классов из вершины иерархии исключений в Java.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "CnqD2RV3Si-yR2lusduoew",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "network"
+            ],
+            "title": "Серверный сокет. Основная задача и метод, который ее решает.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "d_8BgVE4SPqmFxAOh2DolA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "core"
+            ],
+            "title": "Какая разница между файлами JAR и WAR?",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "5_S5j59ATi6KHH5RZ4oUDA",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "web"
+            ],
+            "title": "Недостатки HTTP-протокола.",
+            "level": 1
+        }
+    },
+    {
+        "_index": "catalog_19aug14",
+        "_type": "question",
+        "_id": "CScByEoLRimQm3dPnOjA_Q",
+        "_score": 1,
+        "_source": {
+            "tags": [
+                "db"
+            ],
+            "title": "Нарисуйте отношение Многие-ко-многим. Например: таблицы Авторы и Книги. У одного автора может быть несколько книг, и книга может быть написана несколькими авторами. Составьте SQL запрос на выборку книг определенного автора.",
+            "level": 1,
+            "companies": [
+                "epam"
+            ]
+        }
+    }
+]
