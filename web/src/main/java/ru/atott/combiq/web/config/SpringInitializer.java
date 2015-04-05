@@ -51,6 +51,7 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
     @ComponentScan(basePackages = "ru.atott.combiq.web")
     @ImportResource({
             "classpath:ru/atott/combiq/dao/dao-context.xml",
+            "classpath:ru/atott/combiq/service/service-context.xml",
             "classpath:conf-context.xml"
     })
     public static class AppConfiguration {
