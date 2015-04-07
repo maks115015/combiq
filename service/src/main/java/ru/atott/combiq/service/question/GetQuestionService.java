@@ -1,9 +1,9 @@
 package ru.atott.combiq.service.question;
 
-import ru.atott.combiq.service.bean.QuestionBean;
+import ru.atott.combiq.service.bean.Question;
 
 import java.util.List;
 
 public interface GetQuestionService {
-    List<QuestionBean> getQuestions(GetQuestionContext context);
+    GetQuestionResponse getQuestions(GetQuestionContext context);
 }

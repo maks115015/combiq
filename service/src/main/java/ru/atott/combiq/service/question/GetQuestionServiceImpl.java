@@ -1,41 +1,35 @@
 package ru.atott.combiq.service.question;
 
-import com.google.common.collect.Lists;
-import org.elasticsearch.action.search.SearchRequestBuilder;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.atott.combiq.dao.ClientHolder;
-import ru.atott.combiq.dao.Domains;
-import ru.atott.combiq.dao.Types;
-import ru.atott.combiq.service.bean.QuestionBean;
-import ru.atott.combiq.service.mapper.HitToQuestionMapper;
-import ru.atott.eshit.client.HitClient;
-import ru.atott.eshit.hit.MapHit;
+import ru.atott.combiq.dao.entity.QuestionEntity;
+import ru.atott.combiq.dao.repository.QuestionRepository;
+import ru.atott.combiq.service.bean.Question;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class GetQuestionServiceImpl implements GetQuestionService {
     @Autowired
-    private ClientHolder clientHolder;
-    private HitToQuestionMapper hitToQuestionMapper = new HitToQuestionMapper();
+    private QuestionRepository questionRepository;
 
     @Override
-    public List<QuestionBean> getQuestions(GetQuestionContext context) {
-        HitClient client = clientHolder.getClient();
-        SearchRequestBuilder requestBuilder = client.getClient()
-                .prepareSearch(Domains.question)
-                .setTypes(Types.question)
-                .setSize((int) context.getSize())
-                .setFrom((int) (context.getPage() * context.getSize()));
-        SearchResponse searchResponse = requestBuilder.execute().actionGet();
-        SearchHit[] hits = searchResponse.getHits().getHits();
-        return Lists.newArrayList(hits).stream()
-                .map(hit -> new MapHit(field -> hit.getSource().get(field)))
-                .map(hitToQuestionMapper::map)
-                .collect(Collectors.toList());
+    public GetQuestionResponse getQuestions(GetQuestionContext context) {
+        Pageable pageable = new PageRequest(context.getPage(), context.getSize());
+        Page<QuestionEntity> page = questionRepository.findAll(pageable);
+
+        GetQuestionResponse response = new GetQuestionResponse();
+        response.setQuestions(
+                page.getContent().stream()
+                        .map(e -> {
+                            Question question = new Question();
+                            question.setTitle(e.getTitle());
+                            return question;
+                        })
+                        .collect(Collectors.toList()));
+        return response;
     }
 }

@@ -3,22 +3,22 @@ package ru.atott.combiq.service.question;
 import ru.atott.combiq.service.Context;
 
 public class GetQuestionContext extends Context {
-    private long page = 0;
-    private long size = 20;
+    private int page = 0;
+    private int size = 20;
 
-    public long getPage() {
+    public int getPage() {
         return page;
     }
 
-    public void setPage(long page) {
+    public void setPage(int page) {
         this.page = page;
     }
 
-    public long getSize() {
+    public int getSize() {
         return size;
     }
 
-    public void setSize(long size) {
+    public void setSize(int size) {
         this.size = size;
     }
 }

@@ -1,6 +1,6 @@
 package ru.atott.combiq.service.bean;
 
-public class QuestionBean {
+public class Question {
     private String title;
 
     public String getTitle() {
