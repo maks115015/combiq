@@ -8,9 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.question.GetQuestionContext;
 import ru.atott.combiq.service.question.GetQuestionResponse;
 import ru.atott.combiq.service.question.GetQuestionService;
+import ru.atott.combiq.web.mapper.QuestionToQestionInfoBeanMapper;
 
 @Controller
 public class WelcomeController extends BaseController {
+    private QuestionToQestionInfoBeanMapper questionMapper = new QuestionToQestionInfoBeanMapper();
+
     @Autowired(required = false)
     private GetQuestionService getQuestionService;
 
@@ -21,7 +24,7 @@ public class WelcomeController extends BaseController {
         GetQuestionResponse questions = getQuestionService.getQuestions(context);
 
         ModelAndView mav = new ModelAndView("index");
-        mav.addObject("questions", questions.getQuestions());
+        mav.addObject("questions", questionMapper.toList(questions.getQuestions()));
         return mav;
     }
 }
