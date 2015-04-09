@@ -47,7 +47,7 @@ public class NameVersionDomainResolver {
             updateDomainVersions();
         }
         if (!domainVersions.containsKey(domain)) {
-            throw new DaoException(String.format("Cannot resolve domain %s", domain));
+            return 1L;
         }
         return domainVersions.get(domain);
     }
