@@ -1,6 +1,7 @@
 package ru.atott.combiq.web.config;
 
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
+import ru.atott.combiq.web.aop.CommonViewAttributesInjector;
 
 import javax.servlet.Filter;
 import java.util.Properties;
@@ -66,8 +68,14 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Configuration
     @EnableWebMvc
     public static class MvcConfiguration extends WebMvcConfigurerAdapter {
+        @Autowired
+        private CommonViewAttributesInjector commonViewAttributesInjector;
+
         @Override
-        public void addInterceptors(InterceptorRegistry registry) { }
+        public void addInterceptors(InterceptorRegistry registry) {
+            registry
+                    .addInterceptor(commonViewAttributesInjector);
+        }
 
         @Bean
         public ViewResolver getViewResolver() {

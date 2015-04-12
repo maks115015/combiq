@@ -1,0 +1,25 @@
+body {
+    font-family: Calibri, Ubuntu, Tahoma, 'Lucida Grande';
+    font-size: 16px;
+}
+
+.g-sidebar__open-source {
+    background: url('images/GitHub-Mark-64px.png') no-repeat top center;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding-top: 80px;
+}
+
+.g-sidebar__open-source span {
+    display: inline-block;
+    font-family: 'roboto_ltregular';
+    font-size: 24px;
+    padding: 2px 10px;
+    line-height: 28px;
+}
+
+.g-sidebar__open-source:hover span {
+    background-color: #AA66CC;
+    color: white;
+}
