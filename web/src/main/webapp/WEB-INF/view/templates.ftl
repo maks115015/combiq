@@ -52,12 +52,13 @@
                 <#nested />
             </div>
             <div class="col-md-3">
-                <a class="g-sidebar__open-source" href="https://github.com/atott/combiq">
-                    <span>
-                        Join to<br />
-                        Combiq.ru
-                    </span>
-                </a>
+                <nav class="bs-docs-sidebar">
+                    <ul id="sidebar" class="nav nav-stacked fixed">
+                        <li>
+                            <a href="https://github.com/atott/combiq">Join to Combiq.ru on Github</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </body>
