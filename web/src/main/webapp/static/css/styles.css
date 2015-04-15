@@ -1,5 +1,6 @@
 body {
     font-family: Calibri, Ubuntu, Tahoma, 'Lucida Grande';
+    font-size: 16px;
 }
 
 .bs-docs-sidebar .nav > li > a {
@@ -8,6 +9,7 @@ body {
     padding: 4px 20px;
     font-size: 13px;
     font-weight: 400;
+    line-height: 14px;
 }
 
 .bs-docs-sidebar .nav .nav > li > a {
@@ -49,4 +51,13 @@ body {
 .co-toolbar {
     background-color: #F8F8F8;
     margin-bottom: 20px;
+}
+
+.co-header {
+    font-size: 20px;
+}
+
+.co-brand {
+    color: #000000;
+    font-size: 20px;
 }

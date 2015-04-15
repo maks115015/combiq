@@ -34,10 +34,15 @@
         ${head}
     </head>
     <body>
-        <core-toolbar class="co-toolbar">
-            <span flex><strong>Combiq</strong> - вопросы для подготовки к собеседованию Java разработчика</span>
-            <#--<paper-icon-button id="morebutton" icon="more-vert"></paper-icon-button>-->
-        </core-toolbar>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="co-header">
+                    <a href="/" class="navbar-brand co-brand">
+                        <strong>Combiq</strong> - вопросы для подготовки к собеседованию Java разработчика
+                    </a>
+                </div>
+            </div>
+        </nav>
         <div class="container">
             <div class="col-md-9">
                 <#nested />
@@ -46,7 +51,8 @@
                 <nav class="bs-docs-sidebar">
                     <ul id="sidebar" class="nav nav-stacked fixed">
                         <li>
-                            <a href="https://github.com/atott/combiq">Join to Combiq.ru on Github</a>
+                            <a href="https://github.com/atott/combiq/wiki/%D0%9E-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5">О проекте</a>
+                            <a href="https://github.com/atott/combiq">Присоединяйся к Combiq.ru на Github.com</a>
                         </li>
                     </ul>
                 </nav>
