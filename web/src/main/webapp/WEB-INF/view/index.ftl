@@ -1,16 +1,17 @@
 <#import "templates.ftl" as templates />
 
 <#assign head>
-    <script>
-        require(['jsx!page/IndexPage'], function(IndexPage) {
-            var pageData = {
-                questions: ${utils.toJson(questions)}
-            };
-            window.page = new IndexPage(pageData);
-        });
-    </script>
+    <link rel="import" href="/static/elements/co-question.html">
 </#assign>
 
 <@templates.main head=head>
-    <div id="questions"></div>
+    <ul>
+        <#list questions as question>
+            <li>
+                <co-question>
+                    ${question.title}
+                </co-question>
+            </li>
+        </#list>
+    </ul>
 </@templates.main>

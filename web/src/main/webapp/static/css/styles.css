@@ -45,3 +45,8 @@ body {
 .bs-docs-sidebar .nav > .active > ul.nav {
     display: block;
 }
+
+.co-toolbar {
+    background-color: #F8F8F8;
+    margin-bottom: 20px;
+}

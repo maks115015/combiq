@@ -11,42 +11,33 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/css/styles.css">
         <link rel="stylesheet" href="/static/font/roboto/roboto.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="/static/bower_components/webcomponentsjs/webcomponents.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
 
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <![endif]-->
-
         <script>
             requirejs.config({
                 baseUrl: '/static/js',
                 paths: {
-                    text: 'lib/text',
-                    jsx: 'lib/jsx'
+                    text: 'lib/text'
                 }
             });
         </script>
 
+
+        <link rel="import" href="/static/bower_components/core-toolbar/core-toolbar.html">
+        <link rel="import" href="/static/bower_components/paper-icon-button/paper-icon-button.html">
         ${head}
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                        <span class="sr-only"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="/" class="navbar-brand">Combiq</a>
-                </div>
-            </div>
-        </nav>
+        <core-toolbar class="co-toolbar">
+            <span flex><strong>Combiq</strong> - вопросы для подготовки к собеседованию Java разработчика</span>
+            <#--<paper-icon-button id="morebutton" icon="more-vert"></paper-icon-button>-->
+        </core-toolbar>
         <div class="container">
             <div class="col-md-9">
                 <#nested />
