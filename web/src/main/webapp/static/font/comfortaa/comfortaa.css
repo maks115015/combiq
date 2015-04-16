@@ -1,0 +1,30 @@
+/* font-family: "ComfortaaRegular"; */
+@font-face {
+    font-family: "ComfortaaRegular";
+    src: url("ComfortaaRegular/ComfortaaRegular.eot");
+    src: url("ComfortaaRegular/ComfortaaRegular.eot?#iefix")format("embedded-opentype"),
+    url("ComfortaaRegular/ComfortaaRegular.woff") format("woff"),
+    url("ComfortaaRegular/ComfortaaRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "ComfortaaLight"; */
+@font-face {
+    font-family: "ComfortaaLight";
+    src: url("ComfortaaLight/ComfortaaLight.eot");
+    src: url("ComfortaaLight/ComfortaaLight.eot?#iefix")format("embedded-opentype"),
+    url("ComfortaaLight/ComfortaaLight.woff") format("woff"),
+    url("ComfortaaLight/ComfortaaLight.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "ComfortaaBold"; */
+@font-face {
+    font-family: "ComfortaaBold";
+    src: url("ComfortaaBold/ComfortaaBold.eot");
+    src: url("ComfortaaBold/ComfortaaBold.eot?#iefix")format("embedded-opentype"),
+    url("ComfortaaBold/ComfortaaBold.woff") format("woff"),
+    url("ComfortaaBold/ComfortaaBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}

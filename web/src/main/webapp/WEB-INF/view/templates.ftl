@@ -1,4 +1,4 @@
-<#macro main head=''>
+<#macro bound head=''>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,15 +34,23 @@
         ${head}
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="co-header">
-                    <a href="/" class="navbar-brand co-brand">
-                        <strong>Combiq</strong> - вопросы для подготовки к собеседованию Java разработчика
-                    </a>
-                </div>
-            </div>
+        <nav class="navbar navbar-default navbar-static-top co-header">
+            <ul class="co-topmenu">
+                <li>
+                    <a class="co-topmenu-mainer" href="/">Combiq.ru</a>
+                </li>
+                <li>
+                    <a href="https://github.com/atott/combiq">На Github.com</a>
+                </li>
+            </ul>
         </nav>
+        <#nested />
+    </body>
+</html>
+</#macro>
+
+<#macro withSidebar head=''>
+    <@bound head=head>
         <div class="container">
             <div class="col-md-9">
                 <#nested />
@@ -58,6 +66,11 @@
                 </nav>
             </div>
         </div>
-    </body>
-</html>
+    </@bound>
+</#macro>
+
+<#macro clear head=''>
+    <@bound head=head>
+        <#nested />
+    </@bound>
 </#macro>

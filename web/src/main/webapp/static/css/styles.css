@@ -1,6 +1,16 @@
 body {
     font-family: Calibri, Ubuntu, Tahoma, 'Lucida Grande';
     font-size: 16px;
+    border: 20px solid #f7f7f7;
+}
+
+a {
+    color: #12acef;
+}
+
+a:hover {
+    color: #0082BC;
+    text-decoration: none;
 }
 
 .bs-docs-sidebar .nav > li > a {
@@ -54,10 +64,55 @@ body {
 }
 
 .co-header {
-    font-size: 20px;
+    font-size: 18px;
+    padding: 35px 35px;
+    background-color: transparent;
+    border: none;
 }
 
 .co-brand {
     color: #000000;
-    font-size: 20px;
+}
+
+.co-mainer {
+    padding: 40px 20px;
+}
+
+.co-mainer-title {
+    color: #000000;
+    font-weight: bold;
+    font-family: 'ComfortaaBold', arial, sans-serif;
+    font-size: 24px;
+    margin: 40px 100px;
+    line-height: 30px;
+}
+
+ul.co-topmenu {
+    list-style: none;
+}
+
+ul.co-topmenu > li {
+    display: inline-block;
+    margin-right: 30px;
+    position: relative;
+}
+
+.co-topmenu-mainer,
+.co-topmenu-mainer:hover {
+    padding-left: 65px;
+    font-weight: bold;
+    font-size: 22px;
+    color: #000000;
+}
+
+.co-topmenu-mainer:before {
+    width: 50px;
+    height: 35px;
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: no-repeat 0 0;
+    background-image: url("images/topmenu-logo.png");
 }
