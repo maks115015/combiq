@@ -6,10 +6,15 @@ body {
 
 a {
     color: #12acef;
+    text-decoration: none;
 }
 
 a:hover {
     color: #0082BC;
+    text-decoration: none;
+}
+
+a:active {
     text-decoration: none;
 }
 
@@ -89,6 +94,8 @@ a:hover {
 
 ul.co-topmenu {
     list-style: none;
+    font-family: 'ComfortaaBold', arial, sans-serif;
+    font-size: 16px;
 }
 
 ul.co-topmenu > li {
@@ -103,6 +110,7 @@ ul.co-topmenu > li {
     font-weight: bold;
     font-size: 22px;
     color: #000000;
+    margin-right: 10px;
 }
 
 .co-topmenu-mainer:before {
@@ -115,4 +123,62 @@ ul.co-topmenu > li {
     position: absolute;
     background: no-repeat 0 0;
     background-image: url("images/topmenu-logo.png");
+}
+
+.co-getstarted {
+    float: right;
+    background-color: #00A0D8;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 4px 15px;
+    transition: background-color 500ms linear;
+}
+
+.co-getstarted:hover {
+    background-color: #0082BC;
+    transition: background-color 500ms linear;
+}
+
+.co-getstarted > a,
+.co-getstarted > a:hover {
+    color: #ffffff;
+}
+
+.co-out {
+    position: relative;
+    padding-right: 12px;
+}
+
+.co-out:after {
+    width: 8px;
+    height: 8px;
+    margin-bottom: -4px;
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 50%;
+    background-image: url("images/icon-arrow.png");
+    background-image: url("images/icon-arrow.svg"), none;
+    background-size: auto 8px;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    margin: 2px;
+    border-radius: 0 !important;
+    padding: 4px 8px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.pagination > li.active > a {
+    background-color: #00A0D8;
+}
+
+.pagination > li > span,
+.pagination > li > span:hover {
+    border-color: transparent;
+    background-color: transparent;
+    cursor: default;
 }

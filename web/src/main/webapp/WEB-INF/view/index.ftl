@@ -2,10 +2,9 @@
 
 <#assign head>
     <link rel="import" href="/static/elements/co-question.html">
-    <link rel="stylesheet" href="/static/font/comfortaa/comfortaa.css">
 </#assign>
 
-<@templates.clear head=head>
+<@templates.layoutBody head=head>
     <div class="co-mainer">
         <div class="text-center">
             <img src="/static/images/promo/main.png">
@@ -26,4 +25,4 @@
             </#list>
         </ul>
     </div>
-</@templates.clear>
+</@templates.layoutBody>

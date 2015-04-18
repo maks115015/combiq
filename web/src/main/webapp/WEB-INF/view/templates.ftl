@@ -1,4 +1,4 @@
-<#macro bound head=''>
+<#macro layoutHtml head=''>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/css/styles.css">
         <link rel="stylesheet" href="/static/font/roboto/roboto.css">
+        <link rel="stylesheet" href="/static/font/comfortaa/comfortaa.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="/static/bower_components/webcomponentsjs/webcomponents.min.js"></script>
@@ -40,7 +41,13 @@
                     <a class="co-topmenu-mainer" href="/">Combiq.ru</a>
                 </li>
                 <li>
-                    <a href="https://github.com/atott/combiq">На Github.com</a>
+                    <a class="co-out" href="https://github.com/atott/combiq">на Github.com</a>
+                </li>
+                <li>
+                    <a class="co-out" href="https://github.com/atott/combiq/wiki">о проекте</a>
+                </li>
+                <li class="co-getstarted">
+                    <a href="/questions">Вопросы</a>
                 </li>
             </ul>
         </nav>
@@ -49,8 +56,8 @@
 </html>
 </#macro>
 
-<#macro withSidebar head=''>
-    <@bound head=head>
+<#macro layoutWithSidebar head=''>
+    <@layoutHtml head=head>
         <div class="container">
             <div class="col-md-9">
                 <#nested />
@@ -66,11 +73,37 @@
                 </nav>
             </div>
         </div>
-    </@bound>
+    </@layoutHtml>
 </#macro>
 
-<#macro clear head=''>
-    <@bound head=head>
+<#macro layoutBody head=''>
+    <@layoutHtml head=head>
         <#nested />
-    </@bound>
+    </@layoutHtml>
+</#macro>
+
+<#function if condition a b=''>
+    <#if condition>
+        <#return a>
+    <#else>
+        <#return b>
+    </#if>
+</#function>
+
+<#macro paging paging>
+    <nav>
+        <ul class="pagination">
+            <#list paging.pages as page>
+                <#if page.omission>
+                    <li>
+                        <span>...</span>
+                    </li>
+                <#else>
+                    <li class="${if(page.active, 'active')}">
+                        <a href="${page.url!''}">${page.title}</a>
+                    </li>
+                </#if>
+            </#list>
+        </ul>
+    </nav>
 </#macro>

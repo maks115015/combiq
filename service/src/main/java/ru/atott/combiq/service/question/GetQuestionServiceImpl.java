@@ -22,7 +22,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         Page<QuestionEntity> page = questionRepository.findAll(pageable);
 
         GetQuestionResponse response = new GetQuestionResponse();
-        response.setQuestions(questionMapper.toList(page.getContent()));
+        response.setQuestions(page.map(questionMapper::map));
         return response;
     }
 }
