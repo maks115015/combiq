@@ -182,3 +182,60 @@ ul.co-topmenu > li {
     background-color: transparent;
     cursor: default;
 }
+
+.co-startnumber {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #FF563F;
+    color: #ffffff;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-family: 'ComfortaaBold', arial, sans-serif;
+    font-size: 26px;
+}
+
+.co-starttopic {
+    font-size: 26px;
+    line-height: 30px;
+    padding: 50px 0;
+    padding-left: 45px;
+    position: relative;
+    border-left: dashed 1px #d2d2d2;
+}
+
+.co-starttopic .co-mainbutton {
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.co-mainbutton,
+.co-mainbutton:hover,
+.co-mainbutton:active {
+    background-color: #00A0D8;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 3px 15px;
+    font-family: 'ComfortaaBold', arial, sans-serif;
+    color: #ffffff;
+    transition: background-color 500ms linear;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.co-mainbutton:hover {
+    background-color: #0082BC;
+    transition: background-color 500ms linear;
+}
+
+footer {
+    margin-top: 60px;
+    border-top: solid 1px rgb(231, 231, 231);
+}
+
+.co-footer {
+    padding-top: 25px;
+    font-size: 14px;
+    padding-bottom: 50px;
+}

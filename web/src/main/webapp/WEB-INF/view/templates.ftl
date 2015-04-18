@@ -1,5 +1,11 @@
 <#macro layoutHtml head=''>
 <!DOCTYPE html>
+<!--    Дорогой друг!
+        Злой красный человек спалил тебя ;)
+        Теперь помоги ему сделать проект лучше -
+        сделай свой вклад в проект Combiq.ru,
+        https://github.com/atott/combiq
+-->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -52,6 +58,12 @@
             </ul>
         </nav>
         <#nested />
+        <footer>
+            <div class="container co-footer">
+                Combiq.ru, 2014-2015,
+                <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>
+            </div>
+        </footer>
     </body>
 </html>
 </#macro>

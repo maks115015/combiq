@@ -8,21 +8,67 @@
     <div class="co-mainer">
         <div class="text-center">
             <img src="/static/images/promo/main.png">
-            <div class="co-mainer-title">
-                Искать и повторять вопросы к собеседованию Java <br>
-                только здесь, не сметь уходить!
+            <div>
+                <h1 class="co-mainer-title">Вопросы для подготовки к собеседованию Java</h1>
             </div>
         </div>
     </div>
     <div class="container">
-        <ul>
-            <#list questions as question>
-                <li>
-                    <co-question>
-                    ${question.title}
-                    </co-question>
-                </li>
-            </#list>
-        </ul>
+        <div class="row">
+            <div class="row text-center">
+                <div class="co-startnumber">
+                    1
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-6 co-starttopic">
+                    <div>
+                        Злой красный человек позволяет <br>
+                        тебе судорожно готовиться <br>
+                        к собеседованию по Java <br>
+                        на этом сайте
+                    </div>
+                    <a class="co-mainbutton" href="/questions">Вопросы</a>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="co-startnumber">
+                    2
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-6 co-starttopic">
+                    Ты успешно проходишь <br>
+                    собеседованию на позицию <br>
+                    Java разработчика
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="co-startnumber">
+                    3
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-6 co-starttopic">
+                    <div>
+                        В знак благодарности <br>
+                        ты контрибутишь <br>
+                        в проект Combiq.ru
+                    </div>
+                    <a class="co-mainbutton" href="https://github.com/atott/combiq/wiki/%D0%A7%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%87%D1%8C">Что я могу...</a>
+                </div>
+            </div>
+        </div>
     </div>
 </@templates.layoutBody>
