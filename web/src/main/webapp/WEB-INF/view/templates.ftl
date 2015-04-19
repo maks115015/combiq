@@ -1,3 +1,5 @@
+<#import "stats.ftl" as stats />
+
 <#macro layoutHtml head=''>
 <!DOCTYPE html>
 <!--    Дорогой друг!
@@ -11,6 +13,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name='yandex-verification' content='526ff629012169b9' />
 
         <title>Combiq - вопросы для собеседования Java</title>
 
@@ -41,6 +44,7 @@
         ${head}
     </head>
     <body>
+        <@stats.metrika />
         <nav class="navbar navbar-default navbar-static-top co-header">
             <ul class="co-topmenu">
                 <li>
@@ -61,7 +65,10 @@
         <footer>
             <div class="container co-footer">
                 Combiq.ru, 2014-2015,
-                <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>
+                <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>${if(env == 'prod', ',')}
+                <#if env == 'prod'>
+                    <@stats.informer/>
+                </#if>
             </div>
         </footer>
     </body>

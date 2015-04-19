@@ -20,6 +20,7 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
         if (modelAndView != null
                 && !(modelAndView.getView() instanceof RedirectView)) {
             modelAndView.addObject("utils", viewUtils);
+            modelAndView.addObject("env", System.getProperty("env"));
         }
     }
 }
