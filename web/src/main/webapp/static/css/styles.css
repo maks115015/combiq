@@ -14,7 +14,7 @@ a:hover {
     text-decoration: none;
 }
 
-a:active {
+a:focus {
     text-decoration: none;
 }
 
@@ -212,7 +212,7 @@ ul.co-topmenu > li {
 
 .co-mainbutton,
 .co-mainbutton:hover,
-.co-mainbutton:active {
+.co-mainbutton:focus {
     background-color: #00A0D8;
     font-weight: bold;
     border-radius: 4px;

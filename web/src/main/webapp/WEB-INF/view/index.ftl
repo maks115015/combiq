@@ -27,7 +27,7 @@
                 <div class="col-md-6 co-starttopic">
                     <div>
                         Злой красный человек позволяет <br>
-                        тебе судорожно готовиться <br>
+                        вам судорожно готовиться <br>
                         к собеседованию по Java <br>
                         на этом сайте
                     </div>
@@ -45,7 +45,7 @@
 
                 </div>
                 <div class="col-md-6 co-starttopic">
-                    Ты успешно проходишь <br>
+                    Вы успешно проходите <br>
                     собеседование на позицию <br>
                     Java разработчика
                 </div>
@@ -63,7 +63,7 @@
                 <div class="col-md-6 co-starttopic">
                     <div>
                         В знак благодарности <br>
-                        ты контрибутишь <br>
+                        вы контрибутите <br>
                         в проект Combiq.ru
                     </div>
                     <a class="co-mainbutton" href="https://github.com/atott/combiq/wiki/%D0%A7%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE-%D0%BF%D0%BE%D0%BC%D0%BE%D1%87%D1%8C">Что я могу...</a>

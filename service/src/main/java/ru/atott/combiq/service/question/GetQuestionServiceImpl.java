@@ -19,7 +19,14 @@ public class GetQuestionServiceImpl implements GetQuestionService {
     @Override
     public GetQuestionResponse getQuestions(GetQuestionContext context) {
         Pageable pageable = new PageRequest(context.getPage(), context.getSize());
-        Page<QuestionEntity> page = questionRepository.findAll(pageable);
+
+        Page<QuestionEntity> page = null;
+
+        if (context.getTags() == null || context.getTags().isEmpty()) {
+            page = questionRepository.findAll(pageable);
+        } else {
+            page = questionRepository.findByTagsIn(context.getTags(), pageable);
+        }
 
         GetQuestionResponse response = new GetQuestionResponse();
         response.setQuestions(page.map(questionMapper::map));

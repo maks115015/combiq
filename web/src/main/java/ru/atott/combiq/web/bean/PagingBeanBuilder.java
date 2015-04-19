@@ -22,8 +22,8 @@ public class PagingBeanBuilder {
             int rightEdge = Math.min(leftEdge + 4, page.getTotalPages());
 
             List<PagingBean.Page> pages = new ArrayList<>();
-            if (leftEdge > 1) {
-                pages.addAll(getPages(0, 1, currentPage, uriBuilder));
+            if (leftEdge > 2) {
+                pages.addAll(getPages(0, 0, currentPage, uriBuilder));
                 pages.add(getOmission());
                 pages.addAll(getPages(leftEdge, currentPage, currentPage, uriBuilder));
             } else {
@@ -33,7 +33,7 @@ public class PagingBeanBuilder {
             if (rightEdge < page.getTotalPages() - 3) {
                 pages.addAll(getPages(currentPage + 1, rightEdge, currentPage, uriBuilder));
                 pages.add(getOmission());
-                pages.addAll(getPages(page.getTotalPages() - 2, page.getTotalPages() - 1, currentPage, uriBuilder));
+                pages.addAll(getPages(page.getTotalPages() - 1, page.getTotalPages() - 1, currentPage, uriBuilder));
             } else {
                 pages.addAll(getPages(currentPage + 1, page.getTotalPages() - 1, currentPage, uriBuilder));
             }

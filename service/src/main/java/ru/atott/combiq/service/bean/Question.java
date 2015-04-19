@@ -1,8 +1,19 @@
 package ru.atott.combiq.service.bean;
 
+import java.util.List;
+
 public class Question {
     private String id;
     private String title;
+    private List<String> tags;
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
 
     public String getTitle() {
         return title;

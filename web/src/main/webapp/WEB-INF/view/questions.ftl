@@ -8,7 +8,9 @@
     <ul>
         <#list questions as question>
             <li>
-                <co-question>${question.title}</co-question>
+                <co-question tags="${question.tags?join(',')}">
+                    ${question.title}
+                </co-question>
             </li>
         </#list>
     </ul>
