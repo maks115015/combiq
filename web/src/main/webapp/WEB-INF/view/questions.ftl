@@ -5,7 +5,7 @@
 </#assign>
 
 <@templates.layoutWithSidebar head=head>
-    <ul>
+    <ul class="co-questions">
         <#list questions as question>
             <li>
                 <co-question tags="${question.tags?join(',')}">

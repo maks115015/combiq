@@ -65,10 +65,13 @@
         <footer>
             <div class="container co-footer">
                 Combiq.ru, 2014-2015,
-                <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>${if(env == 'prod', ',')}
-                <#if env == 'prod'>
-                    <@stats.informer/>
-                </#if>
+                <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>
+                    <span class="co-informer">
+                        <a href="/donate">Поддержать проект</a>${if(env == 'prod', ',')}
+                        <#if env == 'prod'>
+                            <@stats.informer/>
+                        </#if>
+                    </span>
             </div>
         </footer>
     </body>

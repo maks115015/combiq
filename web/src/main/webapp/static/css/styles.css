@@ -163,6 +163,11 @@ ul.co-topmenu > li {
     background-size: auto 8px;
 }
 
+.pagination {
+    margin: 0;
+    padding: 0;
+}
+
 .pagination > li > a,
 .pagination > li > span {
     margin: 2px;
@@ -238,4 +243,24 @@ footer {
     padding-top: 25px;
     font-size: 14px;
     padding-bottom: 50px;
+}
+
+.co-informer {
+    float: right;
+}
+
+.co-donatetext {
+    font-size: 18px;
+    margin-top: 60px;
+}
+
+.co-questions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.co-questions > li {
+    margin: 0;
+    padding: 0;
 }
