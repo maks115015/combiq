@@ -1,39 +1,67 @@
 package ru.atott.combiq.service.question;
 
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.index.query.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.DefaultResultMapper;
+import org.springframework.data.elasticsearch.core.FacetedPage;
 import org.springframework.stereotype.Service;
+import ru.atott.combiq.dao.Types;
 import ru.atott.combiq.dao.entity.QuestionEntity;
+import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.dao.repository.QuestionRepository;
+import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.dsl.DslTag;
 import ru.atott.combiq.service.mapper.QuestionEntityToQuestionMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class GetQuestionServiceImpl implements GetQuestionService {
     private QuestionEntityToQuestionMapper questionMapper = new QuestionEntityToQuestionMapper();
-
+    private DefaultResultMapper defaultResultMapper = new DefaultResultMapper();
     @Autowired
-    private QuestionRepository questionRepository;
+    private NameVersionDomainResolver domainResolver;
+    @Autowired(required = false)
+    private Client client;
 
     @Override
     public GetQuestionResponse getQuestions(GetQuestionContext context) {
-        Pageable pageable = new PageRequest(context.getPage(), context.getSize());
+        DslQuery dsl = context.getDslQuery();
+        List<FilterBuilder> filters = new ArrayList<>();
 
-        Page<QuestionEntity> page = null;
+        QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
 
-        if (context.getDslQuery().getTags().isEmpty()) {
-            page = questionRepository.findAll(pageable);
-        } else {
-            List<String> tagValues = context.getDslQuery().getTags().stream()
-                    .map(DslTag::getValue)
-                    .collect(Collectors.toList());
-            page = questionRepository.findByTagsIn(tagValues, pageable);
+        if (!dsl.getTags().isEmpty()) {
+            BoolFilterBuilder tagsFilter = FilterBuilders.boolFilter();
+            dsl.getTags().forEach(tag -> {
+                tagsFilter.must(FilterBuilders.termFilter("tags", tag.getValue()));
+            });
+            filters.add(tagsFilter);
         }
+
+        FilterBuilder filterBuilder = FilterBuilders.matchAllFilter();
+        if (!filters.isEmpty()) {
+            filterBuilder = FilterBuilders.boolFilter().must(filters.toArray(new FilterBuilder[filters.size()]));
+        }
+
+        SearchResponse searchResponse = client
+                .prepareSearch(domainResolver.resolveQuestionIndex())
+                .setTypes(Types.question)
+                .setQuery(QueryBuilders.filteredQuery(queryBuilder, filterBuilder))
+                .setFrom(context.getPage() * context.getSize())
+                .setSize(context.getSize())
+                .execute()
+                .actionGet();
+
+        Pageable pageable = new PageRequest(context.getPage(), context.getSize());
+        Page<QuestionEntity> page = defaultResultMapper.mapResults(searchResponse, QuestionEntity.class, pageable);
 
         GetQuestionResponse response = new GetQuestionResponse();
         response.setQuestions(page.map(questionMapper::map));
