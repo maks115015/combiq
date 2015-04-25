@@ -15,44 +15,40 @@ import ru.atott.combiq.service.question.GetQuestionResponse;
 import ru.atott.combiq.service.question.GetQuestionService;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
+import ru.atott.combiq.web.utils.GetQuestionContextBuilder;
 import ru.atott.combiq.web.view.QuestionsViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class QuestionController extends BaseController {
+    private PagingBeanBuilder pagingBeanBuilder = new PagingBeanBuilder();
     @Autowired
     private GetQuestionService getQuestionService;
-    private PagingBeanBuilder pagingBeanBuilder = new PagingBeanBuilder();
+    @Autowired
+    private GetQuestionContextBuilder getQuestionContextBuilder;
 
     @RequestMapping(value = "/questions", method = RequestMethod.GET)
     public ModelAndView questions(HttpServletRequest request,
                                   @RequestParam(defaultValue = "1") int page) {
-        GetQuestionContext context = new GetQuestionContext();
-        context.setPage(Math.max(0, page - 1));
-        context.setSize(20);
-
-        GetQuestionResponse questionsResponse = getQuestionService.getQuestions(context);
-
-        PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), context.getPage(), request);
-        List<Question> questions = questionsResponse.getQuestions().getContent();
-
-        QuestionsViewBuilder viewBuilder = new QuestionsViewBuilder();
-        viewBuilder.setQuestions(questions);
-        viewBuilder.setPaging(paging);
-        return viewBuilder.build();
+        page = getZeroBasedPage(page);
+        GetQuestionContext context = getQuestionContextBuilder.list(page);
+        return getView(request, context);
     }
 
     @RequestMapping(value = "/questions/tagged/{tags}")
     public ModelAndView taggedQuestions(HttpServletRequest request,
                                         @RequestParam(defaultValue = "1") int page,
                                         @PathVariable("tags") String tags) {
-        GetQuestionContext context = new GetQuestionContext();
-        context.setPage(Math.max(0, page - 1));
-        context.setSize(20);
-        context.setTags(Lists.newArrayList(StringUtils.split(tags, ',')));
+        page = getZeroBasedPage(page);
+        ArrayList<String> tagsList = Lists.newArrayList(StringUtils.split(tags, ','));
+        GetQuestionContext context = getQuestionContextBuilder.listByTags(page, tagsList);
+        return getView(request, context);
+    }
 
+    private ModelAndView getView(HttpServletRequest request, GetQuestionContext context) {
         GetQuestionResponse questionsResponse = getQuestionService.getQuestions(context);
 
         PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), context.getPage(), request);

@@ -7,7 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.repository.QuestionRepository;
+import ru.atott.combiq.service.dsl.DslTag;
 import ru.atott.combiq.service.mapper.QuestionEntityToQuestionMapper;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GetQuestionServiceImpl implements GetQuestionService {
@@ -22,10 +26,13 @@ public class GetQuestionServiceImpl implements GetQuestionService {
 
         Page<QuestionEntity> page = null;
 
-        if (context.getTags() == null || context.getTags().isEmpty()) {
+        if (context.getDslQuery().getTags().isEmpty()) {
             page = questionRepository.findAll(pageable);
         } else {
-            page = questionRepository.findByTagsIn(context.getTags(), pageable);
+            List<String> tagValues = context.getDslQuery().getTags().stream()
+                    .map(DslTag::getValue)
+                    .collect(Collectors.toList());
+            page = questionRepository.findByTagsIn(tagValues, pageable);
         }
 
         GetQuestionResponse response = new GetQuestionResponse();

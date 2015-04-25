@@ -1,21 +1,14 @@
 package ru.atott.combiq.service.question;
 
 import ru.atott.combiq.service.Context;
+import ru.atott.combiq.service.dsl.DslQuery;
 
 import java.util.List;
 
 public class GetQuestionContext extends Context {
     private int page = 0;
     private int size = 20;
-    private List<String> tags;
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
+    private DslQuery dslQuery;
 
     public int getPage() {
         return page;
@@ -31,5 +24,13 @@ public class GetQuestionContext extends Context {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public DslQuery getDslQuery() {
+        return dslQuery;
+    }
+
+    public void setDslQuery(DslQuery dslQuery) {
+        this.dslQuery = dslQuery;
     }
 }
