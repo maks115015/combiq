@@ -2,12 +2,14 @@ package ru.atott.combiq.web.view;
 
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Question;
+import ru.atott.combiq.service.bean.Tag;
 import ru.atott.combiq.web.bean.PagingBean;
 
 import java.util.List;
 
 public class QuestionsViewBuilder {
     private List<Question> questions;
+    private List<Tag> popularTags;
     private PagingBean paging;
     private String dsl;
 
@@ -35,11 +37,20 @@ public class QuestionsViewBuilder {
         this.dsl = dsl;
     }
 
+    public List<Tag> getPopularTags() {
+        return popularTags;
+    }
+
+    public void setPopularTags(List<Tag> popularTags) {
+        this.popularTags = popularTags;
+    }
+
     public ModelAndView build() {
         ModelAndView mav = new ModelAndView("questions");
         mav.addObject("questions", questions);
         mav.addObject("paging", paging);
         mav.addObject("dsl", dsl);
+        mav.addObject("popularTags", popularTags);
         return mav;
     }
 }

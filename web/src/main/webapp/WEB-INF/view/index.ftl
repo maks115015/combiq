@@ -1,7 +1,7 @@
 <#import "templates.ftl" as templates />
 
 <#assign head>
-    <link rel="import" href="/static/elements/co-question.html">
+
 </#assign>
 
 <@templates.layoutBody head=head>

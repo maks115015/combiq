@@ -68,6 +68,7 @@ public class QuestionController extends BaseController {
         viewBuilder.setQuestions(questions);
         viewBuilder.setPaging(paging);
         viewBuilder.setDsl(dsl);
+        viewBuilder.setPopularTags(questionsResponse.getPopularTags());
         return viewBuilder.build();
     }
 }

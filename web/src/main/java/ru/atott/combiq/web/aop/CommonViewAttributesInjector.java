@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
+    private String resourceVersion = String.valueOf(System.currentTimeMillis());
     @Autowired
     private ViewUtils viewUtils;
 
@@ -21,6 +22,7 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
                 && !(modelAndView.getView() instanceof RedirectView)) {
             modelAndView.addObject("utils", viewUtils);
             modelAndView.addObject("env", System.getProperty("env"));
+            modelAndView.addObject("resourceVersion", resourceVersion);
         }
     }
 }

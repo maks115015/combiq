@@ -18,7 +18,7 @@
         <title>Combiq - вопросы для собеседования Java</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/css/styles.css">
+        <link rel="stylesheet" href="/static/css/styles.css?v=${resourceVersion}">
         <link rel="stylesheet" href="/static/font/roboto/roboto.css">
         <link rel="stylesheet" href="/static/font/comfortaa/comfortaa.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -39,8 +39,10 @@
         </script>
 
 
-        <link rel="import" href="/static/bower_components/core-toolbar/core-toolbar.html">
-        <link rel="import" href="/static/bower_components/paper-icon-button/paper-icon-button.html">
+        <link rel="import" href="/static/bower_components/core-toolbar/core-toolbar.html?v=${resourceVersion}">
+        <link rel="import" href="/static/bower_components/paper-icon-button/paper-icon-button.html?v=${resourceVersion}">
+        <link rel="import" href="/static/elements/co-question.html?v=${resourceVersion}">
+        <link rel="import" href="/static/elements/co-tag.html?v=${resourceVersion}">
         ${head}
     </head>
     <body>
@@ -90,21 +92,14 @@
 </html>
 </#macro>
 
-<#macro layoutWithSidebar head='' dsl=''>
+<#macro layoutWithSidebar head='' dsl='' sidebar=''>
     <@layoutHtml head=head dsl=dsl>
         <div class="container">
             <div class="col-md-9">
                 <#nested />
             </div>
             <div class="col-md-3">
-                <nav class="bs-docs-sidebar">
-                    <ul id="sidebar" class="nav nav-stacked fixed">
-                        <li>
-                            <a href="https://github.com/atott/combiq/wiki/%D0%9E-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5">О проекте</a>
-                            <a href="https://github.com/atott/combiq">Присоединяйся к Combiq.ru на Github.com</a>
-                        </li>
-                    </ul>
-                </nav>
+                ${sidebar}
             </div>
         </div>
     </@layoutHtml>
