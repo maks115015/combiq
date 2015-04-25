@@ -4,7 +4,7 @@
     <link rel="import" href="/static/elements/co-question.html">
 </#assign>
 
-<@templates.layoutWithSidebar head=head>
+<@templates.layoutWithSidebar head=head dsl=dsl>
     <ul class="co-questions">
         <#list questions as question>
             <li>

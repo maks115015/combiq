@@ -6,6 +6,9 @@ import org.codehaus.jparsec.Parsers;
 import org.codehaus.jparsec.Scanners;
 import org.codehaus.jparsec.Terminals;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class DslParser {
     private static Parser<DslQuery> parser;
 
@@ -35,11 +38,27 @@ public class DslParser {
                 .between(operators.token("["), operators.token("]"))
                 .map(DslTag::new);
 
-        Parser<DslQuery> queryParser = tagParser
+        Parser<DslTerm> termParser = wordParser
+                .map(DslTerm::new);
+
+        Parser<Object> conditionsParser = Parsers.or(tagParser, termParser);
+
+        Parser<DslQuery> queryParser = conditionsParser
                 .sepBy(operators.token(" ").many())
-                .map(tags -> {
+                .map(conditions -> {
+                    List<DslTag> tags = conditions.stream()
+                            .filter(condition -> condition instanceof DslTag)
+                            .map(DslTag.class::cast)
+                            .collect(Collectors.toList());
+
+                    List<DslTerm> terms = conditions.stream()
+                            .filter(condition -> condition instanceof DslTerm)
+                            .map(DslTerm.class::cast)
+                            .collect(Collectors.toList());
+
                     DslQuery query = new DslQuery();
                     query.setTags(tags);
+                    query.setTerms(terms);
                     return query;
                 });
 

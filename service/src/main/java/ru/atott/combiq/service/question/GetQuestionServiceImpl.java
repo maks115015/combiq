@@ -8,19 +8,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.DefaultResultMapper;
-import org.springframework.data.elasticsearch.core.FacetedPage;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.Types;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
-import ru.atott.combiq.dao.repository.QuestionRepository;
 import ru.atott.combiq.service.dsl.DslQuery;
-import ru.atott.combiq.service.dsl.DslTag;
 import ru.atott.combiq.service.mapper.QuestionEntityToQuestionMapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class GetQuestionServiceImpl implements GetQuestionService {
@@ -37,6 +33,13 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         List<FilterBuilder> filters = new ArrayList<>();
 
         QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
+        if (!dsl.getTerms().isEmpty()) {
+            BoolQueryBuilder termsQueryBuilder = QueryBuilders.boolQuery();
+            dsl.getTerms().forEach(term -> {
+                termsQueryBuilder.must(QueryBuilders.matchQuery("title", term.getValue()));
+            });
+            queryBuilder = termsQueryBuilder;
+        }
 
         if (!dsl.getTags().isEmpty()) {
             BoolFilterBuilder tagsFilter = FilterBuilders.boolFilter();

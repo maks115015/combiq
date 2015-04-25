@@ -30,12 +30,21 @@ public class QuestionController extends BaseController {
     @Autowired
     private GetQuestionContextBuilder getQuestionContextBuilder;
 
+    @RequestMapping(value = "/questions/search", method = RequestMethod.GET)
+    public ModelAndView search(HttpServletRequest request,
+                               @RequestParam(defaultValue = "1") int page,
+                               @RequestParam(value = "q", defaultValue = "") String dsl) {
+        page = getZeroBasedPage(page);
+        GetQuestionContext context = getQuestionContextBuilder.listByDsl(page, dsl);
+        return getView(request, context, dsl);
+    }
+
     @RequestMapping(value = "/questions", method = RequestMethod.GET)
     public ModelAndView questions(HttpServletRequest request,
                                   @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
         GetQuestionContext context = getQuestionContextBuilder.list(page);
-        return getView(request, context);
+        return getView(request, context, null);
     }
 
     @RequestMapping(value = "/questions/tagged/{tags}")
@@ -45,18 +54,20 @@ public class QuestionController extends BaseController {
         page = getZeroBasedPage(page);
         ArrayList<String> tagsList = Lists.newArrayList(StringUtils.split(tags, ','));
         GetQuestionContext context = getQuestionContextBuilder.listByTags(page, tagsList);
-        return getView(request, context);
+        return getView(request, context, null);
     }
 
-    private ModelAndView getView(HttpServletRequest request, GetQuestionContext context) {
+    private ModelAndView getView(HttpServletRequest request, GetQuestionContext context, String dsl) {
         GetQuestionResponse questionsResponse = getQuestionService.getQuestions(context);
 
         PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), context.getPage(), request);
         List<Question> questions = questionsResponse.getQuestions().getContent();
+        dsl = StringUtils.defaultIfBlank(dsl, context.getDslQuery().toDsl());
 
         QuestionsViewBuilder viewBuilder = new QuestionsViewBuilder();
         viewBuilder.setQuestions(questions);
         viewBuilder.setPaging(paging);
+        viewBuilder.setDsl(dsl);
         return viewBuilder.build();
     }
 }

@@ -1,6 +1,6 @@
 <#import "stats.ftl" as stats />
 
-<#macro layoutHtml head=''>
+<#macro layoutHtml head='' dsl=''>
 <!DOCTYPE html>
 <!--    Дорогой друг!
         Злой красный человек спалил тебя ;)
@@ -56,6 +56,18 @@
                 <li>
                     <a class="co-out" href="https://github.com/atott/combiq/wiki">о проекте</a>
                 </li>
+                <li class="co-searchbox">
+                    <form action="/questions/search" method="get">
+                        <div class="input-group">
+                            <input name="q" type="text" class="form-control" value="${dsl!}">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </li>
                 <li class="co-getstarted">
                     <a href="/questions">Вопросы</a>
                 </li>
@@ -78,8 +90,8 @@
 </html>
 </#macro>
 
-<#macro layoutWithSidebar head=''>
-    <@layoutHtml head=head>
+<#macro layoutWithSidebar head='' dsl=''>
+    <@layoutHtml head=head dsl=dsl>
         <div class="container">
             <div class="col-md-9">
                 <#nested />
