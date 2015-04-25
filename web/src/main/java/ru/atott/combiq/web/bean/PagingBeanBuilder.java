@@ -16,6 +16,9 @@ public class PagingBeanBuilder {
         PagingBean bean = new PagingBean();
         String uri = request.getRequestURL().toString() + "?" + StringUtils.defaultString(request.getQueryString());
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(uri);
+        uriBuilder.scheme(null);
+        uriBuilder.host(null);
+        uriBuilder.port(null);
 
         if (page.getTotalPages() <= 5) {
             bean.setPages(getPages(0, page.getTotalPages() - 1, currentPage, uriBuilder));
