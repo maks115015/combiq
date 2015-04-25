@@ -6,6 +6,7 @@ public class Question {
     private String id;
     private String title;
     private List<String> tags;
+    private String level;
 
     public List<String> getTags() {
         return tags;
@@ -29,5 +30,13 @@ public class Question {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }

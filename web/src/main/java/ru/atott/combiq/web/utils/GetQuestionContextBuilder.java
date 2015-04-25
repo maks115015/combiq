@@ -32,6 +32,17 @@ public class GetQuestionContextBuilder {
         return context;
     }
 
+    public GetQuestionContext listByLevel(int page, String level) {
+        DslQuery query = new DslQuery();
+        query.setLevel(level);
+
+        GetQuestionContext context = new GetQuestionContext();
+        context.setPage(page);
+        context.setSize(size);
+        context.setDslQuery(query);
+        return context;
+    }
+
     public GetQuestionContext listByDsl(int page, String dsl) {
         DslQuery dslQuery = DslParser.parse(dsl);
 

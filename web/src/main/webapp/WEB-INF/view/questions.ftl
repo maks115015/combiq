@@ -19,7 +19,7 @@
     <ul class="co-questions">
         <#list questions as question>
             <li>
-                <co-question tags="${question.tags?join(',')}">
+                <co-question level="${question.level}" tags="${question.tags?join(',')}">
                     ${question.title}
                 </co-question>
             </li>

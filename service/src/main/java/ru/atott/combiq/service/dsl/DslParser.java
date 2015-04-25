@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.dsl;
 
+import org.apache.commons.collections.keyvalue.DefaultKeyValue;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jparsec.Parser;
 import org.codehaus.jparsec.Parsers;
@@ -25,9 +26,9 @@ public class DslParser {
     private static Parser<DslQuery> getDslQueryParser() {
         Parser<Void> ignored = Parsers.never();
 
-        Terminals operators = Terminals.operators("[", "]", " ");
+        Terminals operators = Terminals.operators("[", "]", " ", ":");
         Parser<String> singleQuoteTokenizer = Terminals.StringLiteral.SINGLE_QUOTE_TOKENIZER;
-        Parser<?> wordTokenizer = Scanners.notAmong("[]").many().source();
+        Parser<?> wordTokenizer = Scanners.notAmong("[]:").many().source();
         Parser<?> tokenizer = Parsers.or(operators.tokenizer(), singleQuoteTokenizer, wordTokenizer);
 
         // ---
@@ -41,7 +42,11 @@ public class DslParser {
         Parser<DslTerm> termParser = wordParser
                 .map(DslTerm::new);
 
-        Parser<Object> conditionsParser = Parsers.or(tagParser, termParser);
+        Parser<DefaultKeyValue> pairParser = wordParser
+                .followedBy(operators.token(":"))
+                .next(key -> wordParser.map(value -> new DefaultKeyValue(key, value)));
+
+        Parser<Object> conditionsParser = Parsers.or(tagParser, pairParser, termParser);
 
         Parser<DslQuery> queryParser = conditionsParser
                 .sepBy(operators.token(" ").many())
@@ -59,6 +64,20 @@ public class DslParser {
                     DslQuery query = new DslQuery();
                     query.setTags(tags);
                     query.setTerms(terms);
+
+                    List<DefaultKeyValue> pairs = conditions.stream()
+                            .filter(condition -> condition instanceof DefaultKeyValue)
+                            .map(DefaultKeyValue.class::cast)
+                            .collect(Collectors.toList());
+
+                    pairs.forEach(pair -> {
+                        switch ((String) pair.getKey()) {
+                            case "level":
+                                query.setLevel((String) pair.getValue());
+                                break;
+                        }
+                    });
+
                     return query;
                 });
 

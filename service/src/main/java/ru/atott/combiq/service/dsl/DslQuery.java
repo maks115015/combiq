@@ -8,6 +8,7 @@ import java.util.List;
 public class DslQuery {
     private List<DslTag> tags = Collections.emptyList();
     private List<DslTerm> terms = Collections.emptyList();
+    private String level;
 
     public List<DslTag> getTags() {
         return tags;
@@ -30,11 +31,20 @@ public class DslQuery {
         return serializer.serialize(this);
     }
 
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("tags", tags)
                 .append("terms", terms)
+                .append("level", level)
                 .toString();
     }
 }

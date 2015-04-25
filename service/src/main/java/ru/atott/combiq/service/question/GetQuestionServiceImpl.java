@@ -1,11 +1,12 @@
 package ru.atott.combiq.service.question;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.*;
-import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.global.GlobalBuilder;
@@ -96,6 +97,11 @@ public class GetQuestionServiceImpl implements GetQuestionService {
                 tagsFilter.must(FilterBuilders.termFilter("tags", tag.getValue()));
             });
             filters.add(tagsFilter);
+        }
+
+        if (StringUtils.isNoneBlank(dsl.getLevel())) {
+            long level = NumberUtils.toLong(dsl.getLevel().substring(1), -1);
+            filters.add(FilterBuilders.termFilter("level", level));
         }
 
         FilterBuilder filterBuilder = FilterBuilders.matchAllFilter();

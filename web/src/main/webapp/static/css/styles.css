@@ -218,14 +218,15 @@ footer {
 }
 
 .co-questions {
-    margin: 0;
     padding: 0;
     list-style: none;
+    margin: 0 0 30px;
 }
 
 .co-questions > li {
     margin: 0;
-    padding: 0;
+    padding: 12px 0 15px 0;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .co-searchbox {

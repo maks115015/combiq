@@ -11,6 +11,7 @@ public class QuestionEntity {
     private String id;
     private String title;
     private List<String> tags;
+    private int level;
 
     public List<String> getTags() {
         return tags;
@@ -34,5 +35,13 @@ public class QuestionEntity {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

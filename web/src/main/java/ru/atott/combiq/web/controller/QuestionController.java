@@ -57,6 +57,15 @@ public class QuestionController extends BaseController {
         return getView(request, context, null);
     }
 
+    @RequestMapping(value = "/questions/level/{level}")
+    public ModelAndView level(HttpServletRequest request,
+                              @RequestParam(defaultValue = "1") int page,
+                              @PathVariable("level") String level) {
+        page = getZeroBasedPage(page);
+        GetQuestionContext context = getQuestionContextBuilder.listByLevel(page, level);
+        return getView(request, context, null);
+    }
+
     private ModelAndView getView(HttpServletRequest request, GetQuestionContext context, String dsl) {
         GetQuestionResponse questionsResponse = getQuestionService.getQuestions(context);
 

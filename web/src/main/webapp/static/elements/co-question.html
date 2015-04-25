@@ -3,11 +3,11 @@
 <link rel="import" href="co-tag.html">
 -->
 
-<polymer-element name="co-question" attributes="tags">
+<polymer-element name="co-question" attributes="tags level">
     <template>
         <style>
             .co-question {
-                margin-bottom: 30px;
+                display: flex;
             }
 
             ul.co-question-tags {
@@ -26,29 +26,72 @@
                 line-height: 18px;
                 padding-bottom: 5px;
                 display: inline-block;
-                clear: both;
+            }
+
+            .co-question-level {
+                display: inline-block;
+                height: 38px;
+                margin: 0 3px 0 0;
+                color: #777;
+            }
+
+            .co-question-level a {
+                text-decoration: none;
+                color: #777;
+            }
+
+            .co-question-level a:hover {
+                text-decoration: none;
+                color: #b7b7b7;
+            }
+
+            .co-question-numbers {
+                width: 10%;
+            }
+
+            .co-question-content {
+                width: 90%;
+            }
+
+            .co-question-level-title {
+                font-size: 22px;
+            }
+
+            .co-question-level-desc {
+                font-size: 12px;
             }
         </style>
         <div class="co-question">
-            <div class="co-question-text">
-                <content></content>
+            <div class="co-question-numbers">
+                <div class="co-question-level">
+                    <div class="co-question-level-title">
+                        <a href="/questions/level/{{level}}">{{level}}</a>
+                    </div>
+                    <div class="co-question-level-desc">уровень</div>
+                </div>
             </div>
-            <div>
-                <template if="{{tags | hasTags}}">
-                    <ul class="co-question-tags">
-                        <template repeat="{{tag in tags | splitTags}}">
-                            <li>
-                                <co-tag tag="{{tag}}">{{tag}}</co-tag>
-                            </li>
-                        </template>
-                    </ul>
-                </template>
+            <div class="co-question-content">
+                <div class="co-question-text">
+                    <content></content>
+                </div>
+                <div>
+                    <template if="{{tags | hasTags}}">
+                        <ul class="co-question-tags">
+                            <template repeat="{{tag in tags | splitTags}}">
+                                <li>
+                                    <co-tag tag="{{tag}}">{{tag}}</co-tag>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                </div>
             </div>
         </div>
     </template>
     <script>
         Polymer({
             tags: '',
+            level: '',
 
             hasTags: function(tags) {
                 return !!tags;

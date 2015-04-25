@@ -15,6 +15,7 @@ public class QuestionEntityToQuestionMapper implements Mapper<QuestionEntity, Qu
         if (question.getTags() == null) {
             question.setTags(Collections.emptyList());
         }
+        question.setLevel("D" + source.getLevel());
         return question;
     }
 }
