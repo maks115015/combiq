@@ -1,5 +1,6 @@
 package ru.atott.combiq.web.bean;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -13,7 +14,8 @@ import java.util.stream.IntStream;
 public class PagingBeanBuilder {
     public <T> PagingBean build(Page<T> page, int currentPage, HttpServletRequest request) {
         PagingBean bean = new PagingBean();
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(request.getRequestURI());
+        String uri = request.getRequestURL().toString() + "?" + StringUtils.defaultString(request.getQueryString());
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(uri);
 
         if (page.getTotalPages() <= 5) {
             bean.setPages(getPages(0, page.getTotalPages() - 1, currentPage, uriBuilder));
