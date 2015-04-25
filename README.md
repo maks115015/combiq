@@ -1,7 +1,5 @@
 # Сombiq.ru
-[Combiq.ru](http://combiq.ru) поможет вам подготовиться к собеседованию на позицию Java разработчик.
-
-Больше информации вы можете узнать из разделов wiki:
+[Combiq.ru](http://combiq.ru) поможет вам подготовиться к собеседованию на позицию Java разработчик. Исходный код проекта распространяется под лицензией MIT. Больше информации о проекте вы можете узнать из разделов [wiki](https://github.com/atott/combiq/wiki):
 
 1. [Home](https://github.com/atott/combiq/wiki) - О целях проекта
 2. [Разработка](https://github.com/atott/combiq/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0) - О том как начать разрабатывать combiq.ru
