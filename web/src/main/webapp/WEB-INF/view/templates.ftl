@@ -50,13 +50,15 @@
         <nav class="navbar navbar-default navbar-static-top co-header">
             <ul class="co-topmenu">
                 <li>
-                    <a class="co-topmenu-mainer" href="/">Combiq.ru</a>
+                    <a class="co-topmenu-mainer" href="/" title="combiq.ru">
+                        <img src="/static/images/site/logo.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/atott/combiq/wiki">о проекте</a>
                 </li>
                 <li>
                     <a class="co-out" href="https://github.com/atott/combiq">на Github.com</a>
-                </li>
-                <li>
-                    <a class="co-out" href="https://github.com/atott/combiq/wiki">о проекте</a>
                 </li>
                 <li class="co-searchbox">
                     <form action="/questions/search" method="get">
@@ -78,14 +80,22 @@
         <#nested />
         <footer>
             <div class="container co-footer">
-                Combiq.ru, 2014-2015,
-                <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>
-                    <span class="co-informer">
+                <div class="co-inline">
+                    <div>
+                        <strong>Combiq.ru, 2014-2015</strong>
+                    </div>
+                    <div>
+                        <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>
+                    </div>
+                    <div>
                         <a href="/donate">Поддержать проект</a>${if(env == 'prod', ',')}
-                        <#if env == 'prod'>
-                            <@stats.informer/>
-                        </#if>
-                    </span>
+                    </div>
+                </div>
+                <span class="co-informer">
+                    <#if env == 'prod'>
+                        <@stats.informer/>
+                    </#if>
+                </span>
             </div>
         </footer>
     </body>

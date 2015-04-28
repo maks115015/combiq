@@ -57,35 +57,26 @@ a:focus {
 
 ul.co-topmenu {
     list-style: none;
-    font-family: 'ComfortaaBold', arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
+    font-family: Calibri, Ubuntu, Tahoma, 'Lucida Grande';
 }
 
 ul.co-topmenu > li {
     display: inline-block;
-    margin-right: 30px;
+    margin-right: 40px;
     position: relative;
 }
 
 .co-topmenu-mainer,
 .co-topmenu-mainer:hover {
-    padding-left: 65px;
     font-weight: bold;
     font-size: 22px;
     color: #000000;
     margin-right: 10px;
 }
 
-.co-topmenu-mainer:before {
-    width: 50px;
-    height: 35px;
-    content: '';
-    display: block;
-    left: 0;
-    top: 0;
-    position: absolute;
-    background: no-repeat 0 0;
-    background-image: url("images/topmenu-logo.png");
+.co-topmenu-mainer img {
+    margin-top: -28px;
 }
 
 .co-getstarted {
@@ -200,12 +191,21 @@ ul.co-topmenu > li {
 footer {
     margin-top: 60px;
     border-top: solid 1px rgb(231, 231, 231);
+    background-color: #F2F2F2;
 }
 
 .co-footer {
     padding-top: 25px;
     font-size: 14px;
     padding-bottom: 50px;
+}
+
+.co-footer a {
+    color: #97999b;
+}
+
+.co-footer a:hover {
+    color: #5c5e60;
 }
 
 .co-informer {
@@ -215,6 +215,10 @@ footer {
 .co-donatetext {
     font-size: 18px;
     margin-top: 60px;
+}
+
+.co-inline {
+    display: inline-block;
 }
 
 .co-questions {
