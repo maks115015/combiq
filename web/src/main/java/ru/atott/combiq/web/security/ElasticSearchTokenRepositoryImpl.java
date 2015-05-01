@@ -7,6 +7,7 @@ import ru.atott.combiq.dao.entity.RememberMeEntity;
 import ru.atott.combiq.dao.repository.RememberMeRepository;
 
 import java.util.Date;
+import java.util.List;
 
 public class ElasticSearchTokenRepositoryImpl implements PersistentTokenRepository {
     @Autowired
@@ -44,6 +45,7 @@ public class ElasticSearchTokenRepositoryImpl implements PersistentTokenReposito
 
     @Override
     public void removeUserTokens(String username) {
-        rememberMeRepository.deleteByUsername(username);
+        List<RememberMeEntity> rememberMeEntities = rememberMeRepository.findByUsername(username);
+        rememberMeRepository.delete(rememberMeEntities);
     }
 }

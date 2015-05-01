@@ -61,13 +61,12 @@
                     <a class="co-out" href="https://github.com/atott/combiq">на Github.com</a>
                 </li>
                 <#if user??>
-                    <li>
-                        <span>${user.login}</span>
-                        <a href="/logout.do">выйти</a>
+                    <li class="co-authcode">
+                        <strong>${user.login}</strong><a href="/logout.do">.logout()</a><span>;</span>
                     </li>
                 <#else>
-                    <li>
-                        <a href="/login.do">войти</a>
+                    <li class="co-authcode">
+                        <strong>anonymous</strong><a href="/login.do">.login()</a><span>;</span>
                     </li>
                 </#if>
                 <li class="co-searchbox">

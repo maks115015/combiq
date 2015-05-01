@@ -4,7 +4,7 @@
     <div class="container">
         <div>
             <a href="https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=user">
-                Login via Github.com
+                Войти через Github.com
             </a>
         </div>
     </div>

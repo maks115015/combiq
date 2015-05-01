@@ -248,3 +248,17 @@ ul.co-popularTags > li {
     padding: 0;
     margin-bottom: 10px;
 }
+
+.co-authcode {
+    font-family: monospace;
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+}
+
+.co-authcode strong {
+    font-style: italic;
+    color: #5c5e60;
+    font-weight: 400;
+}
