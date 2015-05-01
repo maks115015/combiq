@@ -42,6 +42,13 @@ public class NameVersionDomainResolver {
         return domainVersions.containsKey(domain);
     }
 
+    public Long getVersionOrDefault(String domain, Long defaultVersion) {
+        if (canBeResolved(domain)) {
+            return getVersion(domain);
+        }
+        return defaultVersion;
+    }
+
     public Long getVersion(String domain) {
         if (domainVersions == null) {
             updateDomainVersions();

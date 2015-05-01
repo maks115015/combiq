@@ -60,6 +60,16 @@
                 <li>
                     <a class="co-out" href="https://github.com/atott/combiq">на Github.com</a>
                 </li>
+                <#if user??>
+                    <li>
+                        <span>${user.login}</span>
+                        <a href="/logout.do">выйти</a>
+                    </li>
+                <#else>
+                    <li>
+                        <a href="/login.do">войти</a>
+                    </li>
+                </#if>
                 <li class="co-searchbox">
                     <form action="/questions/search" method="get">
                         <div class="input-group">
@@ -88,7 +98,7 @@
                         <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>
                     </div>
                     <div>
-                        <a href="/donate">Поддержать проект</a>${if(env == 'prod', ',')}
+                        <a href="/donate">Поддержать проект</a>
                     </div>
                 </div>
                 <span class="co-informer">

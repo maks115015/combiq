@@ -6,7 +6,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -16,6 +23,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import ru.atott.combiq.web.aop.CommonViewAttributesInjector;
+import ru.atott.combiq.web.security.CombiqUserDetailsService;
 
 import javax.servlet.Filter;
 import java.util.Properties;
@@ -25,7 +33,8 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[] {
                 MvcConfiguration.class,
-                AppConfiguration.class};
+                AppConfiguration.class,
+                SecurityConfiguration.class};
     }
 
     @Override
@@ -45,7 +54,8 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
         characterEncodingFilter.setForceEncoding(true);
 
         return new Filter[] {
-                characterEncodingFilter
+                characterEncodingFilter,
+                new DelegatingFilterProxy("springSecurityFilterChain")
         };
     }
 
@@ -101,6 +111,62 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
         public void addResourceHandlers(ResourceHandlerRegistry registry) {
             registry
                     .addResourceHandler("/static/**").addResourceLocations("/static/");
+        }
+    }
+
+    @Configuration
+    @EnableWebSecurity
+    public static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+        @Bean
+        public CombiqUserDetailsService getCombiqUserDetailsService() {
+            return new CombiqUserDetailsService();
+        }
+
+        @Bean
+        public ShaPasswordEncoder getShaPasswordEncoder(){
+            return new ShaPasswordEncoder();
+        }
+
+        @Autowired
+        private CombiqUserDetailsService combiqUserDetailsService;
+
+        @Autowired
+        private ShaPasswordEncoder shaPasswordEncoder;
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .csrf()
+                    .disable()
+                    .authorizeRequests()
+                    .antMatchers("/admin/**").hasAuthority("admin")
+                    .and()
+                    .formLogin()
+                    .loginPage("/login.do")
+                    .loginProcessingUrl("/login.do")
+                    .defaultSuccessUrl("/")
+                    .failureUrl("/login.do?error")
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                    .permitAll();
+
+            http
+                    .logout()
+                    .logoutUrl("/logout.do");
+        }
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth
+                    .userDetailsService(combiqUserDetailsService)
+                    .passwordEncoder(shaPasswordEncoder);
+        }
+
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web
+                    .ignoring()
+                    .antMatchers("/static/**");
         }
     }
 }

@@ -38,6 +38,7 @@
         <spring-data-es.version>1.2.0.RELEASE</spring-data-es.version>
         <jparsec.version>2.2.1</jparsec.version>
         <junit.version>4.12</junit.version>
+        <httpclient.version>4.4.1</httpclient.version>
     </properties>
 
     <dependencyManagement>
@@ -96,6 +97,11 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

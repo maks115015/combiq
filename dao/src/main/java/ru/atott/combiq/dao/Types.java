@@ -1,5 +1,6 @@
 package ru.atott.combiq.dao;
 
 public interface Types {
-    static String question = "question";
+    String question = "question";
+    String user = "user";
 }

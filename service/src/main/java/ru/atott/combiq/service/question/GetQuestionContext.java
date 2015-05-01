@@ -1,11 +1,8 @@
 package ru.atott.combiq.service.question;
 
-import ru.atott.combiq.service.Context;
 import ru.atott.combiq.service.dsl.DslQuery;
 
-import java.util.List;
-
-public class GetQuestionContext extends Context {
+public class GetQuestionContext {
     private int page = 0;
     private int size = 20;
     private DslQuery dslQuery;
