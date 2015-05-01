@@ -2,6 +2,7 @@ package ru.atott.combiq.web.config;
 
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.ViewResolver;
@@ -24,8 +27,10 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import ru.atott.combiq.web.aop.CommonViewAttributesInjector;
 import ru.atott.combiq.web.security.CombiqUserDetailsService;
+import ru.atott.combiq.web.security.ElasticSearchTokenRepositoryImpl;
 
 import javax.servlet.Filter;
+import java.time.Duration;
 import java.util.Properties;
 
 public class SpringInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -117,14 +122,31 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Configuration
     @EnableWebSecurity
     public static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+        @Value("${auth.rememberme.key}")
+        private String rememberMeKey;
+
         @Bean
         public CombiqUserDetailsService getCombiqUserDetailsService() {
             return new CombiqUserDetailsService();
         }
 
         @Bean
-        public ShaPasswordEncoder getShaPasswordEncoder(){
+        public ShaPasswordEncoder getShaPasswordEncoder() {
             return new ShaPasswordEncoder();
+        }
+
+        @Bean
+        public ElasticSearchTokenRepositoryImpl getElasticSearchTokenRepository() {
+            return new ElasticSearchTokenRepositoryImpl();
+        }
+
+        @Bean
+        public PersistentTokenBasedRememberMeServices getRememberMeServices() {
+            PersistentTokenBasedRememberMeServices rememberMeServices =
+                    new PersistentTokenBasedRememberMeServices(
+                            rememberMeKey, getCombiqUserDetailsService(), getElasticSearchTokenRepository());
+            rememberMeServices.setAlwaysRemember(true);
+            return rememberMeServices;
         }
 
         @Autowired
@@ -149,6 +171,12 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
                     .usernameParameter("email")
                     .passwordParameter("password")
                     .permitAll();
+
+            http
+                    .rememberMe()
+                    .key(rememberMeKey)
+                    .rememberMeServices(getRememberMeServices())
+                    .tokenValiditySeconds((int) Duration.ofDays(30).getSeconds());
 
             http
                     .logout()

@@ -23,6 +23,10 @@ public class NameVersionDomainResolver {
         return delimiter;
     }
 
+    public String resolveIndexName(String domain, long version) {
+        return domain + delimiter + version;
+    }
+
     public String resolveIndexName(String domain) {
         return domain + delimiter + getVersion(domain);
     }
@@ -33,6 +37,10 @@ public class NameVersionDomainResolver {
 
     public String resolveQuestionIndex() {
         return resolveIndexName(Domains.question);
+    }
+
+    public String resolveSystemIndex() {
+        return resolveIndexName(Domains.system);
     }
 
     public boolean canBeResolved(String domain) {

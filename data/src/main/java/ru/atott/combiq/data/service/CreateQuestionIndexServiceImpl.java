@@ -29,7 +29,7 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
         if (domainResolver.canBeResolved(Domains.question)) {
             version = domainResolver.getVersion(Domains.question) + 1;
         }
-        String indexName = Domains.question + domainResolver.getDelimiter() + version;
+        String indexName = domainResolver.resolveIndexName(Domains.question, version);
         InputStream dataStream = this.getClass().getResourceAsStream("/data/questions-1.json");
         String json = IOUtils.toString(dataStream, "utf-8");
         JsonArray questions = new JsonParser().parse(json).getAsJsonArray();

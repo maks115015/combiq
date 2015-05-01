@@ -9,6 +9,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,10 +20,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.user.GithubRegistrationContext;
 import ru.atott.combiq.service.user.UserService;
+import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.utils.ViewUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
@@ -33,6 +36,10 @@ public class LoginController extends BaseController {
     private String githubClientSecret;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthService authService;
+    @Autowired
+    private RememberMeServices rememberMeServices;
 
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
     public ModelAndView login() {
@@ -44,7 +51,8 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "/login/callback/github.do", method = RequestMethod.GET)
     public RedirectView githubCallback(@RequestParam(value = "code") String code,
-                                       HttpServletRequest request) throws IOException, ServletException {
+                                       HttpServletRequest httpRequest,
+                                       HttpServletResponse httpResponse) throws IOException, ServletException {
         String exchangeUrl = UriComponentsBuilder
                 .fromHttpUrl("https://github.com/login/oauth/access_token")
                 .queryParam("client_id", githubClientId)
@@ -85,7 +93,8 @@ public class LoginController extends BaseController {
             user = userService.registerUserViaGithub(registrationContext);
         }
 
-        request.login(user.getEmail(), "github");
+        httpRequest.login(user.getEmail(), "github");
+        rememberMeServices.loginSuccess(httpRequest, httpResponse, authService.getAuthentication());
 
         return new RedirectView("/");
     }

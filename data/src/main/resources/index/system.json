@@ -1,0 +1,21 @@
+{
+  "settings": {
+  },
+  "mappings": {
+    "rememberme": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "token": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "lastused": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}

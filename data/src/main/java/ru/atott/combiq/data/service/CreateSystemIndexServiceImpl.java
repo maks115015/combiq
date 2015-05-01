@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.util.concurrent.ExecutionException;
 
 @Service
-public class CreatePersonalIndexServiceImpl implements CreatePersonalIndexService {
+public class CreateSystemIndexServiceImpl implements CreateSystemIndexService {
     @Autowired(required = false)
     private Client client;
     @Autowired
@@ -21,9 +21,9 @@ public class CreatePersonalIndexServiceImpl implements CreatePersonalIndexServic
 
     @Override
     public String create(String env) throws IOException, ExecutionException, InterruptedException {
-        Long version = domainResolver.getVersionOrDefault(Domains.personal, 0L) + 1;
-        String indexName = domainResolver.resolveIndexName(Domains.personal, version);
-        InputStream indexStream = this.getClass().getResourceAsStream("/index/personal.json");
+        Long version = domainResolver.getVersionOrDefault(Domains.system, 0L) + 1;
+        String indexName = domainResolver.resolveIndexName(Domains.system, version);
+        InputStream indexStream = this.getClass().getResourceAsStream("/index/system.json");
         String indexJson = IOUtils.toString(indexStream, "utf-8");
         CreateIndexRequest request = new CreateIndexRequest(indexName);
         request.source(indexJson);
