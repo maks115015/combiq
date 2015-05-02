@@ -10,12 +10,17 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 @Component
-public class CreateQuestionsIndexCommands implements CommandMarker {
+public class CreateQuestionIndexCommands implements CommandMarker {
     @Autowired
     private CreateQuestionIndexService createQuestionIndexService;
 
     @CliCommand(value = "create index question")
     public String create() throws InterruptedException, ExecutionException, IOException {
         return createQuestionIndexService.create(CommandsContext.env);
+    }
+
+    @CliCommand(value = "update index question")
+    public String update() throws InterruptedException, ExecutionException, IOException {
+        return createQuestionIndexService.update(CommandsContext.env);
     }
 }

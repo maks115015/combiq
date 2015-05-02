@@ -12,6 +12,7 @@ public class QuestionEntity {
     private String title;
     private List<String> tags;
     private int level;
+    private Long reputation;
 
     public List<String> getTags() {
         return tags;
@@ -43,5 +44,13 @@ public class QuestionEntity {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public Long getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(Long reputation) {
+        this.reputation = reputation;
     }
 }

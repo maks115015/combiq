@@ -15,6 +15,7 @@ import ru.atott.combiq.service.question.GetQuestionResponse;
 import ru.atott.combiq.service.question.GetQuestionService;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
+import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.utils.GetQuestionContextBuilder;
 import ru.atott.combiq.web.view.QuestionsViewBuilder;
 

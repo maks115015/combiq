@@ -20,4 +20,13 @@ public class AuthServiceImpl implements AuthService {
     public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
+
+    @Override
+    public String getUserId() {
+        CombiqUser user = getUser();
+        if (user == null) {
+            return null;
+        }
+        return user.getId();
+    }
 }

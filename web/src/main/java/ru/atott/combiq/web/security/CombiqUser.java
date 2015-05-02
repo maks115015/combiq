@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class CombiqUser extends User {
     private UserType type;
     private String login;
+    private String id;
 
     public UserType getType() {
         return type;
@@ -35,5 +36,13 @@ public class CombiqUser extends User {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

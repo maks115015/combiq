@@ -5,12 +5,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
+import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
 import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.Domains;
 import ru.atott.combiq.dao.Types;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
+import ru.atott.combiq.data.utils.DataUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,6 +33,15 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
             version = domainResolver.getVersion(Domains.question) + 1;
         }
         String indexName = domainResolver.resolveIndexName(Domains.question, version);
+
+        // Create index.
+        InputStream indexStream = this.getClass().getResourceAsStream("/index/question.json");
+        String indexJson = IOUtils.toString(indexStream, "utf-8");
+        CreateIndexRequest request = new CreateIndexRequest(indexName);
+        request.source(indexJson);
+        client.admin().indices().create(request).actionGet();
+
+        // Fill data.
         InputStream dataStream = this.getClass().getResourceAsStream("/data/questions-1.json");
         String json = IOUtils.toString(dataStream, "utf-8");
         JsonArray questions = new JsonParser().parse(json).getAsJsonArray();
@@ -45,6 +57,14 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
                     .get();
         }
         domainResolver.reset();
+        return indexName;
+    }
+
+    @Override
+    public String update(String env) throws IOException, ExecutionException, InterruptedException {
+        String indexName = domainResolver.resolveQuestionIndex();
+        String json = DataUtils.getIndexMapping("/index/question.json");
+        DataUtils.putMapping(client, indexName, json);
         return indexName;
     }
 }

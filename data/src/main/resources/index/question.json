@@ -1,0 +1,13 @@
+{
+  "settings": {
+  },
+  "mappings": {
+    "question": {
+      "properties": {
+        "reputation": {
+          "type": "long"
+        }
+      }
+    }
+  }
+}

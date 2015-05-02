@@ -5,4 +5,5 @@ import org.springframework.security.core.Authentication;
 public interface AuthService {
     CombiqUser getUser();
     Authentication getAuthentication();
+    String getUserId();
 }

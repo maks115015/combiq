@@ -18,4 +18,9 @@ public class CreatePerosnalIndexCommands implements CommandMarker {
     public String create() throws InterruptedException, ExecutionException, IOException {
         return createPersonalIndexService.create(CommandsContext.env);
     }
+
+    @CliCommand(value = "update index personal")
+    public String update() throws InterruptedException, ExecutionException, IOException {
+        return createPersonalIndexService.update(CommandsContext.env);
+    }
 }

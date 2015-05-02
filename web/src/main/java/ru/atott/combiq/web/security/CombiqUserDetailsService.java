@@ -31,6 +31,7 @@ public class CombiqUserDetailsService implements UserDetailsService {
                 CombiqUser combiqUser = new CombiqUser(email, passwordHash);
                 combiqUser.setType(byEmail.getType());
                 combiqUser.setLogin(byEmail.getLogin());
+                combiqUser.setId(byEmail.getId());
                 return combiqUser;
             }
         } catch (Exception e) {

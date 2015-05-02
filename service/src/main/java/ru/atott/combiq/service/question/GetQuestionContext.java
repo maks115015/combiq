@@ -6,6 +6,7 @@ public class GetQuestionContext {
     private int page = 0;
     private int size = 20;
     private DslQuery dslQuery;
+    private String userId;
 
     public int getPage() {
         return page;
@@ -29,5 +30,13 @@ public class GetQuestionContext {
 
     public void setDslQuery(DslQuery dslQuery) {
         this.dslQuery = dslQuery;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

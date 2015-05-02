@@ -5,7 +5,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Date;
 
-@Document(indexName = "#{domainResolver.resolveSystemIndex()}", type = "rememberme")
+@Document(indexName = "#{domainResolver.resolveSystemIndex()}", type = "rememberMe")
 public class RememberMeEntity {
     @Id
     private String series;

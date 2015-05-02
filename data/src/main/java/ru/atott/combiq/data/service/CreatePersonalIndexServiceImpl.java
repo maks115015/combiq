@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.Domains;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
+import ru.atott.combiq.data.utils.DataUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +29,14 @@ public class CreatePersonalIndexServiceImpl implements CreatePersonalIndexServic
         CreateIndexRequest request = new CreateIndexRequest(indexName);
         request.source(indexJson);
         client.admin().indices().create(request).actionGet();
+        return indexName;
+    }
+
+    @Override
+    public String update(String env) throws IOException, ExecutionException, InterruptedException {
+        String indexName = domainResolver.resolvePersonalIndex();
+        String json = DataUtils.getIndexMapping("/index/personal.json");
+        DataUtils.putMapping(client, indexName, json);
         return indexName;
     }
 }

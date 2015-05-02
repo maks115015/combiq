@@ -7,6 +7,8 @@ public class Question {
     private String title;
     private List<String> tags;
     private String level;
+    private long reputation;
+    private QuestionAttrs attrs;
 
     public List<String> getTags() {
         return tags;
@@ -38,5 +40,21 @@ public class Question {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public long getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(long reputation) {
+        this.reputation = reputation;
+    }
+
+    public QuestionAttrs getAttrs() {
+        return attrs;
+    }
+
+    public void setAttrs(QuestionAttrs attrs) {
+        this.attrs = attrs;
     }
 }

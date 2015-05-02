@@ -18,26 +18,37 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.DefaultResultMapper;
+import org.springframework.data.elasticsearch.core.mapping.SimpleElasticsearchMappingContext;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.Types;
+import ru.atott.combiq.dao.entity.QuestionAttrsEntity;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
+import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
+import ru.atott.combiq.service.bean.QuestionAttrs;
 import ru.atott.combiq.service.bean.Tag;
 import ru.atott.combiq.service.dsl.DslQuery;
-import ru.atott.combiq.service.mapper.QuestionEntityToQuestionMapper;
+import ru.atott.combiq.service.mapper.QuestionAttrsEntityMapper;
+import ru.atott.combiq.service.mapper.QuestionEntityMapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class GetQuestionServiceImpl implements GetQuestionService {
-    private QuestionEntityToQuestionMapper questionMapper = new QuestionEntityToQuestionMapper();
-    private DefaultResultMapper defaultResultMapper = new DefaultResultMapper();
+    private DefaultResultMapper defaultResultMapper;
+    private QuestionAttrsEntityMapper questionAttrsEntityMapper = new QuestionAttrsEntityMapper();
     @Autowired
     private NameVersionDomainResolver domainResolver;
     @Autowired(required = false)
     private Client client;
+    @Autowired
+    private QuestionAttrsRepository questionAttrsRepository;
+
+    public GetQuestionServiceImpl() {
+        SimpleElasticsearchMappingContext mappingContext = new SimpleElasticsearchMappingContext();
+        defaultResultMapper = new DefaultResultMapper(mappingContext);
+    }
 
     @Override
     public GetQuestionResponse getQuestions(GetQuestionContext context) {
@@ -57,10 +68,30 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         Pageable pageable = new PageRequest(context.getPage(), context.getSize());
         Page<QuestionEntity> page = defaultResultMapper.mapResults(searchResponse, QuestionEntity.class, pageable);
 
+        QuestionEntityMapper questionMapper = new QuestionEntityMapper();
+        if (context.getUserId() != null) {
+            Set<String> questionIds = page.getContent().stream().map(QuestionEntity::getId).collect(Collectors.toSet());
+            List<QuestionAttrs> questionAttrses = getQuestionAttrses(questionIds, context.getUserId());
+            Map<String, QuestionAttrs> attrsMap = questionAttrses.stream().collect(Collectors.toMap(QuestionAttrs::getQuestionId, attrs -> attrs));
+            questionMapper = new QuestionEntityMapper(context.getUserId(), attrsMap);
+        }
+
         GetQuestionResponse response = new GetQuestionResponse();
         response.setQuestions(page.map(questionMapper::map));
         response.setPopularTags(getPopularTags(searchResponse));
         return response;
+    }
+
+    private List<QuestionAttrs> getQuestionAttrses(Collection<String> questionIds, String userId) {
+        OrFilterBuilder filterBuilder = FilterBuilders.orFilter();
+        questionIds.forEach(questionId -> {
+            filterBuilder.add(FilterBuilders.andFilter(
+                    FilterBuilders.termFilter("questionId", questionId),
+                    FilterBuilders.termFilter("userId", userId)));
+        });
+        QueryBuilder queryBuilder = QueryBuilders.filteredQuery(QueryBuilders.matchAllQuery(), filterBuilder);
+        Iterable<QuestionAttrsEntity> questionAttrsEntities = questionAttrsRepository.search(queryBuilder);;
+        return questionAttrsEntityMapper.toList(questionAttrsEntities);
     }
 
     private List<AggregationBuilder> getAggregationBuilders(DslQuery dsl) {
