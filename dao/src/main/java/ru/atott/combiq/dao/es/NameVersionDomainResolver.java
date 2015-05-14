@@ -3,12 +3,14 @@ package ru.atott.combiq.dao.es;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.atott.combiq.dao.DaoException;
 import ru.atott.combiq.dao.Domains;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,6 +18,8 @@ import java.util.stream.Collectors;
 public class NameVersionDomainResolver {
     private String delimiter = "_";
     private Map<String, Long> domainVersions;
+    @Value("${es.index.prefix}")
+    private String prefix;
     @Autowired(required = false)
     private Client client;
 
@@ -23,12 +27,16 @@ public class NameVersionDomainResolver {
         return delimiter;
     }
 
+    public String getPrefix() {
+        return prefix;
+    }
+
     public String resolveIndexName(String domain, long version) {
-        return domain + delimiter + version;
+        return prefix + domain + delimiter + version;
     }
 
     public String resolveIndexName(String domain) {
-        return domain + delimiter + getVersion(domain);
+        return resolveIndexName(domain, getVersion(domain));
     }
 
     public String resolvePersonalIndex() {
@@ -86,7 +94,7 @@ public class NameVersionDomainResolver {
         domainVersions = domains.stream()
                 .map(domain -> {
                     List<Long> versions = indexNames.stream()
-                            .filter(indexName -> NameVersionUtils.getName(indexName, delimiter).equals(domain))
+                            .filter(indexName -> Objects.equals(NameVersionUtils.getName(indexName, delimiter), domain))
                             .map(indexName -> NameVersionUtils.getVersion(indexName, delimiter))
                             .collect(Collectors.toList());
                     versions.sort(Long::compare);
