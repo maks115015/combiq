@@ -55,6 +55,9 @@
                     </a>
                 </li>
                 <li>
+                    <iframe style="margin-bottom: -7px;" src="https://ghbtns.com/github-btn.html?user=atott&repo=combiq&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+                </li>
+                <li>
                     <a href="https://github.com/atott/combiq/wiki">о проекте</a>
                 </li>
                 <li>

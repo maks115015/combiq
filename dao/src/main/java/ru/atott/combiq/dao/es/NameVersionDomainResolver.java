@@ -55,7 +55,7 @@ public class NameVersionDomainResolver {
         if (domainVersions == null) {
             updateDomainVersions();
         }
-        return domainVersions.containsKey(domain);
+        return domainVersions.containsKey(prefix + domain);
     }
 
     public Long getVersionOrDefault(String domain, Long defaultVersion) {
@@ -69,10 +69,10 @@ public class NameVersionDomainResolver {
         if (domainVersions == null) {
             updateDomainVersions();
         }
-        if (!domainVersions.containsKey(domain)) {
+        if (!domainVersions.containsKey(prefix + domain)) {
             return 1L;
         }
-        return domainVersions.get(domain);
+        return domainVersions.get(prefix + domain);
     }
 
     public void reset() {

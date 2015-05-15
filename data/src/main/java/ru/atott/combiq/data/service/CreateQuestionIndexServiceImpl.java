@@ -25,6 +25,8 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
 
     @Override
     public String create(String env) throws IOException, ExecutionException, InterruptedException {
+        domainResolver.reset();
+
         Long version = 1L;
         if (domainResolver.canBeResolved(Domains.question)) {
             version = domainResolver.getVersion(Domains.question) + 1;
@@ -44,6 +46,7 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
                     .execute()
                     .get();
         }
+
         domainResolver.reset();
         return indexName;
     }
