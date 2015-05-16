@@ -20,7 +20,7 @@
         <#list questions as question>
             <li>
                 <co-question reputation="${question.reputation}" level="${question.level}" tags="${question.tags?join(',')}">
-                    <a href="/questions/${question.id}">${question.title}</a>
+                    <a href="/questions/${question.id}?index=${paging.from + question_index}&dsl=${dsl?url}">${question.title}</a>
                 </co-question>
             </li>
         </#list>

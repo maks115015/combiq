@@ -14,6 +14,8 @@ import java.util.stream.IntStream;
 public class PagingBeanBuilder {
     public <T> PagingBean build(Page<T> page, int currentPage, HttpServletRequest request) {
         PagingBean bean = new PagingBean();
+        bean.setCurrentPage(currentPage);
+        bean.setFrom(currentPage * page.getSize());
         String uri = request.getRequestURL().toString() + "?" + StringUtils.defaultString(request.getQueryString());
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(uri);
         uriBuilder.scheme(null);

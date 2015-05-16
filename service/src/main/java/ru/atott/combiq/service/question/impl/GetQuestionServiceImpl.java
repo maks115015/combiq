@@ -25,14 +25,13 @@ import ru.atott.combiq.dao.entity.QuestionAttrsEntity;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
+import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionAttrs;
 import ru.atott.combiq.service.bean.Tag;
 import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.mapper.QuestionAttrsEntityMapper;
 import ru.atott.combiq.service.mapper.QuestionEntityMapper;
 import ru.atott.combiq.service.question.GetQuestionService;
-import ru.atott.combiq.service.question.SearchContext;
-import ru.atott.combiq.service.question.SearchResponse;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -60,16 +59,16 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         SearchRequestBuilder query = client
                 .prepareSearch(domainResolver.resolveQuestionIndex())
                 .setTypes(Types.question)
-                .setQuery(QueryBuilders.filteredQuery(getQueryBuilder(dsl), getFilterBuilder(dsl)))
+                .setQuery(QueryBuilders.filteredQuery(getQueryBuilder(dsl), getFilterBuilder(dsl, context.getQuestionId())))
                 .addSort("reputation", SortOrder.DESC)
-                .setFrom(context.getPage() * context.getSize())
+                .setFrom(context.getFrom())
                 .setSize(context.getSize());
 
         getAggregationBuilders(dsl).stream().forEach(query::addAggregation);
 
         org.elasticsearch.action.search.SearchResponse searchResponse = query.execute().actionGet();
 
-        Pageable pageable = new PageRequest(context.getPage(), context.getSize());
+        Pageable pageable = new PageRequest((int)Math.floor((double)context.getFrom() / (double)context.getSize()), context.getSize());
         Page<QuestionEntity> page = defaultResultMapper.mapResults(searchResponse, QuestionEntity.class, pageable);
 
         QuestionEntityMapper questionMapper = new QuestionEntityMapper();
@@ -83,6 +82,65 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         SearchResponse response = new SearchResponse();
         response.setQuestions(page.map(questionMapper::map));
         response.setPopularTags(getPopularTags(searchResponse));
+        return response;
+    }
+
+    @Override
+    public GetQuestionResponse getQuestion(GetQuestionContext context) {
+        GetQuestionResponse response = new GetQuestionResponse();
+
+        if (context.getDsl() != null && context.getProposedIndexInDslResponse() != null) {
+            SearchContext searchContext = new SearchContext();
+            if (context.getProposedIndexInDslResponse() == 0) {
+                searchContext.setFrom(0);
+                searchContext.setSize(2);
+            } else {
+                searchContext.setFrom(context.getProposedIndexInDslResponse() - 1);
+                searchContext.setSize(3);
+            }
+            searchContext.setDslQuery(context.getDsl());
+            searchContext.setUserId(context.getUserId());
+
+            SearchResponse searchResponse = getQuestions(searchContext);
+            List<Question> questions = searchResponse.getQuestions().getContent();
+            if (context.getProposedIndexInDslResponse() == 0) {
+                if (questions.size() > 0 && questions.get(0).getId().equals(context.getId())) {
+                    response.setQuestion(questions.get(0));
+                    QuestionPositionInDsl positionInDsl = new QuestionPositionInDsl();
+                    positionInDsl.setIndex(context.getProposedIndexInDslResponse());
+                    positionInDsl.setTotal(searchResponse.getQuestions().getTotalElements());
+                    if (questions.size() > 1) {
+                        positionInDsl.setNextQuestionId(questions.get(1).getId());
+                    }
+                    response.setPositionInDsl(positionInDsl);
+                }
+            } else {
+                if (questions.size() > 1 && questions.get(1).getId().equals(context.getId())) {
+                    response.setQuestion(questions.get(1));
+                    QuestionPositionInDsl positionInDsl = new QuestionPositionInDsl();
+                    positionInDsl.setIndex(context.getProposedIndexInDslResponse());
+                    positionInDsl.setTotal(searchResponse.getQuestions().getTotalElements());
+                    positionInDsl.setPreviosQuestionId(questions.get(0).getId());
+                    if (questions.size() > 2) {
+                        positionInDsl.setNextQuestionId(questions.get(2).getId());
+                    }
+                    response.setPositionInDsl(positionInDsl);
+                }
+            }
+        }
+
+        if (response.getQuestion() == null) {
+            SearchContext searchContext = new SearchContext();
+            searchContext.setFrom(0);
+            searchContext.setSize(1);
+            searchContext.setUserId(context.getUserId());
+            searchContext.setQuestionId(context.getId());
+            SearchResponse searchResponse = getQuestions(searchContext);
+            if (searchResponse.getQuestions().getContent().size() > 0) {
+                response.setQuestion(searchResponse.getQuestions().getContent().get(0));
+            }
+        }
+
         return response;
     }
 
@@ -113,7 +171,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
 
     private QueryBuilder getQueryBuilder(DslQuery dsl) {
         QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
-        if (!dsl.getTerms().isEmpty()) {
+        if (dsl != null && !dsl.getTerms().isEmpty()) {
             BoolQueryBuilder termsQueryBuilder = QueryBuilders.boolQuery();
             dsl.getTerms().forEach(term -> {
                 termsQueryBuilder.must(QueryBuilders.matchQuery("title", term.getValue()));
@@ -123,10 +181,10 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         return queryBuilder;
     }
 
-    private FilterBuilder getFilterBuilder(DslQuery dsl) {
+    private FilterBuilder getFilterBuilder(DslQuery dsl, String questionId) {
         List<FilterBuilder> filters = new ArrayList<>();
 
-        if (!dsl.getTags().isEmpty()) {
+        if (dsl != null && !dsl.getTags().isEmpty()) {
             BoolFilterBuilder tagsFilter = FilterBuilders.boolFilter();
             dsl.getTags().forEach(tag -> {
                 tagsFilter.must(FilterBuilders.termFilter("tags", tag.getValue()));
@@ -134,9 +192,13 @@ public class GetQuestionServiceImpl implements GetQuestionService {
             filters.add(tagsFilter);
         }
 
-        if (StringUtils.isNoneBlank(dsl.getLevel())) {
+        if (dsl != null && StringUtils.isNoneBlank(dsl.getLevel())) {
             long level = NumberUtils.toLong(dsl.getLevel().substring(1), -1);
             filters.add(FilterBuilders.termFilter("level", level));
+        }
+
+        if (StringUtils.isNotBlank(questionId)) {
+            filters.add(FilterBuilders.idsFilter(Types.question).ids(questionId));
         }
 
         FilterBuilder filterBuilder = FilterBuilders.matchAllFilter();

@@ -36,13 +36,13 @@
             }
 
             .co-question-level a {
+                color: #0779AB;
                 text-decoration: none;
-                color: #777;
             }
 
             .co-question-level a:hover {
+                color: #59a1e5;
                 text-decoration: none;
-                color: #b7b7b7;
             }
 
             .co-question-level-bound {
@@ -61,6 +61,11 @@
                 font-size: 22px;
             }
 
+            .co-question-reputation-title {
+                font-size: 22px;
+                color: black;
+            }
+
             .co-question-level-desc {
                 font-size: 12px;
             }
@@ -76,8 +81,8 @@
             </div>
             <div class="co-question-reputation-bound">
                 <div class="co-question-level">
-                    <div class="co-question-level-title">
-                        <a href="/questions/level/{{level}}">{{reputation}}</a>
+                    <div class="co-question-reputation-title">
+                        <span>{{reputation}}</span>
                     </div>
                     <div class="co-question-level-desc">репутация</div>
                 </div>

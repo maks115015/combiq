@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Question;
-import ru.atott.combiq.service.question.SearchContext;
-import ru.atott.combiq.service.question.SearchResponse;
+import ru.atott.combiq.service.question.impl.SearchContext;
+import ru.atott.combiq.service.question.impl.SearchResponse;
 import ru.atott.combiq.service.question.GetQuestionService;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
@@ -69,7 +69,7 @@ public class SearchController extends BaseController {
     private ModelAndView getView(HttpServletRequest request, SearchContext context, String dsl) {
         SearchResponse questionsResponse = getQuestionService.getQuestions(context);
 
-        PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), context.getPage(), request);
+        PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), questionsResponse.getQuestions().getNumber(), request);
         List<Question> questions = questionsResponse.getQuestions().getContent();
         dsl = StringUtils.defaultIfBlank(dsl, context.getDslQuery().toDsl());
 

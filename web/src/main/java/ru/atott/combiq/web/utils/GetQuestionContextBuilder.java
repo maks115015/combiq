@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.dsl.DslTag;
-import ru.atott.combiq.service.question.SearchContext;
+import ru.atott.combiq.service.question.impl.SearchContext;
 import ru.atott.combiq.web.security.AuthService;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class GetQuestionContextBuilder {
 
     public SearchContext list(int page) {
         SearchContext context = new SearchContext();
-        context.setPage(page);
+        context.setFrom(page * size);
         context.setSize(size);
         context.setDslQuery(new DslQuery());
         context.setUserId(authService.getUserId());
@@ -31,7 +31,7 @@ public class GetQuestionContextBuilder {
         query.setTags(tags.stream().map(DslTag::new).collect(Collectors.toList()));
 
         SearchContext context = new SearchContext();
-        context.setPage(page);
+        context.setFrom(page * size);
         context.setSize(size);
         context.setDslQuery(query);
         context.setUserId(authService.getUserId());
@@ -43,7 +43,7 @@ public class GetQuestionContextBuilder {
         query.setLevel(level);
 
         SearchContext context = new SearchContext();
-        context.setPage(page);
+        context.setFrom(page * size);
         context.setSize(size);
         context.setDslQuery(query);
         context.setUserId(authService.getUserId());
@@ -54,7 +54,7 @@ public class GetQuestionContextBuilder {
         DslQuery dslQuery = DslParser.parse(dsl);
 
         SearchContext context = new SearchContext();
-        context.setPage(page);
+        context.setFrom(page * size);
         context.setSize(size);
         context.setDslQuery(dslQuery);
         context.setUserId(authService.getUserId());

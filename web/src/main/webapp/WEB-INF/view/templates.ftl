@@ -25,6 +25,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="/static/bower_components/webcomponentsjs/webcomponents.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+        <script src="/static/js/site.js?v=${resourceVersion}"></script>
 
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -36,9 +37,14 @@
                     text: 'lib/text'
                 }
             });
+            window.co = {
+                userId: ${if(userId??, '"' + (userId!'') + '"', 'null')}
+            };
         </script>
 
 
+        <link rel="import" href="/static/bower_components/paper-button/paper-button.html?v=${resourceVersion}">
+        <link rel="import" href="/static/bower_components/paper-dialog/paper-action-dialog.html?v=${resourceVersion}">
         <link rel="import" href="/static/bower_components/core-toolbar/core-toolbar.html?v=${resourceVersion}">
         <link rel="import" href="/static/bower_components/paper-icon-button/paper-icon-button.html?v=${resourceVersion}">
         <link rel="import" href="/static/elements/co-question.html?v=${resourceVersion}">
@@ -110,6 +116,9 @@
                 </span>
             </div>
         </footer>
+        <#if !user??>
+            <@inviteAuth />
+        </#if>
     </body>
 </html>
 </#macro>
@@ -127,10 +136,31 @@
     </@layoutHtml>
 </#macro>
 
-<#macro layoutBody head=''>
-    <@layoutHtml head=head>
+<#macro layoutWithoutSidebar head='' dsl=''>
+    <@layoutHtml head=head dsl=dsl>
+    <div class="container">
+        <#nested />
+    </div>
+    </@layoutHtml>
+</#macro>
+
+<#macro layoutBody head='' dsl=''>
+    <@layoutHtml head=head dsl=dsl>
         <#nested />
     </@layoutHtml>
+</#macro>
+
+<#macro inviteAuth>
+    <div>
+        <paper-action-dialog heading="Войдите на сайт" layered="true" backdrop="true" id="inviteAuthDialog">
+            <p>
+                Для того, чтобы иметь возможность голосовать за вопросы, нужно <a href="/login.do">войти</a> на сайт
+                <strong>combiq.ru</strong>.
+            </p>
+            <paper-button affirmative>Не сейчас</paper-button>
+            <paper-button onclick="location.href = '/login.do';" class="co-ok-button" affirmative autofocus>Войти</paper-button>
+        </paper-action-dialog>
+    </div>
 </#macro>
 
 <#function if condition a b=''>

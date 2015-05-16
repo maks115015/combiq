@@ -5,6 +5,16 @@ import java.util.List;
 
 public class PagingBean {
     private List<Page> pages;
+    private int currentPage;
+    private int from;
+
+    public int getFrom() {
+        return from;
+    }
+
+    public void setFrom(int from) {
+        this.from = from;
+    }
 
     public List<Page> getPages() {
         return pages;
@@ -12,6 +22,14 @@ public class PagingBean {
 
     public void setPages(List<Page> pages) {
         this.pages = pages;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
     }
 
     public static class Page {

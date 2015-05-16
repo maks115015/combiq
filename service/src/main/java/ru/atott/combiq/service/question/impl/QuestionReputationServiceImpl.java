@@ -8,6 +8,8 @@ import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
 import ru.atott.combiq.dao.repository.QuestionRepository;
 import ru.atott.combiq.service.question.QuestionReputationService;
 
+import java.util.Date;
+
 @Service
 public class QuestionReputationServiceImpl implements QuestionReputationService {
     @Autowired
@@ -28,6 +30,10 @@ public class QuestionReputationServiceImpl implements QuestionReputationService 
     private long vote(String userId, String questionId, long voteReputation) {
         QuestionEntity question = questionRepository.findOne(questionId);
 
+        if (question == null) {
+            return 0;
+        }
+
         QuestionAttrsEntity entity = questionAttrsRepository.findByUserIdAndQuestionId(userId, questionId);
         if (entity == null) {
             entity = new QuestionAttrsEntity();
@@ -40,6 +46,9 @@ public class QuestionReputationServiceImpl implements QuestionReputationService 
             initialReputation = initialReputation - entity.getReputation();
         }
         question.setReputation(initialReputation + voteReputation);
+
+        entity.setReputation(voteReputation);
+        entity.setReputationVoteDate(new Date());
 
         questionAttrsRepository.save(entity);
         questionRepository.save(question);

@@ -28,6 +28,7 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("env", System.getProperty("env"));
             modelAndView.addObject("resourceVersion", resourceVersion);
             modelAndView.addObject("user", authService.getUser());
+            modelAndView.addObject("userId", authService.getUserId());
         }
     }
 }
