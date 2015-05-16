@@ -5,7 +5,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd">
 
-    <import resource="classpath:ru/atott/combiq/dao/dao-context-wo-repositories.xml"/>
+    <import resource="classpath:conf-context.xml"/>
 
-    <elasticsearch:repositories base-package="ru.atott.combiq.dao.repository" />
+    <context:component-scan base-package="ru.atott.combiq.dao"/>
+
+    <elasticsearch:transport-client id="client" cluster-name="${es.cluster}" cluster-nodes="${es.host}:${es.port}"/>
+
+    <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+        <constructor-arg ref="client"/>
+    </bean>
 </beans>

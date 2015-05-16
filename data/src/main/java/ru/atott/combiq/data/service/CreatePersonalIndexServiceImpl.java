@@ -22,6 +22,8 @@ public class CreatePersonalIndexServiceImpl implements CreatePersonalIndexServic
 
     @Override
     public String create(String env) throws IOException, ExecutionException, InterruptedException {
+        domainResolver.reset();
+
         Long version = domainResolver.getVersionOrDefault(Domains.personal, 0L) + 1;
         String indexName = domainResolver.resolveIndexName(Domains.personal, version);
         InputStream indexStream = this.getClass().getResourceAsStream("/index/personal.json");
@@ -29,6 +31,8 @@ public class CreatePersonalIndexServiceImpl implements CreatePersonalIndexServic
         CreateIndexRequest request = new CreateIndexRequest(indexName);
         request.source(indexJson);
         client.admin().indices().create(request).actionGet();
+
+        domainResolver.reset();
         return indexName;
     }
 

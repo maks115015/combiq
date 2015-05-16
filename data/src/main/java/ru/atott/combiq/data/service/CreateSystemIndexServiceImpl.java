@@ -21,6 +21,8 @@ public class CreateSystemIndexServiceImpl implements CreateSystemIndexService {
 
     @Override
     public String create(String env) throws IOException, ExecutionException, InterruptedException {
+        domainResolver.reset();
+
         Long version = domainResolver.getVersionOrDefault(Domains.system, 0L) + 1;
         String indexName = domainResolver.resolveIndexName(Domains.system, version);
         InputStream indexStream = this.getClass().getResourceAsStream("/index/system.json");
@@ -28,6 +30,8 @@ public class CreateSystemIndexServiceImpl implements CreateSystemIndexService {
         CreateIndexRequest request = new CreateIndexRequest(indexName);
         request.source(indexJson);
         client.admin().indices().create(request).actionGet();
+
+        domainResolver.reset();
         return indexName;
     }
 }
