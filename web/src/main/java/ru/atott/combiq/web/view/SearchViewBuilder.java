@@ -7,7 +7,7 @@ import ru.atott.combiq.web.bean.PagingBean;
 
 import java.util.List;
 
-public class QuestionsViewBuilder {
+public class SearchViewBuilder {
     private List<Question> questions;
     private List<Tag> popularTags;
     private PagingBean paging;
@@ -46,7 +46,7 @@ public class QuestionsViewBuilder {
     }
 
     public ModelAndView build() {
-        ModelAndView mav = new ModelAndView("questions");
+        ModelAndView mav = new ModelAndView("search");
         mav.addObject("questions", questions);
         mav.addObject("paging", paging);
         mav.addObject("dsl", dsl);

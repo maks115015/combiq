@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.user;
+package ru.atott.combiq.service.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +8,8 @@ import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.mapper.UserEntityMapper;
+import ru.atott.combiq.service.user.GithubRegistrationContext;
+import ru.atott.combiq.service.user.UserService;
 
 import java.util.List;
 

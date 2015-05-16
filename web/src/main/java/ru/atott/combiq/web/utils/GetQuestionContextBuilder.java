@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.dsl.DslTag;
-import ru.atott.combiq.service.question.GetQuestionContext;
+import ru.atott.combiq.service.question.SearchContext;
 import ru.atott.combiq.web.security.AuthService;
 
 import java.util.List;
@@ -17,8 +17,8 @@ public class GetQuestionContextBuilder {
     @Autowired
     private AuthService authService;
 
-    public GetQuestionContext list(int page) {
-        GetQuestionContext context = new GetQuestionContext();
+    public SearchContext list(int page) {
+        SearchContext context = new SearchContext();
         context.setPage(page);
         context.setSize(size);
         context.setDslQuery(new DslQuery());
@@ -26,11 +26,11 @@ public class GetQuestionContextBuilder {
         return context;
     }
 
-    public GetQuestionContext listByTags(int page, List<String> tags) {
+    public SearchContext listByTags(int page, List<String> tags) {
         DslQuery query = new DslQuery();
         query.setTags(tags.stream().map(DslTag::new).collect(Collectors.toList()));
 
-        GetQuestionContext context = new GetQuestionContext();
+        SearchContext context = new SearchContext();
         context.setPage(page);
         context.setSize(size);
         context.setDslQuery(query);
@@ -38,11 +38,11 @@ public class GetQuestionContextBuilder {
         return context;
     }
 
-    public GetQuestionContext listByLevel(int page, String level) {
+    public SearchContext listByLevel(int page, String level) {
         DslQuery query = new DslQuery();
         query.setLevel(level);
 
-        GetQuestionContext context = new GetQuestionContext();
+        SearchContext context = new SearchContext();
         context.setPage(page);
         context.setSize(size);
         context.setDslQuery(query);
@@ -50,10 +50,10 @@ public class GetQuestionContextBuilder {
         return context;
     }
 
-    public GetQuestionContext listByDsl(int page, String dsl) {
+    public SearchContext listByDsl(int page, String dsl) {
         DslQuery dslQuery = DslParser.parse(dsl);
 
-        GetQuestionContext context = new GetQuestionContext();
+        SearchContext context = new SearchContext();
         context.setPage(page);
         context.setSize(size);
         context.setDslQuery(dslQuery);

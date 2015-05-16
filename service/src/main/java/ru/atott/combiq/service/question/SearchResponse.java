@@ -6,7 +6,7 @@ import ru.atott.combiq.service.bean.Tag;
 
 import java.util.List;
 
-public class GetQuestionResponse {
+public class SearchResponse {
     private Page<Question> questions;
     private List<Tag> popularTags;
 

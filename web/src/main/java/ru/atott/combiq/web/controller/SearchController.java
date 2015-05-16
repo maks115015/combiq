@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Question;
-import ru.atott.combiq.service.question.GetQuestionContext;
-import ru.atott.combiq.service.question.GetQuestionResponse;
+import ru.atott.combiq.service.question.SearchContext;
+import ru.atott.combiq.service.question.SearchResponse;
 import ru.atott.combiq.service.question.GetQuestionService;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
 import ru.atott.combiq.web.utils.GetQuestionContextBuilder;
-import ru.atott.combiq.web.view.QuestionsViewBuilder;
+import ru.atott.combiq.web.view.SearchViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class SearchController extends BaseController {
                                @RequestParam(defaultValue = "1") int page,
                                @RequestParam(value = "q", defaultValue = "") String dsl) {
         page = getZeroBasedPage(page);
-        GetQuestionContext context = getQuestionContextBuilder.listByDsl(page, dsl);
+        SearchContext context = getQuestionContextBuilder.listByDsl(page, dsl);
         return getView(request, context, dsl);
     }
 
@@ -43,7 +43,7 @@ public class SearchController extends BaseController {
     public ModelAndView questions(HttpServletRequest request,
                                   @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
-        GetQuestionContext context = getQuestionContextBuilder.list(page);
+        SearchContext context = getQuestionContextBuilder.list(page);
         return getView(request, context, null);
     }
 
@@ -53,7 +53,7 @@ public class SearchController extends BaseController {
                                         @PathVariable("tags") String tags) {
         page = getZeroBasedPage(page);
         ArrayList<String> tagsList = Lists.newArrayList(StringUtils.split(tags, ','));
-        GetQuestionContext context = getQuestionContextBuilder.listByTags(page, tagsList);
+        SearchContext context = getQuestionContextBuilder.listByTags(page, tagsList);
         return getView(request, context, null);
     }
 
@@ -62,18 +62,18 @@ public class SearchController extends BaseController {
                               @RequestParam(defaultValue = "1") int page,
                               @PathVariable("level") String level) {
         page = getZeroBasedPage(page);
-        GetQuestionContext context = getQuestionContextBuilder.listByLevel(page, level);
+        SearchContext context = getQuestionContextBuilder.listByLevel(page, level);
         return getView(request, context, null);
     }
 
-    private ModelAndView getView(HttpServletRequest request, GetQuestionContext context, String dsl) {
-        GetQuestionResponse questionsResponse = getQuestionService.getQuestions(context);
+    private ModelAndView getView(HttpServletRequest request, SearchContext context, String dsl) {
+        SearchResponse questionsResponse = getQuestionService.getQuestions(context);
 
         PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), context.getPage(), request);
         List<Question> questions = questionsResponse.getQuestions().getContent();
         dsl = StringUtils.defaultIfBlank(dsl, context.getDslQuery().toDsl());
 
-        QuestionsViewBuilder viewBuilder = new QuestionsViewBuilder();
+        SearchViewBuilder viewBuilder = new SearchViewBuilder();
         viewBuilder.setQuestions(questions);
         viewBuilder.setPaging(paging);
         viewBuilder.setDsl(dsl);

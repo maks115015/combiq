@@ -1,10 +1,9 @@
-package ru.atott.combiq.service.question;
+package ru.atott.combiq.service.question.impl;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
-import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
@@ -31,6 +30,9 @@ import ru.atott.combiq.service.bean.Tag;
 import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.mapper.QuestionAttrsEntityMapper;
 import ru.atott.combiq.service.mapper.QuestionEntityMapper;
+import ru.atott.combiq.service.question.GetQuestionService;
+import ru.atott.combiq.service.question.SearchContext;
+import ru.atott.combiq.service.question.SearchResponse;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -52,7 +54,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
     }
 
     @Override
-    public GetQuestionResponse getQuestions(GetQuestionContext context) {
+    public SearchResponse getQuestions(SearchContext context) {
         DslQuery dsl = context.getDslQuery();
 
         SearchRequestBuilder query = client
@@ -65,7 +67,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
 
         getAggregationBuilders(dsl).stream().forEach(query::addAggregation);
 
-        SearchResponse searchResponse = query.execute().actionGet();
+        org.elasticsearch.action.search.SearchResponse searchResponse = query.execute().actionGet();
 
         Pageable pageable = new PageRequest(context.getPage(), context.getSize());
         Page<QuestionEntity> page = defaultResultMapper.mapResults(searchResponse, QuestionEntity.class, pageable);
@@ -78,7 +80,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
             questionMapper = new QuestionEntityMapper(context.getUserId(), attrsMap);
         }
 
-        GetQuestionResponse response = new GetQuestionResponse();
+        SearchResponse response = new SearchResponse();
         response.setQuestions(page.map(questionMapper::map));
         response.setPopularTags(getPopularTags(searchResponse));
         return response;
@@ -145,7 +147,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         return filterBuilder;
     }
 
-    private List<Tag> getPopularTags(SearchResponse response) {
+    private List<Tag> getPopularTags(org.elasticsearch.action.search.SearchResponse response) {
         InternalGlobal global = response.getAggregations().get("global");
 
         StringTerms popularTagsAgg = global.getAggregations().get("popularTags");

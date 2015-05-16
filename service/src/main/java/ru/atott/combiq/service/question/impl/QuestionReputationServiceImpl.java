@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.question;
+package ru.atott.combiq.service.question.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import ru.atott.combiq.dao.entity.QuestionAttrsEntity;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
 import ru.atott.combiq.dao.repository.QuestionRepository;
+import ru.atott.combiq.service.question.QuestionReputationService;
 
 @Service
 public class QuestionReputationServiceImpl implements QuestionReputationService {

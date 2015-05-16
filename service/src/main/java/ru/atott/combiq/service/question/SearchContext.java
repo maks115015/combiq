@@ -2,7 +2,7 @@ package ru.atott.combiq.service.question;
 
 import ru.atott.combiq.service.dsl.DslQuery;
 
-public class GetQuestionContext {
+public class SearchContext {
     private int page = 0;
     private int size = 20;
     private DslQuery dslQuery;
