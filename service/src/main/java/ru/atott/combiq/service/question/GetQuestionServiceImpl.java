@@ -13,6 +13,7 @@ import org.elasticsearch.search.aggregations.bucket.global.GlobalBuilder;
 import org.elasticsearch.search.aggregations.bucket.global.InternalGlobal;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,6 +59,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
                 .prepareSearch(domainResolver.resolveQuestionIndex())
                 .setTypes(Types.question)
                 .setQuery(QueryBuilders.filteredQuery(getQueryBuilder(dsl), getFilterBuilder(dsl)))
+                .addSort("reputation", SortOrder.DESC)
                 .setFrom(context.getPage() * context.getSize())
                 .setSize(context.getSize());
 

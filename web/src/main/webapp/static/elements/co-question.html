@@ -3,7 +3,7 @@
 <link rel="import" href="co-tag.html">
 -->
 
-<polymer-element name="co-question" attributes="tags level">
+<polymer-element name="co-question" attributes="tags level reputation">
     <template>
         <style>
             .co-question {
@@ -45,12 +45,16 @@
                 color: #b7b7b7;
             }
 
-            .co-question-numbers {
+            .co-question-level-bound {
+                width: 10%;
+            }
+
+            .co-question-reputation-bound {
                 width: 10%;
             }
 
             .co-question-content {
-                width: 90%;
+                width: 80%;
             }
 
             .co-question-level-title {
@@ -62,12 +66,20 @@
             }
         </style>
         <div class="co-question">
-            <div class="co-question-numbers">
+            <div class="co-question-level-bound">
                 <div class="co-question-level">
                     <div class="co-question-level-title">
                         <a href="/questions/level/{{level}}">{{level}}</a>
                     </div>
                     <div class="co-question-level-desc">уровень</div>
+                </div>
+            </div>
+            <div class="co-question-reputation-bound">
+                <div class="co-question-level">
+                    <div class="co-question-level-title">
+                        <a href="/questions/level/{{level}}">{{reputation}}</a>
+                    </div>
+                    <div class="co-question-level-desc">репутация</div>
                 </div>
             </div>
             <div class="co-question-content">
@@ -92,6 +104,7 @@
         Polymer({
             tags: '',
             level: '',
+            reputation: '',
 
             hasTags: function(tags) {
                 return !!tags;
