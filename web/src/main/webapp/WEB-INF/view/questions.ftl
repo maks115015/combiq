@@ -20,7 +20,7 @@
         <#list questions as question>
             <li>
                 <co-question reputation="${question.reputation}" level="${question.level}" tags="${question.tags?join(',')}">
-                    ${question.title}
+                    <a href="/questions/${question.id}">${question.title}</a>
                 </co-question>
             </li>
         </#list>

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class QuestionController extends BaseController {
+public class SearchController extends BaseController {
     private PagingBeanBuilder pagingBeanBuilder = new PagingBeanBuilder();
     @Autowired
     private GetQuestionService getQuestionService;
