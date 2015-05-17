@@ -46,6 +46,9 @@
         },
         "reputation": {
           "type": "long"
+        },
+        "comment": {
+          "type": "string"
         }
       }
     }

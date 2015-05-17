@@ -35,8 +35,8 @@ public class CreateIndecesCommands implements CommandMarker {
     @CliCommand(value = "update indeces")
     public String update() throws InterruptedException, ExecutionException, IOException {
         ArrayList<String> indeces = Lists.newArrayList(
-                createQuestionIndexService.create(CommandsContext.env),
-                createPersonalIndexService.create(CommandsContext.env));
+                createQuestionIndexService.update(CommandsContext.env),
+                createPersonalIndexService.update(CommandsContext.env));
         return StringUtils.join(indeces.toArray(), ",");
     }
 }
