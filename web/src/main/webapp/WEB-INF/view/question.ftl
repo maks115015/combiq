@@ -1,7 +1,7 @@
 <#import "templates.ftl" as templates />
 
 <#assign head>
-
+    <link rel="import" href="/static/bower_components/paper-input/paper-autogrow-textarea.html?v=${resourceVersion}">
 </#assign>
 
 <@templates.layoutWithoutSidebar head=head dsl=dsl>
@@ -30,6 +30,21 @@
         </div>
     </div>
     <@questionPosition />
+    <div class="co-my-question-comment co-flex">
+        <div class="co-my-question-comment-label">
+            <div>
+                Ваш комментарий к вопросу, <br/>
+                его видите только Вы
+            </div>
+        </div>
+        <div class="co-my-question-comment-box">
+            <paper-autogrow-textarea rows="3" >
+                <textarea id="questionMyComment" ${templates.if(!user??, 'disabled')}>${questionComment()}</textarea>
+            </paper-autogrow-textarea>
+            <paper-button onclick="saveQuestionComment(document.getElementById('questionMyComment').value, '${question.id}');" ${templates.if(!user??, 'disabled')}>Сохранить</paper-button>
+            <span id="questionMyCommentStatus"></span>
+        </div>
+    </div>
 </@templates.layoutWithoutSidebar>
 
 <#macro questionStaff>
@@ -73,6 +88,16 @@
         <div class="clearfix"></div>
     </#if>
 </#macro>
+
+<#function questionComment>
+    <#if !user??>
+        <#return 'Например, Вы можете сохранить здесь короткий ответ или ссылку.\nТолько зарегистрированные пользователи могут сохранять комментарии.' />
+    </#if>
+    <#if user?? && question.attrs?? && question.attrs.comment??>
+        <#return question.attrs.comment! />
+    </#if>
+    <#return '' />
+</#function>
 
 <#function questionReputationVotedUp>
     <#if user?? && question.attrs?? && question.attrs.reputation?? && question.attrs.reputation &gt; 0>

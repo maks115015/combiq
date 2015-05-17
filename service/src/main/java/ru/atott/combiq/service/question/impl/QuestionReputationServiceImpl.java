@@ -16,6 +16,8 @@ public class QuestionReputationServiceImpl implements QuestionReputationService 
     private QuestionAttrsRepository questionAttrsRepository;
     @Autowired
     private QuestionRepository questionRepository;
+    @Autowired
+    private QuestionAttrsEntityBuilder questionAttrsEntityBuilder;
 
     @Override
     public long voteUp(String userId, String questionId) {
@@ -36,9 +38,7 @@ public class QuestionReputationServiceImpl implements QuestionReputationService 
 
         QuestionAttrsEntity entity = questionAttrsRepository.findByUserIdAndQuestionId(userId, questionId);
         if (entity == null) {
-            entity = new QuestionAttrsEntity();
-            entity.setQuestionId(questionId);
-            entity.setUserId(userId);
+            entity = questionAttrsEntityBuilder.build(questionId, userId);
         }
 
         long initialReputation = question.getReputation() == null ? 0L : question.getReputation();

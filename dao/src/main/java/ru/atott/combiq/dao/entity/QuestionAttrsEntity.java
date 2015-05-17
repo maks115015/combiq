@@ -13,6 +13,7 @@ public class QuestionAttrsEntity {
     private String questionId;
     private Long reputation;
     private Date reputationVoteDate;
+    private String comment;
 
     public String getId() {
         return id;
@@ -52,5 +53,13 @@ public class QuestionAttrsEntity {
 
     public void setReputationVoteDate(Date reputationVoteDate) {
         this.reputationVoteDate = reputationVoteDate;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

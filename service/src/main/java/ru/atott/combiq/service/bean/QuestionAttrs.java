@@ -4,6 +4,7 @@ public class QuestionAttrs {
     private String questionId;
     private String userId;
     private Long reputation;
+    private String comment;
 
     public String getQuestionId() {
         return questionId;
@@ -27,6 +28,14 @@ public class QuestionAttrs {
 
     public void setReputation(Long reputation) {
         this.reputation = reputation;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public static QuestionAttrs defaultOf(String userId, String questionId) {

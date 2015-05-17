@@ -10,6 +10,7 @@ public class QuestionAttrsEntityMapper implements Mapper<QuestionAttrsEntity, Qu
         attrs.setUserId(source.getUserId());
         attrs.setQuestionId(source.getQuestionId());
         attrs.setReputation(source.getReputation());
+        attrs.setComment(source.getComment());
         return attrs;
     }
 }

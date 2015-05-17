@@ -263,13 +263,40 @@ ul.co-popularTags > li {
     font-weight: 400;
 }
 
-.co-question {
+.co-question,
+.co-my-question-comment {
     margin: 70px 140px;
 }
 
 .co-question-title {
     font-size: 28px;
     min-height: 100px;
+}
+
+.co-my-question-comment-label {
+    width: 20%;
+    font-size: 0.75em;
+}
+
+.co-my-question-comment-box {
+    width: 80%;
+    border-left: solid 1px #d2d2d2;
+    background-color: #f5f5f5;
+}
+
+.co-my-question-comment-box paper-autogrow-textarea {
+    width: 100%;
+    margin-left: 5px;
+    margin-top: 2px;
+}
+
+.co-my-question-comment-box paper-button {
+    margin: 5px;
+}
+
+.co-my-question-comment-box textarea {
+    background-color: transparent;
+    border: none;
 }
 
 .co-question-content {

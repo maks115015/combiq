@@ -7,9 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.question.GetQuestionService;
 import ru.atott.combiq.service.question.QuestionReputationService;
+import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.web.bean.ReputationVoteBean;
+import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
 
@@ -19,6 +21,8 @@ public class QuestionController extends BaseController {
     private AuthService authService;
     @Autowired
     private GetQuestionService getQuestionService;
+    @Autowired
+    private QuestionService questionService;
     @Autowired
     private QuestionReputationService questionReputationService;
 
@@ -42,6 +46,18 @@ public class QuestionController extends BaseController {
         viewBuilder.setPositionInDsl(questionResponse.getPositionInDsl());
         viewBuilder.setDsl(dsl);
         return viewBuilder.build();
+    }
+
+    @RequestMapping(value = "/questions/commentSave", method = RequestMethod.POST)
+    @ResponseBody
+    public SuccessBean saveComment(@RequestParam(value = "comment", required = false) String comment,
+                                   @RequestParam(value = "questionId", required = true) String questionId) {
+        if (authService.getUser() == null) {
+            return new SuccessBean(false);
+        }
+
+        questionService.saveComment(authService.getUserId(), questionId, comment);
+        return new SuccessBean();
     }
 
     @RequestMapping(value = "/questions/reputationVote", method = RequestMethod.POST)
