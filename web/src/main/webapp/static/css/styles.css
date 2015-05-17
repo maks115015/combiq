@@ -387,3 +387,33 @@ html /deep/ .co-ok-button {
     background-color: #00A0D8;
     color: white;
 }
+
+.co-search {
+
+}
+
+.co-search paper-input-decorator {
+    width: 100%;
+}
+
+.co-search input[type=text] {
+    width: 85%;
+    font-size: 20px;
+}
+
+.co-search paper-button {
+    width: 15%;
+}
+
+.co-search-help-tip {
+    margin-bottom: 45px;
+}
+
+.co-search-help-tip a {
+    font-size: 0.75em;
+    color: #a7a9ab;
+}
+
+html /deep/ paper-button::shadow .button-content {
+    padding: 0.5em 0.57em;
+}

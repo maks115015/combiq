@@ -42,7 +42,7 @@
             };
         </script>
 
-
+        
         <link rel="import" href="/static/bower_components/paper-button/paper-button.html?v=${resourceVersion}">
         <link rel="import" href="/static/bower_components/paper-dialog/paper-action-dialog.html?v=${resourceVersion}">
         <link rel="import" href="/static/bower_components/core-toolbar/core-toolbar.html?v=${resourceVersion}">

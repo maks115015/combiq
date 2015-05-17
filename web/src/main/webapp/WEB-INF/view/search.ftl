@@ -1,7 +1,7 @@
 <#import "templates.ftl" as templates />
 
 <#assign head>
-
+    <link rel="import" href="/static/bower_components/paper-input/paper-input-decorator.html?v=${resourceVersion}">
 </#assign>
 
 <#assign sidebar>
@@ -16,6 +16,23 @@
 </#assign>
 
 <@templates.layoutWithSidebar head=head dsl=dsl sidebar=sidebar>
+    <form action="/questions/search" method="get" id="searchForm">
+        <div class="co-search">
+            <paper-input-decorator value="${dsl!}" label="Поисковый запрос">
+                <div class="co-flex">
+                    <input autocomplete="off" type="text" name="q" value="${dsl!}"/>
+                    <paper-button onclick="document.getElementById('searchForm').submit();">
+                        Искать
+                    </paper-button>
+                </div>
+            </paper-input-decorator>
+        </div>
+        <div class="co-search-help-tip">
+            <a href="https://github.com/atott/combiq/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA">
+                Вы можете задавать гибкие условия поиска, например, по тэгам или уровню <span class="co-arrow">→</span>
+            </a>
+        </div>
+    </form>
     <ul class="co-questions">
         <#list questions as question>
             <li>

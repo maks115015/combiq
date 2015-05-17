@@ -6,94 +6,94 @@
 <polymer-element name="co-question" attributes="tags level reputation">
     <template>
         <style>
-            .co-question {
+            .co-component-question {
                 display: flex;
             }
 
-            ul.co-question-tags {
+            ul.co-component-question-tags {
                 list-style: none;
                 margin: 0;
                 padding: 0;
             }
 
-            ul.co-question-tags > li {
+            ul.co-component-question-tags > li {
                 display: inline-block;
                 margin-right: 0;
                 padding: 0;
             }
 
-            .co-question-text {
+            .co-component-question-text {
                 line-height: 18px;
                 padding-bottom: 5px;
                 display: inline-block;
             }
 
-            .co-question-level {
+            .co-component-question-level {
                 display: inline-block;
                 height: 38px;
                 margin: 0 3px 0 0;
                 color: #777;
             }
 
-            .co-question-level a {
+            .co-component-question-level a {
                 color: #0779AB;
                 text-decoration: none;
             }
 
-            .co-question-level a:hover {
+            .co-component-question-level a:hover {
                 color: #59a1e5;
                 text-decoration: none;
             }
 
-            .co-question-level-bound {
+            .co-component-question-level-bound {
                 width: 10%;
             }
 
-            .co-question-reputation-bound {
+            .co-component-question-reputation-bound {
                 width: 10%;
             }
 
-            .co-question-content {
+            .co-component-question-content {
                 width: 80%;
             }
 
-            .co-question-level-title {
+            .co-component-question-level-title {
                 font-size: 22px;
             }
 
-            .co-question-reputation-title {
+            .co-component-question-reputation-title {
                 font-size: 22px;
                 color: black;
             }
 
-            .co-question-level-desc {
+            .co-component-question-level-desc {
                 font-size: 12px;
             }
         </style>
-        <div class="co-question">
-            <div class="co-question-level-bound">
-                <div class="co-question-level">
-                    <div class="co-question-level-title">
+        <div class="co-component-question">
+            <div class="co-component-question-level-bound">
+                <div class="co-component-question-level">
+                    <div class="co-component-question-level-title">
                         <a href="/questions/level/{{level}}">{{level}}</a>
                     </div>
-                    <div class="co-question-level-desc">уровень</div>
+                    <div class="co-component-question-level-desc">уровень</div>
                 </div>
             </div>
-            <div class="co-question-reputation-bound">
-                <div class="co-question-level">
-                    <div class="co-question-reputation-title">
+            <div class="co-component-question-reputation-bound">
+                <div class="co-component-question-level">
+                    <div class="co-component-question-reputation-title">
                         <span>{{reputation}}</span>
                     </div>
-                    <div class="co-question-level-desc">репутация</div>
+                    <div class="co-component-question-level-desc">репутация</div>
                 </div>
             </div>
-            <div class="co-question-content">
-                <div class="co-question-text">
+            <div class="co-component-question-content">
+                <div class="co-component-question-text">
                     <content></content>
                 </div>
                 <div>
                     <template if="{{tags | hasTags}}">
-                        <ul class="co-question-tags">
+                        <ul class="co-component-question-tags">
                             <template repeat="{{tag in tags | splitTags}}">
                                 <li>
                                     <co-tag tag="{{tag}}">{{tag}}</co-tag>
