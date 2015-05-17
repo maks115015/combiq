@@ -42,7 +42,7 @@
             };
         </script>
 
-        
+
         <link rel="import" href="/static/bower_components/paper-button/paper-button.html?v=${resourceVersion}">
         <link rel="import" href="/static/bower_components/paper-dialog/paper-action-dialog.html?v=${resourceVersion}">
         <link rel="import" href="/static/bower_components/core-toolbar/core-toolbar.html?v=${resourceVersion}">
@@ -52,7 +52,11 @@
         ${head}
     </head>
     <body>
-        <@stats.metrika />
+        <#if env = 'prod'>
+            <@stats.metrika />
+            <@stats.ga />
+            <@stats.gtm />
+        </#if>
         <nav class="navbar navbar-default navbar-static-top co-header">
             <ul class="co-topmenu">
                 <li>
