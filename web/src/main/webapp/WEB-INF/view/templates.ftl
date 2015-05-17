@@ -52,7 +52,7 @@
         ${head}
     </head>
     <body>
-        <#if env = 'prod'>
+        <#if env == 'prod'>
             <@stats.metrika />
             <@stats.ga />
             <@stats.gtm />
