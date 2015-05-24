@@ -79,10 +79,11 @@
                             <outputDirectory>${basedir}/target</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>/</directory>
-                                    <filtering>true</filtering>
+                                    <directory>${basedir}</directory>
+                                    <filtering>false</filtering>
                                     <includes>
-                                        <include>run.bat</include>
+                                        <include>*.bat</include>
+                                        <include>*.sh</include>
                                     </includes>
                                 </resource>
                             </resources>

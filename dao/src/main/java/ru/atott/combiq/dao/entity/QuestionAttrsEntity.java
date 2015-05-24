@@ -5,7 +5,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Date;
 
-@Document(indexName = "#{domainResolver.resolvePersonalIndex()}", type = "questionAttrs")
+@Document(indexName = "#{domainResolver.resolveQuestionIndex()}", type = "questionAttrs")
 public class QuestionAttrsEntity {
     @Id
     private String id;

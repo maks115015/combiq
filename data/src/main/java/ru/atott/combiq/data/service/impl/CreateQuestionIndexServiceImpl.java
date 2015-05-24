@@ -1,4 +1,4 @@
-package ru.atott.combiq.data.service;
+package ru.atott.combiq.data.service.impl;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.Domains;
 import ru.atott.combiq.dao.Types;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
+import ru.atott.combiq.data.service.CreateQuestionIndexService;
 import ru.atott.combiq.data.utils.DataUtils;
 
 import java.io.IOException;

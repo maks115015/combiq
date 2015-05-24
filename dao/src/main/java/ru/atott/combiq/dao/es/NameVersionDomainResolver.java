@@ -17,7 +17,10 @@ import java.util.stream.Collectors;
 @Component("domainResolver")
 public class NameVersionDomainResolver {
     private String delimiter = "_";
+
     private Map<String, Long> domainVersions;
+    private List<String> rawIndeces;
+
     @Value("${es.index.prefix}")
     private String prefix;
     @Autowired(required = false)
@@ -29,6 +32,15 @@ public class NameVersionDomainResolver {
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public List<String> getDomainIndeces(String domain) {
+        if (rawIndeces == null) {
+            updateDomainVersions();
+        }
+        return rawIndeces.stream()
+                .filter(indexName -> Objects.equals(prefix + domain, NameVersionUtils.getName(indexName, delimiter)))
+                .collect(Collectors.toList());
     }
 
     public String resolveIndexName(String domain, long version) {
@@ -80,10 +92,11 @@ public class NameVersionDomainResolver {
     }
 
     private void updateDomainVersions() {
-        List<String> indexNames = Lists.newArrayList(client
+        rawIndeces = Lists.newArrayList(client
                 .admin().cluster().prepareState().execute().actionGet()
-                .getState().getMetaData().concreteAllIndices())
-                .stream()
+                .getState().getMetaData().concreteAllIndices());
+
+        List<String> indexNames = rawIndeces.stream()
                 .filter(indexName -> NameVersionUtils.getName(indexName, delimiter) != null)
                 .collect(Collectors.toList());
 
