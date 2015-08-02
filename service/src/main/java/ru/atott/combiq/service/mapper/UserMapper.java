@@ -4,7 +4,7 @@ import ru.atott.combiq.dao.entity.UserEntity;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserType;
 
-public class UserEntityMapper implements Mapper<UserEntity, User> {
+public class UserMapper implements Mapper<UserEntity, User> {
     @Override
     public User map(UserEntity source) {
         User user = new User();

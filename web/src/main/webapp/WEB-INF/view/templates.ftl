@@ -71,7 +71,7 @@
                     <a href="https://github.com/atott/combiq/wiki">о проекте</a>
                 </li>
                 <li>
-                    <a class="co-out" href="https://github.com/atott/combiq">на Github.com</a>
+                    <a href="/questionnaires">опросники</a>
                 </li>
                 <#if user??>
                     <li class="co-authcode">

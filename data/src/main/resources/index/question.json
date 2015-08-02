@@ -29,6 +29,17 @@
           "type": "string"
         }
       }
+    },
+    "questionnaire": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "questions": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
     }
   }
 }

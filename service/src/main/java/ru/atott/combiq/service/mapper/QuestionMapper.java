@@ -7,13 +7,13 @@ import ru.atott.combiq.service.bean.QuestionAttrs;
 import java.util.Collections;
 import java.util.Map;
 
-public class QuestionEntityMapper implements Mapper<QuestionEntity, Question> {
+public class QuestionMapper implements Mapper<QuestionEntity, Question> {
     private Map<String, QuestionAttrs> attrsMap;
     private String userId;
 
-    public QuestionEntityMapper() { }
+    public QuestionMapper() { }
 
-    public QuestionEntityMapper(String userId, Map<String, QuestionAttrs> attrsMap) {
+    public QuestionMapper(String userId, Map<String, QuestionAttrs> attrsMap) {
         this.userId = userId;
         this.attrsMap = attrsMap;
     }

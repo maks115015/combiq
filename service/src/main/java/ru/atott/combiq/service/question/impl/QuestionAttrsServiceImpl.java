@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.QuestionAttrsEntity;
 import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
 import ru.atott.combiq.service.bean.QuestionAttrs;
-import ru.atott.combiq.service.mapper.QuestionAttrsEntityMapper;
+import ru.atott.combiq.service.mapper.QuestionAttrsMapper;
 import ru.atott.combiq.service.question.QuestionAttrsService;
 
 @Service
 public class QuestionAttrsServiceImpl implements QuestionAttrsService {
-    private QuestionAttrsEntityMapper questionAttrsEntityMapper = new QuestionAttrsEntityMapper();
+    private QuestionAttrsMapper questionAttrsMapper = new QuestionAttrsMapper();
     @Autowired
     private QuestionAttrsRepository questionAttrsRepository;
 
@@ -20,6 +20,6 @@ public class QuestionAttrsServiceImpl implements QuestionAttrsService {
         if (entity == null) {
             return QuestionAttrs.defaultOf(userId, questionId);
         }
-        return questionAttrsEntityMapper.map(entity);
+        return questionAttrsMapper.map(entity);
     }
 }

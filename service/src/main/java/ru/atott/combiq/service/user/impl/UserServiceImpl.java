@@ -7,7 +7,7 @@ import ru.atott.combiq.dao.repository.UserRepository;
 import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserType;
-import ru.atott.combiq.service.mapper.UserEntityMapper;
+import ru.atott.combiq.service.mapper.UserMapper;
 import ru.atott.combiq.service.user.GithubRegistrationContext;
 import ru.atott.combiq.service.user.UserService;
 
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private UserEntityMapper userEntityMapper = new UserEntityMapper();
+    private UserMapper userMapper = new UserMapper();
     @Autowired
     private UserRepository userRepository;
 
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (userEntity != null) {
-            return userEntityMapper.map(userEntity);
+            return userMapper.map(userEntity);
         }
 
         if (byEmail.size() == 0) {
@@ -50,6 +50,6 @@ public class UserServiceImpl implements UserService {
         userEntity.setType(UserType.github.name());
 
         userEntity = userRepository.index(userEntity);
-        return userEntityMapper.map(userEntity);
+        return userMapper.map(userEntity);
     }
 }
