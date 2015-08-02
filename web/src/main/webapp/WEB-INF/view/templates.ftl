@@ -17,6 +17,8 @@
 
         <title>Combiq - вопросы для собеседования Java</title>
 
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/css/styles.css?v=${resourceVersion}">
         <link rel="stylesheet" href="/static/font/roboto/roboto.css">
@@ -101,15 +103,11 @@
         </nav>
         <#nested />
         <footer>
-            <div class="container co-footer">
+            <div class="container">
                 <div class="co-inline">
                     <div>
-                        <strong>Combiq.ru, 2014-2015</strong>
-                    </div>
-                    <div>
-                        <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>
-                    </div>
-                    <div>
+                        <strong>Combiq.ru, 2014-2015</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                         <a href="/donate">Поддержать проект</a>
                     </div>
                 </div>

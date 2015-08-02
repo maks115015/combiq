@@ -6,10 +6,19 @@
 
 <@templates.layoutBody head=head>
     <div class="co-mainer">
-        <div class="text-center">
-            <img src="/static/images/promo/main.png">
+        <div class="container">
             <div>
-                <h1 class="co-mainer-title">Вопросы для подготовки к собеседованию Java</h1>
+                <h3>
+                    Combiq.ru
+                </h3>
+                <h1>
+                    Всё что может вам потребоваться
+                    для подготовки к Java собеседованию
+                </h1>
+                <p>
+                    Вопросы для подготовки к собеседованию Java кандидатам <br>
+                    и опросники для работадателей.
+                </p>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 body {
-    font-family: Calibri, Ubuntu, Tahoma, 'Lucida Grande';
-    font-size: 16px;
+    font: 400 16px/1.25 Arial,Helvetica,sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 html /deep/ a,
@@ -43,16 +43,40 @@ a:focus {
 }
 
 .co-mainer {
-    padding: 40px 20px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#368290+0,093a5b+100 */
+    background: #368290; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #368290 0%, #093a5b 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#368290), color-stop(100%,#093a5b)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #368290 0%,#093a5b 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #368290 0%,#093a5b 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #368290 0%,#093a5b 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #368290 0%,#093a5b 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#368290', endColorstr='#093a5b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-.co-mainer-title {
-    color: #000000;
-    font-weight: bold;
-    font-family: 'ComfortaaBold', arial, sans-serif;
-    font-size: 24px;
+.co-mainer .container {
+    padding: 60px 40px 80px 40px;
+    text-align: center;
+}
+
+.co-mainer h1 {
+    color: white;
+    font-family: 'Roboto Slab', serif;
+    font-size: 41px;
     margin: 40px 100px;
-    line-height: 30px;
+    line-height: 44px;
+    letter-spacing: -1px;
+}
+
+.co-mainer h3 {
+    font-size: 40px;
+    font-family: "Arial Bold",Gadget,sans-serif;
+    color: rgb(255, 87, 71);
+}
+
+.co-mainer p {
+    font-size: 20px;
+    color: white;
 }
 
 ul.co-topmenu {
@@ -190,22 +214,19 @@ ul.co-topmenu > li {
 
 footer {
     margin-top: 60px;
-    border-top: solid 1px rgb(231, 231, 231);
-    background-color: #F2F2F2;
+    background-color: #2A2D33;
+    font-family: "Arial Bold",Gadget,sans-serif;
+    color: #818692;
+    font-size: 11px;
+    padding: 35px 0;
 }
 
-.co-footer {
-    padding-top: 25px;
-    font-size: 14px;
-    padding-bottom: 50px;
-}
-
-.co-footer a {
+footer /deep/ a {
     color: #97999b;
 }
 
-.co-footer a:hover {
-    color: #5c5e60;
+footer /deep/ a:hover {
+    color: #49c3fb;
 }
 
 .co-informer {
