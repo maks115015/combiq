@@ -1,6 +1,9 @@
 body {
     font: 400 16px/1.25 Arial,Helvetica,sans-serif;
     -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    line-height: 160%;
+    font-family: Verdana,sans-serif;
 }
 
 html /deep/ a,
@@ -16,6 +19,61 @@ a:hover {
 
 a:focus {
     text-decoration: none;
+}
+
+.co-mainhead {
+    background-image: url('images/flat-logo.png');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    min-height: 290px;
+}
+
+@media (max-width: 992px) {
+    .co-mainhead {
+        background: none;
+    }
+}
+
+.co-mainhead-content {
+    padding-top: 60px;
+}
+
+.co-mainhead-content p {
+    margin-bottom: 35px;
+}
+
+.go-github-btn {
+    display: inline-block;
+    background: #e2e2e2;
+    border: 0;
+    line-height: 3.5em;
+    padding: 0 0 0 1em;
+    margin-bottom: 1em;
+    outline: none;
+    text-decoration: none;
+    color: #666;
+    margin-left: 35px;
+}
+
+.go-github-btn:hover {
+    background: white;
+}
+
+.go-github-btn .arrow {
+    display: inline-block;
+    line-height: 3.5em;
+    text-align: center;
+    color: white;
+    font-size: 1em;
+    width: 2.5em;
+    -webkit-transition: margin 200ms;
+    transition: margin 200ms;
+    margin-left: .75em;
+    background-color: #FF5752;
+}
+
+.go-github-btn:hover .arrow {
+    margin-left: 1.25em;
 }
 
 .co-toolbar {
@@ -57,6 +115,7 @@ a:focus {
 .co-mainer .container {
     padding: 60px 40px 80px 40px;
     text-align: center;
+    margin-bottom: -60px;
 }
 
 .co-mainer h1 {
@@ -68,9 +127,13 @@ a:focus {
     letter-spacing: -1px;
 }
 
-.co-mainer h3 {
+h3 {
     font-size: 40px;
     font-family: "Arial Bold",Gadget,sans-serif;
+    color: #354950;
+}
+
+.co-mainer h3 {
     color: rgb(255, 87, 71);
 }
 
@@ -95,8 +158,12 @@ ul.co-topmenu > li {
 .co-topmenu-mainer:hover {
     font-weight: bold;
     font-size: 22px;
-    color: #000000;
+    color: #40565D;
     margin-right: 10px;
+}
+
+.co-topmenu-mainer span {
+    padding-left: 10px;
 }
 
 .co-topmenu-mainer img {
@@ -164,33 +231,6 @@ ul.co-topmenu > li {
     border-color: transparent;
     background-color: transparent;
     cursor: default;
-}
-
-.co-startnumber {
-    display: inline-block;
-    border-radius: 50%;
-    background-color: #FF563F;
-    color: #ffffff;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    text-align: center;
-    font-family: 'ComfortaaBold', arial, sans-serif;
-    font-size: 26px;
-}
-
-.co-starttopic {
-    font-size: 26px;
-    line-height: 30px;
-    padding: 50px 0;
-    padding-left: 45px;
-    position: relative;
-    border-left: dashed 1px #d2d2d2;
-}
-
-.co-starttopic .co-mainbutton {
-    margin: 20px 0;
-    display: inline-block;
 }
 
 .co-mainbutton,

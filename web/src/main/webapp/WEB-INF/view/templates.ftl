@@ -59,48 +59,45 @@
             <@stats.ga />
             <@stats.gtm />
         </#if>
-        <nav class="navbar navbar-default navbar-static-top co-header">
-            <ul class="co-topmenu">
-                <li>
-                    <a class="co-topmenu-mainer" href="/" title="combiq.ru">
-                        <img src="/static/images/site/logo.png" />
-                    </a>
-                </li>
-                <li>
-                    <iframe style="margin-bottom: -7px;" src="https://ghbtns.com/github-btn.html?user=atott&repo=combiq&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-                </li>
-                <li>
-                    <a href="https://github.com/atott/combiq/wiki">о проекте</a>
-                </li>
-                <li>
-                    <a href="/questionnaires">опросники</a>
-                </li>
-                <#if user??>
-                    <li class="co-authcode">
-                        <strong>${user.login}</strong><a href="/logout.do">.logout()</a><span>;</span>
+        <div class="container">
+            <nav class="navbar navbar-default navbar-static-top co-header">
+                <ul class="co-topmenu">
+                    <li>
+                        <a class="co-topmenu-mainer" href="/" title="combiq.ru">
+                            <img src="/static/images/site/flat-logo-64.png" />
+                            <span>Combiq.ru</span>
+                        </a>
                     </li>
-                <#else>
-                    <li class="co-authcode">
-                        <strong>anonymous</strong><a href="/login.do">.login()</a><span>;</span>
+                    <li>
+                        <a href="/questionnaires">опросники</a>
                     </li>
-                </#if>
-                <li class="co-searchbox">
-                    <form action="/questions/search" method="get">
-                        <div class="input-group">
-                            <input name="q" type="text" class="form-control" value="${dsl!}">
+                    <#if user??>
+                        <li class="co-authcode">
+                            <strong>${user.login}</strong><a href="/logout.do">.logout()</a><span>;</span>
+                        </li>
+                    <#else>
+                        <li class="co-authcode">
+                            <strong>anonymous</strong><a href="/login.do">.login()</a><span>;</span>
+                        </li>
+                    </#if>
+                    <li class="co-searchbox">
+                        <form action="/questions/search" method="get">
+                            <div class="input-group">
+                                <input name="q" type="text" class="form-control" value="${dsl!}">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                 </button>
                             </span>
-                        </div>
-                    </form>
-                </li>
-                <li class="co-getstarted">
-                    <a href="/questions">Вопросы</a>
-                </li>
-            </ul>
-        </nav>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="co-getstarted">
+                        <a href="/questions">Вопросы</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
         <#nested />
         <footer>
             <div class="container">
