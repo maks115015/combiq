@@ -1,7 +1,7 @@
 <#import "templates.ftl" as templates />
 
 <#assign head>
-    <link rel="import" href="/static/bower_components/paper-input/paper-input-decorator.html?v=${resourceVersion}">
+    ${templates.import("/static/bower_components/paper-input/paper-input-decorator.html")}
 </#assign>
 
 <#assign sidebar>

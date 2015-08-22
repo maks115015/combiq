@@ -45,12 +45,12 @@
         </script>
 
 
-        <link rel="import" href="/static/bower_components/paper-button/paper-button.html?v=${resourceVersion}">
-        <link rel="import" href="/static/bower_components/paper-dialog/paper-action-dialog.html?v=${resourceVersion}">
-        <link rel="import" href="/static/bower_components/core-toolbar/core-toolbar.html?v=${resourceVersion}">
-        <link rel="import" href="/static/bower_components/paper-icon-button/paper-icon-button.html?v=${resourceVersion}">
-        <link rel="import" href="/static/elements/co-question.html?v=${resourceVersion}">
-        <link rel="import" href="/static/elements/co-tag.html?v=${resourceVersion}">
+        ${import("/static/bower_components/paper-button/paper-button.html")}
+        ${import("/static/bower_components/paper-dialog/paper-action-dialog.html")}
+        ${import("/static/bower_components/core-toolbar/core-toolbar.html")}
+        ${import("/static/bower_components/paper-icon-button/paper-icon-button.html")}
+        ${import("/static/elements/co-question/co-question.html")}
+        ${import("/static/elements/co-tag/co-tag.html")}
         ${head}
     </head>
     <body>
@@ -171,6 +171,14 @@
     <#else>
         <#return b>
     </#if>
+</#function>
+
+<#function import href>
+    <#return '<link rel="import" href="' + href + '?v=$' + resourceVersion + '">' />
+</#function>
+
+<#function importElement name>
+    <#return '<link rel="import" href="/static/build/elements/' + name + '.html?v=' + resourceVersion + '">' />
 </#function>
 
 <#macro paging paging>

@@ -1,0 +1,23 @@
+{
+  "name": "combiq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "del": "^1.2.1",
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-dest": "^0.2.2",
+    "gulp-ext-replace": "^0.2.0",
+    "gulp-json-transform": "^0.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-run-seq": "^1.2.2",
+    "merge-stream": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "atott"
+}

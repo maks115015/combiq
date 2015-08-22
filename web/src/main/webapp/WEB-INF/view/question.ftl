@@ -1,7 +1,7 @@
 <#import "templates.ftl" as templates />
 
 <#assign head>
-    <link rel="import" href="/static/bower_components/paper-input/paper-autogrow-textarea.html?v=${resourceVersion}">
+    ${templates.import("/static/bower_components/paper-input/paper-autogrow-textarea.html")}
 </#assign>
 
 <@templates.layoutWithoutSidebar head=head dsl=dsl>
