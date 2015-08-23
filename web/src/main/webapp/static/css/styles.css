@@ -8,12 +8,12 @@ body {
 
 html /deep/ a,
 a {
-    color: #0779AB;
+    color: #007fb6;
     text-decoration: none;
 }
 html /deep/ a:hover,
 a:hover {
-    color: #59a1e5;
+    color: #00b7ff;
     text-decoration: none;
 }
 
@@ -44,13 +44,14 @@ a:focus {
 
 .go-github-btn {
     display: inline-block;
-    background: #e2e2e2;
-    border: 0;
+    background: white;
+    border: 1px solid #FF5752;
     line-height: 3.5em;
     padding: 0 0 0 1em;
     margin-bottom: 1em;
     outline: none;
     text-decoration: none;
+    font-size: 16px;
     color: #666;
     margin-left: 35px;
 }
@@ -83,7 +84,7 @@ a:focus {
 
 .co-header {
     font-size: 18px;
-    padding: 35px 35px;
+    padding: 35px 0px;
     background-color: transparent;
     border: none;
 }
@@ -115,26 +116,41 @@ a:focus {
 .co-mainer .container {
     padding: 60px 40px 80px 40px;
     text-align: center;
-    margin-bottom: -60px;
 }
 
 .co-mainer h1 {
     color: white;
+}
+
+.co-colored {
+    color: #f63136;
+}
+
+h1 {
     font-family: 'Roboto Slab', serif;
     font-size: 41px;
-    margin: 40px 100px;
+    margin: 40px 0 60px;
     line-height: 44px;
     letter-spacing: -1px;
 }
 
-h3 {
-    font-size: 40px;
-    font-family: "Arial Bold",Gadget,sans-serif;
-    color: #354950;
+h2 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 36px;
+    margin: 40px 0 60px;
+    line-height: 40px;
+    letter-spacing: -1px;
+    font-weight: 300;
 }
 
-.co-mainer h3 {
-    color: rgb(255, 87, 71);
+h3 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 24px;
+    margin: 20px 0 30px;
+    line-height: 30px;
+    letter-spacing: -1px;
+    font-weight: 400;
+    color: #354950;
 }
 
 .co-mainer p {
@@ -146,6 +162,7 @@ ul.co-topmenu {
     list-style: none;
     font-size: 18px;
     font-family: Calibri, Ubuntu, Tahoma, 'Lucida Grande';
+    padding: 0;
 }
 
 ul.co-topmenu > li {
@@ -297,6 +314,7 @@ footer /deep/ a:hover {
 .co-searchbox {
     max-width: 200px;
     float: right;
+    margin-right: 0 !important;
 }
 
 ul.co-popularTags {
