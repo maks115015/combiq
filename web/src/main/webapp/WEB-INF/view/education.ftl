@@ -35,9 +35,17 @@
             </li>
             <li>
                 <p>
-                    Computer since (in English), MIT 6.006,
-                    <a href="http://www.youtube.com/watch?v=HtSuA80QTyo&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb">
-                        Algorithmic Thinking, Peak Finding</a>, лекции: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16, 23.
+                    6.006: Introduction to Algorithms, лекции: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16, 23.
+                </p>
+                <p>
+                    <ul>
+                        <li>
+                            <a href="http://courses.csail.mit.edu/6.006/fall11/notes.shtml">MIT resources</a>
+                        </li>
+                        <li>
+                            <a href="http://www.youtube.com/watch?v=HtSuA80QTyo&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb">Youtube videos</a>
+                        </li>
+                    </ul>
                 </p>
             </li>
             <li>
@@ -105,7 +113,7 @@
             </li>
             <li>
                 <p>
-                    Английский умение базово общаться.
+                    Английский, умение базово общаться.
                 </p>
             </li>
         </ul>
