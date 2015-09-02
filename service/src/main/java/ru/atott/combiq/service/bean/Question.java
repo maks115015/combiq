@@ -1,5 +1,7 @@
 package ru.atott.combiq.service.bean;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.List;
 
 public class Question {
@@ -9,6 +11,7 @@ public class Question {
     private String level;
     private long reputation;
     private QuestionAttrs attrs;
+    private String tip;
 
     public List<String> getTags() {
         return tags;
@@ -56,5 +59,26 @@ public class Question {
 
     public void setAttrs(QuestionAttrs attrs) {
         this.attrs = attrs;
+    }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("title", title)
+                .append("tags", tags)
+                .append("level", level)
+                .append("reputation", reputation)
+                .append("attrs", attrs)
+                .append("tip", tip)
+                .toString();
     }
 }

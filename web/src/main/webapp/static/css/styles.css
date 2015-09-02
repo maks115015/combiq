@@ -6,6 +6,16 @@ body {
     font-family: Verdana,sans-serif;
 }
 
+@media print {
+    a[href]:after {
+        content: none !important;
+    }
+
+    .co-questionnaire-table {
+        font-size: 12px;
+    }
+}
+
 html /deep/ a,
 a {
     color: #007fb6;
@@ -518,6 +528,49 @@ html /deep/ .co-ok-button {
 .co-search-help-tip a {
     font-size: 0.75em;
     color: #a7a9ab;
+}
+
+a.co-action {
+    border-bottom: dotted 1px #007fb6;
+}
+
+a.co-action:hover {
+    border-bottom: dotted 1px #00b7ff;
+}
+
+.co-questionnaire-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.co-questionnaire-table td {
+    border: solid 1px #cdcdcd;
+    padding: 5px 10px;
+    line-height: 1.2em;
+}
+
+.co-question-tip {
+    font-size: 0.86em;
+}
+
+.co-question-tip-title {
+    color: #6c6c6c;
+}
+
+.co-promo-mainer {
+    background-color: rgba(255, 205, 40, 0.48);
+    padding: 15px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: -1px;
+    color: #354950;
+    font-weight: normal;
+}
+
+.co-promo-mainer-new {
+    font-weight: bold;
+    margin-right: 20px;
 }
 
 html /deep/ paper-button::shadow .button-content {

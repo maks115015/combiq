@@ -40,6 +40,12 @@
             </div>
         </div>
     </div>
+    <div class="co-promo-mainer">
+        <div class="container text-center">
+            <span class="co-promo-mainer-new">NEW <span class="glyphicon glyphicon-ok"></span></span>
+            Опросник <a href="/questionnaire/AU7uuDr4o9D60r28WBXV">Java Interview D1-D3</a>
+        </div>
+    </div>
     <div class="container">
         <div class="row text-center">
             <h2>Что <span class="co-colored">умеет</span> Combiq.ru</h2>
@@ -74,7 +80,7 @@
                 <p>
                     Если вы оказались по другую сторону баррикад и ищете себе сотрудников в
                     компанию, то уже подготовленные списки с вопросами помогут вам найти
-                    компетентных сотрудников.
+                    компетентных специалистов.
                 </p>
                 <p>
                     <a href="/questionnaires">

@@ -2,7 +2,7 @@
 
 <@templates.layoutBody head=head>
     <div class="container">
-        <h3>План подготовки к собеседованию Java</h3>
+        <h1>План подготовки к собеседованию</h1>
         <ul>
             <li>
                 <p>

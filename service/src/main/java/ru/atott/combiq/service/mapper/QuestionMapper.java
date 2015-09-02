@@ -38,6 +38,7 @@ public class QuestionMapper implements Mapper<QuestionEntity, Question> {
         if (userId != null) {
             question.setAttrs(attrsMap.getOrDefault(questionId, QuestionAttrs.defaultOf(userId, questionId)));
         }
+        question.setTip(source.getTip());
         return question;
     }
 }

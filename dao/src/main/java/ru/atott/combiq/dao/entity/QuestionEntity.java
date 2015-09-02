@@ -13,6 +13,7 @@ public class QuestionEntity {
     private List<String> tags;
     private int level;
     private Long reputation;
+    private String tip;
 
     public List<String> getTags() {
         return tags;
@@ -52,5 +53,13 @@ public class QuestionEntity {
 
     public void setReputation(Long reputation) {
         this.reputation = reputation;
+    }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
     }
 }
