@@ -14,6 +14,7 @@ public class UserEntity {
     private String location;
     private String home;
     private String type;
+    private String avatarUrl;
 
     public String getLogin() {
         return login;
@@ -77,5 +78,13 @@ public class UserEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

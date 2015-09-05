@@ -11,6 +11,7 @@ public class User {
     private String location;
     private String home;
     private UserType type;
+    private String avatarUrl;
 
     public String getId() {
         return id;
@@ -74,5 +75,13 @@ public class User {
 
     public void setType(UserType type) {
         this.type = type;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

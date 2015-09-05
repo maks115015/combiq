@@ -1,6 +1,6 @@
 <#import "stats.ftl" as stats />
 
-<#macro layoutHtml head='' dsl=''>
+<#macro layoutHtml head='' dsl='' chapter='' showFooter=true>
 <!DOCTYPE html>
 <!--    Дорогой друг!
         Злой красный человек спалил тебя ;)
@@ -68,53 +68,49 @@
                             <span>Combiq.ru</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="/questionnaires">опросники</a>
-                    </li>
-                    <#if user??>
-                        <li class="co-authcode">
-                            <strong>${user.login}</strong><a href="/logout.do">.logout()</a><span>;</span>
-                        </li>
-                    <#else>
-                        <li class="co-authcode">
-                            <strong>anonymous</strong><a href="/login.do">.login()</a><span>;</span>
-                        </li>
-                    </#if>
-                    <li class="co-searchbox">
-                        <form action="/questions/search" method="get">
-                            <div class="input-group">
-                                <input name="q" type="text" class="form-control" value="${dsl!}">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                </button>
-                            </span>
-                            </div>
-                        </form>
-                    </li>
-                    <li class="co-getstarted">
+                </ul>
+                <ul class="co-topmenu pull-right">
+                    <li class="co-chapter ${if(chapter == 'questions', 'active')}">
                         <a href="/questions">Вопросы</a>
                     </li>
+                    <li class="co-chapter ${if(chapter == 'questionnaires', 'active')}">
+                        <a href="/questionnaires">Опросники</a>
+                    </li>
+                    <li class="co-chapter ${if(chapter == 'education', 'active')}">
+                        <a href="/education">План подготовки</a>
+                    </li>
+                    <#if user??>
+                        <li class="co-auth">
+                            <img src="${user.headAvatarUrl}">
+                            <a href="/logout.do">Выйти</a>
+                        </li>
+                    <#else>
+                        <li>
+                            <a href="/login.do">Войти</a>
+                        </li>
+                    </#if>
                 </ul>
             </nav>
         </div>
         <#nested />
-        <footer>
-            <div class="container">
-                <div class="co-inline">
-                    <div>
-                        <strong>Combiq.ru, 2014-2015</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-                        <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-                        <a href="/donate">Поддержать проект</a>
+        <#if showFooter>
+            <footer>
+                <div class="container">
+                    <div class="co-inline">
+                        <div>
+                            <strong>Combiq.ru, 2014-2015</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+                            <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+                            <a href="/donate">Поддержать проект</a>
+                        </div>
                     </div>
+                    <span class="co-informer">
+                        <#if env == 'prod'>
+                            <@stats.informer/>
+                        </#if>
+                    </span>
                 </div>
-                <span class="co-informer">
-                    <#if env == 'prod'>
-                        <@stats.informer/>
-                    </#if>
-                </span>
-            </div>
-        </footer>
+            </footer>
+        </#if>
         <#if !user??>
             <@inviteAuth />
         </#if>
@@ -122,8 +118,8 @@
 </html>
 </#macro>
 
-<#macro layoutWithSidebar head='' dsl='' sidebar=''>
-    <@layoutHtml head=head dsl=dsl>
+<#macro layoutWithSidebar head='' dsl='' sidebar='' chapter=''>
+    <@layoutHtml head=head dsl=dsl chapter=chapter>
         <div class="container">
             <div class="col-md-9">
                 <#nested />
@@ -135,16 +131,16 @@
     </@layoutHtml>
 </#macro>
 
-<#macro layoutWithoutSidebar head='' dsl=''>
-    <@layoutHtml head=head dsl=dsl>
+<#macro layoutWithoutSidebar head='' dsl='' chapter=''>
+    <@layoutHtml head=head dsl=dsl chapter=chapter>
     <div class="container">
         <#nested />
     </div>
     </@layoutHtml>
 </#macro>
 
-<#macro layoutBody head='' dsl=''>
-    <@layoutHtml head=head dsl=dsl>
+<#macro layoutBody head='' dsl='' chapter='' showFooter=true>
+    <@layoutHtml head=head dsl=dsl chapter=chapter showFooter=showFooter>
         <#nested />
     </@layoutHtml>
 </#macro>

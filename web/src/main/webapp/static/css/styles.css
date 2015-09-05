@@ -94,7 +94,8 @@ a:focus {
 
 .co-header {
     font-size: 18px;
-    padding: 35px 0px;
+    padding: 0;
+    margin: 0;
     background-color: transparent;
     border: none;
 }
@@ -171,14 +172,17 @@ h3 {
 ul.co-topmenu {
     list-style: none;
     font-size: 18px;
-    font-family: Calibri, Ubuntu, Tahoma, 'Lucida Grande';
+    font-family: Calibri, Ubuntu, Tahoma, 'Lucida Grande', serif;
     padding: 0;
+    display: inline-block;
+    margin-bottom: 40px;
 }
 
 ul.co-topmenu > li {
     display: inline-block;
-    margin-right: 40px;
+    margin: 0 10px 0 0;
     position: relative;
+    padding-top: 40px;
 }
 
 .co-topmenu-mainer,
@@ -197,28 +201,33 @@ ul.co-topmenu > li {
     margin-top: -28px;
 }
 
-.co-getstarted {
-    float: right;
-    background-color: #00A0D8;
-    font-weight: bold;
-    border-radius: 4px;
-    padding: 4px 15px;
-    transition: background-color 500ms linear;
-}
-
-.co-getstarted:hover {
-    background-color: #0082BC;
-    transition: background-color 500ms linear;
-}
-
-.co-getstarted > a,
-.co-getstarted > a:hover {
-    color: #ffffff;
+.co-auth img {
+    margin-top: -28px;
+    margin-right: 10px;
+    margin-left: 40px;
 }
 
 .co-out {
     position: relative;
     padding-right: 12px;
+}
+
+.co-chapter {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.co-chapter:hover {
+    background-color: #72B8F2;
+}
+
+.co-chapter.active {
+    background-color: #FF5858;
+}
+
+.co-chapter:hover a,
+.co-chapter.active a {
+    color: white;
 }
 
 .co-out:after {
@@ -321,12 +330,6 @@ footer /deep/ a:hover {
     border-bottom: 1px solid #e0e0e0;
 }
 
-.co-searchbox {
-    max-width: 200px;
-    float: right;
-    margin-right: 0 !important;
-}
-
 ul.co-popularTags {
     list-style: none;
     margin: 0;
@@ -336,20 +339,6 @@ ul.co-popularTags {
 ul.co-popularTags > li {
     padding: 0;
     margin-bottom: 10px;
-}
-
-.co-authcode {
-    font-family: monospace;
-    font-size: 15px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 400;
-}
-
-.co-authcode strong {
-    font-style: italic;
-    color: #5c5e60;
-    font-weight: 400;
 }
 
 .co-question,

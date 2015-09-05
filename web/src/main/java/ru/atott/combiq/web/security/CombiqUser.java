@@ -12,6 +12,7 @@ public class CombiqUser extends User {
     private UserType type;
     private String login;
     private String id;
+    private String avatarUrl;
 
     public UserType getType() {
         return type;
@@ -44,5 +45,21 @@ public class CombiqUser extends User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public String getHeadAvatarUrl() {
+        if (avatarUrl == null) {
+            return null;
+        }
+
+        return avatarUrl.contains("?") ? avatarUrl + "&s=46" : avatarUrl + "?s=46";
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

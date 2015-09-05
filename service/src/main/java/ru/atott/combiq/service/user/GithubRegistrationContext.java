@@ -1,11 +1,14 @@
 package ru.atott.combiq.service.user;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class GithubRegistrationContext {
     private String login;
     private String home;
     private String name;
     private String location;
     private String email;
+    private String avatarUrl;
 
     public String getLogin() {
         return login;
@@ -45,5 +48,25 @@ public class GithubRegistrationContext {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("login", login)
+                .append("home", home)
+                .append("name", name)
+                .append("location", location)
+                .append("email", email)
+                .append("avatarUrl", avatarUrl)
+                .toString();
     }
 }

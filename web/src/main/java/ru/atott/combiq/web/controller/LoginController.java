@@ -83,14 +83,19 @@ public class LoginController extends BaseController {
 
         String userEmail = responseJsonObject.get("email").getAsString().toLowerCase();
         User user = userService.findByEmail(userEmail);
+
+        GithubRegistrationContext registrationContext = new GithubRegistrationContext();
+        registrationContext.setLogin(responseJsonObject.get("login").getAsString());
+        registrationContext.setHome(responseJsonObject.get("html_url").getAsString());
+        registrationContext.setName(responseJsonObject.get("name").getAsString());
+        registrationContext.setLocation(responseJsonObject.get("location").getAsString());
+        registrationContext.setAvatarUrl(responseJsonObject.get("avatar_url").getAsString());
+        registrationContext.setEmail(userEmail);
+
         if (user == null) {
-            GithubRegistrationContext registrationContext = new GithubRegistrationContext();
-            registrationContext.setLogin(responseJsonObject.get("login").getAsString());
-            registrationContext.setHome(responseJsonObject.get("html_url").getAsString());
-            registrationContext.setName(responseJsonObject.get("name").getAsString());
-            registrationContext.setLocation(responseJsonObject.get("location").getAsString());
-            registrationContext.setEmail(userEmail);
             user = userService.registerUserViaGithub(registrationContext);
+        } else {
+            user = userService.updateGithubUser(registrationContext);
         }
 
         httpRequest.login(user.getEmail(), "github");

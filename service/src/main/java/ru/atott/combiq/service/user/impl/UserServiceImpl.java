@@ -48,8 +48,24 @@ public class UserServiceImpl implements UserService {
         userEntity.setLocation(context.getLocation());
         userEntity.setName(context.getName());
         userEntity.setType(UserType.github.name());
+        userEntity.setAvatarUrl(context.getAvatarUrl());
 
         userEntity = userRepository.index(userEntity);
+        return userMapper.map(userEntity);
+    }
+
+    @Override
+    public User updateGithubUser(GithubRegistrationContext context) {
+        UserEntity userEntity = userRepository.findByEmail(context.getEmail()).get(0);
+
+        userEntity.setLogin(context.getLogin());
+        userEntity.setHome(context.getHome());
+        userEntity.setLocation(context.getLocation());
+        userEntity.setName(context.getName());
+        userEntity.setType(UserType.github.name());
+        userEntity.setAvatarUrl(context.getAvatarUrl());
+
+        userRepository.save(userEntity);
         return userMapper.map(userEntity);
     }
 }

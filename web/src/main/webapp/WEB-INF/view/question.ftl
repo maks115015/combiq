@@ -4,7 +4,7 @@
     ${templates.import("/static/bower_components/paper-input/paper-autogrow-textarea.html")}
 </#assign>
 
-<@templates.layoutWithoutSidebar head=head dsl=dsl>
+<@templates.layoutWithoutSidebar head=head dsl=dsl chapter='questions'>
     <div class="co-question">
         <div class="co-flex">
             <div class="co-question-reputation">

@@ -15,7 +15,7 @@
     </ul>
 </#assign>
 
-<@templates.layoutWithSidebar head=head dsl=dsl sidebar=sidebar>
+<@templates.layoutWithSidebar head=head dsl=dsl sidebar=sidebar chapter='questions'>
     <form action="/questions/search" method="get" id="searchForm">
         <div class="co-search">
             <paper-input-decorator value="${dsl!}" label="Поисковый запрос">

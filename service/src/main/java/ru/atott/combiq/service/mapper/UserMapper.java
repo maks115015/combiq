@@ -16,6 +16,7 @@ public class UserMapper implements Mapper<UserEntity, User> {
         user.setLocation(source.getLocation());
         user.setHome(source.getHome());
         user.setType(UserType.valueOf(source.getType()));
+        user.setAvatarUrl(source.getAvatarUrl());
         return user;
     }
 }
