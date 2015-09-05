@@ -39,10 +39,16 @@
         <jparsec.version>2.2.1</jparsec.version>
         <junit.version>4.12</junit.version>
         <httpclient.version>4.4.1</httpclient.version>
+        <jasperreports.version>6.1.1</jasperreports.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>net.sf.jasperreports</groupId>
+                <artifactId>jasperreports</artifactId>
+                <version>${jasperreports.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
