@@ -40,6 +40,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByLogin(String login) {
+        List<UserEntity> byEmail = userRepository.findByLogin(login);
+
+        UserEntity userEntity = null;
+        if (byEmail.size() == 1) {
+            userEntity = byEmail.get(0);
+        }
+
+        if (userEntity != null) {
+            return userMapper.map(userEntity);
+        }
+
+        if (byEmail.size() == 0) {
+            return null;
+        }
+
+        throw new ServiceException(String.format("There are more then one user with email: %s", login));
+    }
+
+    @Override
     public User registerUserViaGithub(GithubRegistrationContext context) {
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(context.getEmail());
@@ -56,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateGithubUser(GithubRegistrationContext context) {
-        UserEntity userEntity = userRepository.findByEmail(context.getEmail()).get(0);
+        UserEntity userEntity = userRepository.findByLogin(context.getEmail()).get(0);
 
         userEntity.setLogin(context.getLogin());
         userEntity.setHome(context.getHome());

@@ -81,7 +81,9 @@
                     </li>
                     <#if user??>
                         <li class="co-auth">
-                            <img src="${user.headAvatarUrl}">
+                            <#if user.headAvatarUrl??>
+                                <img src="${user.headAvatarUrl!}">
+                            </#if>
                             <a href="/logout.do">Выйти</a>
                         </li>
                     <#else>
