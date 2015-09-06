@@ -6,7 +6,7 @@ public class DslTag {
     private String value;
 
     public DslTag(String value) {
-        this.value = value;
+        this.value = value.toLowerCase();
     }
 
     public String getValue() {

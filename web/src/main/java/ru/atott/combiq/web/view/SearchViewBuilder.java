@@ -12,6 +12,8 @@ public class SearchViewBuilder {
     private List<Tag> popularTags;
     private PagingBean paging;
     private String dsl;
+    private String subTitle;
+    private boolean questionsCatalog;
 
     public List<Question> getQuestions() {
         return questions;
@@ -45,12 +47,30 @@ public class SearchViewBuilder {
         this.popularTags = popularTags;
     }
 
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public boolean isQuestionsCatalog() {
+        return questionsCatalog;
+    }
+
+    public void setQuestionsCatalog(boolean questionsCatalog) {
+        this.questionsCatalog = questionsCatalog;
+    }
+
     public ModelAndView build() {
         ModelAndView mav = new ModelAndView("search");
         mav.addObject("questions", questions);
         mav.addObject("paging", paging);
         mav.addObject("dsl", dsl);
         mav.addObject("popularTags", popularTags);
+        mav.addObject("subTitle", subTitle);
+        mav.addObject("questionsCatalog", questionsCatalog);
         return mav;
     }
 }

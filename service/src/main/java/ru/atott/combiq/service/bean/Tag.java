@@ -5,7 +5,7 @@ public class Tag {
     private long docCount;
 
     public Tag(String value, long docCount) {
-        this.value = value;
+        this.value = value.toLowerCase();
         this.docCount = docCount;
     }
 

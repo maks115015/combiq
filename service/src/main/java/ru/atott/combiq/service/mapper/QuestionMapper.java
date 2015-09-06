@@ -5,7 +5,9 @@ import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionAttrs;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class QuestionMapper implements Mapper<QuestionEntity, Question> {
     private Map<String, QuestionAttrs> attrsMap;
@@ -25,10 +27,10 @@ public class QuestionMapper implements Mapper<QuestionEntity, Question> {
         Question question = new Question();
         question.setId(questionId);
         question.setTitle(source.getTitle());
-        question.setTags(source.getTags());
-        if (question.getTags() == null) {
-            question.setTags(Collections.emptyList());
-        }
+
+        List<String> tags = source.getTags() == null ? Collections.emptyList() : source.getTags();
+        question.setTags(tags.stream().map(String::toLowerCase).collect(Collectors.toList()));
+
         question.setLevel("D" + source.getLevel());
         if (source.getReputation() == null) {
             question.setReputation(0);

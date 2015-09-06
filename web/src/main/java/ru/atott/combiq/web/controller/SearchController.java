@@ -44,7 +44,7 @@ public class SearchController extends BaseController {
                                   @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
         SearchContext context = getQuestionContextBuilder.list(page);
-        return getView(request, context, null);
+        return getView(request, context, null, "Вопросы", true);
     }
 
     @RequestMapping(value = "/questions/tagged/{tags}")
@@ -66,7 +66,8 @@ public class SearchController extends BaseController {
         return getView(request, context, null);
     }
 
-    private ModelAndView getView(HttpServletRequest request, SearchContext context, String dsl) {
+    private ModelAndView getView(HttpServletRequest request, SearchContext context, String dsl,
+                                 String subTitle, boolean questionsCatalog) {
         SearchResponse questionsResponse = getQuestionService.getQuestions(context);
 
         PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), questionsResponse.getQuestions().getNumber(), request);
@@ -78,6 +79,12 @@ public class SearchController extends BaseController {
         viewBuilder.setPaging(paging);
         viewBuilder.setDsl(dsl);
         viewBuilder.setPopularTags(questionsResponse.getPopularTags());
+        viewBuilder.setSubTitle(subTitle);
+        viewBuilder.setQuestionsCatalog(questionsCatalog);
         return viewBuilder.build();
+    }
+
+    private ModelAndView getView(HttpServletRequest request, SearchContext context, String dsl) {
+        return getView(request, context, dsl, null, false);
     }
 }

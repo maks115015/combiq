@@ -8,6 +8,7 @@ import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.question.GetQuestionService;
 import ru.atott.combiq.service.question.QuestionReputationService;
 import ru.atott.combiq.service.question.QuestionService;
+import ru.atott.combiq.service.question.TagService;
 import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.web.bean.ReputationVoteBean;
@@ -25,6 +26,8 @@ public class QuestionController extends BaseController {
     private QuestionService questionService;
     @Autowired
     private QuestionReputationService questionReputationService;
+    @Autowired
+    private TagService tagService;
 
     @RequestMapping(value = "/questions/{questionId}")
     public ModelAndView view(@PathVariable("questionId") String questionId,
@@ -45,6 +48,7 @@ public class QuestionController extends BaseController {
         viewBuilder.setQuestion(questionResponse.getQuestion());
         viewBuilder.setPositionInDsl(questionResponse.getPositionInDsl());
         viewBuilder.setDsl(dsl);
+        viewBuilder.setTags(tagService.getTags(questionResponse.getQuestion().getTags()));
         return viewBuilder.build();
     }
 
@@ -62,6 +66,7 @@ public class QuestionController extends BaseController {
 
     @RequestMapping(value = "/questions/reputationVote", method = RequestMethod.POST)
     @ResponseBody
+    @Deprecated
     public ReputationVoteBean reputationVote(@RequestParam(value = "up", required = true) boolean up,
                                              @RequestParam(value = "questionId", required = true) String questionId) {
         if (authService.getUser() == null) {

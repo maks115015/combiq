@@ -5,17 +5,27 @@
 </#assign>
 
 <#assign sidebar>
-    <h4 class="co-sidebar-title">Популярное</h4>
-    <ul class="co-popularTags">
-        <#list popularTags as tag>
-            <li>
-                <co-tag tag="${tag.value}" count="${tag.docCount}">${tag.value}</co-tag>
-            </li>
-        </#list>
-    </ul>
+    <div data-spy="affix" class="co-affix" data-offset-top="${templates.if(!questionsCatalog, '110', '250')}">
+        <h4 class="co-sidebar-title">Популярное</h4>
+        <ul class="co-popularTags">
+            <#list popularTags as tag>
+                <li>
+                    <co-tag tag="${tag.value}" count="${tag.docCount}">${tag.value}</co-tag>
+                </li>
+            </#list>
+        </ul>
+    </div>
 </#assign>
 
-<@templates.layoutWithSidebar head=head dsl=dsl sidebar=sidebar chapter='questions'>
+<#assign pageTitle>
+    <#if questionsCatalog>
+        <div class="container">
+            <h1>Вопросы</h1>
+        </div>
+    </#if>
+</#assign>
+
+<@templates.layoutWithSidebar head=head dsl=dsl sidebar=sidebar chapter='questions' subTitle=subTitle!'' pageTitle=pageTitle>
     <form action="/questions/search" method="get" id="searchForm">
         <div class="co-search">
             <paper-input-decorator value="${dsl!}" label="Поисковый запрос">

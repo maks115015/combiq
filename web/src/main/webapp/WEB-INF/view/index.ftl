@@ -4,7 +4,7 @@
 
 </#assign>
 
-<@templates.layoutBody head=head>
+<@templates.layoutBody head=head subTitle='готовьтесь к Java собеседованию здесь'>
     <div class="co-mainhead">
         <div class="container">
             <div class="row">

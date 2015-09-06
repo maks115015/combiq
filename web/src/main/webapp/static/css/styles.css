@@ -349,10 +349,11 @@ ul.co-popularTags > li {
 .co-question-title {
     font-size: 28px;
     min-height: 100px;
+    line-height: 34px;
 }
 
 .co-my-question-comment-label {
-    width: 20%;
+    width: 40%;
     font-size: 0.75em;
 }
 
@@ -419,67 +420,6 @@ ul.co-question-staff > li.co-question-staff-level {
     display: flex;
 }
 
-.co-question-reputation {
-    width: 20%;
-}
-
-.co-question-reputation-label {
-    color: #777;
-    margin-top: 20px;
-}
-
-.co-question-reputation-value {
-    font-size: 26px;
-    text-align: center;
-    display: inline-block;
-}
-
-.co-reputation-up {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 14.5px 15px 14.5px;
-    border-color: transparent transparent #ababab transparent;
-    line-height: 0px;
-    _border-color: #000000 #000000 #ababab #000000;
-    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
-}
-
-.co-reputation-down {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 15px 14.5px 0 14.5px;
-    border-color: #ababab transparent transparent transparent;
-    line-height: 0px;
-    _border-color: #ababab #000000 #000000 #000000;
-    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
-}
-
-.co-voted.co-reputation-up {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 14.5px 15px 14.5px;
-    border-color: transparent transparent #0088c2 transparent;
-    line-height: 0px;
-    _border-color: #000000 #000000 #0088c2 #000000;
-    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
-}
-
-.co-voted.co-reputation-down {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 15px 14.5px 0 14.5px;
-    border-color: #0088c2 transparent transparent transparent;
-    line-height: 0px;
-    _border-color: #0088c2 #000000 #000000 #000000;
-    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
-}
-
 .core-overlay-backdrop.core-opened {
     z-index: 1000 !important;
 }
@@ -538,13 +478,12 @@ a.co-action:hover {
     line-height: 1.2em;
 }
 
-.co-questionnaire-downloadlink {
-    margin-bottom: 20px;
-    display: inline-block;
+.co-question-aside {
+    margin-top: 70px;
 }
 
-.co-questionnaire-downloadlink > span {
-    padding-top: 10px;
+.co-asideimage-container {
+    margin-bottom: 20px;
     display: inline-block;
 }
 
@@ -582,6 +521,13 @@ a.co-action:hover {
 .co-promo-mainer-new {
     font-weight: bold;
     margin-right: 20px;
+}
+
+.co-promo-questionbottom {
+    background-color: rgba(255, 205, 40, 0.48);
+    padding: 15px;
+    margin-left: 140px;
+    margin-top: 35px;
 }
 
 html /deep/ paper-button::shadow .button-content {

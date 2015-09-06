@@ -1,6 +1,6 @@
 <#import "stats.ftl" as stats />
 
-<#macro layoutHtml head='' dsl='' chapter='' showFooter=true>
+<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true>
 <!DOCTYPE html>
 <!--    Дорогой друг!
         Злой красный человек спалил тебя ;)
@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name='yandex-verification' content='526ff629012169b9' />
 
-        <title>Combiq - вопросы для собеседования Java</title>
+        <title>Combiq${if(subTitle == '', '', ' - ' + subTitle)}</title>
 
         <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
@@ -120,8 +120,9 @@
 </html>
 </#macro>
 
-<#macro layoutWithSidebar head='' dsl='' sidebar='' chapter=''>
-    <@layoutHtml head=head dsl=dsl chapter=chapter>
+<#macro layoutWithSidebar head='' dsl='' sidebar='' chapter='' subTitle='' pageTitle=''>
+    <@layoutHtml head=head dsl=dsl chapter=chapter subTitle=subTitle>
+        ${pageTitle}
         <div class="container">
             <div class="col-md-9">
                 <#nested />
@@ -141,8 +142,8 @@
     </@layoutHtml>
 </#macro>
 
-<#macro layoutBody head='' dsl='' chapter='' showFooter=true>
-    <@layoutHtml head=head dsl=dsl chapter=chapter showFooter=showFooter>
+<#macro layoutBody head='' dsl='' chapter='' showFooter=true subTitle=''>
+    <@layoutHtml head=head dsl=dsl chapter=chapter showFooter=showFooter subTitle=subTitle>
         <#nested />
     </@layoutHtml>
 </#macro>

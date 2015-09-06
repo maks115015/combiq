@@ -1,6 +1,6 @@
 <#import "templates.ftl" as templates />
 
-<@templates.layoutBody head=head chapter='questionnaires'>
+<@templates.layoutBody head=head chapter='questionnaires' subTitle='опросник ' + questionnaire.name>
     <div class="container">
         <h1>Опросник ${questionnaire.name}</h1>
         <div class="row">
@@ -36,11 +36,10 @@
                     <#assign downloadUrl="/questionnaire/" + questionnaire.id + "/Опросник " + questionnaire.name?url + ".pdf" />
                     <!--noindex-->
                     <a href="${downloadUrl}"
-                       class="co-questionnaire-downloadlink"
+                       class="co-asideimage-container"
                        title="Скачать опросник ${questionnaire.name?html}"
                        rel="nofollow">
                         <img src="/static/images/download_questionnaire.png" alt="Скачать опросник, PDF формат"><br>
-                        <span>Скачать PDF</span>
                     </a>
                     <p>
                         <a href="${downloadUrl}">Скачайте</a> опросник <em>${questionnaire.name?html}</em>, распечатайте его

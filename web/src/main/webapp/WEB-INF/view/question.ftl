@@ -5,44 +5,60 @@
 </#assign>
 
 <@templates.layoutWithoutSidebar head=head dsl=dsl chapter='questions'>
-    <div class="co-question">
-        <div class="co-flex">
-            <div class="co-question-reputation">
-                <div class="co-question-reputation-value">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="co-question">
+                <div class="co-flex">
                     <div>
-                        <a class="js-questionReputationUp-${question.id} ${templates.if(questionReputationVotedUp(), 'co-voted')} co-reputation-up" onclick="questionReputationVote(true, '${question.id?js_string}'); return false;" href="#"></a>
+                        <div class="co-question-title">
+                        ${question.title}
+                        </div>
+                        <@questionStaff />
                     </div>
-                    <span class="js-questionReputationLabel-${question.id}">${question.reputation}</span>
-                    <div>
-                        <a class="js-questionReputationDown-${question.id} ${templates.if(questionReputationVotedDown(), 'co-voted')} co-reputation-down" onclick="questionReputationVote(false, '${question.id?js_string}'); return false;" href="#"></a>
-                    </div>
-                </div>
-                <div class="co-question-reputation-label">
-                    Репутация
                 </div>
             </div>
-            <div class="co-question-content">
-                <div class="co-question-title">
-                    ${question.title}
+            <@questionPosition />
+            <div class="co-promo-questionbottom">
+                <span class="glyphicon glyphicon-ok"></span>
+                Возможно, вам будет проще готовиться к собеседованию по уже готовым
+                <a href="/questionnaires">опросникам</a>.
+            </div>
+            <div class="co-my-question-comment co-flex">
+                <div class="co-my-question-comment-label">
+                    <div>
+                        Ваш комментарий к вопросу, <br/>
+                        его видите только Вы
+                    </div>
                 </div>
-                <@questionStaff />
+                <div class="co-my-question-comment-box">
+                    <paper-autogrow-textarea rows="3" >
+                        <textarea id="questionMyComment" ${templates.if(!user??, 'disabled')}>${questionComment()}</textarea>
+                    </paper-autogrow-textarea>
+                    <paper-button onclick="saveQuestionComment(document.getElementById('questionMyComment').value, '${question.id}');" ${templates.if(!user??, 'disabled')}>Сохранить</paper-button>
+                    <span id="questionMyCommentStatus"></span>
+                </div>
             </div>
         </div>
-    </div>
-    <@questionPosition />
-    <div class="co-my-question-comment co-flex">
-        <div class="co-my-question-comment-label">
-            <div>
-                Ваш комментарий к вопросу, <br/>
-                его видите только Вы
-            </div>
-        </div>
-        <div class="co-my-question-comment-box">
-            <paper-autogrow-textarea rows="3" >
-                <textarea id="questionMyComment" ${templates.if(!user??, 'disabled')}>${questionComment()}</textarea>
-            </paper-autogrow-textarea>
-            <paper-button onclick="saveQuestionComment(document.getElementById('questionMyComment').value, '${question.id}');" ${templates.if(!user??, 'disabled')}>Сохранить</paper-button>
-            <span id="questionMyCommentStatus"></span>
+        <div class="col-md-3 co-question-aside">
+            <#if tags?size &gt; 0>
+                <div>
+                    <div class="co-asideimage-container">
+                        <img src="/static/images/tip.png" alt="Совет посмотреть другие ресурсы">
+                    </div>
+                    <ol class="list-unstyled">
+                        <#list tags as tag>
+                            <#if tag.suggestViewOthersQuestionsLabel??>
+                                <li>
+                                    <a href="/questions/tagged/${tag.tag?url}">
+                                        <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                                        ${tag.suggestViewOthersQuestionsLabel?html} →
+                                    </a>
+                                </li>
+                            </#if>
+                        </#list>
+                    </ol>
+                </div>
+            </#if>
         </div>
     </div>
 </@templates.layoutWithoutSidebar>
