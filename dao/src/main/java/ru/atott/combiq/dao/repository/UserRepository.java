@@ -9,5 +9,6 @@ import java.util.List;
 @Component
 public interface UserRepository extends ElasticsearchRepository<UserEntity, String> {
     List<UserEntity> findByEmail(String email);
+    
     List<UserEntity> findByLogin(String login);
 }

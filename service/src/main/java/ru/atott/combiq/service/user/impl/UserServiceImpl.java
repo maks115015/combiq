@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
-        throw new ServiceException(String.format("There are more then one user with email: %s", login));
+        throw new ServiceException(String.format("There are more then one user with login: %s", login));
     }
 
     @Override
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateGithubUser(GithubRegistrationContext context) {
-        UserEntity userEntity = userRepository.findByLogin(context.getEmail()).get(0);
+        UserEntity userEntity = userRepository.findByLogin(context.getLogin()).get(0);
 
         userEntity.setLogin(context.getLogin());
         userEntity.setHome(context.getHome());

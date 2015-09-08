@@ -1,7 +1,9 @@
 package ru.atott.combiq.web.controller;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -81,17 +83,19 @@ public class LoginController extends BaseController {
         responseJson = IOUtils.toString(response.getEntity().getContent());
         responseJsonObject = ViewUtils.parseJson(responseJson);
 
-        String userEmail = responseJsonObject.get("email").getAsString().toLowerCase();
         String userLogin = responseJsonObject.get("login").getAsString().toLowerCase();
         User user = userService.findByLogin(userLogin);
 
         GithubRegistrationContext registrationContext = new GithubRegistrationContext();
         registrationContext.setLogin(userLogin);
-        registrationContext.setHome(responseJsonObject.get("html_url").getAsString());
-        registrationContext.setName(responseJsonObject.get("name").getAsString());
-        registrationContext.setLocation(responseJsonObject.get("location").getAsString());
-        registrationContext.setAvatarUrl(responseJsonObject.get("avatar_url").getAsString());
-        registrationContext.setEmail(userEmail);
+        registrationContext.setHome(getDefaultString(responseJsonObject.get("html_url")));
+        registrationContext.setName(getDefaultString(responseJsonObject.get("name")));
+        if (StringUtils.isBlank(registrationContext.getName())) {
+            registrationContext.setName(userLogin);
+        }
+        registrationContext.setLocation(getDefaultString(responseJsonObject.get("location")));
+        registrationContext.setAvatarUrl(getDefaultString(responseJsonObject.get("avatar_url")));
+        registrationContext.setEmail(getDefaultString(responseJsonObject.get("email")));
 
         if (user == null) {
             user = userService.registerUserViaGithub(registrationContext);
@@ -99,9 +103,16 @@ public class LoginController extends BaseController {
             user = userService.updateGithubUser(registrationContext);
         }
 
-        httpRequest.login(user.getEmail(), "github");
+        httpRequest.login(user.getLogin(), "github");
         rememberMeServices.loginSuccess(httpRequest, httpResponse, authService.getAuthentication());
 
         return new RedirectView("/");
+    }
+
+    private String getDefaultString(JsonElement value) {
+        if (value == null || value.isJsonNull()) {
+            return null;
+        }
+        return StringUtils.defaultIfBlank(value.getAsString(), null);
     }
 }
