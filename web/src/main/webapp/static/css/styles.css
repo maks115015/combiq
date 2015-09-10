@@ -530,6 +530,11 @@ a.co-action:hover {
     margin-top: 35px;
 }
 
+.co-mainvk-liker {
+    display: inline-block;
+    padding-top: 15px;
+}
+
 html /deep/ paper-button::shadow .button-content {
     padding: 0.5em 0.57em;
 }

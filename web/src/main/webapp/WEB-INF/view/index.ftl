@@ -1,7 +1,10 @@
 <#import "templates.ftl" as templates />
 
 <#assign head>
-
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
+    <script>
+        VK.init({apiId: 5065282, onlyWidgets: true});
+    </script>
 </#assign>
 
 <@templates.layoutBody head=head subTitle='готовьтесь к Java собеседованию здесь'>
@@ -14,7 +17,11 @@
                         <strong>Combiq.ru</strong> - это проект с открытым исходным кодом, цель которого
                         собрать в одном месте всю полезную информацию для Java программистов,
                         которые готовятся к собеседованию на новое место работы.
+                        <span id="vk_like" class="co-mainvk-liker"></span>
                     </p>
+                    <script type="text/javascript">
+                        VK.Widgets.Like("vk_like", {type: "full", height: 24});
+                    </script>
                     <p>
                         <img src="/static/images/site/Octocat.png" alt="Octocat">
                         <a href="https://github.com/atott/combiq" class="go-github-btn">

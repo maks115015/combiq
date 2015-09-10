@@ -15,6 +15,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name='yandex-verification' content='526ff629012169b9' />
 
+        <meta name="og:site_name" content="Combiq.ru">
+        <meta name="og:description" content="Вопросы для подготовки к собеседованию Java кандидатам и опросники для работадателей. План подготовки к собеседованию.">
+        <meta name="og:title" content="Готовьтесь к Java собеседованию на Combiq.ru">
+        <meta name="og:image" content="/static/images/image.png">
+
         <title>Combiq${if(subTitle == '', '', ' - ' + subTitle)}</title>
 
         <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
