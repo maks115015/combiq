@@ -51,7 +51,7 @@ public class ImportServiceImpl implements ImportService {
             if (StringUtils.isNotBlank(tagsString)) {
                 tags = Lists.newArrayList(StringUtils.split(tagsString, ", "));
             }
-            String tip = getCellStringValue(row, 3);
+            String tip = StringUtils.defaultIfBlank(getCellStringValue(row, 3), null);
 
 
             XContentBuilder builder = jsonBuilder()

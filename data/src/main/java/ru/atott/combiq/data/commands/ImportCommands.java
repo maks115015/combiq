@@ -16,9 +16,9 @@ public class ImportCommands implements CommandMarker {
             value = "import questionnare ods",
             help = "import ODS questionnaire file with columns: question, level, tags, tip")
     public String importQuestionnareOds(
-            @CliOption(key = "file")
+            @CliOption(key = "file", mandatory = true)
             String file,
-            @CliOption(key = "name")
+            @CliOption(key = "name", mandatory = true)
             String name) throws Exception {
         try {
             return importService.importQuestionnareOds(file, name);
