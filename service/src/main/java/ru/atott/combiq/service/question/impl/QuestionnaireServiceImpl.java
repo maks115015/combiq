@@ -49,6 +49,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         QuestionnaireHeadMapper<Questionnaire> mapper = new QuestionnaireHeadMapper<>(Questionnaire.class);
         Questionnaire questionnaire = mapper.map(entity);
         questionnaire.setQuestions(questionsSearchResponse.getQuestions().getContent());
+        questionnaire.setDescription(entity.getDescription());
 
         return questionnaire;
     }

@@ -12,6 +12,8 @@ public class QuestionnaireEntity {
     private String id;
     private String name;
     private List<String> questions;
+    private MarkdownContent title;
+    private MarkdownContent description;
 
     public String getId() {
         return id;
@@ -37,12 +39,30 @@ public class QuestionnaireEntity {
         this.questions = questions;
     }
 
+    public MarkdownContent getTitle() {
+        return title;
+    }
+
+    public void setTitle(MarkdownContent title) {
+        this.title = title;
+    }
+
+    public MarkdownContent getDescription() {
+        return description;
+    }
+
+    public void setDescription(MarkdownContent description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("name", name)
                 .append("questions", questions)
+                .append("title", title)
+                .append("description", description)
                 .toString();
     }
 }

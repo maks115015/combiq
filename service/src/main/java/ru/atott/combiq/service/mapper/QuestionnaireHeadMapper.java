@@ -17,6 +17,7 @@ public class QuestionnaireHeadMapper<T extends QuestionnaireHead> implements Map
         head.setName(source.getName());
         head.setId(source.getId());
         head.setQuestionsCount(source.getQuestions() == null ? 0 : source.getQuestions().size());
+        head.setTitle(source.getTitle());
         return head;
     }
 }

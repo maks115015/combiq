@@ -40,6 +40,7 @@
         <junit.version>4.12</junit.version>
         <httpclient.version>4.4.1</httpclient.version>
         <jasperreports.version>6.1.1</jasperreports.version>
+        <pegdown.version>1.5.0</pegdown.version>
     </properties>
 
     <dependencyManagement>
@@ -108,6 +109,11 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.pegdown</groupId>
+                <artifactId>pegdown</artifactId>
+                <version>${pegdown.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,6 +1,7 @@
 package ru.atott.combiq.service.bean;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import ru.atott.combiq.dao.entity.MarkdownContent;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class QuestionnaireHead {
     private String name;
     private long questionsCount;
     private String id;
+    private MarkdownContent title;
 
     public String getName() {
         return name;
@@ -33,12 +35,21 @@ public class QuestionnaireHead {
         this.id = id;
     }
 
+    public MarkdownContent getTitle() {
+        return title;
+    }
+
+    public void setTitle(MarkdownContent title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("name", name)
                 .append("questionsCount", questionsCount)
                 .append("id", id)
+                .append("title", title)
                 .toString();
     }
 }
