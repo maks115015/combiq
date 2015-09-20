@@ -1,0 +1,90 @@
+<polymer-element name="co-markdown" attributes="value preview">
+    <template>
+        <style>
+            .co-markdown {
+
+            }
+
+            .co-markdown__src {
+                width: 100%;
+            }
+
+            .co-markdown__toolbar {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: inline-block;
+            }
+
+            .co-markdown__toolbar > li {
+                margin: 0;
+                display: inline-block;
+                cursor: pointer;
+                font-size: 12px;
+                color: gray;
+                padding: 2px 10px;
+            }
+
+            .co-markdown__toolbar > li:hover {
+                background-color: #72B8F2;
+            }
+
+            .co-markdown__toolbar > li.active {
+                background-color: #FF5858;
+                color: white;
+            }
+        </style>
+        <div id="element" class="co-markdown">
+            <textarea value="{{value}}" style="display: none" id="src" rows="10" class="co-markdown__src"></textarea>
+            <div id="preview" class="co-markdown__preview"></div>
+            <div style="text-align: right">
+                <ul class="co-markdown__toolbar">
+                    <li id="srcToggler" on-click="{{toggleSrc}}">Markdown</li><li class="active"  id="previewToggler" on-click="{{togglePreview}}">HTML</li>
+                </ul>
+                <button on-click="{{applyClick}}">Применить</button>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            value: '',
+            preview: '',
+
+            ready: function() {
+                console.log('this.preview', this.preview);
+                console.log('this.value', this.value);
+                this.$.preview.innerHTML = this.preview;
+            },
+            toggleSrc: function() {
+                $('.co-markdown__toolbar > li', this.$.element).removeClass('active');
+                $('#srcToggler', this.$.element).addClass('active');
+                $(this.$.src).show();
+                $(this.$.preview).hide();
+            },
+            togglePreview: function() {
+                var self = this;
+
+                $('.co-markdown__toolbar > li', this.$.element).removeClass('active');
+                $('#previewToggler', this.$.element).addClass('active');
+                $(this.$.src).hide();
+                $(this.$.preview).show();
+
+                $.ajax({
+                    url: '/markdown/preview',
+                    datatype: 'text',
+                    contentType: 'text/plain',
+                    data: this.$.src.value,
+                    method: 'POST',
+                    success: function(result) {
+                        $(self.$.preview).html(result);
+                        self.preview = result;
+                    }
+                });
+            },
+            applyClick: function() {
+                this.fire('apply');
+            }
+        });
+    </script>
+</polymer-element>

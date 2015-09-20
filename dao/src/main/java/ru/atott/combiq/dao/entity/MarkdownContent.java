@@ -1,10 +1,20 @@
 package ru.atott.combiq.dao.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.pegdown.PegDownProcessor;
 
 public class MarkdownContent {
     private String markdown;
     private String html;
+
+    public MarkdownContent() { }
+
+    public MarkdownContent(String markdown) {
+        this.markdown = markdown;
+
+        PegDownProcessor processor = new PegDownProcessor();
+        this.html = processor.markdownToHtml(markdown);
+    }
 
     public String getMarkdown() {
         return markdown;

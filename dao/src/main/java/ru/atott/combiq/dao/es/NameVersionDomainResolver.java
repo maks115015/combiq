@@ -59,6 +59,10 @@ public class NameVersionDomainResolver {
         return resolveIndexName(Domains.question);
     }
 
+    public String resolveSiteIndex() {
+        return resolveIndexName(Domains.site);
+    }
+
     public String resolveSystemIndex() {
         return resolveIndexName(Domains.system);
     }

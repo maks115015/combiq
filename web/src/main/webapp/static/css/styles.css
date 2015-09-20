@@ -467,6 +467,18 @@ a.co-action:hover {
     border-bottom: dotted 1px #00b7ff;
 }
 
+.co-questionnaire-title {
+    font-size: 12px;
+    margin-bottom: 20px;
+    border-left: solid 2px rgba(0, 70, 95, 0.29);
+    padding-left: 15px;
+    margin-top: 10px;
+}
+
+.co-questionnaire-title p {
+    margin-bottom: 3px;
+}
+
 .co-questionnaire-table {
     width: 100%;
     border-collapse: collapse;

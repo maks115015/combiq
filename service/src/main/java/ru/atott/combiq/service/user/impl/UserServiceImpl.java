@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.user.impl;
 
+import org.elasticsearch.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.UserEntity;
@@ -11,6 +12,7 @@ import ru.atott.combiq.service.mapper.UserMapper;
 import ru.atott.combiq.service.user.GithubRegistrationContext;
 import ru.atott.combiq.service.user.UserService;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -87,5 +89,14 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(userEntity);
         return userMapper.map(userEntity);
+    }
+
+    @Override
+    public List<String> getUserRoles(String login) {
+        if ("atott".equals(login)) {
+            return Lists.newArrayList("sa");
+        }
+
+        return Collections.emptyList();
     }
 }

@@ -1,0 +1,11 @@
+{
+  "settings": {
+  },
+  "mappings": {
+    "content": {
+      "properties": {
+
+      }
+    }
+  }
+}

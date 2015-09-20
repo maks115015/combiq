@@ -2,8 +2,10 @@ package ru.atott.combiq.service.question.impl;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.QuestionnaireEntity;
 import ru.atott.combiq.dao.repository.QuestionnaireRepository;
 import ru.atott.combiq.service.ServiceException;
@@ -59,6 +61,25 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         Questionnaire questionnaire = getQuestionnaire(id);
         exportQuestionnareToPdf(questionnaire, outputStream);
         return questionnaire;
+    }
+
+    @Override
+    public void updateQuestionnaireTitle(String id, String title) {
+        QuestionnaireEntity entity = questionnaireRepository.findOne(id);
+
+        if (entity == null) {
+            return;
+        }
+
+        PegDownProcessor pegDownProcessor = new PegDownProcessor();
+
+        MarkdownContent markdownTitle = new MarkdownContent();
+        markdownTitle.setMarkdown(title);
+        markdownTitle.setHtml(pegDownProcessor.markdownToHtml(title));
+
+        entity.setTitle(markdownTitle);
+
+        questionnaireRepository.save(entity);
     }
 
     @Override

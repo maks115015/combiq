@@ -12,4 +12,7 @@ public interface Types {
 
     // Domain system.
     String rememberMe = "rememberMe";
+
+    // Domain site.
+    String content = "content";
 }

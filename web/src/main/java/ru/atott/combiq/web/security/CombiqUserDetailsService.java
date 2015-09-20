@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.user.UserService;
 
+import java.util.List;
+
 public class CombiqUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
@@ -24,7 +26,9 @@ public class CombiqUserDetailsService implements UserDetailsService {
                         break;
                 }
 
-                CombiqUser combiqUser = new CombiqUser(login, passwordHash);
+                List<String> userRoles = userService.getUserRoles(login);
+
+                CombiqUser combiqUser = new CombiqUser(login, passwordHash, userRoles);
                 combiqUser.setType(user.getType());
                 combiqUser.setLogin(user.getLogin());
                 combiqUser.setId(user.getId());

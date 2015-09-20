@@ -6,6 +6,7 @@ import ru.atott.combiq.service.bean.UserType;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class CombiqUser extends User {
