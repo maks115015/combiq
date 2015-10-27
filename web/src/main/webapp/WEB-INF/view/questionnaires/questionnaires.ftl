@@ -1,4 +1,5 @@
-<#import "templates.ftl" as templates />
+<#import "../templates.ftl" as templates />
+<#import "questionnaires-common.ftl" as common />
 
 <#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
@@ -11,8 +12,17 @@
     </#if>
 </#assign>
 
-<@templates.layoutWithSidebar head=head chapter='questionnaires' subTitle='Опросники' sidebar='&nbsp;'>
-    <h1>Опросники для собеседований</h1>
+<#assign sidebar>
+    <@common.sidebar activeMenuItem='questionnaires' />
+</#assign>
+
+<@templates.layoutWithSidebar head=head
+        chapter='questionnaires'
+        subTitle='Пройти собеседование'
+        pageTitle='Пройти собеседование'
+        sidebar=sidebar
+        mainContainerClass='co-rightbordered'>
+    <@templates.headBanners></@templates.headBanners>
     <#if allowedEditPageContent>
         <co-markdown
                 class="js-page-content"

@@ -79,10 +79,10 @@
                         <a href="/questions">Вопросы</a>
                     </li>
                     <li class="co-chapter ${if(chapter == 'questionnaires', 'active')}">
-                        <a href="/questionnaires">Опросники</a>
+                        <a href="/questionnaires">Собеседование</a>
                     </li>
                     <li class="co-chapter ${if(chapter == 'education', 'active')}">
-                        <a href="/education">План подготовки</a>
+                        <a href="/education">Подготовка</a>
                     </li>
                     <#if user??>
                         <li class="co-auth">
@@ -92,7 +92,7 @@
                             <a href="/logout.do">Выйти</a>
                         </li>
                     <#else>
-                        <li>
+                        <li class="co-auth">
                             <a href="/login.do">Войти</a>
                         </li>
                     </#if>
@@ -125,15 +125,28 @@
 </html>
 </#macro>
 
-<#macro layoutWithSidebar head='' dsl='' sidebar='' chapter='' subTitle='' pageTitle=''>
+<#macro headBanners>
+</#macro>
+
+<#macro layoutWithSidebar head='' dsl='' sidebar='' chapter='' subTitle='' pageTitle='' mainContainerClass=''>
     <@layoutHtml head=head dsl=dsl chapter=chapter subTitle=subTitle>
-        ${pageTitle}
+        <#if pageTitle??>
         <div class="container">
-            <div class="col-md-9">
-                <#nested />
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>${pageTitle}</h1>
+                </div>
             </div>
-            <div class="col-md-3">
-                ${sidebar}
+        </div>
+        </#if>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 ${mainContainerClass}">
+                    <#nested />
+                </div>
+                <div class="col-md-3">
+                    ${sidebar}
+                </div>
             </div>
         </div>
     </@layoutHtml>

@@ -19,9 +19,7 @@
 
 <#assign pageTitle>
     <#if questionsCatalog>
-        <div class="container">
-            <h1>Вопросы</h1>
-        </div>
+        Вопросы
     </#if>
 </#assign>
 
