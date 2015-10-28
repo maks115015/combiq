@@ -3,7 +3,7 @@
 <#macro sidebar activeMenuItem>
 <ul class="co-nav co-nav-right-bordered nav nav-pills nav-stacked">
     <li role="presentation" class="${templates.if(activeMenuItem == 'questionnaires', 'active')}">
-        <a href="/questionnaires">
+        <a href="/questionnaires/prepare">
             <span>
                 Пройти собеседование
             </span>
@@ -14,7 +14,7 @@
         </a>
     </li>
     <li role="presentation" class="${templates.if(activeMenuItem == 'interview', 'active')}">
-        <a href="/interview">
+        <a href="/questionnaires/interview">
             <span>Провести собеседование</span>
             <span class="co-nav-tip">
                 Рекомендации как эффективно

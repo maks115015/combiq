@@ -55,6 +55,15 @@
             </li>
         </#list>
     </ul>
+    <#if allowedEditPageContent>
+        <co-markdown
+                class="js-page-content-bottom"
+                value="${(questionnairesPageBottomContent.markdown)!?html}"
+                preview="${(questionnairesPageBottomContent.html)!?html}">
+        </co-markdown>
+    <#else>
+        ${(questionnairesPageBottomContent.html)!''}
+    </#if>
     <script>
         $('co-markdown.js-questionnaire-title').on('apply', function(e) {
             var value = this.value;
@@ -73,6 +82,17 @@
 
             $.ajax({
                 url: '/content/questionnaires-page',
+                data: JSON.stringify({content: value}),
+                contentType: 'application/json',
+                method: 'POST',
+                success: function(result) { }
+            });
+        });
+        $('co-markdown.js-page-content-bottom').on('apply', function(e) {
+            var value = this.value;
+
+            $.ajax({
+                url: '/content/questionnaires-page-bottom',
                 data: JSON.stringify({content: value}),
                 contentType: 'application/json',
                 method: 'POST',

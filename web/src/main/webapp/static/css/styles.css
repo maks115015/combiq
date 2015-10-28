@@ -256,12 +256,12 @@ ul.co-topmenu > li.co-auth {
 }
 
 .co-rightbordered {
-    border-right: solid 1px #B1B1B1;
+    border-right: solid 1px #F5C376;
 }
 
 .co-nav-right-bordered.co-nav > li.active {
     background-color: #FFCF86;
-    margin-left: -16px;
+    margin-left: -15px;
     padding-left: 16px;
 }
 
@@ -280,6 +280,10 @@ ul.co-topmenu > li.co-auth {
 .co-nav > li:hover a {
     color: rgb(105, 141, 156);
     background-color: rgb(200, 230, 255);
+}
+
+.co-nav-right-bordered.co-nav > li.active:hover a {
+    background-color: #FFCF86;
 }
 
 .co-nav > li.active a {

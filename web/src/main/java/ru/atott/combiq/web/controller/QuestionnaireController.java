@@ -26,15 +26,16 @@ public class QuestionnaireController extends BaseController {
     @Autowired
     private ContentService contentService;
 
-    @RequestMapping(value = "/questionnaires")
+    @RequestMapping(value = { "/questionnaires", "/questionnaires/prepare" })
     public ModelAndView list() {
         ModelAndView modelAndView = new ModelAndView("questionnaires/questionnaires");
         modelAndView.addObject("questionnaires", questionnaireService.getQuestionnaires());
         modelAndView.addObject("questionnairesPageContent", contentService.getContent("questionnaires-page"));
+        modelAndView.addObject("questionnairesPageBottomContent", contentService.getContent("questionnaires-page-bottom"));
         return modelAndView;
     }
 
-    @RequestMapping(value = "/interview")
+    @RequestMapping(value = "/questionnaires/interview")
     public ModelAndView interview() {
         ModelAndView modelAndView = new ModelAndView("questionnaires/interview");
         modelAndView.addObject("interviewPageContent", contentService.getContent("interview-page"));

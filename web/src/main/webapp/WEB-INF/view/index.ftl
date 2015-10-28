@@ -13,10 +13,12 @@
             <div class="row">
                 <div class="col-md-5"></div>
                 <div class="col-md-5 co-mainhead-content">
-                    <p>
+                    <p style="margin-bottom: 5px;">
                         <strong>Combiq.ru</strong> - это проект с открытым исходным кодом, цель которого
                         собрать в одном месте всю полезную информацию для Java программистов,
                         которые готовятся к собеседованию на новое место работы.
+                    </p>
+                    <p>
                         <span id="vk_like" class="co-mainvk-liker"></span>
                     </p>
                     <script type="text/javascript">

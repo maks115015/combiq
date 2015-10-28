@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /static/
+Clean-param: dsl /questions/
+Clean-param: index /questions/
