@@ -14,4 +14,6 @@ public interface UserService {
     User updateGithubUser(GithubRegistrationContext registrationContext);
 
     List<String> getUserRoles(String login);
+
+    User getById(String userId);
 }

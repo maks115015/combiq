@@ -103,6 +103,11 @@ a:focus {
     color: #000000;
 }
 
+.co-sidebar .co-main-action {
+    margin-bottom: 25px;
+    margin-left: 40px;
+}
+
 .co-sidebar-title {
     color: #222;
     font-size: 26px;
@@ -257,6 +262,7 @@ ul.co-topmenu > li.co-auth {
 
 .co-rightbordered {
     border-right: solid 1px #F5C376;
+    min-height: 420px;
 }
 
 .co-nav-right-bordered.co-nav > li.active {
@@ -605,4 +611,143 @@ a.co-action:hover {
 
 html /deep/ paper-button::shadow .button-content {
     padding: 0.5em 0.57em;
+}
+
+.co-main-action {
+    display: table;
+    width: 160px;
+    height: 160px;
+    border: solid 1px #F5C376;
+    border-radius: 50%;
+}
+
+.co-main-action-middle {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.co-main-action-inner {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.co-main-action .co-nav-tip {
+    margin: 0;
+    padding: 10px 10px 0;
+}
+
+.co-dialog button {
+    min-width: 61px;
+    font-size: 14px;
+    line-height: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+button {
+    background: #FFCF86;
+    background-image: -webkit-linear-gradient(top, #FFCF86, #e6a84a);
+    background-image: -moz-linear-gradient(top, #FFCF86, #e6a84a);
+    background-image: -ms-linear-gradient(top, #FFCF86, #e6a84a);
+    background-image: -o-linear-gradient(top, #FFCF86, #e6a84a);
+    background-image: linear-gradient(to bottom, #FFCF86, #e6a84a);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    color: black;
+    font-size: 12px;
+    border: solid #d19f5a 1px;
+    text-decoration: none;
+}
+
+button:hover {
+    background: #fcd292;
+    background-image: -webkit-linear-gradient(top, #fcd292, #ebb463);
+    background-image: -moz-linear-gradient(top, #fcd292, #ebb463);
+    background-image: -ms-linear-gradient(top, #fcd292, #ebb463);
+    background-image: -o-linear-gradient(top, #fcd292, #ebb463);
+    background-image: linear-gradient(to bottom, #fcd292, #ebb463);
+    text-decoration: none;
+}
+
+button:active {
+    background: #ebb463;
+    background-image: -webkit-linear-gradient(top, #ebb463, #fcd292);
+    background-image: -moz-linear-gradient(top, #ebb463, #fcd292);
+    background-image: -ms-linear-gradient(top, #ebb463, #fcd292);
+    background-image: -o-linear-gradient(top, #ebb463, #fcd292);
+    background-image: linear-gradient(to bottom, #ebb463, #fcd292);
+}
+
+.co-dialog-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000;
+    z-index: 1000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.co-dialog {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    z-index: 2000;
+    background: #fff;
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 30px #5D5858;
+}
+
+.co-dialog-buttons {
+    padding: 15px 0 0 0;
+    border-top: 1px #ccc solid;
+    text-align: center;
+    margin: 15px 0 0 0;
+}
+
+.co-dialog-body {
+    margin: 0;
+    font-size: 13px;
+    width: 470px;
+}
+
+.co-dialog > .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 17px;
+    height: 15px;
+    outline: none;
+    padding: 0;
+    min-width: 20px;
+}
+
+.co-dialog > .close:hover,
+.co-dialog > .close:active {
+    background: none;
+}
+
+.co-login-left {
+    border-right: solid 1px #E0E0E0;
+}
+
+.co-login-left img {
+    margin-bottom: 45px;
+}
+
+.co-login-left .col-md-8 {
+    padding-top: 40px;
+    padding-right: 60px;
+}
+
+.subtitle {
+    margin-top: -60px;
+    margin-bottom: 60px;
+    font-size: 12px;
+    color: rgb(105, 141, 156);
 }

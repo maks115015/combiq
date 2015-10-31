@@ -1,0 +1,25 @@
+<style>
+    .co-jobsubscribe-bg {
+        background-image: url("/static/ko_dialogs/co-jobsubscribe/images/co-jobsubscribe-bg.png");
+        background-position: bottom left;
+        background-repeat: no-repeat;
+        min-height: 120px;
+        margin-bottom: -15px;
+        padding-left: 190px;
+        padding-top: 30px;
+    }
+
+    .co-jobsubscribe-bg input[type=text] {
+        width: 240px;
+    }
+</style>
+
+<div class="co-jobsubscribe-bg">
+    <label for="email">Укажите Ваш email:</label>
+    <div>
+        <input data-bind="value: email" type="text" id="email">
+    </div>
+    <div data-bind="visible: !email().length" class="text-danger">
+        Укажите Ваш email
+    </div>
+</div>

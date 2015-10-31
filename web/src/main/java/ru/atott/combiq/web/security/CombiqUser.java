@@ -14,6 +14,7 @@ public class CombiqUser extends User {
     private String login;
     private String id;
     private String avatarUrl;
+    private String email;
 
     public UserType getType() {
         return type;
@@ -62,5 +63,13 @@ public class CombiqUser extends User {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

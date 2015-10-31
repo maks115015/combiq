@@ -16,10 +16,17 @@ public class ContentServiceImpl implements ContentService {
         ContentEntity contentEntity = contentRepository.findOne(id);
 
         if (contentEntity == null) {
-            return new MarkdownContent();
+            return new MarkdownContent(id, null);
         }
 
-        return contentEntity.getContent();
+        MarkdownContent content = contentEntity.getContent();
+
+        if (content.getId() == null) {
+            content.setId(id);
+            contentRepository.save(contentEntity);
+        }
+
+        return content;
     }
 
     @Override
@@ -31,7 +38,7 @@ public class ContentServiceImpl implements ContentService {
             contentEntity.setId(id);
         }
 
-        contentEntity.setContent(new MarkdownContent(content));
+        contentEntity.setContent(new MarkdownContent(id, content));
         contentRepository.save(contentEntity);
     }
 }

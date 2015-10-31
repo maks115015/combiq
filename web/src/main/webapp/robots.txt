@@ -1,4 +1,7 @@
 User-agent: *
 Disallow: /static/
+Disallow: /rest/
+Disallow: /login.do
+Disallow: /logout.do
 Clean-param: dsl /questions/
 Clean-param: index /questions/

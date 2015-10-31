@@ -62,3 +62,12 @@
 })(window,document,'script','dataLayer','GTM-TNL7XF');</script>
 <!-- End Google Tag Manager -->
 </#macro>
+
+<#macro commonGtmInitialization gtmPageName>
+<script>
+    window.dataLayer = [{
+        page: '${gtmPageName?js_string}',
+        env: '${env}'
+    }];
+</script>
+</#macro>

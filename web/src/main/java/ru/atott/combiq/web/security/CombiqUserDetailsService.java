@@ -33,6 +33,7 @@ public class CombiqUserDetailsService implements UserDetailsService {
                 combiqUser.setLogin(user.getLogin());
                 combiqUser.setId(user.getId());
                 combiqUser.setAvatarUrl(user.getAvatarUrl());
+                combiqUser.setEmail(user.getEmail());
                 return combiqUser;
             }
         } catch (Exception e) {

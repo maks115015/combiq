@@ -1,103 +1,34 @@
 <#import "../templates.ftl" as templates />
 <#import "questionnaires-common.ftl" as common />
 
-<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
-
-<@security.authorize access="hasRole('sa')" var="allowedEditQuestionnaireTitle" />
-<@security.authorize access="hasRole('sa')" var="allowedEditPageContent" />
-
-<#assign head>
-    <#if allowedEditQuestionnaireTitle>
-        ${templates.import("/static/elements/co-markdown/co-markdown.html")}
-    </#if>
-</#assign>
-
 <#assign sidebar>
     <@common.sidebar activeMenuItem='questionnaires' />
 </#assign>
 
-<@templates.layoutWithSidebar head=head
+<@templates.layoutWithSidebar
         chapter='questionnaires'
-        subTitle='Пройти собеседование'
+        subTitle='Опросники для подготовки к собеседованию на позицию Java разработчик'
         pageTitle='Пройти собеседование'
         sidebar=sidebar
         mainContainerClass='co-rightbordered'>
+
     <@templates.headBanners></@templates.headBanners>
-    <#if allowedEditPageContent>
-        <co-markdown
-                class="js-page-content"
-                value="${(questionnairesPageContent.markdown)!?html}"
-                preview="${(questionnairesPageContent.html)!?html}">
-        </co-markdown>
-    <#else>
-        ${(questionnairesPageContent.html)!''}
-    </#if>
+
+    <@templates.contentEditor content=questionnairesPageContent></@templates.contentEditor>
+
     <ul>
         <#list questionnaires as questionnaire>
             <li>
                 <a href="/questionnaire/${questionnaire.id}">
                     ${questionnaire.name}
                 </a>
-                <#if allowedEditQuestionnaireTitle>
-                    <co-markdown
-                            class="js-questionnaire-title"
-                            data-questionnaire-id="${questionnaire.id}"
-                            value="${(questionnaire.title.markdown)!?html}"
-                            preview="${(questionnaire.title.html)!?html}">
-                    </co-markdown>
-                <#else>
-                    <#if questionnaire.title??>
-                        <div class="co-questionnaire-title">
-                            ${questionnaire.title.html}
-                        </div>
-                    </#if>
-                </#if>
+                <@templates.contentEditor
+                    content=questionnaire.title
+                    url='/questionnaire/' + questionnaire.id + '/title'>
+                </@templates.contentEditor>
             </li>
         </#list>
     </ul>
-    <#if allowedEditPageContent>
-        <co-markdown
-                class="js-page-content-bottom"
-                value="${(questionnairesPageBottomContent.markdown)!?html}"
-                preview="${(questionnairesPageBottomContent.html)!?html}">
-        </co-markdown>
-    <#else>
-        ${(questionnairesPageBottomContent.html)!''}
-    </#if>
-    <script>
-        $('co-markdown.js-questionnaire-title').on('apply', function(e) {
-            var value = this.value;
-            var questionnaireId = $(this).data('questionnaire-id');
 
-            $.ajax({
-                url: '/questionnaire/' + questionnaireId + '/title',
-                data: JSON.stringify({content: value}),
-                contentType: 'application/json',
-                method: 'POST',
-                success: function(result) { }
-            });
-        });
-        $('co-markdown.js-page-content').on('apply', function(e) {
-            var value = this.value;
-
-            $.ajax({
-                url: '/content/questionnaires-page',
-                data: JSON.stringify({content: value}),
-                contentType: 'application/json',
-                method: 'POST',
-                success: function(result) { }
-            });
-        });
-        $('co-markdown.js-page-content-bottom').on('apply', function(e) {
-            var value = this.value;
-
-            $.ajax({
-                url: '/content/questionnaires-page-bottom',
-                data: JSON.stringify({content: value}),
-                contentType: 'application/json',
-                method: 'POST',
-                success: function(result) { }
-            });
-        });
-    </script>
+    <@templates.contentEditor content=questionnairesPageBottomContent></@templates.contentEditor>
 </@templates.layoutWithSidebar>

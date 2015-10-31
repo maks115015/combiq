@@ -99,4 +99,15 @@ public class UserServiceImpl implements UserService {
 
         return Collections.emptyList();
     }
+
+    @Override
+    public User getById(String userId) {
+        UserEntity userEntity = userRepository.findOne(userId);
+
+        if (userEntity != null) {
+            return userMapper.map(userEntity);
+        }
+
+        return null;
+    }
 }

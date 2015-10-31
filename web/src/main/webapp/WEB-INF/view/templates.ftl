@@ -1,6 +1,8 @@
 <#import "stats.ftl" as stats />
 
-<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true>
+<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
+
+<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true gtmPageName=''>
 <!DOCTYPE html>
 <!--    Дорогой друг!
         Злой красный человек спалил тебя ;)
@@ -32,6 +34,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="/static/bower_components/webcomponentsjs/webcomponents.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+        <script src="/static/js/lib/knockout.js"></script>
+        <script src="/static/js/lib/knockout.dialog.js?v=${resourceVersion}"></script>
         <script src="/static/js/site.js?v=${resourceVersion}"></script>
 
         <!--[if lt IE 9]>
@@ -39,16 +43,18 @@
         <![endif]-->
         <script>
             requirejs.config({
-                baseUrl: '/static/js',
+                baseUrl: '/static',
                 paths: {
-                    text: 'lib/text'
+                    text: 'js/lib/text',
+                    ajax: 'js/lib/ajax'
                 }
             });
             window.co = {
-                userId: ${if(userId??, '"' + (userId!'') + '"', 'null')}
+                userId: ${if(userId??, '"' + (userId!'') + '"', 'null')},
+                userEmail: '${userEmail!''}'
             };
         </script>
-
+        <script src="/static/ko_components/components.js?v=${resourceVersion}"></script>
 
         ${import("/static/bower_components/paper-button/paper-button.html")}
         ${import("/static/bower_components/paper-dialog/paper-action-dialog.html")}
@@ -56,14 +62,22 @@
         ${import("/static/bower_components/paper-icon-button/paper-icon-button.html")}
         ${import("/static/elements/co-question/co-question.html")}
         ${import("/static/elements/co-tag/co-tag.html")}
+
+        <@security.authorize access="hasRole('sa')" var="allowEditConent" />
+
+        <#if allowEditConent>
+        ${import("/static/elements/co-markdown/co-markdown.html")}
+        </#if>
+
         ${head}
     </head>
     <body>
         <#if env == 'prod'>
             <@stats.metrika />
-            <@stats.ga />
-            <@stats.gtm />
         </#if>
+        <@stats.commonGtmInitialization gtmPageName />
+        <@stats.gtm />
+        <@stats.ga />
         <div class="container">
             <nav class="navbar navbar-default navbar-static-top co-header">
                 <ul class="co-topmenu">
@@ -83,6 +97,9 @@
                     </li>
                     <li class="co-chapter ${if(chapter == 'education', 'active')}">
                         <a href="/education">Подготовка</a>
+                    </li>
+                    <li class="co-chapter ${if(chapter == 'job', 'active')}">
+                        <a href="/job">Работа</a>
                     </li>
                     <#if user??>
                         <li class="co-auth">
@@ -121,6 +138,9 @@
         <#if !user??>
             <@inviteAuth />
         </#if>
+        <script>
+            ko.applyBindings({}, document.body);
+        </script>
     </body>
 </html>
 </#macro>
@@ -135,6 +155,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>${pageTitle}</h1>
+                    <#if subTitle??>
+                        <div class="subtitle">${subTitle!''}</div>
+                    </#if>
                 </div>
             </div>
         </div>
@@ -144,7 +167,7 @@
                 <div class="col-md-9 ${mainContainerClass}">
                     <#nested />
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 co-sidebar">
                     ${sidebar}
                 </div>
             </div>
@@ -160,8 +183,8 @@
     </@layoutHtml>
 </#macro>
 
-<#macro layoutBody head='' dsl='' chapter='' showFooter=true subTitle=''>
-    <@layoutHtml head=head dsl=dsl chapter=chapter showFooter=showFooter subTitle=subTitle>
+<#macro layoutBody head='' dsl='' chapter='' showFooter=true subTitle='' gtmPageName=''>
+    <@layoutHtml head=head dsl=dsl chapter=chapter showFooter=showFooter subTitle=subTitle gtmPageName=gtmPageName>
         <#nested />
     </@layoutHtml>
 </#macro>
@@ -211,4 +234,36 @@
             </#list>
         </ul>
     </nav>
+</#macro>
+
+<#global contentEditorIncrementor=1 />
+
+<#macro contentEditor content url=''>
+    <#-- @ftlvariable name="content" type="ru.atott.combiq.dao.entity.MarkdownContent" -->
+
+    <@security.authorize access="hasRole('sa')" var="allowEditConent" />
+    <#if allowEditConent>
+        <co-markdown
+                id="contentEditor${contentEditorIncrementor}"
+                value="${(content.markdown)!?html}"
+                preview="${(content.html)!?html}">
+        </co-markdown>
+        <script>
+            $('#contentEditor${contentEditorIncrementor}').on('apply', function(e) {
+                var value = this.value;
+
+                $.ajax({
+                    url: '${if(url == '', "/content/" + content.id!, url)}',
+                    data: JSON.stringify({content: value}),
+                    contentType: 'application/json',
+                    method: 'POST',
+                    success: function(result) { }
+                });
+            });
+        </script>
+    <#else>
+        ${(content.html)!''}
+    </#if>
+
+    <#global contentEditorIncrementor = contentEditorIncrementor + 1 />
 </#macro>

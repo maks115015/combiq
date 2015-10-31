@@ -73,7 +73,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
         PegDownProcessor pegDownProcessor = new PegDownProcessor();
 
-        MarkdownContent markdownTitle = new MarkdownContent();
+        MarkdownContent markdownTitle = new MarkdownContent(null, null);
         markdownTitle.setMarkdown(title);
         markdownTitle.setHtml(pegDownProcessor.markdownToHtml(title));
 

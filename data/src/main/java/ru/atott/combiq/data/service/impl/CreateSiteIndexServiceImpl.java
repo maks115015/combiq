@@ -9,6 +9,7 @@ import ru.atott.combiq.dao.Domains;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.data.service.CreateSiteIndexService;
 import ru.atott.combiq.data.service.CreateSystemIndexService;
+import ru.atott.combiq.data.utils.DataUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +40,9 @@ public class CreateSiteIndexServiceImpl implements CreateSiteIndexService {
 
     @Override
     public String update(String env) throws IOException, ExecutionException, InterruptedException {
-        throw new UnsupportedOperationException();
+        String indexName = domainResolver.resolveSiteIndex();
+        String json = DataUtils.getIndexMapping("/index/site.json");
+        DataUtils.putMapping(client, indexName, json);
+        return indexName;
     }
 }

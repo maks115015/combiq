@@ -1,0 +1,23 @@
+<style>
+    .co-error-bg {
+        background-image: url("/static/ko_dialogs/co-error/images/co-error-bg.png");
+        background-position: bottom left;
+        background-repeat: no-repeat;
+        min-height: 120px;
+        margin-bottom: -15px;
+        padding-left: 190px;
+        padding-top: 30px;
+    }
+
+    .co-error-title {
+        font-size: 12px;
+        color: #698D9C;
+    }
+</style>
+
+<div class="co-error-bg">
+    <div>
+        <div class="co-error-title" data-bind="text: title"></div>
+        <div data-bind="text: message"></div>
+    </div>
+</div>

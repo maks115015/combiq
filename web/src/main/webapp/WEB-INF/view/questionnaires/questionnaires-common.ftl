@@ -3,13 +3,12 @@
 <#macro sidebar activeMenuItem>
 <ul class="co-nav co-nav-right-bordered nav nav-pills nav-stacked">
     <li role="presentation" class="${templates.if(activeMenuItem == 'questionnaires', 'active')}">
-        <a href="/questionnaires/prepare">
+        <a href="/questionnaires">
             <span>
                 Пройти собеседование
             </span>
             <span class="co-nav-tip">
-                Подобранные опросники для подготовки
-                к прохождению собеседований
+                Опросники для подготовки к собеседованию на позицию Java разработчик
             </span>
         </a>
     </li>
@@ -17,9 +16,7 @@
         <a href="/questionnaires/interview">
             <span>Провести собеседование</span>
             <span class="co-nav-tip">
-                Рекомендации как эффективно
-                провести собеседование на позицию
-                Java разработчик
+                Советы как провести собеседование на позицию Java разработчик
             </span>
         </a>
     </li>

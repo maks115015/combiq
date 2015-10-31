@@ -1,6 +1,6 @@
 <#import "templates.ftl" as templates />
 
-<@templates.layoutBody head=head chapter='education' subTitle='План подготовки'>
+<@templates.layoutBody chapter='education' subTitle='План подготовки'>
     <div class="container">
         <h1>План подготовки к собеседованию</h1>
         <ul>

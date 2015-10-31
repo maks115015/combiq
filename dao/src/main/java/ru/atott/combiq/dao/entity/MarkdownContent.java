@@ -6,14 +6,19 @@ import org.pegdown.PegDownProcessor;
 public class MarkdownContent {
     private String markdown;
     private String html;
+    private String id;
 
+    @Deprecated
     public MarkdownContent() { }
 
-    public MarkdownContent(String markdown) {
+    public MarkdownContent(String id, String markdown) {
+        this.id = id;
         this.markdown = markdown;
 
-        PegDownProcessor processor = new PegDownProcessor();
-        this.html = processor.markdownToHtml(markdown);
+        if (markdown != null) {
+            PegDownProcessor processor = new PegDownProcessor();
+            this.html = processor.markdownToHtml(markdown);
+        }
     }
 
     public String getMarkdown() {
@@ -32,11 +37,20 @@ public class MarkdownContent {
         this.html = html;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("markdown", markdown)
                 .append("html", html)
+                .append("id", id)
                 .toString();
     }
 }

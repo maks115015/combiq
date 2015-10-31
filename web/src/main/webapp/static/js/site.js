@@ -1,23 +1,9 @@
-function questionReputationVote(up, questionId) {
-    if (!co.userId) {
-        var dialog = document.getElementById('inviteAuthDialog');
-        dialog.open();
-        return;
-    }
-    $.post(
-        '/questions/reputationVote', {
-            up: up,
-            questionId: questionId
-        }, function(response) {
-            $('.js-questionReputationLabel-' + questionId).text(response.questionReputation);
-            $('.js-questionReputationUp-' + questionId)
-                .removeClass('co-voted')
-                .addClass(up ? 'co-voted' : '');
-            $('.js-questionReputationDown-' + questionId)
-                .removeClass('co-voted')
-                .addClass(!up ? 'co-voted' : '');
-        });
-}
+
+ko.wrap = function(value) {
+    return ko.isObservable(value)
+        ? value
+        : (value instanceof Array ? ko.observableArray(value) : ko.observable(value));
+};
 
 function saveQuestionComment(comment, questionId) {
     $('#questionMyCommentStatus').text('Сохранение...');
