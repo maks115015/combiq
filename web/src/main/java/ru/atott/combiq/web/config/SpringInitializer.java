@@ -116,6 +116,7 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
         public void addResourceHandlers(ResourceHandlerRegistry registry) {
             registry.addResourceHandler("/static/**").addResourceLocations("/static/");
             registry.addResourceHandler("/robots.txt").addResourceLocations("/robots.txt");
+            registry.addResourceHandler("/b74b66d51df1.html").addResourceLocations("/b74b66d51df1.html");
         }
     }
 
