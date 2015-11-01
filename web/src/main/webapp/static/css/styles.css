@@ -751,3 +751,26 @@ button:active {
     font-size: 12px;
     color: rgb(105, 141, 156);
 }
+
+.co-table {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.co-table td,
+.co-table th {
+    padding: 3px 4px;
+    border: solid 1px #A5A5A5;
+}
+
+.co-table th {
+    padding: 6px 4px;
+}
+
+.co-table .headers {
+    background-color: #FFE9C8;
+}
+
+.co-search-advice {
+    margin-bottom: 25px;
+}

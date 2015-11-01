@@ -1,7 +1,10 @@
+<#-- @ftlvariable name="question" type="ru.atott.combiq.service.bean.Question" -->
+
 <#import "templates.ftl" as templates />
 
 <#assign head>
     ${templates.import("/static/bower_components/paper-input/paper-autogrow-textarea.html")}
+    <link rel="canonical" href="http://combiq.ru/questions/${question.id}" />
 </#assign>
 
 <@templates.layoutWithoutSidebar head=head dsl=dsl chapter='questions'>

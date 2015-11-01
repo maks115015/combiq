@@ -74,10 +74,10 @@
     <body>
         <#if env == 'prod'>
             <@stats.metrika />
+            <@stats.commonGtmInitialization gtmPageName />
+            <@stats.gtm />
+            <@stats.ga />
         </#if>
-        <@stats.commonGtmInitialization gtmPageName />
-        <@stats.gtm />
-        <@stats.ga />
         <div class="container">
             <nav class="navbar navbar-default navbar-static-top co-header">
                 <ul class="co-topmenu">

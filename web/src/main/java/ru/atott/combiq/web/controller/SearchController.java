@@ -81,6 +81,7 @@ public class SearchController extends BaseController {
         viewBuilder.setPopularTags(questionsResponse.getPopularTags());
         viewBuilder.setSubTitle(subTitle);
         viewBuilder.setQuestionsCatalog(questionsCatalog);
+        viewBuilder.setDslQuery(context.getDslQuery());
         return viewBuilder.build();
     }
 

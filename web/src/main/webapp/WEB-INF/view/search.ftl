@@ -41,6 +41,16 @@
             </a>
         </div>
     </form>
+
+    <#-- Advices -->
+    <#if showMatrixCompetenceAdvice?? && showMatrixCompetenceAdvice!false>
+        <div class="co-search-advice">
+            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+            Ознакомьтесь с <a href="/education/competence">матрицей компетенций Java разработчиков</a>, чтобы
+            определить уровень знаний.
+        </div>
+    </#if>
+
     <ul class="co-questions">
         <#list questions as question>
             <li>

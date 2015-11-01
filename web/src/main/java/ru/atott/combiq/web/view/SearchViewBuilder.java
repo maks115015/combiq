@@ -1,11 +1,15 @@
 package ru.atott.combiq.web.view;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.Tag;
+import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.web.bean.PagingBean;
 
 import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class SearchViewBuilder {
     private List<Question> questions;
@@ -14,6 +18,7 @@ public class SearchViewBuilder {
     private String dsl;
     private String subTitle;
     private boolean questionsCatalog;
+    private DslQuery dslQuery;
 
     public List<Question> getQuestions() {
         return questions;
@@ -63,6 +68,14 @@ public class SearchViewBuilder {
         this.questionsCatalog = questionsCatalog;
     }
 
+    public DslQuery getDslQuery() {
+        return dslQuery;
+    }
+
+    public void setDslQuery(DslQuery dslQuery) {
+        this.dslQuery = dslQuery;
+    }
+
     public ModelAndView build() {
         ModelAndView mav = new ModelAndView("search");
         mav.addObject("questions", questions);
@@ -71,6 +84,7 @@ public class SearchViewBuilder {
         mav.addObject("popularTags", popularTags);
         mav.addObject("subTitle", subTitle);
         mav.addObject("questionsCatalog", questionsCatalog);
+        mav.addObject("showMatrixCompetenceAdvice", dslQuery != null && isNotBlank(dslQuery.getLevel()));
         return mav;
     }
 }
