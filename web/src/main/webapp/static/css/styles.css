@@ -65,6 +65,11 @@ a:focus {
     margin-left: 35px;
 }
 
+.go-github-btn.login-btn > span.text {
+    min-width: 200px;
+    display: inline-block;
+}
+
 .go-github-btn:hover {
     background: white;
 }

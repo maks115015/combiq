@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ru.atott.combiq.service.bean.User;
+import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.user.UserService;
 
 import java.util.List;
@@ -15,20 +16,24 @@ public class CombiqUserDetailsService implements UserDetailsService {
     private UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String qualifier) throws UsernameNotFoundException {
         try {
-            User user = userService.findByLogin(login);
+            UserQualifier userQualifier = new UserQualifier(qualifier);
+            User user = userService.findByLogin(userQualifier.getLogin(), userQualifier.getType());
             if (user != null) {
                 String passwordHash = user.getPasswordHash();
                 switch (user.getType()) {
                     case github:
                         passwordHash = DigestUtils.sha1Hex("github");
                         break;
+                    case vk:
+                        passwordHash = DigestUtils.sha1Hex("vk");
+                        break;
                 }
 
-                List<String> userRoles = userService.getUserRoles(login);
+                List<String> userRoles = userService.getUserRoles(userQualifier.getLogin());
 
-                CombiqUser combiqUser = new CombiqUser(login, passwordHash, userRoles);
+                CombiqUser combiqUser = new CombiqUser(qualifier, passwordHash, userRoles);
                 combiqUser.setType(user.getType());
                 combiqUser.setLogin(user.getLogin());
                 combiqUser.setId(user.getId());
@@ -39,6 +44,6 @@ public class CombiqUserDetailsService implements UserDetailsService {
         } catch (Exception e) {
             throw new UsernameNotFoundException(e.getMessage(), e);
         }
-        throw new UsernameNotFoundException(String.format("User '%s' is not found.", login));
+        throw new UsernameNotFoundException(String.format("User '%s' is not found.", qualifier));
     }
 }

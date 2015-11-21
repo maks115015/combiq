@@ -84,4 +84,8 @@ public class User {
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
+
+    public UserQualifier getQualifier() {
+        return new UserQualifier(type, login);
+    }
 }

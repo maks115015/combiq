@@ -7,6 +7,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.security.CombiqUser;
+import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.utils.ViewUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +34,7 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("user", user);
             modelAndView.addObject("userId", authService.getUserId());
             modelAndView.addObject("userEmail", user != null ? user.getEmail() : null);
+            modelAndView.addObject("urlResolver", new RequestUrlResolver(request));
         }
     }
 }

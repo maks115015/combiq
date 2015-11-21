@@ -58,7 +58,14 @@ public class CombiqUser extends User {
             return null;
         }
 
-        return avatarUrl.contains("?") ? avatarUrl + "&s=46" : avatarUrl + "?s=46";
+        switch (type) {
+            case github:
+                return avatarUrl.contains("?") ? avatarUrl + "&s=46" : avatarUrl + "?s=46";
+            case vk:
+                return avatarUrl;
+        }
+
+        return null;
     }
 
     public void setAvatarUrl(String avatarUrl) {
