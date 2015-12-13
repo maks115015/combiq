@@ -5,7 +5,7 @@
 </#assign>
 
 <#assign sidebar>
-    <div data-spy="affix" class="co-affix" data-offset-top="${templates.if(!questionsCatalog, '110', '250')}">
+    <div>
         <h4 class="co-sidebar-title">Популярное</h4>
         <ul class="co-popularTags">
             <#list popularTags as tag>
@@ -14,6 +14,9 @@
                 </li>
             </#list>
         </ul>
+        <p>
+            <a href="/tags">Смотреть все тэги →</a>
+        </p>
     </div>
 </#assign>
 

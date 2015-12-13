@@ -9,6 +9,7 @@ public class QuestionTagMapper implements Mapper<TagEntity, QuestionTag> {
         QuestionTag tag = new QuestionTag();
         tag.setTag(source.getName());
         tag.setSuggestViewOthersQuestionsLabel(source.getSuggestViewOthersQuestionsLabel());
+        tag.setDescription(source.getDescription());
         return tag;
     }
 }

@@ -779,3 +779,34 @@ button:active {
 .co-search-advice {
     margin-bottom: 25px;
 }
+
+.co-tag {
+    text-decoration: none;
+    background-color: #cad6df;
+    display: inline-block;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    padding: 2px 10px;
+}
+
+.co-tag-counter {
+    font-size: 12px;
+    color: #777;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.co-tag-description {
+    font-size: 11px;
+    line-height: 14px;
+    display: inline-block;
+}
+
+.page-tags .co-tag-description {
+    margin: 8px 0;
+}
+
+.m-separated-row {
+    border-bottom: solid 1px #ebebeb;
+    margin-bottom: 28px;
+    padding-bottom: 10px;
+}

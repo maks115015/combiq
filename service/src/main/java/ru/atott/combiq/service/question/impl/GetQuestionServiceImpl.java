@@ -43,7 +43,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
     private QuestionAttrsMapper questionAttrsMapper = new QuestionAttrsMapper();
     @Autowired
     private NameVersionDomainResolver domainResolver;
-    @Autowired(required = false)
+    @Autowired
     private Client client;
     @Autowired
     private QuestionAttrsRepository questionAttrsRepository;
