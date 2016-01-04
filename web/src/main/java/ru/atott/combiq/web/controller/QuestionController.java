@@ -1,6 +1,7 @@
 package ru.atott.combiq.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +14,7 @@ import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.web.bean.ReputationVoteBean;
 import ru.atott.combiq.web.bean.SuccessBean;
+import ru.atott.combiq.web.request.ContentRequest;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
 
@@ -50,6 +52,15 @@ public class QuestionController extends BaseController {
         viewBuilder.setDsl(dsl);
         viewBuilder.setTags(tagService.getTags(questionResponse.getQuestion().getTags()));
         return viewBuilder.build();
+    }
+
+    @RequestMapping(value = "/questions/{questionId}/content", method = RequestMethod.POST)
+    @ResponseBody
+    @Secured("sa")
+    public Object preview(@PathVariable("questionId") String questionId,
+                          @RequestBody ContentRequest contentRequest) {
+        questionService.saveQuestionBody(questionId, contentRequest.getContent());
+        return new SuccessBean();
     }
 
     @RequestMapping(value = "/questions/commentSave", method = RequestMethod.POST)

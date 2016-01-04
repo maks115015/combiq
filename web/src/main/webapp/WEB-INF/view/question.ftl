@@ -16,16 +16,16 @@
                         <div class="co-question-title">
                         ${question.title}
                         </div>
+
+                        <div class="co-question-body">
+                            <@templates.contentEditor content=question.body url='/questions/${question.id}/content' />
+                        </div>
+
                         <@questionStaff />
                     </div>
                 </div>
             </div>
             <@questionPosition />
-            <div class="co-promo-questionbottom">
-                <span class="glyphicon glyphicon-ok"></span>
-                Возможно, вам будет проще готовиться к собеседованию по уже готовым
-                <a href="/questionnaires">опросникам</a>.
-            </div>
             <div class="co-my-question-comment co-flex">
                 <div class="co-my-question-comment-label">
                     <div>
@@ -43,25 +43,39 @@
             </div>
         </div>
         <div class="col-md-3 co-question-aside">
-            <#if tags?size &gt; 0>
-                <div>
-                    <div class="co-asideimage-container">
-                        <img src="/static/images/tip.png" alt="Совет посмотреть другие ресурсы">
-                    </div>
-                    <ol class="list-unstyled">
-                        <#list tags as tag>
-                            <#if tag.suggestViewOthersQuestionsLabel??>
-                                <li>
-                                    <a href="/questions/tagged/${tag.tag?url}">
+            <div>
+                <h4 class="co-sidebar-title">Полезное</h4>
+                <ol class="list-unstyled co-question-aside-tips">
+                    <#list tags as tag>
+                        <#if tag.suggestViewOthersQuestionsLabel??>
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-1">
                                         <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
-                                        ${tag.suggestViewOthersQuestionsLabel?html} →
-                                    </a>
-                                </li>
-                            </#if>
-                        </#list>
-                    </ol>
-                </div>
-            </#if>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <a href="/questions/tagged/${tag.tag?url}">
+                                            ${tag.suggestViewOthersQuestionsLabel?html} →
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </#if>
+                    </#list>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </div>
+                            <div class="col-md-10">
+                                Возможно, вам будет проще готовиться к собеседованию по уже готовым
+                                <a href="/questionnaires">опросникам →</a>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
         </div>
     </div>
 </@templates.layoutWithoutSidebar>

@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.mapper;
 
+import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionAttrs;
@@ -41,6 +42,11 @@ public class QuestionMapper implements Mapper<QuestionEntity, Question> {
             question.setAttrs(attrsMap.getOrDefault(questionId, QuestionAttrs.defaultOf(userId, questionId)));
         }
         question.setTip(source.getTip());
+        if (source.getBody() != null) {
+            question.setBody(source.getBody());
+        } else {
+            question.setBody(new MarkdownContent());
+        }
         return question;
     }
 }

@@ -82,10 +82,18 @@
             <nav class="navbar navbar-default navbar-static-top co-header">
                 <ul class="co-topmenu">
                     <li>
-                        <a class="co-topmenu-mainer" href="/" title="combiq.ru">
-                            <img src="/static/images/site/flat-logo-64.png" />
-                            <span>Combiq.ru</span>
-                        </a>
+                        <img style="vertical-align: baseline; margin-right: 14px;" src="/static/images/site/flat-logo-64.png" />
+                        <div class="co-inline">
+                            <a class="co-topmenu-mainer" href="/" title="combiq.ru">
+                                <span>Combiq.ru</span>
+                            </a>
+                            <br>
+                            <span style="font-size: 12px;">
+                                Всё что может вам потребоваться для подготовки
+                                <br>
+                                к Java собеседованию
+                            </span>
+                        </div>
                     </li>
                 </ul>
                 <ul class="co-topmenu pull-right">

@@ -6,6 +6,23 @@
 
 <#assign sidebar>
     <div>
+        <h4 class="co-sidebar-title">Интересное</h4>
+        <ol class="list-unstyled co-question-aside-tips">
+            <li>
+                <div class="row">
+                    <div class="col-md-1">
+                        <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-10">
+                        Freak вопросы, которые вам могут задать на собеседовании.
+                        <a href="/questions/tagged/freak">Будьте осторожны →</a>
+                    </div>
+                </div>
+            </li>
+        </ol>
+    </div>
+
+    <div>
         <h4 class="co-sidebar-title">Популярное</h4>
         <ul class="co-popularTags">
             <#list popularTags as tag>

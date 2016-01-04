@@ -113,6 +113,10 @@ a:focus {
     margin-left: 40px;
 }
 
+.co-sidebar > div {
+    margin-bottom: 40px;
+}
+
 .co-sidebar-title {
     color: #222;
     font-size: 26px;
@@ -186,6 +190,10 @@ ul.co-topmenu {
     margin-bottom: 40px;
 }
 
+ul.co-topmenu * {
+    line-height: 14px;
+}
+
 ul.co-topmenu > li {
     display: inline-block;
     margin: 30px 0 0 0;
@@ -199,10 +207,8 @@ ul.co-topmenu > li {
     font-size: 22px;
     color: #40565D;
     margin-right: 10px;
-}
-
-.co-topmenu-mainer span {
-    padding-left: 10px;
+    padding-bottom: 12px;
+    display: inline-block;
 }
 
 .co-topmenu-mainer img {
@@ -417,6 +423,12 @@ ul.co-popularTags > li {
     font-size: 28px;
     min-height: 100px;
     line-height: 34px;
+    margin-bottom: 20px;
+}
+
+.co-question-body {
+    font-size: 14px;
+    line-height: 16px;
 }
 
 .co-my-question-comment-label {
@@ -561,6 +573,12 @@ a.co-action:hover {
     margin-top: 70px;
 }
 
+.co-question-aside-tips li {
+    line-height: 14px;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
 .co-asideimage-container {
     margin-bottom: 20px;
     display: inline-block;
@@ -600,13 +618,6 @@ a.co-action:hover {
 .co-promo-mainer-new {
     font-weight: bold;
     margin-right: 20px;
-}
-
-.co-promo-questionbottom {
-    background-color: rgba(255, 205, 40, 0.48);
-    padding: 15px;
-    margin-left: 140px;
-    margin-top: 35px;
 }
 
 .co-mainvk-liker {

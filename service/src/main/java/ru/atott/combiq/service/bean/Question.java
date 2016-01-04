@@ -1,6 +1,7 @@
 package ru.atott.combiq.service.bean;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import ru.atott.combiq.dao.entity.MarkdownContent;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Question {
     private long reputation;
     private QuestionAttrs attrs;
     private String tip;
+    private MarkdownContent body;
 
     public List<String> getTags() {
         return tags;
@@ -69,6 +71,14 @@ public class Question {
         this.tip = tip;
     }
 
+    public MarkdownContent getBody() {
+        return body;
+    }
+
+    public void setBody(MarkdownContent body) {
+        this.body = body;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -79,6 +89,7 @@ public class Question {
                 .append("reputation", reputation)
                 .append("attrs", attrs)
                 .append("tip", tip)
+                .append("body", body)
                 .toString();
     }
 }
