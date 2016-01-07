@@ -7,9 +7,11 @@ import ru.atott.combiq.dao.entity.UserEntity;
 import ru.atott.combiq.dao.repository.UserRepository;
 import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.User;
+import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.mapper.UserMapper;
 import ru.atott.combiq.service.user.GithubRegistrationContext;
+import ru.atott.combiq.service.user.UserRoles;
 import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.service.user.VkRegistrationContext;
 
@@ -100,12 +102,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<String> getUserRoles(String login) {
-        if ("atott".equals(login)) {
-            return Lists.newArrayList("sa");
+    public List<String> getUserRoles(UserQualifier userQualifier) {
+        if (UserQualifier.ATOTT.equals(userQualifier)) {
+            return Lists.newArrayList(UserRoles.sa, UserRoles.user);
         }
 
-        return Collections.emptyList();
+        return Collections.singletonList(UserRoles.user);
     }
 
     @Override

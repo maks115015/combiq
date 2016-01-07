@@ -31,7 +31,7 @@ public class CombiqUserDetailsService implements UserDetailsService {
                         break;
                 }
 
-                List<String> userRoles = userService.getUserRoles(userQualifier.getLogin());
+                List<String> userRoles = userService.getUserRoles(userQualifier);
 
                 CombiqUser combiqUser = new CombiqUser(qualifier, passwordHash, userRoles);
                 combiqUser.setType(user.getType());
@@ -39,6 +39,7 @@ public class CombiqUserDetailsService implements UserDetailsService {
                 combiqUser.setId(user.getId());
                 combiqUser.setAvatarUrl(user.getAvatarUrl());
                 combiqUser.setEmail(user.getEmail());
+                combiqUser.setName(user.getName());
                 return combiqUser;
             }
         } catch (Exception e) {

@@ -57,21 +57,31 @@ public class QuestionController extends BaseController {
     @RequestMapping(value = "/questions/{questionId}/content", method = RequestMethod.POST)
     @ResponseBody
     @Secured("sa")
-    public Object preview(@PathVariable("questionId") String questionId,
-                          @RequestBody ContentRequest contentRequest) {
+    public Object postContent(@PathVariable("questionId") String questionId,
+                              @RequestBody ContentRequest contentRequest) {
         questionService.saveQuestionBody(questionId, contentRequest.getContent());
+        return new SuccessBean();
+    }
+
+    @RequestMapping(value = "/questions/{questionId}/comment", method = RequestMethod.POST)
+    @ResponseBody
+    @Secured("user")
+    public Object postComment(@PathVariable("questionId") String questionId,
+                              @RequestBody ContentRequest contentRequest) {
+        questionService.saveComment(getContext(), questionId, contentRequest.getContent());
         return new SuccessBean();
     }
 
     @RequestMapping(value = "/questions/commentSave", method = RequestMethod.POST)
     @ResponseBody
+    @Deprecated
     public SuccessBean saveComment(@RequestParam(value = "comment", required = false) String comment,
                                    @RequestParam(value = "questionId", required = true) String questionId) {
         if (authService.getUser() == null) {
             return new SuccessBean(false);
         }
 
-        questionService.saveComment(authService.getUserId(), questionId, comment);
+        questionService.saveUserComment(authService.getUserId(), questionId, comment);
         return new SuccessBean();
     }
 

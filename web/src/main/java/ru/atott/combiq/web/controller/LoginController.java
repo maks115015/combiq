@@ -2,6 +2,7 @@ package ru.atott.combiq.web.controller;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -9,6 +10,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
+import org.codehaus.jparsec.internal.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.web.authentication.RememberMeServices;
@@ -63,9 +65,19 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "/login/callback/vk.do", method = RequestMethod.GET)
     public RedirectView vkCallback(@RequestParam(value = "code") String code,
+                                   @RequestParam(value = "state") String state,
                                    HttpServletRequest httpRequest,
                                    HttpServletResponse httpResponse) throws IOException, ServletException {
         UrlResolver urlResolver = new RequestUrlResolver(httpRequest);
+
+        String sessionId = httpRequest.getSession(true).getId();
+        String stateHash = StringUtils.substringBefore(state, ":");
+        String actualStateHash = DigestUtils.sha256Hex(sessionId + authService.getLaunchDependentSalt());
+        String redirectUrl = StringUtils.defaultIfBlank(StringUtils.substringAfter(state, ":"), "/");
+
+        if (!Objects.equals(stateHash, actualStateHash)) {
+            return new RedirectView("/");
+        }
 
         String exchangeUrl = UriComponentsBuilder
                 .fromHttpUrl("https://oauth.vk.com/access_token")
@@ -126,13 +138,23 @@ public class LoginController extends BaseController {
         httpRequest.login(user.getQualifier().toString(), "vk");
         rememberMeServices.loginSuccess(httpRequest, httpResponse, authService.getAuthentication());
 
-        return new RedirectView("/");
+        return new RedirectView(redirectUrl);
     }
 
     @RequestMapping(value = "/login/callback/github.do", method = RequestMethod.GET)
     public RedirectView githubCallback(@RequestParam(value = "code") String code,
+                                       @RequestParam(value = "state") String state,
                                        HttpServletRequest httpRequest,
                                        HttpServletResponse httpResponse) throws IOException, ServletException {
+        String sessionId = httpRequest.getSession(true).getId();
+        String stateHash = StringUtils.substringBefore(state, ":");
+        String actualStateHash = DigestUtils.sha256Hex(sessionId + authService.getLaunchDependentSalt());
+        String redirectUrl = StringUtils.defaultIfBlank(StringUtils.substringAfter(state, ":"), "/");
+
+        if (!Objects.equals(stateHash, actualStateHash)) {
+            return new RedirectView("/");
+        }
+
         String exchangeUrl = UriComponentsBuilder
                 .fromHttpUrl("https://github.com/login/oauth/access_token")
                 .queryParam("client_id", githubClientId)
@@ -184,7 +206,7 @@ public class LoginController extends BaseController {
         httpRequest.login(user.getQualifier().toString(), "github");
         rememberMeServices.loginSuccess(httpRequest, httpResponse, authService.getAuthentication());
 
-        return new RedirectView("/");
+        return new RedirectView(redirectUrl);
     }
 
     private String getDefaultString(JsonElement value) {

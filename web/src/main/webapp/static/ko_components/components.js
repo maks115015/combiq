@@ -30,6 +30,7 @@
 
     define('co-helloworld', 'ko_components/co-helloworld', 'co-helloworld', {layoutSeparated: true});
     define('co-jobsubscribe', 'ko_components/co-jobsubscribe', 'co-jobsubscribe', {layoutSeparated: true});
+    define('co-commentposter', 'ko_components/co-commentposter', 'co-commentposter', {layoutSeparated: true, styles: 'css'});
 
     ko.createComponent = function(componentName, params, tag) {
         var html;
@@ -42,10 +43,13 @@
     ko.components.defaultLoader.originalLoadComponent = ko.components.defaultLoader.loadComponent;
     ko.components.defaultLoader.loadComponent = function(componentName, config, callback) {
         if (config && config.styles) {
-            require(['requirejs.' + config.styles.engine + '!' + config.styles.path], function() {
-                // Nothing to do.
+            console.log('load:', config.styles.engine);
+            require([config.styles.engine], function() {
+                require(['requirejs.' + config.styles.engine + '!' + config.styles.path], function() {
+                    // Nothing to do.
+                });
+                ko.components.defaultLoader.originalLoadComponent(componentName, config, callback);
             });
-            ko.components.defaultLoader.originalLoadComponent(componentName, config, callback);
         } else {
             ko.components.defaultLoader.originalLoadComponent(componentName, config, callback);
         }

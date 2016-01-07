@@ -1,4 +1,5 @@
 <#-- @ftlvariable name="question" type="ru.atott.combiq.service.bean.Question" -->
+<#-- @ftlvariable name="comment" type="ru.atott.combiq.dao.entity.QuestionComment" -->
 
 <#import "templates.ftl" as templates />
 
@@ -25,26 +26,14 @@
                     </div>
                 </div>
             </div>
+
             <@questionPosition />
-            <div class="co-my-question-comment co-flex">
-                <div class="co-my-question-comment-label">
-                    <div>
-                        Ваш комментарий к вопросу, <br/>
-                        его видите только Вы
-                    </div>
-                </div>
-                <div class="co-my-question-comment-box">
-                    <paper-autogrow-textarea rows="3" >
-                        <textarea id="questionMyComment" ${templates.if(!user??, 'disabled')}>${questionComment()}</textarea>
-                    </paper-autogrow-textarea>
-                    <paper-button onclick="saveQuestionComment(document.getElementById('questionMyComment').value, '${question.id}');" ${templates.if(!user??, 'disabled')}>Сохранить</paper-button>
-                    <span id="questionMyCommentStatus"></span>
-                </div>
-            </div>
+
+            <@questionComments />
         </div>
         <div class="col-md-3 co-question-aside">
             <div>
-                <h4 class="co-sidebar-title">Полезное</h4>
+                <h4>Полезное</h4>
                 <ol class="list-unstyled co-question-aside-tips">
                     <#list tags as tag>
                         <#if tag.suggestViewOthersQuestionsLabel??>
@@ -101,17 +90,17 @@
             <ul class="co-question-position">
                 <#if position.previosQuestionId??>
                     <li>
-                        <a href="/questions/${position.previosQuestionId}?index=${position.index - 1}&dsl=${dsl?url}">
+                        <a href="/questions/${position.previosQuestionId}?index=${position.index - 1}&dsl=${dsl!''?url}">
                             <span class="co-arrow">←</span> предыдущий
                         </a>
                     </li>
                 </#if>
                 <li>
-                    <strong>${position.index + 1}</strong> из <a href="/questions/search?q=${dsl?url}">${position.total}</a>
+                    <strong>${position.index + 1}</strong> из <a href="/questions/search?q=${dsl!''?url}">${position.total}</a>
                 </li>
                 <#if position.nextQuestionId??>
                     <li>
-                        <a href="/questions/${position.nextQuestionId}?index=${position.index + 1}&dsl=${dsl?url}">
+                        <a href="/questions/${position.nextQuestionId}?index=${position.index + 1}&dsl=${dsl!''?url}">
                             следующий <span class="co-arrow">→</span>
                         </a>
                     </li>
@@ -120,6 +109,45 @@
         </div>
         <div class="clearfix"></div>
     </#if>
+</#macro>
+
+<#macro questionComments>
+    <#--<div class="co-my-question-comment co-flex">
+        <div class="co-my-question-comment-label">
+            <div>
+                Ваш комментарий к вопросу, <br/>
+                его видите только Вы
+            </div>
+        </div>
+        <div class="co-my-question-comment-box">
+            <paper-autogrow-textarea rows="3" >
+                <textarea id="questionMyComment" ${templates.if(!user??, 'disabled')}>${questionComment()}</textarea>
+            </paper-autogrow-textarea>
+            <paper-button onclick="saveQuestionComment(document.getElementById('questionMyComment').value, '${question.id}');" ${templates.if(!user??, 'disabled')}>Сохранить</paper-button>
+            <span id="questionMyCommentStatus"></span>
+        </div>
+    </div>-->
+
+    <div>
+        <h4>Комментарии</h4>
+        <co-commentposter params="questionId: '${question.id?js_string}'"></co-commentposter>
+        <div style="margin-top: 25px;">
+            <#if comments?? && comments?size &gt; 0>
+                <ul class="co-comments">
+                    <#list comments as comment>
+                        <li>
+                            <span class="co-comments-meta">${comment.userName}, ${comment.postDate?string('dd MMMM yyyy, hh:mm')}</span>
+                            <div class="co-comments-body">
+                            ${comment.content.html}
+                            </div>
+                        </li>
+                    </#list>
+                </ul>
+            <#else>
+                Комментариев пока нет.
+            </#if>
+        </div>
+    </div>
 </#macro>
 
 <#function questionComment>

@@ -117,7 +117,7 @@ a:focus {
     margin-bottom: 40px;
 }
 
-.co-sidebar-title {
+h4 {
     color: #222;
     font-size: 26px;
     font-weight: normal;
@@ -696,6 +696,10 @@ button:active {
     background-image: linear-gradient(to bottom, #ebb463, #fcd292);
 }
 
+button:disabled {
+    opacity: 0.7;
+}
+
 .co-dialog-overlay {
     position: fixed;
     top: 0;
@@ -820,4 +824,26 @@ button:active {
     border-bottom: solid 1px #ebebeb;
     margin-bottom: 28px;
     padding-bottom: 10px;
+}
+
+.co-comments {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.co-comments > li {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.co-comments-meta {
+    font-size: 11px;
+    color: #696969;
+}
+
+.co-comments-body {
+    font-size: 13px;
+    line-height: 16px;
 }

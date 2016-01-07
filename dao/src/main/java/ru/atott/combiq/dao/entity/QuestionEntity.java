@@ -15,6 +15,7 @@ public class QuestionEntity {
     private Long reputation;
     private String tip;
     private MarkdownContent body;
+    private List<QuestionComment> comments;
 
     public List<String> getTags() {
         return tags;
@@ -70,5 +71,13 @@ public class QuestionEntity {
 
     public void setBody(MarkdownContent body) {
         this.body = body;
+    }
+
+    public List<QuestionComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<QuestionComment> comments) {
+        this.comments = comments;
     }
 }

@@ -46,12 +46,18 @@
                 baseUrl: '/static',
                 paths: {
                     text: 'js/lib/text',
+                    css: 'js/lib/css',
                     ajax: 'js/lib/ajax'
                 }
             });
             window.co = {
                 userId: ${if(userId??, '"' + (userId!'') + '"', 'null')},
-                userEmail: '${userEmail!''}'
+                userEmail: '${userEmail!''}',
+                githubClientId: '${githubClientId?js_string}',
+                githubClientState: '${githubClientState?js_string}',
+                vkClientId: '${vkClientId?js_string}',
+                vkClientState: '${vkClientState?js_string}',
+                vkCallbackUrl: '${vkCallbackUrl?js_string}'
             };
         </script>
         <script src="/static/ko_components/components.js?v=${resourceVersion}"></script>

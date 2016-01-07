@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+
+    private static String launchDependentSalt = String.valueOf(System.currentTimeMillis());
+
     @Override
     public CombiqUser getUser() {
         CombiqUser user = null;
@@ -28,5 +31,10 @@ public class AuthServiceImpl implements AuthService {
             return null;
         }
         return user.getId();
+    }
+
+    @Override
+    public String getLaunchDependentSalt() {
+        return launchDependentSalt;
     }
 }

@@ -6,7 +6,7 @@
 
 <#assign sidebar>
     <div>
-        <h4 class="co-sidebar-title">Интересное</h4>
+        <h4>Интересное</h4>
         <ol class="list-unstyled co-question-aside-tips">
             <li>
                 <div class="row">
@@ -23,7 +23,7 @@
     </div>
 
     <div>
-        <h4 class="co-sidebar-title">Популярное</h4>
+        <h4>Популярное</h4>
         <ul class="co-popularTags">
             <#list popularTags as tag>
                 <li>

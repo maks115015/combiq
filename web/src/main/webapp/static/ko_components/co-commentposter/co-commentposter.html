@@ -1,0 +1,14 @@
+<div class="co-commentposter">
+    <textarea data-bind="value: comment, event: {focus: focus}, css: {'active': focused}, disable: posting"
+              placeholder="Оставить комментарий к вопросу"></textarea>
+
+    <div data-bind="visible: focused">
+        <button data-bind="click: postComment, disable: posting">Оставить комментарий</button>
+        <span class="co-commentposter-postingtip" data-bind="visible: posting">Сохранение...</span>
+
+        <div class="pull-right co-inline">
+            <span class="co-commentposter-markdowntip">Используйте <a target="_blank" href="http://daringfireball.net/projects/markdown/">markdown</a> разметку</span>
+        </div>
+    </div>
+
+</div>

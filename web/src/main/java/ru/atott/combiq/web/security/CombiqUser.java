@@ -15,6 +15,8 @@ public class CombiqUser extends User {
     private String id;
     private String avatarUrl;
     private String email;
+    private String name;
+    private Collection<String> roles;
 
     public UserType getType() {
         return type;
@@ -31,6 +33,7 @@ public class CombiqUser extends User {
     public CombiqUser(String username, String password, Collection<String> roles) {
         super(username, password,
                 roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+        this.roles = roles;
     }
 
     public String getLogin() {
@@ -78,5 +81,21 @@ public class CombiqUser extends User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Collection<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<String> roles) {
+        this.roles = roles;
     }
 }

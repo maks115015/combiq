@@ -37,14 +37,14 @@
             <div class="col-md-6 co-login-right">
                 <div class="text-center" style="padding: 100px 0">
                     <p>
-                        <a id="githubLoginButton" class="go-github-btn login-btn" href="https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=user">
+                        <a id="githubLoginButton" class="go-github-btn login-btn" href="https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=user&state=${githubClientState}:">
                             <span class="text">Войти через Github.com</span>
                             <span class="arrow">❯</span>
                         </a>
                     </p>
                     <p>
                         <#assign vkCallbackUrl = urlResolver.externalize("/login/callback/vk.do") />
-                        <a id="vkLoginButton" class="go-github-btn login-btn" href="https://oauth.vk.com/authorize?client_id=${vkClientId}&display=page&response_type=code&redirect_uri=${vkCallbackUrl?url}">
+                        <a id="vkLoginButton" class="go-github-btn login-btn" href="https://oauth.vk.com/authorize?client_id=${vkClientId}&display=page&response_type=code&state=${vkClientState}:&redirect_uri=${vkCallbackUrl?url}">
                             <span class="text">Войти через vk.com</span>
                             <span class="arrow">❯</span>
                         </a>
