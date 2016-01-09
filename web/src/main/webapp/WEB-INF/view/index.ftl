@@ -1,7 +1,6 @@
 <#import "templates.ftl" as templates />
 
 <#assign head>
-    <script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
     <script>
         VK.init({apiId: 5065282, onlyWidgets: true});
     </script>
@@ -39,7 +38,7 @@
         <div class="container">
             <div>
                 <h1>
-                    Всё что может вам потребоваться
+                    Всё, что может вам потребоваться
                     для подготовки к Java собеседованию
                 </h1>
                 <p>

@@ -29,6 +29,7 @@ import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionAttrs;
 import ru.atott.combiq.service.bean.Tag;
+import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.mapper.QuestionAttrsMapper;
 import ru.atott.combiq.service.mapper.QuestionMapper;
@@ -84,6 +85,19 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         response.setQuestions(page.map(questionMapper::map));
         response.setPopularTags(getPopularTags(searchResponse));
         return response;
+    }
+
+    @Override
+    public Optional<SearchResponse> getAnotherQuestions(Question question) {
+        if (CollectionUtils.isEmpty(question.getTags())) {
+            return Optional.empty();
+        }
+
+        SearchContext searchContext = new SearchContext();
+        searchContext.setDslQuery(DslParser.parse("[" + question.getTags().get(0) + "]"));
+        searchContext.setSize(5);
+
+        return Optional.of(getQuestions(searchContext));
     }
 
     @Override
@@ -153,7 +167,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
                     FilterBuilders.termFilter("userId", userId)));
         });
         QueryBuilder queryBuilder = QueryBuilders.filteredQuery(QueryBuilders.matchAllQuery(), filterBuilder);
-        Iterable<QuestionAttrsEntity> questionAttrsEntities = questionAttrsRepository.search(queryBuilder);;
+        Iterable<QuestionAttrsEntity> questionAttrsEntities = questionAttrsRepository.search(queryBuilder);
         return questionAttrsMapper.toList(questionAttrsEntities);
     }
 

@@ -1,10 +1,13 @@
 package ru.atott.combiq.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.question.GetQuestionService;
 import ru.atott.combiq.service.question.QuestionReputationService;
@@ -16,7 +19,11 @@ import ru.atott.combiq.web.bean.ReputationVoteBean;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.ContentRequest;
 import ru.atott.combiq.web.security.AuthService;
+import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class QuestionController extends BaseController {
@@ -34,7 +41,10 @@ public class QuestionController extends BaseController {
     @RequestMapping(value = "/questions/{questionId}")
     public ModelAndView view(@PathVariable("questionId") String questionId,
                              @RequestParam(value = "index", required = false) Integer index,
-                             @RequestParam(value = "dsl", required = false) String dsl) {
+                             @RequestParam(value = "dsl", required = false) String dsl,
+                             HttpServletRequest request) {
+        UrlResolver urlResolver = new RequestUrlResolver(request);
+
         GetQuestionContext context = new GetQuestionContext();
         context.setUserId(authService.getUserId());
         context.setId(questionId);
@@ -46,11 +56,21 @@ public class QuestionController extends BaseController {
 
         GetQuestionResponse questionResponse = getQuestionService.getQuestion(context);
 
+        List<Question> anotherQuestions = null;
+        if (questionResponse.getQuestion().isLanding()) {
+            anotherQuestions = getQuestionService
+                    .getAnotherQuestions(questionResponse.getQuestion())
+                    .map(response -> response.getQuestions().getContent())
+                    .orElse(null);
+        }
+
         QuestionViewBuilder viewBuilder = new QuestionViewBuilder();
         viewBuilder.setQuestion(questionResponse.getQuestion());
         viewBuilder.setPositionInDsl(questionResponse.getPositionInDsl());
         viewBuilder.setDsl(dsl);
         viewBuilder.setTags(tagService.getTags(questionResponse.getQuestion().getTags()));
+        viewBuilder.setCanonicalUrl(urlResolver.externalize("/questions/" + questionId));
+        viewBuilder.setAnotherQuestions(anotherQuestions);
         return viewBuilder.build();
     }
 

@@ -15,6 +15,8 @@ public class QuestionViewBuilder {
     private QuestionPositionInDsl positionInDsl;
     private String dsl;
     private List<QuestionTag> tags;
+    private String canonicalUrl;
+    private List<Question> anotherQuestions;
 
     public String getDsl() {
         return dsl;
@@ -48,6 +50,22 @@ public class QuestionViewBuilder {
         this.tags = tags;
     }
 
+    public String getCanonicalUrl() {
+        return canonicalUrl;
+    }
+
+    public void setCanonicalUrl(String canonicalUrl) {
+        this.canonicalUrl = canonicalUrl;
+    }
+
+    public List<Question> getAnotherQuestions() {
+        return anotherQuestions;
+    }
+
+    public void setAnotherQuestions(List<Question> anotherQuestions) {
+        this.anotherQuestions = anotherQuestions;
+    }
+
     public ModelAndView build() {
         List<QuestionComment> comments = question.getComments();
         if (comments == null) {
@@ -63,6 +81,9 @@ public class QuestionViewBuilder {
         mav.addObject("dsl", dsl);
         mav.addObject("tags", tags);
         mav.addObject("comments", comments);
+        mav.addObject("landing", question.isLanding());
+        mav.addObject("canonicalUrl", canonicalUrl);
+        mav.addObject("anotherQuestions", anotherQuestions);
         return mav;
     }
 }

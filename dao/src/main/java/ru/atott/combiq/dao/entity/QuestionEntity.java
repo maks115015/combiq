@@ -16,6 +16,7 @@ public class QuestionEntity {
     private String tip;
     private MarkdownContent body;
     private List<QuestionComment> comments;
+    private boolean landing;
 
     public List<String> getTags() {
         return tags;
@@ -79,5 +80,13 @@ public class QuestionEntity {
 
     public void setComments(List<QuestionComment> comments) {
         this.comments = comments;
+    }
+
+    public boolean isLanding() {
+        return landing;
+    }
+
+    public void setLanding(boolean landing) {
+        this.landing = landing;
     }
 }

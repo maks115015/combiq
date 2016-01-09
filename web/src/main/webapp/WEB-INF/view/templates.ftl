@@ -37,6 +37,7 @@
         <script src="/static/js/lib/knockout.js"></script>
         <script src="/static/js/lib/knockout.dialog.js?v=${resourceVersion}"></script>
         <script src="/static/js/site.js?v=${resourceVersion}"></script>
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
 
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -95,7 +96,7 @@
                             </a>
                             <br>
                             <span style="font-size: 12px;">
-                                Всё что может вам потребоваться для подготовки
+                                Всё, что может вам потребоваться для подготовки
                                 <br>
                                 к Java собеседованию
                             </span>
@@ -103,6 +104,16 @@
                     </li>
                 </ul>
                 <ul class="co-topmenu pull-right">
+                    <li class="co-socials">
+                        <a href="https://vk.com/combiq">
+                            <img src="/static/images/social/vk.png" alt="Java Combiq on VK.com">
+                        </a>
+                    </li>
+                    <li class="co-socials" style="padding-right: 15px;">
+                        <a href="https://github.com/atott/combiq">
+                            <img src="/static/images/social/github.png" alt="Combiq on Github">
+                        </a>
+                    </li>
                     <li class="co-chapter ${if(chapter == 'questions', 'active')}">
                         <a href="/questions">Вопросы</a>
                     </li>
@@ -281,3 +292,12 @@
 
     <#global contentEditorIncrementor = contentEditorIncrementor + 1 />
 </#macro>
+
+<#function explainLevel level>
+    <#switch level>
+        <#case "D1"><#return "D1 - Junior" />
+        <#case "D2"><#return "D2 - Middle" />
+        <#case "D3"><#return "D3 - Senior" />
+    </#switch>
+    <#return level />
+</#function>

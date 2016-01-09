@@ -240,6 +240,19 @@ ul.co-topmenu > li.co-auth {
     color: #698D9C;
 }
 
+.co-socials {
+    padding-right: 8px;
+}
+
+.co-socials img {
+    margin-top: -4px;
+    opacity: 0.5;
+}
+
+.co-socials a:hover img {
+    opacity: 1;
+}
+
 .co-chapter:hover {
     background-color: #C8E6FF;
     color: #698D9C;
@@ -491,8 +504,8 @@ ul.co-question-staff > li {
     padding: 0;
 }
 
-ul.co-question-staff > li.co-question-staff-level {
-    margin-right: 20px;
+.co-small {
+    font-size: 12px;
 }
 
 .co-flex {
@@ -571,6 +584,10 @@ a.co-action:hover {
 
 .co-question-aside {
     margin-top: 70px;
+}
+
+.co-question-aside > div {
+    margin-bottom: 35px;
 }
 
 .co-question-aside-tips li {
@@ -802,6 +819,12 @@ button:disabled {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 12px;
     padding: 2px 10px;
+    color: #777;
+}
+
+.co-tag:hover {
+    color: rgb(105, 141, 156);
+    background-color: rgb(200, 230, 255);
 }
 
 .co-tag-counter {
@@ -846,4 +869,24 @@ button:disabled {
 .co-comments-body {
     font-size: 13px;
     line-height: 16px;
+}
+
+.co-landing {
+    background-color: #E6E6E6;
+    line-height: 16px;
+    font-size: 12px;
+    margin-bottom: 45px;
+}
+
+.co-landing-another-desc {
+    padding: 15px;
+}
+
+.co-landing-another-questions {
+    background-color: #F3F3F3;
+    padding: 15px;
+}
+
+.co-landing h4 {
+    font-size: 16px;
 }

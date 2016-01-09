@@ -4,8 +4,9 @@
 <#import "templates.ftl" as templates />
 
 <#assign head>
-    ${templates.import("/static/bower_components/paper-input/paper-autogrow-textarea.html")}
-    <link rel="canonical" href="http://combiq.ru/questions/${question.id}" />
+    <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
+    <#--${templates.import("/static/bower_components/paper-input/paper-autogrow-textarea.html")}-->
+    <link rel="canonical" href="${canonicalUrl}" />
 </#assign>
 
 <@templates.layoutWithoutSidebar head=head dsl=dsl chapter='questions'>
@@ -29,58 +30,114 @@
 
             <@questionPosition />
 
+            <#if landing>
+                <@landingBlock />
+            </#if>
+
             <@questionComments />
         </div>
         <div class="col-md-3 co-question-aside">
-            <div>
-                <h4>Полезное</h4>
-                <ol class="list-unstyled co-question-aside-tips">
-                    <#list tags as tag>
-                        <#if tag.suggestViewOthersQuestionsLabel??>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <a href="/questions/tagged/${tag.tag?url}">
-                                            ${tag.suggestViewOthersQuestionsLabel?html} →
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                        </#if>
-                    </#list>
-
-                    <li>
-                        <div class="row">
-                            <div class="col-md-1">
-                                <span class="glyphicon glyphicon-ok"></span>
-                            </div>
-                            <div class="col-md-10">
-                                Возможно, вам будет проще готовиться к собеседованию по уже готовым
-                                <a href="/questionnaires">опросникам →</a>
-                            </div>
-                        </div>
-                    </li>
-                </ol>
-            </div>
+            <@sidebar />
         </div>
     </div>
 </@templates.layoutWithoutSidebar>
 
+<#macro landingBlock>
+    <div class="co-landing">
+        <div class="row">
+            <div class="col-md-8 co-landing-another-questions">
+                <#if anotherQuestions??>
+                    <h4>Другие вопросы для подготовки к собеседованию</h4>
+                    <ul>
+                        <#list anotherQuestions as anotherQuestion>
+                            <li>
+                                <a href="/questions/${anotherQuestion.id}">
+                                    ${anotherQuestion.title}
+                                </a>
+                            </li>
+                        </#list>
+                    </ul>
+                </#if>
+            </div>
+            <div class="col-md-4 co-landing-another-desc">
+                <a href="http://combiq.ru">Combiq.ru</a> - это проект с открытым исходным кодом, цель которого
+                собрать в одном месте
+                всю полезную информацию для Java программистов, которые
+                готовятся к собеседованию на новое место работы.
+            </div>
+        </div>
+    </div>
+</#macro>
+
+<#macro sidebar>
+    <div>
+        <h4>Полезное</h4>
+        <ol class="list-unstyled co-question-aside-tips">
+            <#list tags as tag>
+                <#if tag.suggestViewOthersQuestionsLabel??>
+                    <li>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-md-10">
+                                <a href="/questions/tagged/${tag.tag?url}">
+                                ${tag.suggestViewOthersQuestionsLabel?html} →
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </#if>
+            </#list>
+
+            <li>
+                <div class="row">
+                    <div class="col-md-1">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </div>
+                    <div class="col-md-10">
+                        Возможно, вам будет проще готовиться к собеседованию по уже готовым
+                        <a href="/questionnaires">опросникам →</a>
+                    </div>
+                </div>
+            </li>
+        </ol>
+    </div>
+
+    <#if landing>
+        <div>
+            <h4>ВКонтакте</h4>
+            <!-- VK Widget -->
+            <div id="vk_groups"></div>
+            <script type="text/javascript">
+                VK.Widgets.Group("vk_groups", {mode: 2, width: "220", height: "400"}, 111268840);
+            </script>
+        </div>
+    </#if>
+</#macro>
+
 <#macro questionStaff>
     <ul class="co-question-staff">
-        <#if question.level??>
-            <li class="co-question-staff-level">
-                Уровень <strong><a href="/questions/level/${question.level}">${question.level}</a></strong>
-            </li>
-        </#if>
         <#list question.tags as tag>
-            <li>
-                <co-tag tag="${tag}">${tag}</co-tag>
+            <li class="co-small">
+                <a class="co-tag" href="/questions/tagged/${tag}">${tag}</a>
             </li>
         </#list>
+        <#if question.level??>
+            <li style="margin-left: 15px;" class="co-small">
+                Уровень <a href="/questions/level/${question.level}">${templates.explainLevel(question.level)}</a>
+            </li>
+        </#if>
+        <li class="pull-right" style="padding-top: 2px;">
+            <script type="text/javascript"><!--
+            document.write(VK.Share.button({
+                url: "${canonicalUrl}",
+                title: "Combiq",
+                description: "${question.title?js_string}",
+                image: "/static/images/image.png"
+            },{type: "round", text: "Поделиться", eng: 1}));
+            --></script>
+        </li>
     </ul>
 </#macro>
 

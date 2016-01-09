@@ -48,6 +48,7 @@ public class QuestionMapper implements Mapper<QuestionEntity, Question> {
             question.setBody(new MarkdownContent());
         }
         question.setComments(source.getComments());
+        question.setLanding(source.isLanding());
         return question;
     }
 }

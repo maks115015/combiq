@@ -16,6 +16,7 @@ public class Question {
     private String tip;
     private MarkdownContent body;
     private List<QuestionComment> comments;
+    private boolean landing;
 
     public List<String> getTags() {
         return tags;
@@ -89,6 +90,14 @@ public class Question {
         this.comments = comments;
     }
 
+    public boolean isLanding() {
+        return landing;
+    }
+
+    public void setLanding(boolean landing) {
+        this.landing = landing;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -101,6 +110,7 @@ public class Question {
                 .append("tip", tip)
                 .append("body", body)
                 .append("comments", comments)
+                .append("landing", landing)
                 .toString();
     }
 }
