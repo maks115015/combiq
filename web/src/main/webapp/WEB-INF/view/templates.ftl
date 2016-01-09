@@ -2,7 +2,7 @@
 
 <#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
-<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true gtmPageName=''>
+<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true gtmPageName='' ogDescription='' ogTitle=''>
 <!DOCTYPE html>
 <!--    Дорогой друг!
         Злой красный человек спалил тебя ;)
@@ -18,8 +18,8 @@
         <meta name='yandex-verification' content='526ff629012169b9' />
 
         <meta name="og:site_name" content="Combiq.ru">
-        <meta name="og:description" content="Вопросы для подготовки к собеседованию Java кандидатам и опросники для работадателей. План подготовки к собеседованию.">
-        <meta name="og:title" content="Готовьтесь к Java собеседованию на Combiq.ru">
+        <meta name="og:description" content="${if(ogDescription!='', ogDescription, "Вопросы для подготовки к собеседованию Java кандидатам и опросники для работадателей. План подготовки к собеседованию.")}">
+        <meta name="og:title" content="${if(ogTitle!='', ogTitle, "Готовьтесь к Java собеседованию на Combiq.ru")}">
         <meta name="og:image" content="/static/images/image.png">
 
         <title>Combiq${if(subTitle == '', '', ' - ' + subTitle)}</title>
@@ -200,8 +200,8 @@
     </@layoutHtml>
 </#macro>
 
-<#macro layoutWithoutSidebar head='' dsl='' chapter=''>
-    <@layoutHtml head=head dsl=dsl chapter=chapter>
+<#macro layoutWithoutSidebar head='' dsl='' chapter='' ogDescription='' ogTitle='' subTitle=''>
+    <@layoutHtml head=head dsl=dsl chapter=chapter ogTitle=ogTitle ogDescription=ogDescription subTitle=subTitle>
     <div class="container">
         <#nested />
     </div>

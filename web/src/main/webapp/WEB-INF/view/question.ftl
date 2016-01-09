@@ -9,7 +9,8 @@
     <link rel="canonical" href="${canonicalUrl}" />
 </#assign>
 
-<@templates.layoutWithoutSidebar head=head dsl=dsl chapter='questions'>
+<@templates.layoutWithoutSidebar head=head dsl=dsl chapter='questions'
+        subTitle=question.title ogDescription=question.title>
     <div class="row">
         <div class="col-md-9">
             <div class="co-question">
@@ -130,12 +131,7 @@
         </#if>
         <li class="pull-right" style="padding-top: 2px;">
             <script type="text/javascript"><!--
-            document.write(VK.Share.button({
-                url: "${canonicalUrl}",
-                title: "Combiq",
-                description: "${question.title?js_string}",
-                image: "/static/images/image.png"
-            },{type: "round", text: "Поделиться", eng: 1}));
+            document.write(VK.Share.button({url: "${canonicalUrl}"},{type: "round", text: "Поделиться", eng: 1}));
             --></script>
         </li>
     </ul>
@@ -143,7 +139,7 @@
 
 <#macro questionPosition>
     <#if position??>
-        <div>
+        <div >
             <ul class="co-question-position">
                 <#if position.previosQuestionId??>
                     <li>
@@ -164,7 +160,7 @@
                 </#if>
             </ul>
         </div>
-        <div class="clearfix"></div>
+        <div style="margin-bottom: 25px;" class="clearfix"></div>
     </#if>
 </#macro>
 
