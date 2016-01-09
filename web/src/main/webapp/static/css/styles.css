@@ -867,8 +867,31 @@ button:disabled {
 }
 
 .co-comments-body {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 16px;
+}
+
+.co-comments-body h1,
+.co-comments-body h2,
+.co-comments-body h3,
+.co-comments-body h4,
+.co-comments-body h5,
+.co-comments-body h6 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.co-comments-body h1 {
+    font-size: 18px;
+}
+
+.co-comments-body h2 {
+    font-size: 16px;
+}
+
+.co-comments-body h3 {
+    font-size: 14px;
 }
 
 .co-landing {
