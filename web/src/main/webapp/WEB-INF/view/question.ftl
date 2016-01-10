@@ -105,6 +105,30 @@
         </ol>
     </div>
 
+    <#if question.classNames?? && question.classNames?size != 0>
+        <div>
+            <h4>JavaDoc</h4>
+            <ol class="list-unstyled co-question-aside-tips">
+                <#list question.classNames as className>
+                    <li>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="glyphicon glyphicon-book"></span>
+                            </div>
+                            <div class="col-md-10">
+                                <a href="https://docs.oracle.com/javase/8/docs/api/${className?replace(".", "/")}.html">${className}</a>
+                                <span style="font-size: 12px">
+                                    (<a style="color: #777777"
+                                        href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/8u40-b25/${className?replace(".", "/")}.java">src</a>)
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </#list>
+            </ol>
+        </div>
+    </#if>
+
     <#if landing>
         <div>
             <h4>ВКонтакте</h4>

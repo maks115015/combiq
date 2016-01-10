@@ -17,6 +17,7 @@ public class Question {
     private MarkdownContent body;
     private List<QuestionComment> comments;
     private boolean landing;
+    private List<String> classNames;
 
     public List<String> getTags() {
         return tags;
@@ -98,6 +99,14 @@ public class Question {
         this.landing = landing;
     }
 
+    public List<String> getClassNames() {
+        return classNames;
+    }
+
+    public void setClassNames(List<String> classNames) {
+        this.classNames = classNames;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -111,6 +120,7 @@ public class Question {
                 .append("body", body)
                 .append("comments", comments)
                 .append("landing", landing)
+                .append("classNames", classNames)
                 .toString();
     }
 }

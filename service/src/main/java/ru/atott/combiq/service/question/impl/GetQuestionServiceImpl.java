@@ -34,6 +34,7 @@ import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.mapper.QuestionAttrsMapper;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.question.GetQuestionService;
+import ru.atott.combiq.service.question.QuestionService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -48,6 +49,8 @@ public class GetQuestionServiceImpl implements GetQuestionService {
     private Client client;
     @Autowired
     private QuestionAttrsRepository questionAttrsRepository;
+    @Autowired
+    private QuestionService questionService;
 
     public GetQuestionServiceImpl() {
         SimpleElasticsearchMappingContext mappingContext = new SimpleElasticsearchMappingContext();
@@ -153,6 +156,13 @@ public class GetQuestionServiceImpl implements GetQuestionService {
             SearchResponse searchResponse = getQuestions(searchContext);
             if (searchResponse.getQuestions().getContent().size() > 0) {
                 response.setQuestion(searchResponse.getQuestions().getContent().get(0));
+            }
+        }
+
+        if (response.getQuestion() != null) {
+            Question question = response.getQuestion();
+            if (question.getClassNames() == null) {
+                questionService.refreshMentionedClassNames(question);
             }
         }
 
