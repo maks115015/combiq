@@ -7,6 +7,8 @@ import org.springframework.shell.core.annotation.CliOption;
 import org.springframework.stereotype.Component;
 import ru.atott.combiq.data.service.ImportService;
 
+import java.io.IOException;
+
 @Component
 public class ImportCommands implements CommandMarker {
     @Autowired
@@ -22,6 +24,18 @@ public class ImportCommands implements CommandMarker {
             String name) throws Exception {
         try {
             return importService.importQuestionnareOds(file, name);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @CliCommand(
+            value = "import dictionary jdk8classes"
+    )
+    public String importJdk8ClassesDictionary() throws IOException {
+        try {
+            return importService.importJdk8ClassesDictionary();
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

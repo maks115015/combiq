@@ -1,7 +1,9 @@
 package ru.atott.combiq.data.service.impl;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -15,16 +17,24 @@ import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.data.service.ImportService;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 @Service
 public class ImportServiceImpl implements ImportService {
+
     @Autowired(required = false)
     private Client client;
+
     @Autowired
     private NameVersionDomainResolver domainResolver;
 
@@ -84,6 +94,43 @@ public class ImportServiceImpl implements ImportService {
                 .actionGet();
 
         return indexResponse.getId();
+    }
+
+    @Override
+    public String importJdk8ClassesDictionary() throws IOException {
+        String questionIndex = domainResolver.resolveQuestionIndex();
+
+        List<String> classes = IOUtils.readLines(this.getClass().getResourceAsStream("/data/jdk8classes.txt"));
+        Map<String, List<String>> normalizedClasses = classes.stream()
+                .flatMap(className -> {
+                    String simpleClassName = StringUtils.substringAfterLast(className, ".");
+                    return Stream.<ImmutablePair<String, String>>of(
+                            new ImmutablePair<>(className, className),
+                            new ImmutablePair<>(simpleClassName, className));
+                })
+                .collect(groupingBy(ImmutablePair::getLeft, mapping(ImmutablePair::getRight, toList())));
+
+        normalizedClasses.keySet().forEach(className -> {
+            List<String> classNames = normalizedClasses.get(className);
+
+            try {
+                XContentBuilder request = jsonBuilder()
+                        .startObject()
+                            .field("classNames", classNames)
+                        .endObject();
+
+                client
+                        .prepareIndex(questionIndex, Types.jdk8classes, className)
+                        .setSource(request)
+                        .execute()
+                        .actionGet();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        return questionIndex;
     }
 
     private String getCellStringValue(Row row, int index) {
