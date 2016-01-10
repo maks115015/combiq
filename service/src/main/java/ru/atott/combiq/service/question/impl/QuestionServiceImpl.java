@@ -96,6 +96,7 @@ public class QuestionServiceImpl implements QuestionService {
                 .filter(s -> StringUtils.startsWithAny(s.toLowerCase(), alphabet))
                 .map(s -> s.replaceAll("[^A-z.]", ""))
                 .map(s -> StringUtils.removeEnd(s, "."))
+                .distinct()
                 .collect(Collectors.toList());
 
         List<String> actualClassNames = StreamSupport.stream(jdk8ClassRepository.findAll(classNames).spliterator(), false)
