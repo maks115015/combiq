@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-9">
             <div class="co-question">
-                <div class="co-flex">
+                <div>
                     <div>
                         <div class="co-question-title">
                         ${question.title}
@@ -189,22 +189,6 @@
 </#macro>
 
 <#macro questionComments>
-    <#--<div class="co-my-question-comment co-flex">
-        <div class="co-my-question-comment-label">
-            <div>
-                Ваш комментарий к вопросу, <br/>
-                его видите только Вы
-            </div>
-        </div>
-        <div class="co-my-question-comment-box">
-            <paper-autogrow-textarea rows="3" >
-                <textarea id="questionMyComment" ${templates.if(!user??, 'disabled')}>${questionComment()}</textarea>
-            </paper-autogrow-textarea>
-            <paper-button onclick="saveQuestionComment(document.getElementById('questionMyComment').value, '${question.id}');" ${templates.if(!user??, 'disabled')}>Сохранить</paper-button>
-            <span id="questionMyCommentStatus"></span>
-        </div>
-    </div>-->
-
     <div>
         <h4>Комментарии</h4>
         <co-commentposter params="questionId: '${question.id?js_string}'"></co-commentposter>

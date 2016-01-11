@@ -147,7 +147,7 @@
                 <div class="container">
                     <div class="co-inline">
                         <div>
-                            <strong>Combiq.ru, 2014-2015</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+                            <strong>Combiq.ru, 2014-2016</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                             <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                             <a href="/donate">Поддержать проект</a>
                         </div>

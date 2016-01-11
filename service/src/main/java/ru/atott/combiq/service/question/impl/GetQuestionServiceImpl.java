@@ -65,7 +65,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
                 .prepareSearch(domainResolver.resolveQuestionIndex())
                 .setTypes(Types.question)
                 .setQuery(QueryBuilders.filteredQuery(getQueryBuilder(dsl), getFilterBuilder(dsl, context.getQuestionIds())))
-                .addSort("reputation", SortOrder.DESC)
+                .addSort("timestamp", SortOrder.DESC)
                 .setFrom(context.getFrom())
                 .setSize(context.getSize());
 

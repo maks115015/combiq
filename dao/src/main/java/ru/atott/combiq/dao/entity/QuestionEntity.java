@@ -18,6 +18,7 @@ public class QuestionEntity {
     private List<QuestionComment> comments;
     private boolean landing;
     private List<String> classNames;
+    private Long timestamp;
 
     public List<String> getTags() {
         return tags;
@@ -97,5 +98,13 @@ public class QuestionEntity {
 
     public void setClassNames(List<String> classNames) {
         this.classNames = classNames;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }
