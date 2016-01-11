@@ -99,11 +99,15 @@ public class QuestionServiceImpl implements QuestionService {
                 .distinct()
                 .collect(Collectors.toList());
 
-        List<String> actualClassNames = StreamSupport.stream(jdk8ClassRepository.findAll(classNames).spliterator(), false)
-                .filter(entity -> entity != null)
-                .flatMap(entity -> entity.getClassNames().stream())
-                .distinct()
-                .collect(Collectors.toList());
+        List<String> actualClassNames = Collections.emptyList();
+
+        if (classNames.size() != 0) {
+            actualClassNames = StreamSupport.stream(jdk8ClassRepository.findAll(classNames).spliterator(), false)
+                    .filter(entity -> entity != null)
+                    .flatMap(entity -> entity.getClassNames().stream())
+                    .distinct()
+                    .collect(Collectors.toList());
+        }
 
         question.setClassNames(actualClassNames);
 
