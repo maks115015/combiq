@@ -1,4 +1,5 @@
 <#import "stats.ftl" as stats />
+<#import "banners.ftl" as banners />
 
 <#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
@@ -173,9 +174,17 @@
 <#macro headBanners>
 </#macro>
 
-<#macro layoutWithSidebar head='' dsl='' sidebar='' chapter='' subTitle='' pageTitle='' mainContainerClass=''>
-    <@layoutHtml head=head dsl=dsl chapter=chapter subTitle=subTitle>
-        <#if pageTitle??>
+<#macro layoutWithSidebar head='' dsl='' sidebar='' chapter='' subTitle='' pageTitle=''
+        mainContainerClass='' sidebarContainerClass=''
+        ogDescription='' ogTitle=''>
+    <@layoutHtml
+                head=head
+                dsl=dsl
+                chapter=chapter
+                subTitle=subTitle
+                ogTitle=ogTitle
+                ogDescription=ogDescription>
+        <#if pageTitle?? && pageTitle != ''>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -192,7 +201,8 @@
                 <div class="col-md-9 ${mainContainerClass}">
                     <#nested />
                 </div>
-                <div class="col-md-3 co-sidebar">
+                <div class="col-md-3 co-sidebar ${sidebarContainerClass}">
+                    <@banners.seoHunting />
                     ${sidebar}
                 </div>
             </div>

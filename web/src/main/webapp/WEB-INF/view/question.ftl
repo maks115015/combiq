@@ -9,68 +9,7 @@
     <link rel="canonical" href="${canonicalUrl}" />
 </#assign>
 
-<@templates.layoutWithoutSidebar head=head dsl=dsl chapter='questions'
-        subTitle=question.title ogDescription=question.title>
-    <div class="row">
-        <div class="col-md-9">
-            <div class="co-question">
-                <div>
-                    <div>
-                        <div class="co-question-title">
-                        ${question.title}
-                        </div>
-
-                        <div class="co-question-body">
-                            <@templates.contentEditor content=question.body url='/questions/${question.id}/content' />
-                        </div>
-
-                        <@questionStaff />
-                    </div>
-                </div>
-            </div>
-
-            <@questionPosition />
-
-            <#if landing>
-                <@landingBlock />
-            </#if>
-
-            <@questionComments />
-        </div>
-        <div class="col-md-3 co-question-aside">
-            <@sidebar />
-        </div>
-    </div>
-</@templates.layoutWithoutSidebar>
-
-<#macro landingBlock>
-    <div class="co-landing">
-        <div class="row">
-            <div class="col-md-8 co-landing-another-questions">
-                <#if anotherQuestions??>
-                    <h4>Другие вопросы для подготовки к собеседованию</h4>
-                    <ul>
-                        <#list anotherQuestions as anotherQuestion>
-                            <li>
-                                <a href="/questions/${anotherQuestion.id}">
-                                    ${anotherQuestion.title}
-                                </a>
-                            </li>
-                        </#list>
-                    </ul>
-                </#if>
-            </div>
-            <div class="col-md-4 co-landing-another-desc">
-                <a href="http://combiq.ru">Combiq.ru</a> - это проект с открытым исходным кодом, цель которого
-                собрать в одном месте
-                всю полезную информацию для Java программистов, которые
-                готовятся к собеседованию на новое место работы.
-            </div>
-        </div>
-    </div>
-</#macro>
-
-<#macro sidebar>
+<#assign sidebar>
     <div>
         <h4>Полезное</h4>
         <ol class="list-unstyled co-question-aside-tips">
@@ -139,6 +78,67 @@
             </script>
         </div>
     </#if>
+</#assign>
+
+<@templates.layoutWithSidebar
+        head=head
+        dsl=dsl
+        chapter='questions'
+        subTitle=question.title
+        sidebar=sidebar
+        sidebarContainerClass='co-question-aside'
+        ogDescription=question.title>
+
+        <div class="co-question">
+            <div>
+                <div>
+                    <div class="co-question-title">
+                    ${question.title}
+                    </div>
+
+                    <div class="co-question-body">
+                        <@templates.contentEditor content=question.body url='/questions/${question.id}/content' />
+                    </div>
+
+                    <@questionStaff />
+                </div>
+            </div>
+        </div>
+
+        <@questionPosition />
+
+        <#if landing>
+            <@landingBlock />
+        </#if>
+
+        <@questionComments />
+</@templates.layoutWithSidebar>
+
+<#macro landingBlock>
+    <div class="co-landing">
+        <div class="row">
+            <div class="col-md-8 co-landing-another-questions">
+                <#if anotherQuestions??>
+                    <h4>Другие вопросы для подготовки к собеседованию</h4>
+                    <ul>
+                        <#list anotherQuestions as anotherQuestion>
+                            <li>
+                                <a href="/questions/${anotherQuestion.id}">
+                                    ${anotherQuestion.title}
+                                </a>
+                            </li>
+                        </#list>
+                    </ul>
+                </#if>
+            </div>
+            <div class="col-md-4 co-landing-another-desc">
+                <a href="http://combiq.ru">Combiq.ru</a> - это проект с открытым исходным кодом, цель которого
+                собрать в одном месте
+                всю полезную информацию для Java программистов, которые
+                готовятся к собеседованию на новое место работы.
+            </div>
+        </div>
+    </div>
 </#macro>
 
 <#macro questionStaff>
