@@ -100,6 +100,11 @@
                                 Всё, что может вам потребоваться для подготовки
                                 <br>
                                 к Java собеседованию
+                                <br>
+                                <span class="co-topmenu-links">
+                                    <a href="https://github.com/combiq">Исходный код на Gtihub</a>,
+                                    <a href="http://jira.combiq.ru">JIRA</a>
+                                </span>
                             </span>
                         </div>
                     </li>
