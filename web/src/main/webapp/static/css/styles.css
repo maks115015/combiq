@@ -201,11 +201,6 @@ ul.co-topmenu > li {
     line-height: 32px;
 }
 
-.co-topmenu-links {
-    display: inline-block;
-    padding-top: 5px;
-}
-
 .co-topmenu-mainer,
 .co-topmenu-mainer:hover {
     font-weight: bold;

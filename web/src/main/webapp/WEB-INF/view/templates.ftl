@@ -100,11 +100,6 @@
                                 Всё, что может вам потребоваться для подготовки
                                 <br>
                                 к Java собеседованию
-                                <br>
-                                <span class="co-topmenu-links">
-                                    <a href="https://github.com/combiq">Исходный код на Gtihub</a>,
-                                    <a href="http://jira.combiq.ru">JIRA</a>
-                                </span>
                             </span>
                         </div>
                     </li>
@@ -113,6 +108,11 @@
                     <li class="co-socials">
                         <a href="https://vk.com/combiq">
                             <img src="/static/images/social/vk.png" alt="Java Combiq on VK.com">
+                        </a>
+                    </li>
+                    <li class="co-socials">
+                        <a href="http://jira.combiq.ru/">
+                            <img src="/static/images/social/jira.png" alt="JIRA">
                         </a>
                     </li>
                     <li class="co-socials" style="padding-right: 15px;">
@@ -155,7 +155,10 @@
                         <div>
                             <strong>Combiq.ru, 2014-2016</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                             <a href="https://github.com/atott/combiq">https://github.com/atott/combiq</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-                            <a href="/donate">Поддержать проект</a>
+                            <a href="/donate">Поддержать проект</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+                            <a href="http://jira.combiq.ru/">
+                                <img style="margin-top: -12px;" src="/static/images/social/jirasoftware_rgb_white_atlassian.png" alt="JIRA">
+                            </a>
                         </div>
                     </div>
                     <span class="co-informer">
