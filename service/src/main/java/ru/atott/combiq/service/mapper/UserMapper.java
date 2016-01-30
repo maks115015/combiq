@@ -21,6 +21,7 @@ public class UserMapper implements Mapper<UserEntity, User> {
         user.setHome(source.getHome());
         user.setType(UserType.valueOf(source.getType()));
         user.setAvatarUrl(source.getAvatarUrl());
+        user.setRegisterDate(source.getRegisterDate());
 
         ArrayList<String> roles = new ArrayList<>();
 

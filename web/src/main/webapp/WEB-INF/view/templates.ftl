@@ -132,6 +132,11 @@
                     <li class="co-chapter ${if(chapter == 'job', 'active')}">
                         <a href="/job">Работа</a>
                     </li>
+                    <@security.authorize access="hasRole('sa')">
+                        <li class="co-chapter ${if(chapter == 'admin', 'active')}">
+                            <a href="/admin">Админка</a>
+                        </li>
+                    </@security.authorize>
                     <#if user??>
                         <li class="co-auth">
                             <#if user.headAvatarUrl??>

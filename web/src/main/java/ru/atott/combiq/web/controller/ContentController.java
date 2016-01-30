@@ -1,7 +1,7 @@
 package ru.atott.combiq.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.atott.combiq.service.site.ContentService;
@@ -15,7 +15,7 @@ public class ContentController extends BaseController {
 
     @RequestMapping(value = "/content/{contentId}", method = RequestMethod.POST)
     @ResponseBody
-    @Secured("sa")
+    @PreAuthorize("hasAnyRole('sa','contenter')")
     public Object preview(@PathVariable("contentId") String contentId,
                           @RequestBody ContentRequest contentRequest) {
         contentService.updateContent(contentId, contentRequest.getContent());

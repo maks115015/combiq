@@ -1,13 +1,15 @@
 package ru.atott.combiq.web.security;
 
+import com.google.common.collect.Sets;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import ru.atott.combiq.service.bean.UserType;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CombiqUser extends User {
     private UserType type;
@@ -16,7 +18,7 @@ public class CombiqUser extends User {
     private String avatarUrl;
     private String email;
     private String name;
-    private Collection<String> roles;
+    private Set<String> roles;
 
     public UserType getType() {
         return type;
@@ -32,8 +34,10 @@ public class CombiqUser extends User {
 
     public CombiqUser(String username, String password, Collection<String> roles) {
         super(username, password,
-                roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
-        this.roles = roles;
+                roles.stream()
+                        /*.flatMap(roleName -> Stream.of(roleName, "ROLE_" + roleName))*/
+                        .map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+        this.roles = Sets.newHashSet(roles);
     }
 
     public String getLogin() {
@@ -91,11 +95,11 @@ public class CombiqUser extends User {
         this.name = name;
     }
 
-    public Collection<String> getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<String> roles) {
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 }

@@ -32,6 +32,9 @@
         "roles": {
           "type": "string",
           "index": "not_analyzed"
+        },
+        "registerDate": {
+          "type": "date"
         }
       }
     }

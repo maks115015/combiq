@@ -3,6 +3,7 @@ package ru.atott.combiq.dao.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.util.Date;
 import java.util.List;
 
 @Document(indexName = "#{domainResolver.resolvePersonalIndex()}", type = "user")
@@ -18,6 +19,7 @@ public class UserEntity {
     private String type;
     private String avatarUrl;
     private List<String> roles;
+    private Date registerDate;
 
     public String getLogin() {
         return login;
@@ -97,5 +99,13 @@ public class UserEntity {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 }
