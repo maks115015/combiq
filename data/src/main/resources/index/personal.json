@@ -28,6 +28,10 @@
         "type": {
           "type": "string",
           "index": "not_analyzed"
+        },
+        "roles": {
+          "type": "string",
+          "index": "not_analyzed"
         }
       }
     }

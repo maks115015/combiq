@@ -3,8 +3,12 @@ package ru.atott.combiq.service.mapper;
 import ru.atott.combiq.dao.entity.UserEntity;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserType;
+import ru.atott.combiq.service.user.UserRoles;
+
+import java.util.ArrayList;
 
 public class UserMapper implements Mapper<UserEntity, User> {
+
     @Override
     public User map(UserEntity source) {
         User user = new User();
@@ -17,6 +21,16 @@ public class UserMapper implements Mapper<UserEntity, User> {
         user.setHome(source.getHome());
         user.setType(UserType.valueOf(source.getType()));
         user.setAvatarUrl(source.getAvatarUrl());
+
+        ArrayList<String> roles = new ArrayList<>();
+
+        if (source.getRoles() != null) {
+            roles.addAll(source.getRoles());
+        }
+
+        roles.add(UserRoles.user);
+
+        user.setRoles(roles);
         return user;
     }
 }

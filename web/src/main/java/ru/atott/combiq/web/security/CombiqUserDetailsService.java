@@ -9,8 +9,6 @@ import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.user.UserService;
 
-import java.util.List;
-
 public class CombiqUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
@@ -19,7 +17,7 @@ public class CombiqUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String qualifier) throws UsernameNotFoundException {
         try {
             UserQualifier userQualifier = new UserQualifier(qualifier);
-            User user = userService.findByLogin(userQualifier.getLogin(), userQualifier.getType());
+            User user = userService.findByLoginAndType(userQualifier.getLogin(), userQualifier.getType());
             if (user != null) {
                 String passwordHash = user.getPasswordHash();
                 switch (user.getType()) {
@@ -31,9 +29,7 @@ public class CombiqUserDetailsService implements UserDetailsService {
                         break;
                 }
 
-                List<String> userRoles = userService.getUserRoles(userQualifier);
-
-                CombiqUser combiqUser = new CombiqUser(qualifier, passwordHash, userRoles);
+                CombiqUser combiqUser = new CombiqUser(qualifier, passwordHash, user.getRoles());
                 combiqUser.setType(user.getType());
                 combiqUser.setLogin(user.getLogin());
                 combiqUser.setId(user.getId());

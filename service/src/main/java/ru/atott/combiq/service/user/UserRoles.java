@@ -5,4 +5,6 @@ public interface UserRoles {
     String sa = "sa";
 
     String user = "user";
+
+    String contenter = "contenter";
 }

@@ -1,6 +1,5 @@
 package ru.atott.combiq.service.user.impl;
 
-import org.elasticsearch.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.UserEntity;
@@ -11,37 +10,30 @@ import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.mapper.UserMapper;
 import ru.atott.combiq.service.user.GithubRegistrationContext;
-import ru.atott.combiq.service.user.UserRoles;
+import ru.atott.combiq.service.user.UserNotFoundException;
 import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.service.user.VkRegistrationContext;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private UserMapper userMapper = new UserMapper();
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public User findByLogin(String login, UserType type) {
-        List<UserEntity> byEmail = userRepository.findByLoginAndType(login, type.name());
+    public User findByLoginAndType(String login, UserType type) {
+        return userMapper.safeMap(findEntityByLoginAndType(login, type));
+    }
 
-        UserEntity userEntity = null;
-        if (byEmail.size() == 1) {
-            userEntity = byEmail.get(0);
-        }
-
-        if (userEntity != null) {
-            return userMapper.map(userEntity);
-        }
-
-        if (byEmail.size() == 0) {
-            return null;
-        }
-
-        throw new ServiceException(String.format("There are more then one user with login: %s", login));
+    @Override
+    public User findByQualifier(UserQualifier userQualifier) {
+        return findByLoginAndType(userQualifier.getLogin(), userQualifier.getType());
     }
 
     @Override
@@ -102,16 +94,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<String> getUserRoles(UserQualifier userQualifier) {
-        if (UserQualifier.ATOTT.equals(userQualifier)) {
-            return Lists.newArrayList(UserRoles.sa, UserRoles.user);
-        }
-
-        return Collections.singletonList(UserRoles.user);
-    }
-
-    @Override
-    public User getById(String userId) {
+    public User findById(String userId) {
         UserEntity userEntity = userRepository.findOne(userId);
 
         if (userEntity != null) {
@@ -119,5 +102,76 @@ public class UserServiceImpl implements UserService {
         }
 
         return null;
+    }
+
+    @Override
+    public void grantRole(UserQualifier userQualifier, String role) throws UserNotFoundException {
+        UserEntity entity = findEntityByQualifier(userQualifier);
+
+        if (entity == null) {
+            throw new UserNotFoundException(userQualifier.toString());
+        }
+
+        List<String> roles = Optional
+                .ofNullable(entity.getRoles())
+                .map(ArrayList::new)
+                .orElse(new ArrayList<>())
+                .stream()
+                .distinct()
+                .collect(Collectors.toList());
+
+        if (!roles.contains(role)) {
+            roles.add(role);
+        }
+
+        entity.setRoles(roles);
+
+        userRepository.save(entity);
+    }
+
+    @Override
+    public void revokeRole(UserQualifier userQualifier, String role) throws UserNotFoundException {
+        UserEntity entity = findEntityByQualifier(userQualifier);
+
+        if (entity == null) {
+            throw new UserNotFoundException(userQualifier.toString());
+        }
+
+        List<String> roles = Optional
+                .ofNullable(entity.getRoles())
+                .map(ArrayList::new)
+                .orElse(new ArrayList<>())
+                .stream()
+                .distinct()
+                .collect(Collectors.toList());
+
+        roles.remove(role);
+
+        entity.setRoles(roles);
+
+        userRepository.save(entity);
+    }
+
+    private UserEntity findEntityByLoginAndType(String login, UserType type) {
+        List<UserEntity> result = userRepository.findByLoginAndType(login, type.name());
+
+        UserEntity userEntity = null;
+        if (result.size() == 1) {
+            userEntity = result.get(0);
+        }
+
+        if (userEntity != null) {
+            return userEntity;
+        }
+
+        if (result.size() == 0) {
+            return null;
+        }
+
+        throw new ServiceException(String.format("There are more then one user with login: %s", login));
+    }
+
+    private UserEntity findEntityByQualifier(UserQualifier userQualifier) {
+        return findEntityByLoginAndType(userQualifier.getLogin(), userQualifier.getType());
     }
 }

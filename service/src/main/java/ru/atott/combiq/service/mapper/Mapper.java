@@ -7,7 +7,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface Mapper<S, D> {
+
     D map(S source);
+
+    default D safeMap(S source) {
+        if (source == null) {
+            return null;
+        }
+
+        return map(source);
+    }
 
     default List<D> toList(Collection<S> source) {
         return source.stream().map(this::map).collect(Collectors.toList());
