@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.bean;
 
+import java.util.Date;
 import java.util.List;
 
 public class User {
@@ -13,6 +14,7 @@ public class User {
     private UserType type;
     private String avatarUrl;
     private List<String> roles;
+    private Date registerDate;
 
     public String getId() {
         return id;
@@ -96,5 +98,13 @@ public class User {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 }

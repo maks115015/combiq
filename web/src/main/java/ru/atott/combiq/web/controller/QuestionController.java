@@ -1,8 +1,7 @@
 package ru.atott.combiq.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -76,7 +75,7 @@ public class QuestionController extends BaseController {
 
     @RequestMapping(value = "/questions/{questionId}/content", method = RequestMethod.POST)
     @ResponseBody
-    @Secured("sa")
+    @PreAuthorize("hasAnyRole('sa','contenter')")
     public Object postContent(@PathVariable("questionId") String questionId,
                               @RequestBody ContentRequest contentRequest) {
         questionService.saveQuestionBody(questionId, contentRequest.getContent());
@@ -85,7 +84,7 @@ public class QuestionController extends BaseController {
 
     @RequestMapping(value = "/questions/{questionId}/comment", method = RequestMethod.POST)
     @ResponseBody
-    @Secured("user")
+    @PreAuthorize("hasAnyRole('user')")
     public Object postComment(@PathVariable("questionId") String questionId,
                               @RequestBody ContentRequest contentRequest) {
         questionService.saveComment(getContext(), questionId, contentRequest.getContent());

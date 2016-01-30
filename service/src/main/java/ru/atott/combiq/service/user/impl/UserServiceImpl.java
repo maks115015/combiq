@@ -1,6 +1,8 @@
 package ru.atott.combiq.service.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.UserEntity;
 import ru.atott.combiq.dao.repository.UserRepository;
@@ -15,6 +17,7 @@ import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.service.user.VkRegistrationContext;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,6 +49,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setName(context.getName());
         userEntity.setType(UserType.github.name());
         userEntity.setAvatarUrl(context.getAvatarUrl());
+        userEntity.setRegisterDate(new Date());
 
         userEntity = userRepository.index(userEntity);
         return userMapper.map(userEntity);
@@ -59,6 +63,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setName(context.getName());
         userEntity.setType(UserType.vk.name());
         userEntity.setAvatarUrl(context.getAvatarUrl());
+        userEntity.setRegisterDate(new Date());
 
         userEntity = userRepository.index(userEntity);
         return userMapper.map(userEntity);
@@ -75,6 +80,10 @@ public class UserServiceImpl implements UserService {
         userEntity.setType(UserType.github.name());
         userEntity.setAvatarUrl(context.getAvatarUrl());
 
+        if (userEntity.getRegisterDate() == null) {
+            userEntity.setRegisterDate(new Date());
+        }
+
         userRepository.save(userEntity);
         return userMapper.map(userEntity);
     }
@@ -89,8 +98,19 @@ public class UserServiceImpl implements UserService {
         userEntity.setType(UserType.vk.name());
         userEntity.setAvatarUrl(context.getAvatarUrl());
 
+        if (userEntity.getRegisterDate() == null) {
+            userEntity.setRegisterDate(new Date());
+        }
+
         userRepository.save(userEntity);
         return userMapper.map(userEntity);
+    }
+
+    @Override
+    public List<User> getLastRegisteredUsers(long count) {
+        PageRequest pageRequest = new PageRequest(0, (int) count, Sort.Direction.DESC, "registerDate");
+        List<UserEntity> users = userRepository.findAll(pageRequest).getContent();
+        return userMapper.toList(users);
     }
 
     @Override
@@ -102,6 +122,11 @@ public class UserServiceImpl implements UserService {
         }
 
         return null;
+    }
+
+    @Override
+    public long getCountRegisteredUsersSince(Date since) {
+        return userRepository.countByRegisterDateGreaterThanEqual(since);
     }
 
     @Override

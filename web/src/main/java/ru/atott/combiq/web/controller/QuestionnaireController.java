@@ -1,9 +1,7 @@
 package ru.atott.combiq.web.controller;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,10 +12,6 @@ import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.ContentRequest;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 @Controller
 public class QuestionnaireController extends BaseController {
@@ -65,7 +59,7 @@ public class QuestionnaireController extends BaseController {
 
     @RequestMapping(value = "/questionnaire/{questionnaireId}/title", method = RequestMethod.POST)
     @ResponseBody
-    @Secured("sa")
+    @PreAuthorize("hasAnyRole('sa','contenter')")
     public Object updateTitle(@PathVariable("questionnaireId") String questionnaireId,
                               @RequestBody ContentRequest title) {
         questionnaireService.updateQuestionnaireTitle(questionnaireId, title.getContent());

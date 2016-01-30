@@ -20,7 +20,7 @@ public class PagingBeanBuilder {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(uri);
         uriBuilder.scheme(null);
         uriBuilder.host(null);
-        uriBuilder.port(null);
+        uriBuilder.port(-1);
 
         if (page.getTotalPages() <= 5) {
             bean.setPages(getPages(0, page.getTotalPages() - 1, currentPage, uriBuilder));
