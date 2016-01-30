@@ -6,6 +6,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <import resource="classpath:ru/atott/combiq/dao/dao-context-wo-repositories.xml"/>
+    <import resource="classpath:ru/atott/combiq/service/service-context.xml"/>
 
     <context:component-scan base-package="ru.atott.combiq.data" />
 </beans>

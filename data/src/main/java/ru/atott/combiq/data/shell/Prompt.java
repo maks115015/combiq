@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 public class Prompt implements PromptProvider {
     @Override
     public String getPrompt() {
-        return "shell>";
+        return "combiq>";
     }
 
     @Override
     public String getProviderName() {
-        return "shell";
+        return "combiq";
     }
 }

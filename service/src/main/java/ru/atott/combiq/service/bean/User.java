@@ -1,6 +1,6 @@
 package ru.atott.combiq.service.bean;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import java.util.List;
 
 public class User {
     private String id;
@@ -12,6 +12,7 @@ public class User {
     private String home;
     private UserType type;
     private String avatarUrl;
+    private List<String> roles;
 
     public String getId() {
         return id;
@@ -87,5 +88,13 @@ public class User {
 
     public UserQualifier getQualifier() {
         return new UserQualifier(type, login);
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

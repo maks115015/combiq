@@ -121,7 +121,7 @@ public class LoginController extends BaseController {
             site = "http://" + site;
         }
 
-        User user = userService.findByLogin(uid, UserType.vk);
+        User user = userService.findByLoginAndType(uid, UserType.vk);
 
         VkRegistrationContext vkRegistrationContext = new VkRegistrationContext();
         vkRegistrationContext.setUid(uid);
@@ -184,7 +184,7 @@ public class LoginController extends BaseController {
         responseJsonObject = ViewUtils.parseJson(responseJson);
 
         String userLogin = responseJsonObject.get("login").getAsString().toLowerCase();
-        User user = userService.findByLogin(userLogin, UserType.github);
+        User user = userService.findByLoginAndType(userLogin, UserType.github);
 
         GithubRegistrationContext registrationContext = new GithubRegistrationContext();
         registrationContext.setLogin(userLogin);

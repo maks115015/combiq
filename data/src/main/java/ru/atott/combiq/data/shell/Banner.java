@@ -24,6 +24,6 @@ public class Banner implements BannerProvider {
 
     @Override
     public String getProviderName() {
-        return "shell";
+        return "combiq";
     }
 }

@@ -4,11 +4,13 @@ import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.bean.UserType;
 
-import java.util.List;
-
 public interface UserService {
 
-    User findByLogin(String login, UserType provider);
+    User findByLoginAndType(String login, UserType provider);
+
+    User findByQualifier(UserQualifier userQualifier);
+
+    User findById(String userId);
 
     User registerUserViaGithub(GithubRegistrationContext context);
 
@@ -18,7 +20,7 @@ public interface UserService {
 
     User updateVkUser(VkRegistrationContext registrationContext);
 
-    List<String> getUserRoles(UserQualifier userQualifier);
+    void grantRole(UserQualifier userQualifier, String role) throws UserNotFoundException;
 
-    User getById(String userId);
+    void revokeRole(UserQualifier userQualifier, String role) throws UserNotFoundException;
 }

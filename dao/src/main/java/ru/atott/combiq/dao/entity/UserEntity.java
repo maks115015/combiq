@@ -3,6 +3,8 @@ package ru.atott.combiq.dao.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.util.List;
+
 @Document(indexName = "#{domainResolver.resolvePersonalIndex()}", type = "user")
 public class UserEntity {
     @Id
@@ -15,6 +17,7 @@ public class UserEntity {
     private String home;
     private String type;
     private String avatarUrl;
+    private List<String> roles;
 
     public String getLogin() {
         return login;
@@ -86,5 +89,13 @@ public class UserEntity {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }
