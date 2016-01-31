@@ -324,3 +324,10 @@
     </#switch>
     <#return level />
 </#function>
+
+<#function hasRole roleName>
+    <@security.authorize access="hasRole('" + roleName + "')">
+        <#return true>
+    </@security.authorize>
+    <#return false>
+</#function>

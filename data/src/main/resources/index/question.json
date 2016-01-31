@@ -19,6 +19,17 @@
             },
             "postDate": {
               "type": "date"
+            },
+            "editDate": {
+              "type": "date"
+            },
+            "editUserId": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "editUserName": {
+              "type": "string",
+              "index": "not_analyzed"
             }
           }
         }

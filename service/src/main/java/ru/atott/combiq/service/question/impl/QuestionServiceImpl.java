@@ -1,5 +1,8 @@
 package ru.atott.combiq.service.question.impl;
 
+import com.google.common.collect.Sets;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.SetUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,9 @@ import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.repository.Jdk8ClassRepository;
 import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
 import ru.atott.combiq.dao.repository.QuestionRepository;
+import ru.atott.combiq.service.AccessException;
 import ru.atott.combiq.service.CombiqConstants;
+import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.Context;
@@ -20,6 +25,9 @@ import ru.atott.combiq.service.user.UserRoles;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import static ru.atott.combiq.service.user.UserRoles.contenter;
+import static ru.atott.combiq.service.user.UserRoles.sa;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -69,7 +77,7 @@ public class QuestionServiceImpl implements QuestionService {
         questionComment.setUserId(context.getUser().getUserId());
         questionComment.setId(UUID.randomUUID().toString());
 
-        if (context.getUser().getRoles().contains(UserRoles.sa)) {
+        if (context.getUser().getRoles().contains(sa)) {
             questionComment.setUserName(CombiqConstants.combiqUserName);
         } else {
             questionComment.setUserName(context.getUser().getUserName());
@@ -77,6 +85,47 @@ public class QuestionServiceImpl implements QuestionService {
         comments.add(questionComment);
 
         questionEntity.setComments(comments);
+        questionRepository.save(questionEntity);
+    }
+
+    @Override
+    public void updateComment(Context context, String questionId, String commentId, String commentMarkdown) {
+        Validate.isTrue(!context.getUser().isAnonimous());
+        Validate.notEmpty(commentMarkdown);
+
+        QuestionEntity questionEntity = questionRepository.findOne(questionId);
+        List<QuestionComment> comments = questionEntity.getComments();
+
+        if (comments == null) {
+            comments = Collections.emptyList();
+        }
+
+        QuestionComment questionComment = comments.stream()
+                .filter(comment -> Objects.equals(comment.getId(), commentId))
+                .findFirst().orElse(null);
+
+        if (questionComment == null) {
+            throw new ServiceException("Question comment " + commentId + " not found.");
+        }
+
+        if (!Objects.equals(questionComment.getUserId(), context.getUser().getUserId())) {
+
+            if (Sets.intersection(context.getUser().getRoles(), Sets.newHashSet(sa, contenter)).size() == 0) {
+                throw new AccessException();
+            }
+        }
+
+        questionComment.setContent(new MarkdownContent(null, commentMarkdown));
+        questionComment.setEditDate(new Date());
+
+        if (!Objects.equals(questionComment.getUserId(), context.getUser().getUserId())) {
+            questionComment.setEditUserId(context.getUser().getUserId());
+            questionComment.setEditUserName(context.getUser().getUserName());
+        } else {
+            questionComment.setEditUserId(null);
+            questionComment.setEditUserName(null);
+        }
+
         questionRepository.save(questionEntity);
     }
 

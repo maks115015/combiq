@@ -10,6 +10,12 @@ public class QuestionComment {
 
     private Date postDate;
 
+    private String editUserId;
+
+    private String editUserName;
+
+    private Date editDate;
+
     private String id;
 
     private MarkdownContent content;
@@ -52,5 +58,29 @@ public class QuestionComment {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getEditUserId() {
+        return editUserId;
+    }
+
+    public void setEditUserId(String editUserId) {
+        this.editUserId = editUserId;
+    }
+
+    public String getEditUserName() {
+        return editUserName;
+    }
+
+    public void setEditUserName(String editUserName) {
+        this.editUserName = editUserName;
+    }
+
+    public Date getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(Date editDate) {
+        this.editDate = editDate;
     }
 }

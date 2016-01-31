@@ -17,6 +17,7 @@ import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.web.bean.ReputationVoteBean;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.ContentRequest;
+import ru.atott.combiq.web.request.EditCommentRequest;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
@@ -86,8 +87,12 @@ public class QuestionController extends BaseController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('user')")
     public Object postComment(@PathVariable("questionId") String questionId,
-                              @RequestBody ContentRequest contentRequest) {
-        questionService.saveComment(getContext(), questionId, contentRequest.getContent());
+                              @RequestBody EditCommentRequest request) {
+        if (request.getCommentId() == null) {
+            questionService.saveComment(getContext(), questionId, request.getContent());
+        } else {
+            questionService.updateComment(getContext(), questionId, request.getCommentId(), request.getContent());
+        }
         return new SuccessBean();
     }
 

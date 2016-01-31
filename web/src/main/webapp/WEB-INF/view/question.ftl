@@ -197,7 +197,24 @@
                 <ul class="co-comments">
                     <#list comments as comment>
                         <li>
-                            <span class="co-comments-meta">${comment.userName}, ${comment.postDate?string('dd MMMM yyyy, hh:mm')}</span>
+                            <span class="co-comments-meta">
+                                ${comment.userName}, ${comment.postDate?string('dd MMMM yyyy, hh:mm')}
+                                <#if comment.editDate??>
+                                    <span class="co-comments-meta-edited" title="${comment.editUserName!comment.userName}, ${comment.editDate?string('dd MMMM yyyy, hh:mm')}">изменён</span>
+                                </#if>
+                                <#if (user.id)! == comment.userId
+                                        || templates.hasRole('sa')
+                                        || templates.hasRole('contenter') >
+                                    <a class="pull-right" href="#"
+                                        onclick="ko.openDialog('co-editcomment', {
+                                            questionId: '${question.id?js_string}',
+                                            commentId: '${comment.id?js_string}',
+                                            commentMarkdown: '${comment.content.markdown?js_string}'
+                                        }); return false;">
+                                        Изменить
+                                    </a>
+                                </#if>
+                            </span>
                             <div class="co-comments-body">
                             ${comment.content.html}
                             </div>
