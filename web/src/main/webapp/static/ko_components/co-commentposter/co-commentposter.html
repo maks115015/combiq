@@ -1,5 +1,6 @@
 <div class="co-commentposter">
-    <textarea data-bind="value: comment, event: {focus: focus}, css: {'active': focused}, disable: posting"
+    <textarea class="co-commentbox"
+              data-bind="value: comment, event: {focus: focus}, css: {'active': focused}, disable: posting"
               placeholder="Оставить комментарий к вопросу"></textarea>
 
     <div data-bind="visible: focused">

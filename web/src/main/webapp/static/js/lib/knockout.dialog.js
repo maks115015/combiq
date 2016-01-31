@@ -1,5 +1,7 @@
 (function() {
     function Dialog(options) {
+        this.originalOptions = options;
+
         var defaults = {
             content: null,
             buttons: ['OK'],
@@ -28,6 +30,7 @@
         this.show();
         this.resultDeferred = new $.Deferred();
         this.resultPromise = this.resultDeferred.promise();
+        this.originalOptions.dialog = this;
     }
 
     Dialog.openedInstances = [];
@@ -81,7 +84,7 @@
         }
 
         $(node).click(function() {
-            var buttonHandler = self.options.buttonHandler;
+            var buttonHandler = self.options.buttonHandler.bind(self.originalOptions);
             if (buttonHandler(self, button) !== false) {
                 self.close();
             }

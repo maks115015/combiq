@@ -1,0 +1,18 @@
+<div>
+    Изменить комментарий:
+</div>
+
+<textarea class="co-commentbox" style="min-height: 200px;" data-bind="value: markdown">
+
+</textarea>
+
+<div>
+    <button data-bind="click: saveButtonClick, disable: posting">Сохранить</button>
+    <span class="co-commentposter-postingtip" data-bind="visible: posting">Сохранение...</span>
+
+    <div class="pull-right co-inline">
+        <span class="co-commentposter-markdowntip">Используйте <a target="_blank" href="http://daringfireball.net/projects/markdown/">markdown</a> разметку</span>
+    </div>
+</div>
+
+<div class="clearfix"></div>

@@ -11,6 +11,8 @@ public interface QuestionService {
 
     void saveComment(Context context, String questionId, String comment);
 
+    void updateComment(Context context, String questionId, String commentId, String comment);
+
     void saveQuestionBody(String questionId, String body);
 
     List<String> refreshMentionedClassNames(Question question);
