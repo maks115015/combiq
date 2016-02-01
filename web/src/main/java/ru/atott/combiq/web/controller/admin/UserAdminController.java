@@ -32,7 +32,7 @@ public class UserAdminController extends BaseController {
             @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
 
-        Page<User> registeredUsers = userService.getRegisteredUsers(page, 1);
+        Page<User> registeredUsers = userService.getRegisteredUsers(page, 10);
 
         PagingBean paging = pagingBeanBuilder.build(registeredUsers, page, httpServletRequest);
 
