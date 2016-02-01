@@ -14,6 +14,10 @@
 
     <ul>
         <li>
+            Общее число зарегистрированных пользователей:
+            <strong>${countAllRegisteredUsers}</strong>
+        </li>
+        <li>
             Число зарегистрированных за последние 2 недели пользователей:
             <strong>${countLastRegisteredUsers}</strong>
         </li>

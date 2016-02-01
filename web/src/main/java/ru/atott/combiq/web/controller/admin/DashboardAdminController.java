@@ -24,9 +24,11 @@ public class DashboardAdminController extends BaseController {
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public ModelAndView dashboard() {
         long countLastRegisteredUsers = userService.getCountRegisteredUsersSince(DateUtils.addDays(new Date(), -14));
+        long countAllRegisteredUsers = userService.getCountRegisteredUsers();
         List<User> lastRegisteredUsers = userService.getLastRegisteredUsers(10);
 
         ModelAndView modelAndView = new ModelAndView("admin/dashboard");
+        modelAndView.addObject("countAllRegisteredUsers", countAllRegisteredUsers);
         modelAndView.addObject("countLastRegisteredUsers", countLastRegisteredUsers);
         modelAndView.addObject("lastRegisteredUsers", lastRegisteredUsers);
         return modelAndView;
