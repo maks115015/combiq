@@ -1,7 +1,9 @@
 package ru.atott.combiq.service.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.UserEntity;
@@ -107,6 +109,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Page<User> getRegisteredUsers(long page, long size) {
+        Pageable pageable = new PageRequest((int) page, (int) size, Sort.Direction.DESC, "registerDate");
+        Page<UserEntity> result = userRepository.findAll(pageable);
+        return result.map(userEntity -> userMapper.map(userEntity));
+    }
+
+    @Override
     public List<User> getLastRegisteredUsers(long count) {
         PageRequest pageRequest = new PageRequest(0, (int) count, Sort.Direction.DESC, "registerDate");
         List<UserEntity> users = userRepository.findAll(pageRequest).getContent();
@@ -122,6 +131,10 @@ public class UserServiceImpl implements UserService {
         }
 
         return null;
+    }
+
+    public long getCountRegisteredUsers() {
+        return userRepository.count();
     }
 
     @Override
