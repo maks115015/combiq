@@ -1020,7 +1020,7 @@ ul.co-component-question-tags > li {
 .co-component-question-level-desc {
       font-size: 12px;
 }
-.co-tag a {
+a.co-tag  {
       display: inline-block;
       background-color: #DAE6EF;
       color: #566e76;
@@ -1031,7 +1031,7 @@ ul.co-component-question-tags > li {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.co-tag a:hover {
+a.co-tag :hover {
       text-decoration: none;
       background-color: #cad6df;
 }

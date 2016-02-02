@@ -1,6 +1,0 @@
-{
-  "dependencies": [
-    "../../bower_components/polymer/polymer.html",
-    "co-tag.html"
-  ]
-}

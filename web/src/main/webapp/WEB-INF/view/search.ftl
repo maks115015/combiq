@@ -25,11 +25,18 @@
     <div>
         <h4>Популярное</h4>
         <ul class="co-popularTags">
-            <#list popularTags as tag>
-                <li>
-                    <co-tag tag="${tag.value}" count="${tag.docCount}">${tag.value}</co-tag>
-                </li>
-            </#list>
+           <#list popularTags as tag>
+            <li>
+                <a  class="co-tag" href="/questions/tagged/${tag.value}">
+                   ${tag.value}
+                </a>
+                   <#if tag.docCount??>
+                       <span class="co-tag-counter">
+                           &nbsp;× ${tag.docCount}
+                       </span>
+                   </#if>
+            </li>
+           </#list>
         </ul>
         <p>
             <a href="/tags">Смотреть все тэги →</a>
@@ -90,8 +97,8 @@
                         <div>
                             <ul class="co-component-question-tags">
                                 <#list question.tags as tag>
-                                  <li class="co-tag">
-                                     <a  href="/questions/tagged/${tag}">
+                                  <li>
+                                     <a class="co-tag" href="/questions/tagged/${tag}">
                                         ${tag}
                                      </a>
                                    </li>
