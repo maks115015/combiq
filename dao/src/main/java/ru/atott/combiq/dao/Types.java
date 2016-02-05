@@ -17,4 +17,5 @@ public interface Types {
     // Domain site.
     String content = "content";
     String subscription = "subscription";
+    String event = "event";
 }

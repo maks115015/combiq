@@ -7,10 +7,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.atott.combiq.dao.entity.MarkdownContent;
-import ru.atott.combiq.dao.entity.QuestionAttrsEntity;
-import ru.atott.combiq.dao.entity.QuestionComment;
-import ru.atott.combiq.dao.entity.QuestionEntity;
+import ru.atott.combiq.dao.entity.*;
 import ru.atott.combiq.dao.repository.Jdk8ClassRepository;
 import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
 import ru.atott.combiq.dao.repository.QuestionRepository;
@@ -20,6 +17,7 @@ import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.Context;
+import ru.atott.combiq.service.site.EventService;
 import ru.atott.combiq.service.user.UserRoles;
 
 import java.util.*;
@@ -46,6 +44,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private Jdk8ClassRepository jdk8ClassRepository;
+
+    @Autowired
+    private EventService eventService;
 
     @Override
     public void saveUserComment(String userId, String questionId, String comment) {
@@ -86,6 +87,8 @@ public class QuestionServiceImpl implements QuestionService {
 
         questionEntity.setComments(comments);
         questionRepository.save(questionEntity);
+
+        eventService.createPostQuestionCommentEvent(context, questionEntity, questionComment.getId());
     }
 
     @Override
@@ -127,6 +130,8 @@ public class QuestionServiceImpl implements QuestionService {
         }
 
         questionRepository.save(questionEntity);
+
+        eventService.createEditQuestionCommentEvent(context, questionEntity, commentId);
     }
 
     @Override
