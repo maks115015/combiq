@@ -197,7 +197,7 @@
                 <ul class="co-comments">
                     <#list comments as comment>
                         <li>
-                            <span class="co-comments-meta">
+                            <span class="co-comments-meta" id="comment-${comment.id!}">
                                 ${comment.userName}, ${comment.postDate?string('dd MMMM yyyy, hh:mm')}
                                 <#if comment.editDate??>
                                     <span class="co-comments-meta-edited" title="${comment.editUserName!comment.userName}, ${comment.editDate?string('dd MMMM yyyy, hh:mm')}">изменён</span>

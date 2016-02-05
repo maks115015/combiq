@@ -8,6 +8,9 @@ import java.util.List;
 
 @Document(indexName = "#{domainResolver.resolvePersonalIndex()}", type = "user")
 public class UserEntity {
+
+    public static final String REGISTER_DATE_FIELD = "registerDate";
+
     @Id
     private String id;
     private String name;
