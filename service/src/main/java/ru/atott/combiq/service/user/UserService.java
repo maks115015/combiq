@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.user;
 
+import org.springframework.data.domain.Page;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.bean.UserType;
@@ -15,6 +16,8 @@ public interface UserService {
 
     User findById(String userId);
 
+    long getCountRegisteredUsers();
+
     long getCountRegisteredUsersSince(Date since);
 
     User registerUserViaGithub(GithubRegistrationContext context);
@@ -24,6 +27,8 @@ public interface UserService {
     User updateGithubUser(GithubRegistrationContext registrationContext);
 
     User updateVkUser(VkRegistrationContext registrationContext);
+
+    Page<User> getRegisteredUsers(long page, long size);
 
     List<User> getLastRegisteredUsers(long count);
 
