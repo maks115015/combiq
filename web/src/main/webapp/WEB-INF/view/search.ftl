@@ -25,11 +25,18 @@
     <div>
         <h4>Популярное</h4>
         <ul class="co-popularTags">
-            <#list popularTags as tag>
-                <li>
-                    <co-tag tag="${tag.value}" count="${tag.docCount}">${tag.value}</co-tag>
-                </li>
-            </#list>
+           <#list popularTags as tag>
+            <li>
+                <a  class="co-tag" href="/questions/tagged/${tag.value}">
+                   ${tag.value}
+                </a>
+                   <#if tag.docCount??>
+                       <span class="co-tag-counter">
+                           &nbsp;× ${tag.docCount}
+                       </span>
+                   </#if>
+            </li>
+           </#list>
         </ul>
         <p>
             <a href="/tags">Смотреть все тэги →</a>
@@ -74,9 +81,32 @@
     <ul class="co-questions">
         <#list questions as question>
             <li>
-                <co-question reputation="${question.reputation}" level="${question.level}" tags="${question.tags?join(',')}">
-                    <a href="/questions/${question.id}?index=${paging.from + question_index}&dsl=${dsl?url}">${question.title}</a>
-                </co-question>
+              <div class="co-component-question">
+                    <div class="co-component-question-level-bound">
+                        <div class="co-component-question-level">
+                            <div class="co-component-question-level-title">
+                                <a href="/questions/level/${question.level}">${question.level}</a>
+                            </div>
+                            <div class="co-component-question-level-desc">уровень</div>
+                        </div>
+                    </div>
+                    <div class="co-component-question-content">
+                        <div class="co-component-question-text">
+                            <a href="/questions/${question.id}?index=${paging.from + question_index}&dsl=${dsl?url}">${question.title}</a>
+                        </div>
+                        <div>
+                            <ul class="co-component-question-tags">
+                                <#list question.tags as tag>
+                                  <li>
+                                     <a class="co-tag" href="/questions/tagged/${tag}">
+                                        ${tag}
+                                     </a>
+                                   </li>
+                                </#list>
+                            </ul>
+                        </div>
+                    </div>
+              </div>
             </li>
         </#list>
     </ul>
