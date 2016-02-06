@@ -1,3 +1,13 @@
-<textarea class="co-commentbox" style="min-height: 200px;" data-bind="value: text">
+<div id="element" class="co-markdown">
+<textarea class="co-commentbox" id="src" style="min-height: 200px;" data-bind="value: text , visible: active() == 'markdown'">
 
 </textarea>
+    <div id="preview" class="co-markdown__preview" data-bind="html:preview ,visible: active() == 'html'"></div>
+    <div style="text-align: right">
+        <ul class="co-markdown__toolbar">
+            <li id="srcToggler" data-bind="click: toggleSrc, css: { active: active()=='markdown'}">Markdown</li>
+            <li class="active"  id="previewToggler" data-bind="click:togglePreview, css: { active: active() =='html'}">HTML</li>
+        </ul>
+        <button data-bind="click:applyClick">Применить</button>
+    </div>
+</div>
