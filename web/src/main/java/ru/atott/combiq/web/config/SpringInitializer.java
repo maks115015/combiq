@@ -28,6 +28,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import ru.atott.combiq.web.aop.CommonViewAttributesInjector;
+import ru.atott.combiq.web.filter.RequestHolderFilter;
 import ru.atott.combiq.web.security.CombiqUserDetailsService;
 import ru.atott.combiq.web.security.ElasticSearchTokenRepositoryImpl;
 
@@ -35,6 +36,7 @@ import javax.servlet.Filter;
 import java.time.Duration;
 import java.util.Properties;
 
+@SuppressWarnings("ALL")
 public class SpringInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -60,8 +62,11 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
 
+        RequestHolderFilter requestHolderFilter = new RequestHolderFilter();
+
         return new Filter[] {
                 characterEncodingFilter,
+                requestHolderFilter,
                 new DelegatingFilterProxy("springSecurityFilterChain")
         };
     }

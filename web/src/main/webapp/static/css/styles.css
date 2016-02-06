@@ -678,7 +678,7 @@ html /deep/ paper-button::shadow .button-content {
     padding-right: 10px;
 }
 
-button {
+button, .btn {
     background: #FFCF86;
     background-image: -webkit-linear-gradient(top, #FFCF86, #e6a84a);
     background-image: -moz-linear-gradient(top, #FFCF86, #e6a84a);
@@ -694,7 +694,7 @@ button {
     text-decoration: none;
 }
 
-button:hover {
+button:hover, .btn:hover {
     background: #fcd292;
     background-image: -webkit-linear-gradient(top, #fcd292, #ebb463);
     background-image: -moz-linear-gradient(top, #fcd292, #ebb463);
@@ -704,7 +704,7 @@ button:hover {
     text-decoration: none;
 }
 
-button:active {
+button:active, .btn:active {
     background: #ebb463;
     background-image: -webkit-linear-gradient(top, #ebb463, #fcd292);
     background-image: -moz-linear-gradient(top, #ebb463, #fcd292);
@@ -713,7 +713,7 @@ button:active {
     background-image: linear-gradient(to bottom, #ebb463, #fcd292);
 }
 
-button:disabled {
+button:disabled, .btn:disabled {
     opacity: 0.7;
 }
 
@@ -767,19 +767,6 @@ button:disabled {
 .co-dialog > .close:hover,
 .co-dialog > .close:active {
     background: none;
-}
-
-.co-login-left {
-    border-right: solid 1px #E0E0E0;
-}
-
-.co-login-left img {
-    margin-bottom: 45px;
-}
-
-.co-login-left .col-md-8 {
-    padding-top: 40px;
-    padding-right: 60px;
 }
 
 .subtitle {
@@ -1025,4 +1012,55 @@ ul.co-component-question-tags > li {
       font-size: 12px;
       color: #777;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.row-centered {
+    text-align:center;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
+
+.co-login {
+    padding: 40px 0;
+}
+
+.co-login-bordered {
+    margin-top: 100px;
+    border: solid 1px #D2D2D2;
+    background-color: #FDFDFD;
+    -webkit-box-shadow: 1px 1px 4px -1px rgba(0,0,0,0.36);
+    -moz-box-shadow: 1px 1px 4px -1px rgba(0,0,0,0.36);
+    box-shadow: 1px 1px 4px -1px rgba(0,0,0,0.36);
+}
+
+.co-login h1 {
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+.co-login-logo {
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+    height: 120px;
+    vertical-align: middle;
+    background-color: #F1F1F1;
+    border-radius: 50%;
+}
+
+.co-login-logo > a {
+    display: inline-block;
+    line-height: 112px;
+    margin-left: -6px;
+}
+
+.co-login-delimiter {
+    color: gray;
+    font-style: italic;
+    font-size: 12px;
 }

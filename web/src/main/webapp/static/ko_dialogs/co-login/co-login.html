@@ -1,20 +1,30 @@
-<div>
-    <h4>Войти на Combiq.ru</h4>
-    <div class="text-center" style="padding-top: 20px">
+<div class="co-login text-center">
+    <div class="co-login-logo">
+        <a href="/"><img src="/static/images/site/flat-logo-64.png" ></a>
+    </div>
+
+    <h1>Войти на Combiq.ru</h1>
+
+    <div class="text-center">
         <p>
-            <a data-bind="attr: {href: githubUrl}" id="githubLoginButton"
-               class="go-github-btn login-btn"
-               style="margin-left: 0">
-                <span class="text">Войти через Github.com</span>
-                <span class="arrow">❯</span>
+            <a data-bind="attr: {href: githubUrl}" class="btn">
+                через <b>github.com</b>
             </a>
         </p>
+        <p class="co-login-delimiter">
+            - или -
+        </p>
         <p>
-            <a data-bind="attr: {href: vkUrl}" id="vkLoginButton"
-               class="go-github-btn login-btn"
-               style="margin-left: 0">
-                <span class="text">Войти через vk.com</span>
-                <span class="arrow">❯</span>
+            <a data-bind="attr: {href: vkUrl}" class="btn">
+                через <b>vk.com</b>
+            </a>
+        </p>
+        <p class="co-login-delimiter">
+            - или -
+        </p>
+        <p>
+            <a class="btn" data-bind="attr: {href: stackexchangeUrl}">
+                через <b>stackoverflow.com</b>
             </a>
         </p>
     </div>

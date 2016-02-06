@@ -24,9 +24,13 @@ public interface UserService {
 
     User registerUserViaVk(VkRegistrationContext context);
 
+    User registerUserViaStackexchange(StackexchangeRegistrationContext context);
+
     User updateGithubUser(GithubRegistrationContext registrationContext);
 
     User updateVkUser(VkRegistrationContext registrationContext);
+
+    User updateStackexchangeUser(StackexchangeRegistrationContext registrationContext);
 
     Page<User> getRegisteredUsers(long page, long size);
 

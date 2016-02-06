@@ -27,6 +27,8 @@ public class CombiqUserDetailsService implements UserDetailsService {
                     case vk:
                         passwordHash = DigestUtils.sha1Hex("vk");
                         break;
+                    case stackexchange:
+                        passwordHash = DigestUtils.sha1Hex("stackexchange");
                 }
 
                 CombiqUser combiqUser = new CombiqUser(qualifier, passwordHash, user.getRoles());

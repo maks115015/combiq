@@ -11,4 +11,6 @@ public interface AuthService {
     String getUserId();
 
     String getLaunchDependentSalt();
+
+    String getSessionId();
 }
