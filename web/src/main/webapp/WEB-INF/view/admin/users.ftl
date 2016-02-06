@@ -27,10 +27,10 @@
                 <tr>
                     <td>
                         <div>
-                            <strong>${user.login!}</strong>
+                            <strong>${user.type}/${user.login!}</strong>
                         </div>
                         <div>
-                            <span>
+                            <span class="co-small">
                                 id: ${user.id}
                             </span>
                         </div>

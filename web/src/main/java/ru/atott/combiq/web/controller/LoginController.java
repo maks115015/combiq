@@ -1,5 +1,6 @@
 package ru.atott.combiq.web.controller;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -25,11 +26,13 @@ import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.user.GithubRegistrationContext;
+import ru.atott.combiq.service.user.StackexchangeRegistrationContext;
 import ru.atott.combiq.service.user.UserService;
 import ru.atott.combiq.service.user.VkRegistrationContext;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.utils.ViewUtils;
+import ru.atott.combiq.web.view.InstantMessageHolder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,18 +41,37 @@ import java.io.IOException;
 
 @Controller
 public class LoginController extends BaseController {
+
     @Value("${auth.github.clientId}")
     private String githubClientId;
+
     @Value("${auth.github.clientSecret}")
     private String githubClientSecret;
+
     @Value("${auth.vk.clientId}")
     private String vkClientId;
+
     @Value("${auth.vk.clientSecret}")
     private String vkClientSecret;
+
+    @Value("${auth.stackexchange.clientId}")
+    private String stackexchangeClientId;
+
+    @Value("${auth.stackexchange.clientSecret}")
+    private String stackexchangeClientSecret;
+
+    @Value("${auth.stackexchange.clientKey}")
+    private String stackexchangeClientKey;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private InstantMessageHolder instantMessageHolder;
+
     @Autowired
     private RememberMeServices rememberMeServices;
 
@@ -57,9 +79,8 @@ public class LoginController extends BaseController {
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView("login");
         modelAndView.addObject("githubClientId", githubClientId);
-        modelAndView.addObject("githubClientSecret", githubClientSecret);
         modelAndView.addObject("vkClientId", vkClientId);
-        modelAndView.addObject("vkClientSecret", vkClientSecret);
+        modelAndView.addObject("stackexchangeClientId", stackexchangeClientId);
         return modelAndView;
     }
 
@@ -125,7 +146,7 @@ public class LoginController extends BaseController {
 
         VkRegistrationContext vkRegistrationContext = new VkRegistrationContext();
         vkRegistrationContext.setUid(uid);
-        vkRegistrationContext.setName(firstName + " " + lastName);
+        vkRegistrationContext.setName((firstName + " " + lastName).trim());
         vkRegistrationContext.setLocation(city);
         vkRegistrationContext.setAvatarUrl(photo);
 
@@ -204,6 +225,88 @@ public class LoginController extends BaseController {
         }
 
         httpRequest.login(user.getQualifier().toString(), "github");
+        rememberMeServices.loginSuccess(httpRequest, httpResponse, authService.getAuthentication());
+
+        return new RedirectView(redirectUrl);
+    }
+
+    @RequestMapping(value = "/login/callback/stackexchange.do", method = RequestMethod.GET)
+    public RedirectView stackexchangeCallback(@RequestParam(value = "code") String code,
+                                       @RequestParam(value = "state") String state,
+                                       HttpServletRequest httpRequest,
+                                       HttpServletResponse httpResponse) throws IOException, ServletException {
+        String sessionId = httpRequest.getSession(true).getId();
+        String stateHash = StringUtils.substringBefore(state, ":");
+        String actualStateHash = DigestUtils.sha256Hex(sessionId + authService.getLaunchDependentSalt());
+        String redirectUrl = StringUtils.defaultIfBlank(StringUtils.substringAfter(state, ":"), "/");
+
+        if (!Objects.equals(stateHash, actualStateHash)) {
+            return new RedirectView("/");
+        }
+
+        UrlResolver urlResolver = new RequestUrlResolver(httpRequest);
+
+        String exchangeUrl = UriComponentsBuilder
+                .fromHttpUrl("https://stackexchange.com/oauth/access_token")
+                .queryParam("client_id", stackexchangeClientId)
+                .queryParam("client_secret", stackexchangeClientSecret)
+                .queryParam("code", code)
+                .queryParam("redirect_uri", urlResolver.externalize("/login/callback/stackexchange.do"))
+                .build()
+                .toString();
+
+        HttpClient client = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(exchangeUrl);
+        HttpResponse response = client.execute(httpPost);
+        String responseAnswer = IOUtils.toString(response.getEntity().getContent());
+        String accessToken = StringUtils.substringAfter(responseAnswer, "access_token=");
+
+        String getUrl = UriComponentsBuilder
+                .fromHttpUrl("https://api.stackexchange.com/2.2/me")
+                .queryParam("key", stackexchangeClientKey)
+                .queryParam("access_token", accessToken)
+                .queryParam("site", "stackoverflow")
+                .build()
+                .toUriString();
+        HttpGet httpGet = new HttpGet(getUrl);
+        httpGet.setHeader("Accept", "application/json");
+        response = client.execute(httpGet);
+        String responseJson = IOUtils.toString(response.getEntity().getContent(), "utf-8");
+        JsonObject responseJsonObject = ViewUtils.parseJson(responseJson);
+
+        JsonArray items = responseJsonObject.get("items").getAsJsonArray();
+
+        if (items.size() == 0) {
+            instantMessageHolder.push("У вас отсутствует профиль на stackoverflow.com.");
+        }
+
+        JsonObject profile = items.get(0).getAsJsonObject();
+        String userId = profile.get("user_id").getAsString();
+        String displayName = profile.get("display_name").getAsString();
+        String location = null;
+        if (profile.has("location") && !profile.get("location").isJsonNull()) {
+            location = profile.get("location").getAsString();
+        }
+        String avatarUrl = null;
+        if (profile.has("profile_image") && !profile.get("profile_image").isJsonNull()) {
+            avatarUrl = profile.get("profile_image").getAsString();
+        }
+
+        User user = userService.findByLoginAndType(userId, UserType.stackexchange);
+
+        StackexchangeRegistrationContext registrationContext = new StackexchangeRegistrationContext();
+        registrationContext.setUid(userId);
+        registrationContext.setAvatarUrl(avatarUrl);
+        registrationContext.setLocation(location);
+        registrationContext.setName(displayName);
+
+        if (user == null) {
+            user = userService.registerUserViaStackexchange(registrationContext);
+        } else {
+            user = userService.updateStackexchangeUser(registrationContext);
+        }
+
+        httpRequest.login(user.getQualifier().toString(), "stackexchange");
         rememberMeServices.loginSuccess(httpRequest, httpResponse, authService.getAuthentication());
 
         return new RedirectView(redirectUrl);

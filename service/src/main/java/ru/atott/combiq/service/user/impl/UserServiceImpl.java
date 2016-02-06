@@ -14,10 +14,7 @@ import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.mapper.UserMapper;
 import ru.atott.combiq.service.site.EventService;
-import ru.atott.combiq.service.user.GithubRegistrationContext;
-import ru.atott.combiq.service.user.UserNotFoundException;
-import ru.atott.combiq.service.user.UserService;
-import ru.atott.combiq.service.user.VkRegistrationContext;
+import ru.atott.combiq.service.user.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -74,7 +71,23 @@ public class UserServiceImpl implements UserService {
         userEntity.setAvatarUrl(context.getAvatarUrl());
         userEntity.setRegisterDate(new Date());
 
-        eventService.createRegisterUserEvent(UserType.github, context.getUid());
+        eventService.createRegisterUserEvent(UserType.vk, context.getUid());
+
+        userEntity = userRepository.index(userEntity);
+        return userMapper.map(userEntity);
+    }
+
+    @Override
+    public User registerUserViaStackexchange(StackexchangeRegistrationContext context) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLogin(context.getUid());
+        userEntity.setLocation(context.getLocation());
+        userEntity.setName(context.getName());
+        userEntity.setType(UserType.stackexchange.name());
+        userEntity.setAvatarUrl(context.getAvatarUrl());
+        userEntity.setRegisterDate(new Date());
+
+        eventService.createRegisterUserEvent(UserType.stackexchange, context.getUid());
 
         userEntity = userRepository.index(userEntity);
         return userMapper.map(userEntity);
@@ -107,6 +120,24 @@ public class UserServiceImpl implements UserService {
         userEntity.setLocation(context.getLocation());
         userEntity.setName(context.getName());
         userEntity.setType(UserType.vk.name());
+        userEntity.setAvatarUrl(context.getAvatarUrl());
+
+        if (userEntity.getRegisterDate() == null) {
+            userEntity.setRegisterDate(new Date());
+        }
+
+        userRepository.save(userEntity);
+        return userMapper.map(userEntity);
+    }
+
+    @Override
+    public User updateStackexchangeUser(StackexchangeRegistrationContext context) {
+        UserEntity userEntity = userRepository.findByLoginAndType(context.getUid(), UserType.stackexchange.name()).get(0);
+
+        userEntity.setLogin(context.getUid());
+        userEntity.setLocation(context.getLocation());
+        userEntity.setName(context.getName());
+        userEntity.setType(UserType.stackexchange.name());
         userEntity.setAvatarUrl(context.getAvatarUrl());
 
         if (userEntity.getRegisterDate() == null) {

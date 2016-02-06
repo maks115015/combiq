@@ -3,13 +3,13 @@
 
 <#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
-<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true gtmPageName='' ogDescription='' ogTitle=''>
+<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true showHeader=true gtmPageName='' ogDescription='' ogTitle=''>
 <!DOCTYPE html>
 <!--    Дорогой друг!
-        Злой красный человек спалил тебя ;)
-        Теперь помоги ему сделать проект лучше -
+        Мы спалили тебя ;)
+        Теперь помоги нам сделать проект лучше -
         сделай свой вклад в проект Combiq.ru,
-        https://github.com/atott/combiq
+        https://github.com/combiq/combiq
 -->
 <html>
     <head>
@@ -59,7 +59,10 @@
                 githubClientState: '${githubClientState?js_string}',
                 vkClientId: '${vkClientId?js_string}',
                 vkClientState: '${vkClientState?js_string}',
-                vkCallbackUrl: '${vkCallbackUrl?js_string}'
+                vkCallbackUrl: '${vkCallbackUrl?js_string}',
+                stackexchangeClientId: '${stackexchangeClientId?js_string}',
+                stackexchangeClientState: '${stackexchangeClientState?js_string}',
+                stackexchangeCallbackUrl: '${stackexchangeCallbackUrl?js_string}'
             };
         </script>
         <script src="/static/ko_components/components.js?v=${resourceVersion}"></script>
@@ -68,8 +71,6 @@
         ${import("/static/bower_components/paper-dialog/paper-action-dialog.html")}
         ${import("/static/bower_components/core-toolbar/core-toolbar.html")}
         ${import("/static/bower_components/paper-icon-button/paper-icon-button.html")}
-        ${import("/static/elements/co-question/co-question.html")}
-        ${import("/static/elements/co-tag/co-tag.html")}
 
         <@security.authorize access="hasRole('sa')" var="allowEditConent" />
 
@@ -86,72 +87,74 @@
             <@stats.gtm />
             <@stats.ga />
         </#if>
-        <div class="container">
-            <nav class="navbar navbar-default navbar-static-top co-header">
-                <ul class="co-topmenu">
-                    <li>
-                        <img style="vertical-align: baseline; margin-right: 14px;" src="/static/images/site/flat-logo-64.png" />
-                        <div class="co-inline">
-                            <a class="co-topmenu-mainer" href="/" title="combiq.ru">
-                                <span>Combiq.ru</span>
-                            </a>
-                            <br>
-                            <span style="font-size: 12px;">
-                                Всё, что может вам потребоваться для подготовки
+        <#if showHeader>
+            <div class="container">
+                <nav class="navbar navbar-default navbar-static-top co-header">
+                    <ul class="co-topmenu">
+                        <li>
+                            <img style="vertical-align: baseline; margin-right: 14px;" src="/static/images/site/flat-logo-64.png" />
+                            <div class="co-inline">
+                                <a class="co-topmenu-mainer" href="/" title="combiq.ru">
+                                    <span>Combiq.ru</span>
+                                </a>
                                 <br>
-                                к Java собеседованию
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="co-topmenu pull-right">
-                    <li class="co-socials">
-                        <a href="https://vk.com/combiq">
-                            <img src="/static/images/social/vk.png" alt="Java Combiq on VK.com">
-                        </a>
-                    </li>
-                    <li class="co-socials">
-                        <a href="http://jira.combiq.ru/">
-                            <img src="/static/images/social/jira.png" alt="JIRA">
-                        </a>
-                    </li>
-                    <li class="co-socials" style="padding-right: 15px;">
-                        <a href="https://github.com/atott/combiq">
-                            <img src="/static/images/social/github.png" alt="Combiq on Github">
-                        </a>
-                    </li>
-                    <li class="co-chapter ${if(chapter == 'questions', 'active')}">
-                        <a href="/questions">Вопросы</a>
-                    </li>
-                    <li class="co-chapter ${if(chapter == 'questionnaires', 'active')}">
-                        <a href="/questionnaires">Собеседование</a>
-                    </li>
-                    <li class="co-chapter ${if(chapter == 'education', 'active')}">
-                        <a href="/education">Подготовка</a>
-                    </li>
-                    <li class="co-chapter ${if(chapter == 'job', 'active')}">
-                        <a href="/job">Работа</a>
-                    </li>
-                    <@security.authorize access="hasRole('sa')">
-                        <li class="co-chapter ${if(chapter == 'admin', 'active')}">
-                            <a href="/admin">Админка</a>
+                                <span style="font-size: 12px;">
+                                    Всё, что может вам потребоваться для подготовки
+                                    <br>
+                                    к Java собеседованию
+                                </span>
+                            </div>
                         </li>
-                    </@security.authorize>
-                    <#if user??>
-                        <li class="co-auth">
-                            <#if user.headAvatarUrl??>
-                                <img width="46" height="46" src="${user.headAvatarUrl!}">
-                            </#if>
-                            <a href="/logout.do">Выйти</a>
+                    </ul>
+                    <ul class="co-topmenu pull-right">
+                        <li class="co-socials">
+                            <a href="https://vk.com/combiq">
+                                <img src="/static/images/social/vk.png" alt="Java Combiq on VK.com">
+                            </a>
                         </li>
-                    <#else>
-                        <li class="co-auth">
-                            <a href="/login.do">Войти</a>
+                        <li class="co-socials">
+                            <a href="http://jira.combiq.ru/">
+                                <img src="/static/images/social/jira.png" alt="JIRA">
+                            </a>
                         </li>
-                    </#if>
-                </ul>
-            </nav>
-        </div>
+                        <li class="co-socials" style="padding-right: 15px;">
+                            <a href="https://github.com/atott/combiq">
+                                <img src="/static/images/social/github.png" alt="Combiq on Github">
+                            </a>
+                        </li>
+                        <li class="co-chapter ${if(chapter == 'questions', 'active')}">
+                            <a href="/questions">Вопросы</a>
+                        </li>
+                        <li class="co-chapter ${if(chapter == 'questionnaires', 'active')}">
+                            <a href="/questionnaires">Собеседование</a>
+                        </li>
+                        <li class="co-chapter ${if(chapter == 'education', 'active')}">
+                            <a href="/education">Подготовка</a>
+                        </li>
+                        <li class="co-chapter ${if(chapter == 'job', 'active')}">
+                            <a href="/job">Работа</a>
+                        </li>
+                        <@security.authorize access="hasRole('sa')">
+                            <li class="co-chapter ${if(chapter == 'admin', 'active')}">
+                                <a href="/admin">Админка</a>
+                            </li>
+                        </@security.authorize>
+                        <#if user??>
+                            <li class="co-auth">
+                                <#if user.headAvatarUrl??>
+                                    <img width="46" height="46" src="${user.headAvatarUrl!}">
+                                </#if>
+                                <a href="/logout.do">Выйти</a>
+                            </li>
+                        <#else>
+                            <li class="co-auth">
+                                <a href="/login.do">Войти</a>
+                            </li>
+                        </#if>
+                    </ul>
+                </nav>
+            </div>
+        </#if>
         <#nested />
         <#if showFooter>
             <footer>
@@ -180,6 +183,7 @@
         <script>
             ko.applyBindings({}, document.body);
         </script>
+        <@showInstantMessages></@showInstantMessages>
     </body>
 </html>
 </#macro>
@@ -314,6 +318,17 @@
     </#if>
 
     <#global contentEditorIncrementor = contentEditorIncrementor + 1 />
+</#macro>
+
+<#macro showInstantMessages>
+    <#if instantMessage??>
+    <#-- @ftlvariable name="instantMessage" type="ru.atott.combiq.web.view.InstantMessageHolder.Message" -->
+    <script>
+        $(function() {
+            new Dialog('${instantMessage.text?js_string}');
+        });
+    </script>
+    </#if>
 </#macro>
 
 <#function explainLevel level>
