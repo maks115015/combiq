@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -78,6 +80,7 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
             "classpath:ru/atott/combiq/service/service-context.xml",
             "classpath:conf-context.xml"
     })
+    @EnableScheduling
     public static class AppConfiguration {
         @Bean
         public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {

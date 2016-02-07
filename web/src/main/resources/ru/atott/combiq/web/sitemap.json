@@ -1,0 +1,42 @@
+[
+  {
+    "url": "/",
+    "priority": "0.9"
+  },
+  {
+    "url": "/questions",
+    "priority": "0.8"
+  },
+  {
+    "url": "/questions/tagged/freak",
+    "priority": "0.8"
+  },
+  {
+    "url": "/tags",
+    "priority": "0.7"
+  },
+  {
+    "url": "/questionnaires",
+    "priority": "0.8"
+  },
+  {
+    "url": "/questionnaires/interview",
+    "priority": "0.8"
+  },
+  {
+    "url": "/education",
+    "priority": "0.8"
+  },
+  {
+    "url": "/education/competence",
+    "priority": "0.8"
+  },
+  {
+    "url": "/job",
+    "priority": "0.8"
+  },
+  {
+    "url": "/job/opinions",
+    "priority": "0.8"
+  }
+]

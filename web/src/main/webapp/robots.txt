@@ -5,3 +5,4 @@ Disallow: /login.do
 Disallow: /logout.do
 Clean-param: dsl /questions/
 Clean-param: index /questions/
+Sitemap: http://combiq.ru/sitemap.xml
