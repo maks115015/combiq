@@ -31,24 +31,18 @@ a:focus {
 }
 
 .co-mainhead {
-    background-image: url('images/flat-logo.png');
-    background-position: bottom center;
-    background-repeat: no-repeat;
-    min-height: 290px;
-}
-
-@media (max-width: 992px) {
-    .co-mainhead {
-        background: none;
-    }
+    margin-top: 120px;
+    overflow-y: hidden;
+    margin-bottom: 40px;
 }
 
 .co-mainhead-content {
-    padding-top: 60px;
-}
-
-.co-mainhead-content p {
-    margin-bottom: 35px;
+    font-family: 'Segoe UI', 'Segoe UI', Verdana, sans-serif;
+    font-size: 28px;
+    color: black;
+    line-height: 32px;
+    font-weight: normal;
+    margin: 0;
 }
 
 .go-github-btn {
@@ -126,24 +120,48 @@ h4 {
 }
 
 .co-mainer {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#368290+0,093a5b+100 */
-    background: #368290; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover,  #368290 0%, #093a5b 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#368290), color-stop(100%,#093a5b)); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover,  #368290 0%,#093a5b 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover,  #368290 0%,#093a5b 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover,  #368290 0%,#093a5b 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center,  #368290 0%,#093a5b 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#368290', endColorstr='#093a5b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    margin-top: 120px;
 }
 
-.co-mainer .container {
-    padding: 60px 40px 80px 40px;
-    text-align: center;
+.co-mainer-title {
+    font-family: "Arial Bold", Arial;
+    font-size: 38px;
+    color: black;
+    line-height: 48px;
+    font-weight: bold;
+    margin: 40px 0 25px;
 }
 
-.co-mainer h1 {
+.co-mainer-desc {
+    color: #151515;
+    font-family: 'Segoe UI', 'Segoe UI', Verdana, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: normal;
+    margin: 0;
+    max-width: 340px;
+    margin-bottom: 35px;
+}
+
+.co-mainer-background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 365px;
+    background-color: #e3e3e3;
+    z-index: -40;
+}
+
+.co-mainer-a {
+    background-color: black;
+    border-radius: 20px;
     color: white;
+    font-family: 'Segoe UI', 'Segoe UI', Verdana, sans-serif;
+    font-size: 14px;
+    padding: 10px 24px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    display: inline-block;
 }
 
 .co-colored {
@@ -621,22 +639,6 @@ a.co-action:hover {
     color: #6c6c6c;
 }
 
-.co-promo-mainer {
-    background-color: rgba(255, 205, 40, 0.48);
-    padding: 15px;
-    font-family: 'Roboto Slab', serif;
-    font-size: 24px;
-    line-height: 30px;
-    letter-spacing: -1px;
-    color: #354950;
-    font-weight: normal;
-}
-
-.co-promo-mainer-new {
-    font-weight: bold;
-    margin-right: 20px;
-}
-
 .co-mainvk-liker {
     display: inline-block;
     padding-top: 15px;
@@ -1063,4 +1065,16 @@ ul.co-component-question-tags > li {
     color: gray;
     font-style: italic;
     font-size: 12px;
+}
+
+.co-titler {
+    overflow-x: hidden;
+}
+
+.co-titler > img {
+    position: absolute;
+    top: 80px;
+    transform-origin: 0 0;
+    transform: translate(-60px, 0);
+    z-index: -10;
 }

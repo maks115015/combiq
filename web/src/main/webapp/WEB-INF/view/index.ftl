@@ -7,53 +7,41 @@
 </#assign>
 
 <@templates.layoutBody head=head subTitle='готовьтесь к Java собеседованию здесь'>
-    <div class="co-mainhead">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5"></div>
-                <div class="col-md-5 co-mainhead-content">
-                    <p style="margin-bottom: 5px;">
-                        <strong>Combiq.ru</strong> - это проект с открытым исходным кодом, цель которого
-                        собрать в одном месте всю полезную информацию для Java программистов,
-                        которые готовятся к собеседованию на новое место работы.
-                    </p>
-                    <p>
-                        <span id="vk_like" class="co-mainvk-liker"></span>
-                    </p>
-                    <script type="text/javascript">
-                        VK.Widgets.Like("vk_like", {type: "full", height: 24});
-                    </script>
-                    <p>
-                        <img src="/static/images/site/Octocat.png" alt="Octocat">
-                        <a href="https://github.com/atott/combiq" class="go-github-btn">
-                            Check it out on Github!
-                            <span class="arrow">❯</span>
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="co-mainer">
-        <div class="container">
-            <div>
-                <h1>
+
+    <div class="container">
+        <div class="co-titler">
+            <img src="/static/images/background.svg" onerror="this.onerror=null; this.src='image.png'">
+
+            <div class="co-mainhead text-center">
+                <img src="/static/images/site/titler.png">
+
+                <h1 class="co-mainhead-content">
                     Всё, что может вам потребоваться
+                    <br>
                     для подготовки к Java собеседованию
                 </h1>
-                <p>
-                    Вопросы для подготовки к собеседованию Java кандидатам <br>
-                    и опросники для работадателей
-                </p>
             </div>
         </div>
+
     </div>
-    <div class="co-promo-mainer">
-        <div class="container text-center">
-            <span class="co-promo-mainer-new">NEW <span class="glyphicon glyphicon-ok"></span></span>
-            Опросник <a href="/questionnaire/AU7uuDr4o9D60r28WBXV">Java Interview D1-D3</a>
+
+    <div class="co-mainer">
+        <div class="co-mainer-background"></div>
+        <div class="container">
+            <div class="co-mainer-title">
+                Подключайся
+            </div>
+            <div class="co-mainer-desc">
+                Combiq.ru - это проект с открытым исходным кодом,
+                цель которого собрать в одном месте всю полезную информацию
+                для Java программистов, которые готовятся к собеседованию
+                на новое место работы.
+            </div>
+            <a class="co-mainer-a" href="https://github.com/combiq/combiq">Combiq.ru на github</a>
         </div>
     </div>
+
+
     <div class="container">
         <div class="row text-center">
             <h2>Что <span class="co-colored">умеет</span> Combiq.ru</h2>
