@@ -1,4 +1,4 @@
-<#import "../templates.ftl" as templates />
+<#import "../_layout/templates.ftl" as templates />
 <#import "interview-common.ftl" as common />
 
 <#assign sidebar>
@@ -6,13 +6,11 @@
 </#assign>
 
 <@templates.layoutWithSidebar
-        chapter='questionnaires'
+        chapter='interview'
         subTitle='Опросники для подготовки к собеседованию на позицию Java разработчик'
         pageTitle='Пройти собеседование'
         sidebar=sidebar
         mainContainerClass='co-rightbordered'>
-
-    <@templates.headBanners></@templates.headBanners>
 
     <@templates.contentEditor content=questionnairesPageContent></@templates.contentEditor>
 

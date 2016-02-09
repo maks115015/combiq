@@ -1,4 +1,4 @@
-<#import "../templates.ftl" as templates />
+<#import "../_layout/templates.ftl" as templates />
 <#import "interview-common.ftl" as common />
 
 <#assign sidebar>
@@ -11,8 +11,6 @@
         pageTitle='Провести собеседование'
         sidebar=sidebar
         mainContainerClass='co-rightbordered'>
-
-    <@templates.headBanners></@templates.headBanners>
 
     <@templates.contentEditor content=interviewPageContent></@templates.contentEditor>
 

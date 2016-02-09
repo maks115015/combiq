@@ -1,4 +1,4 @@
-<#import "../templates.ftl" as templates />
+<#import "../_layout/templates.ftl" as templates />
 
 <#macro sidebar activeMenuItem>
 <ul class="co-nav co-nav-right-bordered nav nav-pills nav-stacked">

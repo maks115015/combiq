@@ -1,5 +1,6 @@
 <#import "stats.ftl" as stats />
 <#import "banners.ftl" as banners />
+<#import "menu.ftl" as menu />
 
 <#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
@@ -88,69 +89,7 @@
             <@stats.ga />
         </#if>
         <#if showHeader>
-            <div class="container">
-                <nav class="navbar navbar-default navbar-static-top co-header">
-                    <ul class="co-topmenu">
-                        <li>
-                            <img style="vertical-align: baseline; margin-right: 14px;" src="/static/images/site/flat-logo-64.png" />
-                            <div class="co-inline">
-                                <a class="co-topmenu-mainer" href="/" title="combiq.ru">
-                                    <span>Combiq.ru</span>
-                                </a>
-                                <br>
-                                <span style="font-size: 12px;">
-                                    Всё, что может вам потребоваться для подготовки
-                                    <br>
-                                    к Java собеседованию
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="co-topmenu pull-right">
-                        <li class="co-socials">
-                            <a href="https://vk.com/combiq">
-                                <img src="/static/images/social/vk.png" alt="Java Combiq on VK.com">
-                            </a>
-                        </li>
-                        <li class="co-socials">
-                            <a href="http://jira.combiq.ru/">
-                                <img src="/static/images/social/jira.png" alt="JIRA">
-                            </a>
-                        </li>
-                        <li class="co-socials" style="padding-right: 15px;">
-                            <a href="https://github.com/atott/combiq">
-                                <img src="/static/images/social/github.png" alt="Combiq on Github">
-                            </a>
-                        </li>
-                        <li class="co-chapter ${if(chapter == 'questions', 'active')}">
-                            <a href="/questions">Вопросы</a>
-                        </li>
-                        <li class="co-chapter ${if(chapter == 'interview', 'active')}">
-                            <a href="/interview">Собеседование</a>
-                        </li>
-                        <li class="co-chapter ${if(chapter == 'job', 'active')}">
-                            <a href="/job">Работа</a>
-                        </li>
-                        <@security.authorize access="hasRole('sa')">
-                            <li class="co-chapter ${if(chapter == 'admin', 'active')}">
-                                <a href="/admin">Админка</a>
-                            </li>
-                        </@security.authorize>
-                        <#if user??>
-                            <li class="co-auth">
-                                <#if user.headAvatarUrl??>
-                                    <img width="46" height="46" src="${user.headAvatarUrl!}">
-                                </#if>
-                                <a href="/logout.do">Выйти</a>
-                            </li>
-                        <#else>
-                            <li class="co-auth">
-                                <a href="/login.do">Войти</a>
-                            </li>
-                        </#if>
-                    </ul>
-                </nav>
-            </div>
+            <@menu.topMenu chapter=chapter />
         </#if>
         <#nested />
         <#if showFooter>
@@ -174,18 +113,12 @@
                 </div>
             </footer>
         </#if>
-        <#if !user??>
-            <@inviteAuth />
-        </#if>
         <script>
             ko.applyBindings({}, document.body);
         </script>
         <@showInstantMessages></@showInstantMessages>
     </body>
 </html>
-</#macro>
-
-<#macro headBanners>
 </#macro>
 
 <#macro layoutWithSidebar head='' dsl='' sidebar='' chapter='' subTitle='' pageTitle=''
@@ -210,7 +143,7 @@
             </div>
         </div>
         </#if>
-        <div class="container">
+        <div class="container" style="${if(!pageTitle?? || pageTitle == '', 'margin-top: 50px;')}">
             <div class="row">
                 <div class="col-md-9 ${mainContainerClass}">
                     <#nested />
@@ -235,19 +168,6 @@
     <@layoutHtml head=head dsl=dsl chapter=chapter showFooter=showFooter subTitle=subTitle gtmPageName=gtmPageName>
         <#nested />
     </@layoutHtml>
-</#macro>
-
-<#macro inviteAuth>
-    <div>
-        <paper-action-dialog heading="Войдите на сайт" layered="true" backdrop="true" id="inviteAuthDialog">
-            <p>
-                Для того, чтобы иметь возможность голосовать за вопросы, нужно <a href="/login.do">войти</a> на сайт
-                <strong>combiq.ru</strong>.
-            </p>
-            <paper-button affirmative>Не сейчас</paper-button>
-            <paper-button onclick="location.href = '/login.do';" class="co-ok-button" affirmative autofocus>Войти</paper-button>
-        </paper-action-dialog>
-    </div>
 </#macro>
 
 <#function if condition a b=''>

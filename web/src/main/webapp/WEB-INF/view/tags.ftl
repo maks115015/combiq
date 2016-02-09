@@ -1,6 +1,6 @@
 <#-- @ftlvariable name="tags" type="java.util.List" -->
 <#-- @ftlvariable name="tag" type="ru.atott.combiq.service.bean.DetailedQuestionTag" -->
-<#import "templates.ftl" as templates />
+<#import "_layout/templates.ftl" as templates />
 
 <@templates.layoutWithSidebar
         pageTitle="Тэги"

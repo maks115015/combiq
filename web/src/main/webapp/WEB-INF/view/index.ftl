@@ -1,4 +1,4 @@
-<#import "templates.ftl" as templates />
+<#import "_layout/templates.ftl" as templates />
 
 <#assign head>
     <script>
@@ -10,7 +10,7 @@
 
     <div class="container">
         <div class="co-titler">
-            <img src="/static/images/background.svg" onerror="this.onerror=null; this.src='image.png'">
+            <img src="/static/images/background.svg" <#--onerror="this.onerror=null; this.src='image.png'"-->>
 
             <div class="co-mainhead text-center">
                 <img src="/static/images/site/titler.png">

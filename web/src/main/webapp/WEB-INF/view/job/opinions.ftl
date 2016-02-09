@@ -1,4 +1,4 @@
-<#import "../templates.ftl" as templates />
+<#import "../_layout/templates.ftl" as templates />
 <#import "job-common.ftl" as common />
 
 <#assign sidebar>

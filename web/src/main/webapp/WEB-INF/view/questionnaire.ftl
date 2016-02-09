@@ -1,4 +1,4 @@
-<#import "templates.ftl" as templates />
+<#import "_layout/templates.ftl" as templates />
 
 <@templates.layoutBody head=head chapter='questionnaires' subTitle='опросник ' + questionnaire.name>
     <div class="container">

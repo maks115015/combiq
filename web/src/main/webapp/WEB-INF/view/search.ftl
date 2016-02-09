@@ -1,4 +1,4 @@
-<#import "templates.ftl" as templates />
+<#import "_layout/templates.ftl" as templates />
 
 <#assign head>
     ${templates.import("/static/bower_components/paper-input/paper-input-decorator.html")}

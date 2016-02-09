@@ -1,4 +1,4 @@
-<#import "templates.ftl" as templates />
+<#import "_layout/templates.ftl" as templates />
 
 <@templates.layoutHtml showFooter=false showHeader=false gtmPageName='login'>
     <div class="container" style="min-height: 400px;">
