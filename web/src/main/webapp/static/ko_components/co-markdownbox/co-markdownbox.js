@@ -21,7 +21,6 @@ define(['ajax'], function(ajax) {
                             self.preview(result);
                         }
                     });
-
-}
+                    }
     return ViewModel;
 });

@@ -68,15 +68,7 @@
         ${import("/static/bower_components/paper-dialog/paper-action-dialog.html")}
         ${import("/static/bower_components/core-toolbar/core-toolbar.html")}
         ${import("/static/bower_components/paper-icon-button/paper-icon-button.html")}
-        ${import("/static/elements/co-question/co-question.html")}
-        ${import("/static/elements/co-tag/co-tag.html")}
-
         <@security.authorize access="hasRole('sa')" var="allowEditConent" />
-
-        <#if allowEditConent>
-        ${import("/static/elements/co-markdown/co-markdown.html")}
-        </#if>
-
         ${head}
     </head>
     <body>
@@ -291,24 +283,7 @@
 
     <@security.authorize access="hasRole('sa')" var="allowEditConent" />
     <#if allowEditConent>
-        <co-markdown
-                id="contentEditor${contentEditorIncrementor}"
-                value="${(content.markdown)!?html}"
-                preview="${(content.html)!?html}">
-        </co-markdown>
-        <script>
-            $('#contentEditor${contentEditorIncrementor}').on('apply', function(e) {
-                var value = this.value;
-
-                $.ajax({
-                    url: '${if(url == '', "/content/" + content.id!, url)}',
-                    data: JSON.stringify({content: value}),
-                    contentType: 'application/json',
-                    method: 'POST',
-                    success: function(result) { }
-                });
-            });
-        </script>
+        <co-contenteditor params="value:'${(content.markdown)!?html}' ,url: '${if(url == '', "/content/" + content.id!, url)}'"></co-contenteditor>
     <#else>
         ${(content.html)!''}
     </#if>
