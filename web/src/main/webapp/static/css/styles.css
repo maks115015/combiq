@@ -917,44 +917,6 @@ button:disabled, .btn:disabled {
     font-size: 16px;
 }
 
-.co-seo-hunting {
-    background-color: #36a412;
-    background-image: url("images/seo-hunting.png");
-    background-position: top right;
-    background-repeat: no-repeat;
-    min-height: 99px;
-    padding: 7px 10px;
-}
-
-.co-seo-hunting-title {
-    color: white;
-    font-size: 24px;
-    font-family: 'Segoe UI', Verdana, sans-serif;
-}
-
-.co-seo-hunting-description {
-    color: black;
-    font-size: 12px;
-    line-height: 16px;
-    display: inline-block;
-    padding-top: 5px;
-}
-
-.co-sidebar > div.co-seo-hunting-tip,
-.co-seo-hunting-tip {
-    margin: 0;
-    padding: 0;
-}
-
-.co-sidebar > div.co-seo-hunting-tip span,
-.co-seo-hunting-tip span {
-    font-size: 12px;
-    background-color: #E0E0E0;
-    display: inline-block;
-    padding: 1px 10px;
-    color: #757575;
-}
-
 .co-component-question {
     display: flex;
 }

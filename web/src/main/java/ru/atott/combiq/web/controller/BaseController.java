@@ -1,6 +1,8 @@
 package ru.atott.combiq.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.view.RedirectView;
 import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.site.Context;
 import ru.atott.combiq.service.site.UserContext;
@@ -32,5 +34,11 @@ public class BaseController {
         }
 
         return context;
+    }
+
+    protected RedirectView movedPermanently(String url) {
+        RedirectView redirectView = new RedirectView(url);
+        redirectView.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+        return redirectView;
     }
 }

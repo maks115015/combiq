@@ -1,5 +1,5 @@
 <#import "../templates.ftl" as templates />
-<#import "edu-common.ftl" as common />
+<#import "interview-common.ftl" as common />
 
 <#assign sidebar>
     <@common.sidebar activeMenuItem='education' />

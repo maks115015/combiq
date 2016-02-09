@@ -125,11 +125,8 @@
                         <li class="co-chapter ${if(chapter == 'questions', 'active')}">
                             <a href="/questions">Вопросы</a>
                         </li>
-                        <li class="co-chapter ${if(chapter == 'questionnaires', 'active')}">
-                            <a href="/questionnaires">Собеседование</a>
-                        </li>
-                        <li class="co-chapter ${if(chapter == 'education', 'active')}">
-                            <a href="/education">Подготовка</a>
+                        <li class="co-chapter ${if(chapter == 'interview', 'active')}">
+                            <a href="/interview">Собеседование</a>
                         </li>
                         <li class="co-chapter ${if(chapter == 'job', 'active')}">
                             <a href="/job">Работа</a>
@@ -219,7 +216,6 @@
                     <#nested />
                 </div>
                 <div class="col-md-3 co-sidebar ${sidebarContainerClass}">
-                    <@banners.seoHunting />
                     ${sidebar}
                 </div>
             </div>

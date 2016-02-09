@@ -1,8 +1,8 @@
 <#import "../templates.ftl" as templates />
-<#import "questionnaires-common.ftl" as common />
+<#import "interview-common.ftl" as common />
 
 <#assign sidebar>
-    <@common.sidebar activeMenuItem='questionnaires' />
+    <@common.sidebar activeMenuItem='interview' />
 </#assign>
 
 <@templates.layoutWithSidebar
