@@ -63,11 +63,6 @@
             };
         </script>
         <script src="/static/ko_components/components.js?v=${resourceVersion}"></script>
-
-        ${import("/static/bower_components/paper-button/paper-button.html")}
-        ${import("/static/bower_components/paper-dialog/paper-action-dialog.html")}
-        ${import("/static/bower_components/core-toolbar/core-toolbar.html")}
-        ${import("/static/bower_components/paper-icon-button/paper-icon-button.html")}
         <@security.authorize access="hasRole('sa')" var="allowEditConent" />
         ${head}
     </head>
@@ -230,16 +225,6 @@
 </#macro>
 
 <#macro inviteAuth>
-    <div>
-        <paper-action-dialog heading="Войдите на сайт" layered="true" backdrop="true" id="inviteAuthDialog">
-            <p>
-                Для того, чтобы иметь возможность голосовать за вопросы, нужно <a href="/login.do">войти</a> на сайт
-                <strong>combiq.ru</strong>.
-            </p>
-            <paper-button affirmative>Не сейчас</paper-button>
-            <paper-button onclick="location.href = '/login.do';" class="co-ok-button" affirmative autofocus>Войти</paper-button>
-        </paper-action-dialog>
-    </div>
 </#macro>
 
 <#function if condition a b=''>
