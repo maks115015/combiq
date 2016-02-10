@@ -3,6 +3,7 @@ package ru.atott.combiq.web.security;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import ru.atott.combiq.web.filter.RequestHolderFilter;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -36,5 +37,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String getLaunchDependentSalt() {
         return launchDependentSalt;
+    }
+
+    @Override
+    public String getSessionId() {
+        return RequestHolderFilter.REQUEST.get().getSession(true).getId();
     }
 }

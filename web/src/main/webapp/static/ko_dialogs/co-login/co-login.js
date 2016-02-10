@@ -15,6 +15,16 @@ define([], function() {
             + window.co.vkClientState
             + ':' + encodeURIComponent(location.pathname + (location.search || ''));
 
+        this.stackexchangeUrl = 'https://stackexchange.com/oauth?client_id='
+            + window.co.stackexchangeClientId
+            + '&scope=no_expiry&redirect_uri='
+            + encodeURIComponent(window.co.stackexchangeCallbackUrl)
+            + '&state='
+            + window.co.stackexchangeClientState
+            + ':' + encodeURIComponent(location.pathname + (location.search || ''));
+
+        this.width = 360;
+        this.align = 'top';
         this.buttons = [];
     }
 

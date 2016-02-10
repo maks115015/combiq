@@ -5,8 +5,13 @@
 
 <#assign head>
     <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
+<<<<<<< HEAD
 
     <link rel="canonical" href="${canonicalUrl}" />
+=======
+    <#--${templates.import("/static/bower_components/paper-input/paper-autogrow-textarea.html")}-->
+    <#--<link rel="canonical" href="${canonicalUrl}" />-->
+>>>>>>> refs/remotes/origin/master
 </#assign>
 
 <#assign sidebar>
@@ -197,7 +202,7 @@
                 <ul class="co-comments">
                     <#list comments as comment>
                         <li>
-                            <span class="co-comments-meta">
+                            <span class="co-comments-meta" id="comment-${comment.id!}">
                                 ${comment.userName}, ${comment.postDate?string('dd MMMM yyyy, hh:mm')}
                                 <#if comment.editDate??>
                                     <span class="co-comments-meta-edited" title="${comment.editUserName!comment.userName}, ${comment.editDate?string('dd MMMM yyyy, hh:mm')}">изменён</span>

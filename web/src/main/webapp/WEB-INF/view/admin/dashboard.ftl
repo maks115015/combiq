@@ -5,7 +5,12 @@
     <@common.sidebar activeMenuItem='dashboard' />
 </#assign>
 
+<#assign head>
+    <script src="/static/js/admin/dashboard.js"></script>
+</#assign>
+
 <@templates.layoutWithSidebar
+        head=head
         chapter='admin'
         subTitle='Общая информация о системе'
         pageTitle='Dashboard'
@@ -35,6 +40,11 @@
                 </#list>
             </ol>
         </li>
+        <#if templates.hasRole("sa")>
+            <li>
+                <button onclick="dashboard.submitJob('sitemapGeneratorJob')">Перестроить sitemap.xml</button>
+            </li>
+        </#if>
     </ul>
 
 </@templates.layoutWithSidebar>

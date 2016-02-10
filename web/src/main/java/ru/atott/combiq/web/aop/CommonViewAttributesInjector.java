@@ -12,6 +12,7 @@ import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.security.CombiqUser;
 import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.utils.ViewUtils;
+import ru.atott.combiq.web.view.InstantMessageHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +34,12 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
     @Value("${auth.vk.clientId}")
     private String vkClientId;
 
+    @Value("${auth.stackexchange.clientId}")
+    private String stackexchangeClientId;
+
+    @Autowired
+    private InstantMessageHolder instantMessageHolder;
+
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null
@@ -50,12 +57,17 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("urlResolver", new RequestUrlResolver(request));
 
             String sessionId = request.getSession(true).getId();
+            String state = DigestUtils.sha256Hex(sessionId + authService.getLaunchDependentSalt());
 
             modelAndView.addObject("githubClientId", githubClientId);
-            modelAndView.addObject("githubClientState", DigestUtils.sha256Hex(sessionId + authService.getLaunchDependentSalt()));
+            modelAndView.addObject("githubClientState", state);
             modelAndView.addObject("vkClientId", vkClientId);
-            modelAndView.addObject("vkClientState", DigestUtils.sha256Hex(sessionId + authService.getLaunchDependentSalt()));
+            modelAndView.addObject("vkClientState", state);
             modelAndView.addObject("vkCallbackUrl", urlResolver.externalize("/login/callback/vk.do"));
+            modelAndView.addObject("stackexchangeClientId", stackexchangeClientId);
+            modelAndView.addObject("stackexchangeClientState", state);
+            modelAndView.addObject("stackexchangeCallbackUrl", urlResolver.externalize("/login/callback/stackexchange.do"));
+            modelAndView.addObject("instantMessage", instantMessageHolder.get());
         }
     }
 }

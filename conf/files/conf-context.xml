@@ -6,5 +6,6 @@
 
     <context:property-placeholder location="
                 classpath:env/${env}/es.properties,
+                classpath:env/${env}/web.properties,
                 classpath:env/${env}/auth.properties"/>
 </beans>

@@ -13,10 +13,8 @@ import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserQualifier;
 import ru.atott.combiq.service.bean.UserType;
 import ru.atott.combiq.service.mapper.UserMapper;
-import ru.atott.combiq.service.user.GithubRegistrationContext;
-import ru.atott.combiq.service.user.UserNotFoundException;
-import ru.atott.combiq.service.user.UserService;
-import ru.atott.combiq.service.user.VkRegistrationContext;
+import ru.atott.combiq.service.site.EventService;
+import ru.atott.combiq.service.user.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,8 +26,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private UserMapper userMapper = new UserMapper();
+
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EventService eventService;
 
     @Override
     public User findByLoginAndType(String login, UserType type) {
@@ -53,6 +55,8 @@ public class UserServiceImpl implements UserService {
         userEntity.setAvatarUrl(context.getAvatarUrl());
         userEntity.setRegisterDate(new Date());
 
+        eventService.createRegisterUserEvent(UserType.github, context.getLogin());
+
         userEntity = userRepository.index(userEntity);
         return userMapper.map(userEntity);
     }
@@ -66,6 +70,24 @@ public class UserServiceImpl implements UserService {
         userEntity.setType(UserType.vk.name());
         userEntity.setAvatarUrl(context.getAvatarUrl());
         userEntity.setRegisterDate(new Date());
+
+        eventService.createRegisterUserEvent(UserType.vk, context.getUid());
+
+        userEntity = userRepository.index(userEntity);
+        return userMapper.map(userEntity);
+    }
+
+    @Override
+    public User registerUserViaStackexchange(StackexchangeRegistrationContext context) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLogin(context.getUid());
+        userEntity.setLocation(context.getLocation());
+        userEntity.setName(context.getName());
+        userEntity.setType(UserType.stackexchange.name());
+        userEntity.setAvatarUrl(context.getAvatarUrl());
+        userEntity.setRegisterDate(new Date());
+
+        eventService.createRegisterUserEvent(UserType.stackexchange, context.getUid());
 
         userEntity = userRepository.index(userEntity);
         return userMapper.map(userEntity);
@@ -109,15 +131,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updateStackexchangeUser(StackexchangeRegistrationContext context) {
+        UserEntity userEntity = userRepository.findByLoginAndType(context.getUid(), UserType.stackexchange.name()).get(0);
+
+        userEntity.setLogin(context.getUid());
+        userEntity.setLocation(context.getLocation());
+        userEntity.setName(context.getName());
+        userEntity.setType(UserType.stackexchange.name());
+        userEntity.setAvatarUrl(context.getAvatarUrl());
+
+        if (userEntity.getRegisterDate() == null) {
+            userEntity.setRegisterDate(new Date());
+        }
+
+        userRepository.save(userEntity);
+        return userMapper.map(userEntity);
+    }
+
+    @Override
     public Page<User> getRegisteredUsers(long page, long size) {
-        Pageable pageable = new PageRequest((int) page, (int) size, Sort.Direction.DESC, "registerDate");
+        Pageable pageable = new PageRequest((int) page, (int) size, Sort.Direction.DESC, UserEntity.REGISTER_DATE_FIELD);
         Page<UserEntity> result = userRepository.findAll(pageable);
         return result.map(userEntity -> userMapper.map(userEntity));
     }
 
     @Override
     public List<User> getLastRegisteredUsers(long count) {
-        PageRequest pageRequest = new PageRequest(0, (int) count, Sort.Direction.DESC, "registerDate");
+        PageRequest pageRequest = new PageRequest(0, (int) count, Sort.Direction.DESC, UserEntity.REGISTER_DATE_FIELD);
         List<UserEntity> users = userRepository.findAll(pageRequest).getContent();
         return userMapper.toList(users);
     }

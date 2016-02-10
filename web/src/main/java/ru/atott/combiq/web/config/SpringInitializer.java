@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -28,6 +30,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import ru.atott.combiq.web.aop.CommonViewAttributesInjector;
+import ru.atott.combiq.web.filter.RequestHolderFilter;
 import ru.atott.combiq.web.security.CombiqUserDetailsService;
 import ru.atott.combiq.web.security.ElasticSearchTokenRepositoryImpl;
 
@@ -35,6 +38,7 @@ import javax.servlet.Filter;
 import java.time.Duration;
 import java.util.Properties;
 
+@SuppressWarnings("ALL")
 public class SpringInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -60,8 +64,11 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
 
+        RequestHolderFilter requestHolderFilter = new RequestHolderFilter();
+
         return new Filter[] {
                 characterEncodingFilter,
+                requestHolderFilter,
                 new DelegatingFilterProxy("springSecurityFilterChain")
         };
     }
@@ -73,6 +80,7 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
             "classpath:ru/atott/combiq/service/service-context.xml",
             "classpath:conf-context.xml"
     })
+    @EnableScheduling
     public static class AppConfiguration {
         @Bean
         public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {

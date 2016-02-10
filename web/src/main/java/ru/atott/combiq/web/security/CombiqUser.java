@@ -70,6 +70,8 @@ public class CombiqUser extends User {
                 return avatarUrl.contains("?") ? avatarUrl + "&s=46" : avatarUrl + "?s=46";
             case vk:
                 return avatarUrl;
+            case stackexchange:
+                return avatarUrl;
         }
 
         return null;
