@@ -5,13 +5,8 @@
 
 <#assign head>
     <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
-<<<<<<< HEAD
-
     <link rel="canonical" href="${canonicalUrl}" />
-=======
-    <#--${templates.import("/static/bower_components/paper-input/paper-autogrow-textarea.html")}-->
     <#--<link rel="canonical" href="${canonicalUrl}" />-->
->>>>>>> refs/remotes/origin/master
 </#assign>
 
 <#assign sidebar>

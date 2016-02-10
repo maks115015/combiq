@@ -2,7 +2,7 @@ define(['ajax'], function(ajax) {
 
     function ViewModel(params) {
         this.text = ko.wrap(params.text);
-        this.active=ko.wrap('markdown');
+        this.active=ko.wrap('html');
         this.preview=ko.wrap();
     }
     ViewModel.prototype.toggleSrc=function() {

@@ -66,15 +66,6 @@
             };
         </script>
         <script src="/static/ko_components/components.js?v=${resourceVersion}"></script>
-<<<<<<< HEAD
-=======
-
-        ${import("/static/bower_components/paper-button/paper-button.html")}
-        ${import("/static/bower_components/paper-dialog/paper-action-dialog.html")}
-        ${import("/static/bower_components/core-toolbar/core-toolbar.html")}
-        ${import("/static/bower_components/paper-icon-button/paper-icon-button.html")}
-
->>>>>>> refs/remotes/origin/master
         <@security.authorize access="hasRole('sa')" var="allowEditConent" />
         ${head}
     </head>
