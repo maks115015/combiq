@@ -5,7 +5,7 @@
 
 <#assign head>
     <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
-    <#--${templates.import("/static/bower_components/paper-input/paper-autogrow-textarea.html")}-->
+    <link rel="canonical" href="${canonicalUrl}" />
     <#--<link rel="canonical" href="${canonicalUrl}" />-->
 </#assign>
 

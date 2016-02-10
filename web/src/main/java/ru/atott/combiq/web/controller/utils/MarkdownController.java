@@ -14,7 +14,6 @@ import ru.atott.combiq.web.controller.BaseController;
 public class MarkdownController extends BaseController {
     @RequestMapping(value = "/markdown/preview", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     @ResponseBody
-    @PreAuthorize("hasAnyRole('sa','contenter')")
     public String preview(@RequestBody String markdown) {
         if (StringUtils.isBlank(markdown)) {
             return markdown;

@@ -31,7 +31,8 @@
     define('co-helloworld', 'ko_components/co-helloworld', 'co-helloworld', {layoutSeparated: true});
     define('co-jobsubscribe', 'ko_components/co-jobsubscribe', 'co-jobsubscribe', {layoutSeparated: true});
     define('co-commentposter', 'ko_components/co-commentposter', 'co-commentposter', {layoutSeparated: true, styles: 'css'});
-    define('co-markdownbox', 'ko_components/co-markdownbox', 'co-markdownbox', {layoutSeparated: true});
+    define('co-markdownbox', 'ko_components/co-markdownbox', 'co-markdownbox', {layoutSeparated: true, styles: 'css'});
+    define('co-contenteditor', 'ko_components/co-contenteditor', 'co-contenteditor', {layoutSeparated: true});
 
     ko.createComponent = function(componentName, params, tag) {
         var html;
