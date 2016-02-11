@@ -1,8 +1,6 @@
 <#import "_layout/templates.ftl" as templates />
 
-<#assign head>
-    ${templates.import("/static/bower_components/paper-input/paper-input-decorator.html")}
-</#assign>
+
 
 <#assign sidebar>
     <div>
@@ -53,14 +51,13 @@
 <@templates.layoutWithSidebar head=head dsl=dsl sidebar=sidebar chapter='questions' subTitle=subTitle!'' pageTitle=pageTitle>
     <form action="/questions/search" method="get" id="searchForm">
         <div class="co-search">
-            <paper-input-decorator value="${dsl!}" label="Поисковый запрос">
+            <h4>Поисковый запрос</h4>
                 <div class="co-flex">
                     <input autocomplete="off" type="text" name="q" value="${dsl!}"/>
-                    <paper-button onclick="document.getElementById('searchForm').submit();">
+                    <button onclick="document.getElementById('searchForm').submit();" style="margin-left: 10px" >
                         Искать
-                    </paper-button>
+                    </button>
                 </div>
-            </paper-input-decorator>
         </div>
         <div class="co-search-help-tip">
             <a href="https://github.com/atott/combiq/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA">
@@ -77,8 +74,8 @@
             определить уровень знаний.
         </div>
     </#if>
-
     <ul class="co-questions">
+    <#if questions?size==0>К сожалению по такому запросу ничего не найдено</#if>
         <#list questions as question>
             <li>
               <div class="co-component-question">
