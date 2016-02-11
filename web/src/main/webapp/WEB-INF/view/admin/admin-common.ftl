@@ -23,5 +23,13 @@
             </a>
         </li>
     </#if>
+
+    <#if templates.hasRole('sa') || templates.hasRole('contenter')>
+        <li role="presentation" class="${templates.if(activeMenuItem == 'posts', 'active')}">
+            <a href="/admin/posts">
+                <span>Статьи</span>
+            </a>
+        </li>
+    </#if>
 </ul>
 </#macro>

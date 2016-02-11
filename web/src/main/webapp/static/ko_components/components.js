@@ -32,6 +32,7 @@
     define('co-jobsubscribe', 'ko_components/co-jobsubscribe', 'co-jobsubscribe', {layoutSeparated: true});
     define('co-commentposter', 'ko_components/co-commentposter', 'co-commentposter', {layoutSeparated: true, styles: 'css'});
     define('co-markdownbox', 'ko_components/co-markdownbox', 'co-markdownbox', {layoutSeparated: true});
+    define('co-posteditor', 'ko_components/co-posteditor', 'co-posteditor', {layoutSeparated: true, styles: 'css'});
 
     ko.createComponent = function(componentName, params, tag) {
         var html;

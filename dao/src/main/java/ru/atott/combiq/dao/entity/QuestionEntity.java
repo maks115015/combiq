@@ -2,10 +2,11 @@ package ru.atott.combiq.dao.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import ru.atott.combiq.dao.Types;
 
 import java.util.List;
 
-@Document(indexName = "#{domainResolver.resolveQuestionIndex()}", type = "question")
+@Document(indexName = "#{domainResolver.resolveQuestionIndex()}", type = Types.question)
 public class QuestionEntity {
     @Id
     private String id;
