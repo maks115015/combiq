@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <a class="co-topmenu-mainer" href="/" title="Combiq.ru - Всё, что может потребоваться для подготовки к Java собеседованию" style="line-height: 48px;">
-                            <img style="margin-bottom: -8px;" src="/static/images/site/flat-logo-64.png" />
+                            <img style="margin-bottom: -8px;" src="/static/images/site/flat-logo-64.png?v=1" />
                         </a>
                     </div>
                     <div class="col-md-7">
