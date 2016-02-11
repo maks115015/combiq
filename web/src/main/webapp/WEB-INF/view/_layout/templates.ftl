@@ -4,7 +4,8 @@
 
 <#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
-<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true showHeader=true gtmPageName='' ogDescription='' ogTitle=''>
+<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true showHeader=true gtmPageName='' ogDescription='' ogTitle=''
+            bodyClass=''>
 <!DOCTYPE html>
 <!--    Дорогой друг!
         Мы спалили тебя ;)
@@ -34,7 +35,6 @@
         <link rel="stylesheet" href="/static/font/comfortaa/comfortaa.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script src="/static/bower_components/webcomponentsjs/webcomponents.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
         <script src="/static/js/lib/knockout.js"></script>
         <script src="/static/js/lib/knockout.dialog.js?v=${resourceVersion}"></script>
@@ -70,7 +70,7 @@
         <@security.authorize access="hasRole('sa')" var="allowEditConent" />
         ${head}
     </head>
-    <body>
+    <body class="${bodyClass}">
         <#if env == 'prod'>
             <@stats.metrika />
             <@stats.commonGtmInitialization gtmPageName />
@@ -153,8 +153,9 @@
     </@layoutHtml>
 </#macro>
 
-<#macro layoutBody head='' dsl='' chapter='' showFooter=true subTitle='' gtmPageName=''>
-    <@layoutHtml head=head dsl=dsl chapter=chapter showFooter=showFooter subTitle=subTitle gtmPageName=gtmPageName>
+<#macro layoutBody head='' dsl='' chapter='' showFooter=true subTitle='' gtmPageName='' bodyClass=''>
+    <@layoutHtml head=head dsl=dsl chapter=chapter showFooter=showFooter subTitle=subTitle gtmPageName=gtmPageName
+            bodyClass=bodyClass>
         <#nested />
     </@layoutHtml>
 </#macro>

@@ -30,13 +30,13 @@
 
                 <tr>
                     <td>
-                        <strong>${post.title}</strong>
+                        <strong>${post.title!}</strong>
                     </td>
                     <td>
                         ${post.createDate?string["dd.MM.yyyy"]}
                     </td>
                     <td>
-                        <button>Изменить</button>
+                        <a class="btn" href="/admin/posts/edit?id=${post.id?url}">Изменить</a>
                     </td>
                 </tr>
             </#list>

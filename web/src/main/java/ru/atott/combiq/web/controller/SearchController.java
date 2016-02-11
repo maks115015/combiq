@@ -44,7 +44,8 @@ public class SearchController extends BaseController {
                                   @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
         SearchContext context = getQuestionContextBuilder.list(page);
-        return getView(request, context, null, "Вопросы", true);
+        String subTitle = "Вопросы для подготовки к собеседованию Java";
+        return getView(request, context, null, subTitle, true);
     }
 
     @RequestMapping(value = "/questions/tagged/{tags}")

@@ -1,7 +1,5 @@
 <#import "_layout/templates.ftl" as templates />
 
-
-
 <#assign sidebar>
     <div>
         <h4>Интересное</h4>
@@ -51,13 +49,17 @@
 <@templates.layoutWithSidebar head=head dsl=dsl sidebar=sidebar chapter='questions' subTitle=subTitle!'' pageTitle=pageTitle>
     <form action="/questions/search" method="get" id="searchForm">
         <div class="co-search">
-            <h4>Поисковый запрос</h4>
-                <div class="co-flex">
-                    <input autocomplete="off" type="text" name="q" value="${dsl!}"/>
-                    <button onclick="document.getElementById('searchForm').submit();" style="margin-left: 10px" >
-                        Искать
+            <div class="row">
+                <div class="col-md-10">
+                    <input autofocus placeholder="Поисковый запрос" autocomplete="off" type="text" name="q" value="${dsl!}"/>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="pull-right">
+                        ENTER
+                        <img src="/static/images/down_right-16.png">
                     </button>
                 </div>
+            </div>
         </div>
         <div class="co-search-help-tip">
             <a href="https://github.com/atott/combiq/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA">

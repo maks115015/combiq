@@ -1,1 +1,23 @@
-Hello world!
+<div>
+    <div class="form-group">
+        <label for="title">Заголовок:</label>
+        <input data-bind="value: title" type="text" class="form-control" id="title" placeholder="Заголовок">
+    </div>
+
+    <div class="form-group">
+        <label >Текст статьи:</label>
+        <co-markdownbox params="
+            active: 'markdown',
+            text: content">
+
+        </co-markdownbox>
+    </div>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" data-bind="checked: published"> Опубликовано
+        </label>
+    </div>
+
+    <button data-bind="click: save" type="button" class="btn">Сохранить</button>
+</div>

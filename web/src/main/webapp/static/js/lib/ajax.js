@@ -103,7 +103,7 @@ define([], function() {
 
     exports.rest = function(method, url, params, jqueryAjax) {
         var restSuccessResponseResolver = function(response) {
-            return response && response.success;
+            return response && !response.error;
         };
 
         var restErrorMessageResolver = function(response) {

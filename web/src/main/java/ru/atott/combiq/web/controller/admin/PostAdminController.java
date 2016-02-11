@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Post;
 import ru.atott.combiq.service.post.PostService;
+import ru.atott.combiq.web.bean.IdBean;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
 import ru.atott.combiq.web.controller.BaseController;
+import ru.atott.combiq.web.request.EditPostRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -55,5 +55,14 @@ public class PostAdminController extends BaseController {
         modelAndView.addObject("post", post);
         modelAndView.addObject("postId", id);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/posts/edit", method = RequestMethod.POST)
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('sa','contenter')")
+    public Object postComment(@RequestBody EditPostRequest request) {
+        String postId = postService.save(
+                getContext(), request.getPostId(), request.getTitle(), request.getContent(), request.isPublished());
+        return new IdBean(postId);
     }
 }
