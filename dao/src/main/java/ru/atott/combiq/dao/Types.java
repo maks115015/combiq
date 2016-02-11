@@ -6,6 +6,7 @@ public interface Types {
     String questionnaire = "questionnaire";
     String tag = "tag";
     String jdk8classes = "jdk8classes";
+    String post = "post";
 
     // Domain personal.
     String user = "user";

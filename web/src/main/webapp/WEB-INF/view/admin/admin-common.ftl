@@ -1,4 +1,4 @@
-<#import "../templates.ftl" as templates />
+<#import "../_layout/templates.ftl" as templates />
 
 <#macro sidebar activeMenuItem>
 <ul class="co-nav co-nav-right-bordered nav nav-pills nav-stacked">
@@ -20,6 +20,14 @@
         <li role="presentation" class="${templates.if(activeMenuItem == 'events', 'active')}">
             <a href="/admin/events">
                 <span>События</span>
+            </a>
+        </li>
+    </#if>
+
+    <#if templates.hasRole('sa') || templates.hasRole('contenter')>
+        <li role="presentation" class="${templates.if(activeMenuItem == 'posts', 'active')}">
+            <a href="/admin/posts">
+                <span>Статьи</span>
             </a>
         </li>
     </#if>

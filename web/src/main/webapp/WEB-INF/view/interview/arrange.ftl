@@ -1,18 +1,16 @@
-<#import "../templates.ftl" as templates />
-<#import "questionnaires-common.ftl" as common />
+<#import "../_layout/templates.ftl" as templates />
+<#import "interview-common.ftl" as common />
 
 <#assign sidebar>
-    <@common.sidebar activeMenuItem='interview' />
+    <@common.sidebar activeMenuItem='arrange' />
 </#assign>
 
 <@templates.layoutWithSidebar
-        chapter='questionnaires'
+        chapter='interview'
         subTitle='Советы как провести собеседование на позицию Java разработчик'
         pageTitle='Провести собеседование'
         sidebar=sidebar
         mainContainerClass='co-rightbordered'>
-
-    <@templates.headBanners></@templates.headBanners>
 
     <@templates.contentEditor content=interviewPageContent></@templates.contentEditor>
 

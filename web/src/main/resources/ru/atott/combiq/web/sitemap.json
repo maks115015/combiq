@@ -20,15 +20,23 @@
     "priority": "0.8"
   },
   {
-    "url": "/questionnaires/interview",
+    "url": "/interview",
     "priority": "0.8"
   },
   {
-    "url": "/education",
+    "url": "/interview",
     "priority": "0.8"
   },
   {
-    "url": "/education/competence",
+    "url": "/interview/arrange",
+    "priority": "0.8"
+  },
+  {
+    "url": "/interview/competence",
+    "priority": "0.8"
+  },
+  {
+    "url": "/interview/education",
     "priority": "0.8"
   },
   {

@@ -1,12 +1,12 @@
-<#import "../templates.ftl" as templates />
-<#import "edu-common.ftl" as common />
+<#import "../_layout/templates.ftl" as templates />
+<#import "interview-common.ftl" as common />
 
 <#assign sidebar>
     <@common.sidebar activeMenuItem='education' />
 </#assign>
 
 <@templates.layoutWithSidebar
-        chapter='education'
+        chapter='interview'
         subTitle='План подготовки к собеседованию на позицию Java разработчик уровня D2-D3'
         pageTitle='Подготовка Java Dev D2-D3'
         sidebar=sidebar

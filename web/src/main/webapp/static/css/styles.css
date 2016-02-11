@@ -31,24 +31,18 @@ a:focus {
 }
 
 .co-mainhead {
-    background-image: url('images/flat-logo.png');
-    background-position: bottom center;
-    background-repeat: no-repeat;
-    min-height: 290px;
-}
-
-@media (max-width: 992px) {
-    .co-mainhead {
-        background: none;
-    }
+    margin-top: 120px;
+    overflow-y: hidden;
+    margin-bottom: 40px;
 }
 
 .co-mainhead-content {
-    padding-top: 60px;
-}
-
-.co-mainhead-content p {
-    margin-bottom: 35px;
+    font-family: 'Segoe UI', 'Segoe UI', Verdana, sans-serif;
+    font-size: 28px;
+    color: black;
+    line-height: 32px;
+    font-weight: normal;
+    margin: 0;
 }
 
 .go-github-btn {
@@ -126,24 +120,48 @@ h4 {
 }
 
 .co-mainer {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#368290+0,093a5b+100 */
-    background: #368290; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover,  #368290 0%, #093a5b 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#368290), color-stop(100%,#093a5b)); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover,  #368290 0%,#093a5b 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover,  #368290 0%,#093a5b 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover,  #368290 0%,#093a5b 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center,  #368290 0%,#093a5b 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#368290', endColorstr='#093a5b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    margin-top: 120px;
 }
 
-.co-mainer .container {
-    padding: 60px 40px 80px 40px;
-    text-align: center;
+.co-mainer-title {
+    font-family: "Arial Bold", Arial;
+    font-size: 38px;
+    color: black;
+    line-height: 48px;
+    font-weight: bold;
+    margin: 40px 0 25px;
 }
 
-.co-mainer h1 {
+.co-mainer-desc {
+    color: #151515;
+    font-family: 'Segoe UI', 'Segoe UI', Verdana, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: normal;
+    margin: 0;
+    max-width: 340px;
+    margin-bottom: 35px;
+}
+
+.co-mainer-background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 375px;
+    background-color: #e3e3e3;
+    z-index: -40;
+}
+
+.co-mainer-a {
+    background-color: black;
+    border-radius: 20px;
     color: white;
+    font-family: 'Segoe UI', 'Segoe UI', Verdana, sans-serif;
+    font-size: 14px;
+    padding: 10px 24px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    display: inline-block;
 }
 
 .co-colored {
@@ -182,152 +200,47 @@ h3 {
     color: white;
 }
 
-ul.co-topmenu {
-    list-style: none;
-    font-size: 14px;
-    padding: 0;
-    display: inline-block;
-    margin-bottom: 40px;
-}
-
-ul.co-topmenu * {
-    line-height: 14px;
-}
-
-ul.co-topmenu > li {
-    display: inline-block;
-    margin: 30px 0 0 0;
-    position: relative;
-    line-height: 32px;
-}
-
-.co-topmenu-mainer,
-.co-topmenu-mainer:hover {
-    font-weight: bold;
-    font-size: 22px;
-    color: #40565D;
-    margin-right: 10px;
-    padding-bottom: 12px;
-    display: inline-block;
-}
-
-.co-topmenu-mainer img {
-    margin-top: -28px;
-}
-
-ul.co-topmenu > li.co-auth {
-    margin-left: 15px;
-}
-
-.co-auth img {
-    margin-top: -16px;
-    margin-right: 10px;
-    margin-left: 40px;
-}
-
-.co-out {
-    position: relative;
-    padding-right: 12px;
-}
-
-.co-chapter {
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color: #EFEFEF;
-}
-
-.co-chapter a {
-    color: #698D9C;
-}
-
-.co-socials {
-    padding-right: 8px;
-}
-
-.co-socials img {
-    margin-top: -4px;
-    opacity: 0.5;
-}
-
-.co-socials a:hover img {
-    opacity: 1;
-}
-
-.co-chapter:hover {
-    background-color: #C8E6FF;
-    color: #698D9C;
-}
-
-.co-chapter:hover a:hover {
-    color: #698D9C;
-}
-
-.co-chapter.active {
-    background-color: #FFCF86;
-}
-
-.co-chapter.active a {
-    color: #905757;
-}
-
-.co-out:after {
-    width: 8px;
-    height: 8px;
-    margin-bottom: -4px;
-    content: '';
-    display: block;
-    position: absolute;
-    right: 0;
-    bottom: 50%;
-    background-image: url("images/icon-arrow.png");
-    background-image: url("images/icon-arrow.svg"), none;
-    background-size: auto 8px;
-}
-
 .co-rightbordered {
-    border-right: solid 1px #F5C376;
+    border-right: solid 1px #00A8EC;
     min-height: 420px;
 }
 
 .co-nav-right-bordered.co-nav > li.active {
-    background-color: #FFCF86;
+    background-color: #00A8EC;
     margin-left: -15px;
     padding-left: 16px;
 }
 
-.co-nav > li a {
-    border-radius: 0;
-    line-height: 32px;
-    padding: 0 10px;
+.co-nav > li {
+    margin-bottom: 10px;
 }
 
 .co-nav > li a {
-    background-color: #EFEFEF;
-    color: rgb(105, 141, 156);
+    border-radius: 0;
+    padding: 10px;
+    background-color: #EDEDED;
+    color: black;
+    font-family: 'Segoe UI', 'Segoe UI', Verdana, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .co-nav > li.active:hover a,
-.co-nav > li:hover a {
-    color: rgb(105, 141, 156);
-    background-color: rgb(200, 230, 255);
-}
-
-.co-nav-right-bordered.co-nav > li.active:hover a {
-    background-color: #FFCF86;
-}
-
+.co-nav > li:hover a,
 .co-nav > li.active a {
-    background-color: #FFCF86;
-    color: rgb(144, 87, 87);
+    background-color: #00A8EC;
+    color: black;
 }
 
 .co-nav-tip {
     display: block;
     font-size: 12px;
-    padding-left: 35px;
     line-height: 16px;
-    color: rgb(65, 83, 97);
-    padding-bottom: 10px;
+    color: black;
+    padding-top: 10px;
+    font-weight: normal;
+    text-transform: none;
 }
 
 .pagination {
@@ -455,8 +368,6 @@ ul.co-popularTags > li {
     background-color: #f5f5f5;
 }
 
-}
-
 .co-my-question-comment-box textarea {
     background-color: transparent;
     border: none;
@@ -504,26 +415,51 @@ ul.co-question-staff > li {
     display: flex;
 }
 
-.core-overlay-backdrop.core-opened {
-    z-index: 1000 !important;
-}
-
-core-overlay-layer {
-    z-index: 1001 !important;
-}
-
 html /deep/ .co-ok-button {
     background-color: #00A0D8;
     color: white;
 }
 
 .co-search {
+    border-bottom: solid 2px #00A8EC;
+    position: relative;
+}
 
+.co-search button {
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+    margin-right: 6px;
+    font-family: 'Segoe UI', 'Segoe UI', Verdana, sans-serif;
+    font-size: 11px;
+    opacity: 0.3;
+    margin-top: 8px;
+}
+
+.co-search button:hover {
+    opacity: 1;
 }
 
 .co-search input[type=text] {
-    width: 85%;
-    font-size: 20px;
+    font-size: 22px;
+    border: none;
+    margin: 0 6px;
+    outline: none;
+    padding: 2px 4px;
+    width: 100%;
+    color: black;
+}
+
+.co-search:after {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 6px;
+    width: 100%;
+    bottom: 0;
+    z-index: -1;
+    border-left: solid 2px #00A8EC;
+    border-right: solid 2px #00A8EC;
 }
 
 
@@ -604,22 +540,6 @@ a.co-action:hover {
 
 .co-question-tip-title {
     color: #6c6c6c;
-}
-
-.co-promo-mainer {
-    background-color: rgba(255, 205, 40, 0.48);
-    padding: 15px;
-    font-family: 'Roboto Slab', serif;
-    font-size: 24px;
-    line-height: 30px;
-    letter-spacing: -1px;
-    color: #354950;
-    font-weight: normal;
-}
-
-.co-promo-mainer-new {
-    font-weight: bold;
-    margin-right: 20px;
 }
 
 .co-mainvk-liker {
@@ -896,44 +816,6 @@ button:disabled, .btn:disabled {
     font-size: 16px;
 }
 
-.co-seo-hunting {
-    background-color: #36a412;
-    background-image: url("images/seo-hunting.png");
-    background-position: top right;
-    background-repeat: no-repeat;
-    min-height: 99px;
-    padding: 7px 10px;
-}
-
-.co-seo-hunting-title {
-    color: white;
-    font-size: 24px;
-    font-family: 'Segoe UI', Verdana, sans-serif;
-}
-
-.co-seo-hunting-description {
-    color: black;
-    font-size: 12px;
-    line-height: 16px;
-    display: inline-block;
-    padding-top: 5px;
-}
-
-.co-sidebar > div.co-seo-hunting-tip,
-.co-seo-hunting-tip {
-    margin: 0;
-    padding: 0;
-}
-
-.co-sidebar > div.co-seo-hunting-tip span,
-.co-seo-hunting-tip span {
-    font-size: 12px;
-    background-color: #E0E0E0;
-    display: inline-block;
-    padding: 1px 10px;
-    color: #757575;
-}
-
 .co-component-question {
     display: flex;
 }
@@ -1027,16 +909,11 @@ ul.co-component-question-tags > li {
 .co-login-logo {
     display: inline-block;
     text-align: center;
-    width: 120px;
-    height: 120px;
     vertical-align: middle;
-    background-color: #F1F1F1;
-    border-radius: 50%;
 }
 
 .co-login-logo > a {
     display: inline-block;
-    line-height: 112px;
     margin-left: -6px;
 }
 
@@ -1044,4 +921,55 @@ ul.co-component-question-tags > li {
     color: gray;
     font-style: italic;
     font-size: 12px;
+}
+
+.co-titler-body {
+    overflow-x: hidden;
+}
+
+.co-titler {
+    overflow-x: hidden;
+}
+
+.co-titler > img {
+    position: absolute;
+    top: 60px;
+    transform-origin: 0 0;
+    transform: translate(-60px, 0);
+    z-index: -10;
+}
+
+.co-menu-top {
+    background-color: #ededed;
+}
+
+.co-menu-top-items {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.co-menu-top-items > li {
+    display: inline-block;
+    margin: 0;
+}
+
+.co-menu-top-items > li a {
+    display: inline-block;
+    padding: 24px 28px;
+    color: #151515;
+    font-family: 'Segoe UI', 'Segoe UI', Verdana, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.co-menu-top-items > li.active,
+.co-menu-top-items > li:hover {
+    background-color: #00A8EC;
+}
+
+.co-menu-top-items > li:hover > a {
+    color: white;
 }
