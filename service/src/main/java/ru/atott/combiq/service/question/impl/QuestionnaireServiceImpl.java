@@ -14,6 +14,7 @@ import ru.atott.combiq.service.bean.QuestionnaireHead;
 import ru.atott.combiq.service.mapper.QuestionnaireHeadMapper;
 import ru.atott.combiq.service.question.GetQuestionService;
 import ru.atott.combiq.service.question.QuestionnaireService;
+import ru.atott.combiq.service.site.MarkdownService;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,10 +25,15 @@ import java.util.List;
 
 @Service
 public class QuestionnaireServiceImpl implements QuestionnaireService {
+
     @Autowired
     private QuestionnaireRepository questionnaireRepository;
+
     @Autowired
     private GetQuestionService getQuestionService;
+
+    @Autowired
+    private MarkdownService markdownService;
 
     @Override
     public List<QuestionnaireHead> getQuestionnaires() {
@@ -71,13 +77,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
             return;
         }
 
-        PegDownProcessor pegDownProcessor = new PegDownProcessor();
-
-        MarkdownContent markdownTitle = new MarkdownContent(null, null);
-        markdownTitle.setMarkdown(title);
-        markdownTitle.setHtml(pegDownProcessor.markdownToHtml(title));
-
-        entity.setTitle(markdownTitle);
+        entity.setTitle(markdownService.toMarkdownContent(title));
 
         questionnaireRepository.save(entity);
     }

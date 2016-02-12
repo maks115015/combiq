@@ -21,6 +21,7 @@ import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -109,6 +110,14 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
             resolver.setSuffix(".ftl");
             resolver.setContentType("text/html;charset=UTF-8");
             return resolver;
+        }
+
+        @Bean
+        public CommonsMultipartResolver multipartResolver(){
+            CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+            multipartResolver.setDefaultEncoding("utf-8");
+            multipartResolver.setMaxUploadSize(5_000_000);
+            return multipartResolver;
         }
 
         @Bean

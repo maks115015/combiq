@@ -13,6 +13,7 @@ import ru.atott.combiq.dao.repository.PostRepository;
 import ru.atott.combiq.service.bean.Post;
 import ru.atott.combiq.service.mapper.PostMapper;
 import ru.atott.combiq.service.site.Context;
+import ru.atott.combiq.service.site.MarkdownService;
 
 import java.util.Date;
 
@@ -23,6 +24,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private MarkdownService markdownService;
 
     @Override
     public Page<Post> getPosts(long page, long size) {
@@ -56,7 +60,7 @@ public class PostServiceImpl implements PostService {
         }
 
         postEntity.setTitle(title);
-        postEntity.setContent(new MarkdownContent(null, content));
+        postEntity.setContent(markdownService.toMarkdownContent(content));
         postEntity.setPublished(published);
         postEntity = postRepository.save(postEntity);
         return postEntity.getId();

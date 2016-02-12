@@ -4,22 +4,14 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.pegdown.PegDownProcessor;
 
 public class MarkdownContent {
+
     private String markdown;
+
     private String html;
+
     private String id;
 
-    @Deprecated
     public MarkdownContent() { }
-
-    public MarkdownContent(String id, String markdown) {
-        this.id = id;
-        this.markdown = markdown;
-
-        if (markdown != null) {
-            PegDownProcessor processor = new PegDownProcessor();
-            this.html = processor.markdownToHtml(markdown);
-        }
-    }
 
     public String getMarkdown() {
         return markdown;

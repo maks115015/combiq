@@ -1,12 +1,36 @@
 <div id="element" class="co-markdown">
-<textarea class="co-commentbox" id="src" style="min-height: 200px;" data-bind="value: text , visible: active() == 'markdown'">
+    <ul class="co-markdown__toolbar">
+        <li>
+            <div class="btn-group" role="group">
+                <button data-bind="css: {active: active() == 'markdown'}, click: toggleSrc"
+                        type="button" class="btn btn-default">
+                    Markdown
+                </button>
+                <button data-bind="css: {active: active() == 'html'}, click: togglePreview"
+                        type="button" class="btn btn-default">
+                    HTML
+                </button>
+            </div>
+        </li>
+        <li>
+            <div class="btn-group" role="group">
+                <button data-bind="disable: active() != 'markdown'"
+                        type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Вставить...
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" data-bind="click: insertImage">Изображение</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
 
-</textarea>
-    <div id="preview" class="co-markdown__preview" data-bind="html:preview ,visible: active() == 'html'"></div>
-    <div style="text-align: right">
-        <ul class="co-markdown__toolbar">
-            <li id="srcToggler" data-bind="click: toggleSrc, css: { active: active()=='markdown'}">Markdown</li>
-            <li class="active"  id="previewToggler" data-bind="click:togglePreview, css: { active: active() =='html'}">HTML</li>
-        </ul>
-    </div>
+    <textarea class="co-markdown__src"
+              style="min-height: 200px;"
+              data-bind="textInput: text, visible: active() == 'markdown', element: textarea"></textarea>
+
+    <div class="co-markdown__preview" data-bind="html: preview, visible: active() == 'html'"></div>
 </div>
