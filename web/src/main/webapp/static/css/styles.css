@@ -573,10 +573,7 @@ a.co-action:hover {
 
 .co-dialog button {
     min-width: 61px;
-    font-size: 14px;
-    line-height: 26px;
-    padding-left: 10px;
-    padding-right: 10px;
+    line-height: 20px;
 }
 
 button, .btn {

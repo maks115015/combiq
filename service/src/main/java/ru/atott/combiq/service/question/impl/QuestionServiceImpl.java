@@ -18,6 +18,7 @@ import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.Context;
 import ru.atott.combiq.service.site.EventService;
+import ru.atott.combiq.service.site.MarkdownService;
 import ru.atott.combiq.service.user.UserRoles;
 
 import java.util.*;
@@ -32,6 +33,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     private static String[] alphabet = 
             {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+
+    @Autowired
+    private MarkdownService markdownService;
 
     @Autowired
     private QuestionAttrsRepository questionAttrsRepository;
@@ -73,7 +77,7 @@ public class QuestionServiceImpl implements QuestionService {
         }
 
         QuestionComment questionComment = new QuestionComment();
-        questionComment.setContent(new MarkdownContent(null, comment));
+        questionComment.setContent(markdownService.toMarkdownContent(comment));
         questionComment.setPostDate(new Date());
         questionComment.setUserId(context.getUser().getUserId());
         questionComment.setId(UUID.randomUUID().toString());
@@ -118,7 +122,7 @@ public class QuestionServiceImpl implements QuestionService {
             }
         }
 
-        questionComment.setContent(new MarkdownContent(null, commentMarkdown));
+        questionComment.setContent(markdownService.toMarkdownContent(commentMarkdown));
         questionComment.setEditDate(new Date());
 
         if (!Objects.equals(questionComment.getUserId(), context.getUser().getUserId())) {
@@ -137,7 +141,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void saveQuestionBody(String questionId, String body) {
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
-        questionEntity.setBody(new MarkdownContent(null, body));
+        questionEntity.setBody(markdownService.toMarkdownContent(body));
         questionRepository.save(questionEntity);
     }
 

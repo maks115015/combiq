@@ -38,6 +38,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
         <script src="/static/js/lib/knockout.js"></script>
         <script src="/static/js/lib/knockout.dialog.js?v=${resourceVersion}"></script>
+        <script src="/static/js/lib/knockout.bindings.js?v=${resourceVersion}"></script>
         <script src="/static/js/site.js?v=${resourceVersion}"></script>
         <script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
 

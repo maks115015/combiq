@@ -8,15 +8,19 @@ import ru.atott.combiq.dao.repository.ContentRepository;
 
 @Service
 public class ContentServiceImpl implements ContentService {
+
     @Autowired
     private ContentRepository contentRepository;
+
+    @Autowired
+    private MarkdownService markdownService;
 
     @Override
     public MarkdownContent getContent(String id) {
         ContentEntity contentEntity = contentRepository.findOne(id);
 
         if (contentEntity == null) {
-            return new MarkdownContent(id, null);
+            return markdownService.toMarkdownContent(id, null);
         }
 
         MarkdownContent content = contentEntity.getContent();
@@ -38,7 +42,7 @@ public class ContentServiceImpl implements ContentService {
             contentEntity.setId(id);
         }
 
-        contentEntity.setContent(new MarkdownContent(id, content));
+        contentEntity.setContent(markdownService.toMarkdownContent(id, content));
         contentRepository.save(contentEntity);
     }
 }
