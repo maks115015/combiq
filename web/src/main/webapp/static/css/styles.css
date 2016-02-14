@@ -748,6 +748,25 @@ button:disabled, .btn:disabled {
     padding-bottom: 10px;
 }
 
+.co-comments-notfound {
+    padding: 15px 0;
+    padding-bottom: 30px;
+}
+
+.co-comments-lastest {
+    margin-top: 15px !important;
+    margin-left: 40px !important;
+}
+
+.co-comments-question-comments {
+
+}
+
+.co-comments-question-title,
+.co-questionsFeeds-question-title {
+    line-height: 16px;
+}
+
 .co-comments {
     list-style: none;
     margin: 0;

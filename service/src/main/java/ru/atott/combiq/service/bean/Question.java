@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.bean;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.QuestionComment;
@@ -89,6 +90,14 @@ public class Question {
 
     public void setComments(List<QuestionComment> comments) {
         this.comments = comments;
+    }
+
+    public QuestionComment getLastComment() {
+        if (CollectionUtils.isEmpty(comments)) {
+            return null;
+        }
+
+        return comments.get(comments.size() - 1);
     }
 
     public boolean isLanding() {
