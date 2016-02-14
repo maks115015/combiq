@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
-import ru.atott.combiq.service.question.GetQuestionService;
+import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.service.question.QuestionReputationService;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.question.TagService;
@@ -30,7 +30,7 @@ public class QuestionController extends BaseController {
     @Autowired
     private AuthService authService;
     @Autowired
-    private GetQuestionService getQuestionService;
+    private SearchQuestionService searchQuestionService;
     @Autowired
     private QuestionService questionService;
     @Autowired
@@ -54,12 +54,12 @@ public class QuestionController extends BaseController {
             context.setDsl(DslParser.parse(dsl));
         }
 
-        GetQuestionResponse questionResponse = getQuestionService.getQuestion(context);
+        GetQuestionResponse questionResponse = searchQuestionService.getQuestion(context);
 
         List<Question> anotherQuestions = null;
         if (questionResponse.getQuestion().isLanding()) {
-            anotherQuestions = getQuestionService
-                    .getAnotherQuestions(questionResponse.getQuestion())
+            anotherQuestions = searchQuestionService
+                    .searchAnotherQuestions(questionResponse.getQuestion())
                     .map(response -> response.getQuestions().getContent())
                     .orElse(null);
         }

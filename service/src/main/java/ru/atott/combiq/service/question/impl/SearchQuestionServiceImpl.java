@@ -33,14 +33,14 @@ import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.mapper.QuestionAttrsMapper;
 import ru.atott.combiq.service.mapper.QuestionMapper;
-import ru.atott.combiq.service.question.GetQuestionService;
+import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.service.question.QuestionService;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class GetQuestionServiceImpl implements GetQuestionService {
+public class SearchQuestionServiceImpl implements SearchQuestionService {
     private DefaultResultMapper defaultResultMapper;
     private QuestionAttrsMapper questionAttrsMapper = new QuestionAttrsMapper();
     @Autowired
@@ -52,13 +52,13 @@ public class GetQuestionServiceImpl implements GetQuestionService {
     @Autowired
     private QuestionService questionService;
 
-    public GetQuestionServiceImpl() {
+    public SearchQuestionServiceImpl() {
         SimpleElasticsearchMappingContext mappingContext = new SimpleElasticsearchMappingContext();
         defaultResultMapper = new DefaultResultMapper(mappingContext);
     }
 
     @Override
-    public SearchResponse getQuestions(SearchContext context) {
+    public SearchResponse searchQuestions(SearchContext context) {
         DslQuery dsl = context.getDslQuery();
 
         SearchRequestBuilder query = client
@@ -91,7 +91,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
     }
 
     @Override
-    public Optional<SearchResponse> getAnotherQuestions(Question question) {
+    public Optional<SearchResponse> searchAnotherQuestions(Question question) {
         if (CollectionUtils.isEmpty(question.getTags())) {
             return Optional.empty();
         }
@@ -100,7 +100,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         searchContext.setDslQuery(DslParser.parse("[" + question.getTags().get(0) + "]"));
         searchContext.setSize(5);
 
-        return Optional.of(getQuestions(searchContext));
+        return Optional.of(searchQuestions(searchContext));
     }
 
     @Override
@@ -119,7 +119,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
             searchContext.setDslQuery(context.getDsl());
             searchContext.setUserId(context.getUserId());
 
-            SearchResponse searchResponse = getQuestions(searchContext);
+            SearchResponse searchResponse = searchQuestions(searchContext);
             List<Question> questions = searchResponse.getQuestions().getContent();
             if (context.getProposedIndexInDslResponse() == 0) {
                 if (questions.size() > 0 && questions.get(0).getId().equals(context.getId())) {
@@ -153,7 +153,7 @@ public class GetQuestionServiceImpl implements GetQuestionService {
             searchContext.setSize(1);
             searchContext.setUserId(context.getUserId());
             searchContext.setQuestionId(context.getId());
-            SearchResponse searchResponse = getQuestions(searchContext);
+            SearchResponse searchResponse = searchQuestions(searchContext);
             if (searchResponse.getQuestions().getContent().size() > 0) {
                 response.setQuestion(searchResponse.getQuestions().getContent().get(0));
             }
@@ -196,13 +196,23 @@ public class GetQuestionServiceImpl implements GetQuestionService {
 
     private QueryBuilder getQueryBuilder(DslQuery dsl) {
         QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
+
+        List<QueryBuilder> conditions = new ArrayList<>();
+
         if (dsl != null && !dsl.getTerms().isEmpty()) {
             BoolQueryBuilder termsQueryBuilder = QueryBuilders.boolQuery();
             dsl.getTerms().forEach(term -> {
                 termsQueryBuilder.must(QueryBuilders.matchQuery("title", term.getValue()));
             });
-            queryBuilder = termsQueryBuilder;
+            conditions.add(termsQueryBuilder);
         }
+
+        if (!conditions.isEmpty()) {
+            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+            conditions.forEach(boolQueryBuilder::must);
+            queryBuilder = boolQueryBuilder;
+        }
+
         return queryBuilder;
     }
 
@@ -220,6 +230,19 @@ public class GetQuestionServiceImpl implements GetQuestionService {
         if (dsl != null && StringUtils.isNoneBlank(dsl.getLevel())) {
             long level = NumberUtils.toLong(dsl.getLevel().substring(1), -1);
             filters.add(FilterBuilders.termFilter("level", level));
+        }
+
+        if (dsl != null && dsl.getMinCommentQuantity() != null) {
+            if (dsl.getMinCommentQuantity().equals(1L)) {
+                filters.add(FilterBuilders.existsFilter("comments.id"));
+            } else {
+                filters.add(FilterBuilders.andFilter(
+                        FilterBuilders
+                                .existsFilter("comments.id"),
+                        FilterBuilders
+                                .scriptFilter("_source.comments && _source.comments.size >= quantity")
+                                .addParam("quantity", dsl.getMinCommentQuantity())));
+            }
         }
 
         if (CollectionUtils.isNotEmpty(questionIds)) {

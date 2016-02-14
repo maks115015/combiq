@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.question.impl.SearchContext;
 import ru.atott.combiq.service.question.impl.SearchResponse;
-import ru.atott.combiq.service.question.GetQuestionService;
+import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
 import ru.atott.combiq.web.utils.GetQuestionContextBuilder;
@@ -26,7 +26,7 @@ import java.util.List;
 public class SearchController extends BaseController {
     private PagingBeanBuilder pagingBeanBuilder = new PagingBeanBuilder();
     @Autowired
-    private GetQuestionService getQuestionService;
+    private SearchQuestionService searchQuestionService;
     @Autowired
     private GetQuestionContextBuilder getQuestionContextBuilder;
 
@@ -69,7 +69,7 @@ public class SearchController extends BaseController {
 
     private ModelAndView getView(HttpServletRequest request, SearchContext context, String dsl,
                                  String subTitle, boolean questionsCatalog) {
-        SearchResponse questionsResponse = getQuestionService.getQuestions(context);
+        SearchResponse questionsResponse = searchQuestionService.searchQuestions(context);
 
         PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), questionsResponse.getQuestions().getNumber(), request);
         List<Question> questions = questionsResponse.getQuestions().getContent();

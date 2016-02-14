@@ -1,3 +1,9 @@
+ko.wrap = function(value) {
+    return ko.isObservable(value)
+        ? value
+        : (value instanceof Array ? ko.observableArray(value) : ko.observable(value));
+};
+
 ko.bindingHandlers.init = {
     init: function(element, valueAccessor, allBindings, data) {
         var action = valueAccessor();

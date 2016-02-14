@@ -9,6 +9,7 @@ public class DslQuery {
     private List<DslTag> tags = Collections.emptyList();
     private List<DslTerm> terms = Collections.emptyList();
     private String level;
+    private Long minCommentQuantity;
 
     public List<DslTag> getTags() {
         return tags;
@@ -39,12 +40,21 @@ public class DslQuery {
         this.level = level;
     }
 
+    public Long getMinCommentQuantity() {
+        return minCommentQuantity;
+    }
+
+    public void setMinCommentQuantity(Long minCommentQuantity) {
+        this.minCommentQuantity = minCommentQuantity;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("tags", tags)
                 .append("terms", terms)
                 .append("level", level)
+                .append("minCommentQuantity", minCommentQuantity)
                 .toString();
     }
 }
