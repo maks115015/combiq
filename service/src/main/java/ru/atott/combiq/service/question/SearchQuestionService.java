@@ -6,6 +6,7 @@ import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.service.question.impl.SearchContext;
 import ru.atott.combiq.service.question.impl.SearchResponse;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface SearchQuestionService {
@@ -15,4 +16,10 @@ public interface SearchQuestionService {
     Optional<SearchResponse> searchAnotherQuestions(Question question);
 
     GetQuestionResponse getQuestion(GetQuestionContext context);
+
+    List<Question> getQuestionsWithLatestComments(int count);
+
+    List<Question> get3QuestionsWithLatestComments();
+
+    List<Question> get7QuestionsWithLatestComments();
 }

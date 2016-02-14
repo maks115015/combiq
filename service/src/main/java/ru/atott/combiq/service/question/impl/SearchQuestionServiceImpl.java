@@ -1,5 +1,8 @@
 package ru.atott.combiq.service.question.impl;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +29,7 @@ import ru.atott.combiq.dao.entity.QuestionAttrsEntity;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
+import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionAttrs;
 import ru.atott.combiq.service.bean.Tag;
@@ -33,22 +37,41 @@ import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.mapper.QuestionAttrsMapper;
 import ru.atott.combiq.service.mapper.QuestionMapper;
-import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.service.question.QuestionService;
+import ru.atott.combiq.service.question.SearchQuestionService;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
 public class SearchQuestionServiceImpl implements SearchQuestionService {
+
     private DefaultResultMapper defaultResultMapper;
+
     private QuestionAttrsMapper questionAttrsMapper = new QuestionAttrsMapper();
+
+    private LoadingCache<Integer, List<Question>> questionsQithLatestCommentsCache =
+            CacheBuilder
+                    .newBuilder()
+                    .refreshAfterWrite(30, TimeUnit.MINUTES)
+                    .build(new CacheLoader<Integer, List<Question>>() {
+                        @Override
+                        public List<Question> load(Integer key) throws Exception {
+                            return getQuestionsWithLatestComments(key);
+                        }
+                    });
+
     @Autowired
     private NameVersionDomainResolver domainResolver;
+
     @Autowired
     private Client client;
+
     @Autowired
     private QuestionAttrsRepository questionAttrsRepository;
+
     @Autowired
     private QuestionService questionService;
 
@@ -167,6 +190,48 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
         }
 
         return response;
+    }
+
+    @Override
+    public List<Question> getQuestionsWithLatestComments(int count) {
+        QueryBuilder query = QueryBuilders
+                .filteredQuery(
+                        QueryBuilders.matchAllQuery(),
+                        FilterBuilders.existsFilter("comments.id"));
+
+        SearchRequestBuilder requestBuilder = client
+                .prepareSearch(domainResolver.resolveQuestionIndex())
+                .setTypes(Types.question)
+                .setQuery(query)
+                .addSort("comments.postDate", SortOrder.DESC)
+                .setSize(count);
+
+        org.elasticsearch.action.search.SearchResponse response = requestBuilder.execute().actionGet();
+
+        List<QuestionEntity> entities = defaultResultMapper
+                .mapResults(response, QuestionEntity.class, new PageRequest(0, count))
+                .getContent();
+
+        QuestionMapper questionMapper = new QuestionMapper();
+        return questionMapper.toList(entities);
+    }
+
+    @Override
+    public List<Question> get3QuestionsWithLatestComments() {
+        try {
+            return questionsQithLatestCommentsCache.get(3);
+        } catch (ExecutionException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<Question> get7QuestionsWithLatestComments() {
+        try {
+            return questionsQithLatestCommentsCache.get(7);
+        } catch (ExecutionException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
     }
 
     private List<QuestionAttrs> getQuestionAttrses(Collection<String> questionIds, String userId) {

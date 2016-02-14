@@ -1,5 +1,6 @@
 package ru.atott.combiq.web.controller;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -64,6 +66,11 @@ public class QuestionController extends BaseController {
                     .orElse(null);
         }
 
+        List<Question> questionsWithLatestComments = Collections.emptyList();
+        if (CollectionUtils.isEmpty(questionResponse.getQuestion().getComments())) {
+            questionsWithLatestComments = searchQuestionService.get3QuestionsWithLatestComments();
+        }
+
         QuestionViewBuilder viewBuilder = new QuestionViewBuilder();
         viewBuilder.setQuestion(questionResponse.getQuestion());
         viewBuilder.setPositionInDsl(questionResponse.getPositionInDsl());
@@ -71,6 +78,8 @@ public class QuestionController extends BaseController {
         viewBuilder.setTags(tagService.getTags(questionResponse.getQuestion().getTags()));
         viewBuilder.setCanonicalUrl(urlResolver.externalize("/questions/" + questionId));
         viewBuilder.setAnotherQuestions(anotherQuestions);
+        viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
+        viewBuilder.setQuestionsFeed(searchQuestionService.get7QuestionsWithLatestComments());
         return viewBuilder.build();
     }
 
