@@ -1,19 +1,19 @@
+var coSearch = {
 
-ko.wrap = function(value) {
-    return ko.isObservable(value)
-        ? value
-        : (value instanceof Array ? ko.observableArray(value) : ko.observable(value));
+    toggleCheckBoxOnlyWithComments: function(checked) {
+        var searchQuery = this.getSearchQuery();
+        searchQuery = searchQuery.replace(/comments:\d+/g, '');
+        if (checked) {
+            searchQuery = 'comments:' + 1 + ' ' + searchQuery.trim();
+        }
+        this.setSearchQuery(searchQuery.trim());
+    },
+
+    getSearchQuery: function() {
+        return $('#searchBox').val() || '';
+    },
+
+    setSearchQuery: function(query) {
+        $('#searchBox').val(query);
+    }
 };
-
-function saveQuestionComment(comment, questionId) {
-    $('#questionMyCommentStatus').text('Сохранение...');
-    $.post(
-        '/questions/commentSave', {
-            comment: comment,
-            questionId: questionId
-        }).done(function() {
-            $('#questionMyCommentStatus').text('Комментарий успешно сохранен');
-        }).fail(function() {
-            $('#questionMyCommentStatus').text('Ошибка при сохранении');
-        });
-}

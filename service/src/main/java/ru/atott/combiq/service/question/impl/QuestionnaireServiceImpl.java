@@ -2,22 +2,18 @@ package ru.atott.combiq.service.question.impl;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.QuestionnaireEntity;
 import ru.atott.combiq.dao.repository.QuestionnaireRepository;
 import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Questionnaire;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
 import ru.atott.combiq.service.mapper.QuestionnaireHeadMapper;
-import ru.atott.combiq.service.question.GetQuestionService;
+import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.service.question.QuestionnaireService;
 import ru.atott.combiq.service.site.MarkdownService;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -30,7 +26,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     private QuestionnaireRepository questionnaireRepository;
 
     @Autowired
-    private GetQuestionService getQuestionService;
+    private SearchQuestionService searchQuestionService;
 
     @Autowired
     private MarkdownService markdownService;
@@ -52,7 +48,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         SearchContext searchContext = new SearchContext();
         searchContext.setQuestionIds(entity.getQuestions());
         searchContext.setSize(400);
-        SearchResponse questionsSearchResponse = getQuestionService.getQuestions(searchContext);
+        SearchResponse questionsSearchResponse = searchQuestionService.searchQuestions(searchContext);
 
         QuestionnaireHeadMapper<Questionnaire> mapper = new QuestionnaireHeadMapper<>(Questionnaire.class);
         Questionnaire questionnaire = mapper.map(entity);

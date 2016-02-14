@@ -467,9 +467,23 @@ html /deep/ .co-ok-button {
     margin-bottom: 45px;
 }
 
+.co-search-help-tip label,
 .co-search-help-tip a {
     font-size: 0.75em;
     color: #a7a9ab;
+    font-weight: normal;
+    display: inline-block;
+    position: relative;
+}
+
+.co-search-help-tip label > input {
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    position: relative;
+    top: 2px;
+    *overflow: hidden;
 }
 
 a.co-action {
