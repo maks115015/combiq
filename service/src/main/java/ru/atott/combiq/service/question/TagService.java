@@ -15,4 +15,5 @@ public interface TagService {
     List<QuestionTag> getTags();
 
     List<DetailedQuestionTag> getAllQuestionTags();
+    String[] getAllTags();
 }

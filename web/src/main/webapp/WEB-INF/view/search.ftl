@@ -110,4 +110,6 @@
         </#list>
     </ul>
     <@templates.paging paging=paging />
+    <a class="pull-right" href="#" onclick="ko.openDialog('co-questionposter'); return false;"> Добавить новый вопрос
+        </a>
 </@templates.layoutWithSidebar>

@@ -144,6 +144,15 @@ public class QuestionServiceImpl implements QuestionService {
         questionEntity.setBody(markdownService.toMarkdownContent(body));
         questionRepository.save(questionEntity);
     }
+    @Override
+    public void saveQuestion(Question question){
+        QuestionEntity questionEntity=new QuestionEntity();
+        questionEntity.setTitle(question.getTitle());
+        questionEntity.setBody(question.getBody());
+        questionEntity.setLevel(Integer.parseInt(question.getLevel()));
+        questionEntity.setTags(question.getTags());
+        questionRepository.save(questionEntity);
+    }
 
     @Override
     public List<String> refreshMentionedClassNames(Question question) {

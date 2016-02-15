@@ -21,6 +21,8 @@ import ru.atott.combiq.service.bean.Tag;
 import ru.atott.combiq.service.mapper.QuestionTagMapper;
 import ru.atott.combiq.service.question.TagService;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -102,5 +104,14 @@ public class TagServiceImpl implements TagService {
         });
 
         return result;
+    }
+    public String[] getAllTags(){
+        List<DetailedQuestionTag> tags=getAllQuestionTags();
+        ArrayList<String> list=new ArrayList<String>();
+        for(DetailedQuestionTag tag:tags) {
+            list.add(tag.getValue());
+        }
+        String[] array=new String[list.size()];
+        return  list.toArray(array);
     }
 }

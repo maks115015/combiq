@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.question;
 
+import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.site.Context;
 
@@ -14,6 +15,7 @@ public interface QuestionService {
     void updateComment(Context context, String questionId, String commentId, String comment);
 
     void saveQuestionBody(String questionId, String body);
+    void saveQuestion(Question question);
 
     List<String> refreshMentionedClassNames(Question question);
 }
