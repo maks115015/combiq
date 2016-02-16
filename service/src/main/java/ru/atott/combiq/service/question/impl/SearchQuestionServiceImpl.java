@@ -245,6 +245,9 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
     }
 
     private List<QuestionAttrs> getQuestionAttrses(Collection<String> questionIds, String userId) {
+        if (CollectionUtils.isEmpty(questionIds)) {
+            return Collections.emptyList();
+        }
         OrFilterBuilder filterBuilder = FilterBuilders.orFilter();
         questionIds.forEach(questionId -> {
             filterBuilder.add(FilterBuilders.andFilter(
