@@ -11,6 +11,8 @@ public interface CreateQuestionIndexService {
 
     String updateQuestionTimestamps() throws IOException, ExecutionException, InterruptedException;
 
+    void updateHumanUrlTitles();
+
     void migrateQuestionIdsToNumbers();
 
     void migrateQuestionnaireIdsToNumbers();

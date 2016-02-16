@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -26,6 +27,7 @@ import ru.atott.combiq.dao.repository.QuestionnaireRepository;
 import ru.atott.combiq.data.service.CreateQuestionIndexService;
 import ru.atott.combiq.data.utils.DataUtils;
 import ru.atott.combiq.service.util.NumberService;
+import ru.atott.combiq.service.util.TransletirateService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,6 +58,9 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
 
     @Autowired
     private NumberService numberService;
+
+    @Autowired
+    private TransletirateService transletirateService;
 
     @Override
     public String create(String env) throws IOException, ExecutionException, InterruptedException {
@@ -140,6 +145,19 @@ public class CreateQuestionIndexServiceImpl implements CreateQuestionIndexServic
         }
 
         return indexName;
+    }
+
+    @Override
+    public void updateHumanUrlTitles() {
+        Iterable<QuestionEntity> questionEntities = questionRepository.findAll();
+        StreamSupport
+                .stream(questionEntities.spliterator(), false)
+                .filter(questionEntity -> StringUtils.isBlank(questionEntity.getHumanUrlTitle()))
+                .forEach(questionEntity -> {
+                    String humanUrlTitle = transletirateService.lowercaseAndTransletirate(questionEntity.getTitle(), 80);
+                    questionEntity.setHumanUrlTitle(humanUrlTitle);
+                    questionRepository.save(questionEntity);
+                });
     }
 
     @Override

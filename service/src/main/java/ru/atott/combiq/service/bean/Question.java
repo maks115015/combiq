@@ -19,6 +19,7 @@ public class Question {
     private List<QuestionComment> comments;
     private boolean landing;
     private List<String> classNames;
+    private String humanUrlTitle;
 
     public List<String> getTags() {
         return tags;
@@ -116,6 +117,14 @@ public class Question {
         this.classNames = classNames;
     }
 
+    public String getHumanUrlTitle() {
+        return humanUrlTitle;
+    }
+
+    public void setHumanUrlTitle(String humanUrlTitle) {
+        this.humanUrlTitle = humanUrlTitle;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -130,6 +139,7 @@ public class Question {
                 .append("comments", comments)
                 .append("landing", landing)
                 .append("classNames", classNames)
+                .append("humanUrlTitle", humanUrlTitle)
                 .toString();
     }
 }
