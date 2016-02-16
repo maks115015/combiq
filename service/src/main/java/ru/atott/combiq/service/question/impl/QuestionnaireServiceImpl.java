@@ -38,6 +38,12 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     }
 
     @Override
+    public QuestionnaireHead getQuestionnaireByLegacyId(String id) {
+        QuestionnaireHeadMapper<QuestionnaireHead> mapper = new QuestionnaireHeadMapper<>(QuestionnaireHead.class);
+        return mapper.safeMap(questionnaireRepository.findOneByLegacyId(id));
+    }
+
+    @Override
     public Questionnaire getQuestionnaire(String id) {
         QuestionnaireEntity entity = questionnaireRepository.findOne(id);
 

@@ -2,10 +2,11 @@ package ru.atott.combiq.dao.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import ru.atott.combiq.dao.Types;
 
 import java.util.Date;
 
-@Document(indexName = "#{domainResolver.resolveSystemIndex()}", type = "rememberMe")
+@Document(indexName = "#{domainResolver.resolveSystemIndex()}", type = Types.rememberMe)
 public class RememberMeEntity {
     @Id
     private String series;

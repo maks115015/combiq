@@ -17,6 +17,8 @@ public interface SearchQuestionService {
 
     GetQuestionResponse getQuestion(GetQuestionContext context);
 
+    Question getQuestionByLegacyId(String legacyId);
+
     List<Question> getQuestionsWithLatestComments(int count);
 
     List<Question> get3QuestionsWithLatestComments();
