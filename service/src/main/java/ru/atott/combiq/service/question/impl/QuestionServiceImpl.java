@@ -1,13 +1,13 @@
 package ru.atott.combiq.service.question.impl;
 
 import com.google.common.collect.Sets;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.SetUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.atott.combiq.dao.entity.*;
+import ru.atott.combiq.dao.entity.QuestionAttrsEntity;
+import ru.atott.combiq.dao.entity.QuestionComment;
+import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.repository.Jdk8ClassRepository;
 import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
 import ru.atott.combiq.dao.repository.QuestionRepository;
@@ -19,7 +19,6 @@ import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.Context;
 import ru.atott.combiq.service.site.EventService;
 import ru.atott.combiq.service.site.MarkdownService;
-import ru.atott.combiq.service.user.UserRoles;
 
 import java.util.*;
 import java.util.stream.Collectors;

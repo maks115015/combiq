@@ -68,6 +68,13 @@
         </div>
     </#if>
 
+    <#--<#if questionsFeed?size != 0>
+        <div>
+            <h4>Лента обновлений</h4>
+            <@listQuestionsFeed questionsFeed=questionsFeed />
+        </div>
+    </#if>-->
+
     <#if landing>
         <div>
             <h4>ВКонтакте</h4>
@@ -111,7 +118,8 @@
             <@landingBlock />
         </#if>
 
-        <@questionComments />
+
+        <@listQuestionComments />
 </@templates.layoutWithSidebar>
 
 <#macro landingBlock>
@@ -123,7 +131,7 @@
                     <ul>
                         <#list anotherQuestions as anotherQuestion>
                             <li>
-                                <a href="/questions/${anotherQuestion.id}">
+                                <a href="${urlResolver.getQuestionUrl(anotherQuestion)}">
                                     ${anotherQuestion.title}
                                 </a>
                             </li>
@@ -188,66 +196,78 @@
     </#if>
 </#macro>
 
-<#macro questionComments>
+<#macro listQuestionComments>
     <div>
-        <h4>Комментарии</h4>
+        <h4 id="comments">Комментарии</h4>
         <co-commentposter params="questionId: '${question.id?js_string}'"></co-commentposter>
         <div style="margin-top: 25px;">
             <#if comments?? && comments?size &gt; 0>
                 <ul class="co-comments">
                     <#list comments as comment>
                         <li>
-                            <span class="co-comments-meta" id="comment-${comment.id!}">
-                                ${comment.userName}, ${comment.postDate?string('dd MMMM yyyy, hh:mm')}
-                                <#if comment.editDate??>
-                                    <span class="co-comments-meta-edited" title="${comment.editUserName!comment.userName}, ${comment.editDate?string('dd MMMM yyyy, hh:mm')}">изменён</span>
-                                </#if>
-                                <#if (user.id)! == comment.userId
-                                        || templates.hasRole('sa')
-                                        || templates.hasRole('contenter') >
-                                    <a class="pull-right" href="#"
-                                        onclick="ko.openDialog('co-editcomment', {
-                                            questionId: '${question.id?js_string}',
-                                            commentId: '${comment.id?js_string}',
-                                            commentMarkdown: '${comment.content.markdown?js_string}'
-                                        }); return false;">
-                                        Изменить
-                                    </a>
-                                </#if>
-                            </span>
-                            <div class="co-comments-body">
-                            ${comment.content.html}
+                            <@outComment comment=comment />
+                        </li>
+                    </#list>
+                </ul>
+
+            <#else>
+                <div class="co-comments-notfound">
+                    Комментариев к этому вопросу пока нет. Возможно, вам будут интересны комментарии
+                    наших пользователей к другим вопросам:
+                </div>
+
+                <ul class="co-comments co-comments-latest">
+                    <#list questionsWithLatestComments as question>
+                        <li>
+                            <div class="co-comments-question-title">
+                                <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
+                            </div>
+                            <div class="co-comments-question-comments">
+                                <@outComment comment=question.lastComment />
                             </div>
                         </li>
                     </#list>
                 </ul>
-            <#else>
-                Комментариев пока нет.
             </#if>
         </div>
     </div>
 </#macro>
 
-<#function questionComment>
-    <#if !user??>
-        <#return 'Например, Вы можете сохранить здесь короткий ответ или ссылку.\nТолько зарегистрированные пользователи могут сохранять комментарии.' />
-    </#if>
-    <#if user?? && question.attrs?? && question.attrs.comment??>
-        <#return question.attrs.comment! />
-    </#if>
-    <#return '' />
-</#function>
+<#macro listQuestionsFeed questionsFeed>
+    <ol class="list-unstyled">
+        <#list questionsFeed as question>
+           <li>
+               <div class="co-questionsFeeds-question-title">
+                   <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
+               </div>
+               <div class="co-comments-question-comments">
+                   <@outComment comment=question.lastComment />
+               </div>
+           </li>
+        </#list>
+    </ol>
+</#macro>
 
-<#function questionReputationVotedUp>
-    <#if user?? && question.attrs?? && question.attrs.reputation?? && question.attrs.reputation &gt; 0>
-        <#return true />
-    </#if>
-    <#return false />
-</#function>
-
-<#function questionReputationVotedDown>
-    <#if user?? && question.attrs?? && question.attrs.reputation?? && question.attrs.reputation &lt; 0>
-        <#return true />
-    </#if>
-    <#return false />
-</#function>
+<#macro outComment comment>
+    <span class="co-comments-meta" id="comment-${comment.id!}">
+        ${comment.userName}, ${comment.postDate?string('dd MMMM yyyy, hh:mm')}
+        <#if comment.editDate??>
+            <span class="co-comments-meta-edited" title="${comment.editUserName!comment.userName}, ${comment.editDate?string('dd MMMM yyyy, hh:mm')}">изменён</span>
+        </#if>
+        <#if (user.id)! == comment.userId
+                || templates.hasRole('sa')
+                || templates.hasRole('contenter') >
+            <a class="pull-right" href="#"
+                onclick="ko.openDialog('co-editcomment', {
+                    questionId: '${question.id?js_string}',
+                    commentId: '${comment.id?js_string}',
+                    commentMarkdown: '${comment.content.markdown?js_string}'
+                }); return false;">
+                Изменить
+            </a>
+        </#if>
+    </span>
+    <div class="co-comments-body">
+    ${comment.content.html}
+    </div>
+</#macro>

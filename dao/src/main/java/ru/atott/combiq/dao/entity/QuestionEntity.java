@@ -2,24 +2,43 @@ package ru.atott.combiq.dao.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldIndex;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import ru.atott.combiq.dao.Types;
 
 import java.util.List;
 
 @Document(indexName = "#{domainResolver.resolveQuestionIndex()}", type = Types.question)
 public class QuestionEntity {
+
     @Id
     private String id;
+
     private String title;
+
     private List<String> tags;
+
     private int level;
+
     private Long reputation;
+
     private String tip;
+
     private MarkdownContent body;
+
     private List<QuestionComment> comments;
+
     private boolean landing;
+
     private List<String> classNames;
+
     private Long timestamp;
+
+    private String legacyId;
+
+    @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
+    private String humanUrlTitle;
 
     public List<String> getTags() {
         return tags;
@@ -107,5 +126,21 @@ public class QuestionEntity {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getLegacyId() {
+        return legacyId;
+    }
+
+    public void setLegacyId(String legacyId) {
+        this.legacyId = legacyId;
+    }
+
+    public String getHumanUrlTitle() {
+        return humanUrlTitle;
+    }
+
+    public void setHumanUrlTitle(String humanUrlTitle) {
+        this.humanUrlTitle = humanUrlTitle;
     }
 }

@@ -51,7 +51,7 @@
         <div class="co-search">
             <div class="row">
                 <div class="col-md-10">
-                    <input autofocus placeholder="Поисковый запрос" autocomplete="off" type="text" name="q" value="${dsl!}"/>
+                    <input id="searchBox" autofocus placeholder="Поисковый запрос" autocomplete="off" type="text" name="q" value="${dsl!}"/>
                 </div>
                 <div class="col-md-2">
                     <button type="submit" class="pull-right">
@@ -62,7 +62,11 @@
             </div>
         </div>
         <div class="co-search-help-tip">
-            <a href="https://github.com/atott/combiq/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA">
+            <label>
+                <input onchange="coSearch.toggleCheckBoxOnlyWithComments($(this).is(':checked'))" type="checkbox" ${templates.if(searchOnlyWithComments, "checked")}>
+                Только с комментариями
+            </label>
+            <a class="pull-right" href="https://github.com/atott/combiq/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA">
                 Вы можете задавать гибкие условия поиска, например, по тэгам или уровню <span class="co-arrow">→</span>
             </a>
         </div>
@@ -91,7 +95,7 @@
                     </div>
                     <div class="co-component-question-content">
                         <div class="co-component-question-text">
-                            <a href="/questions/${question.id}?index=${paging.from + question_index}&dsl=${dsl?url}">${question.title}</a>
+                            <a href="${urlResolver.getQuestionUrl(question, 'index=' + (paging.from + question_index) + '&dsl=' + dsl?url)}">${question.title}</a>
                         </div>
                         <div>
                             <ul class="co-component-question-tags">

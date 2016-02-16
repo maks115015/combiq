@@ -8,7 +8,10 @@ import java.io.OutputStream;
 import java.util.List;
 
 public interface QuestionnaireService {
+
     List<QuestionnaireHead> getQuestionnaires();
+
+    QuestionnaireHead getQuestionnaireByLegacyId(String id);
 
     Questionnaire getQuestionnaire(String id);
 

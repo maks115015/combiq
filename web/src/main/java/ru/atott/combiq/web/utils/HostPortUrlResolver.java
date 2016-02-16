@@ -45,11 +45,35 @@ public class HostPortUrlResolver implements UrlResolver {
 
     @Override
     public String getQuestionUrl(Question question) {
-        return "/questions/" + question.getId();
+        return getQuestionUrl(question, null);
+    }
+
+    @Override
+    public String getQuestionUrl(Question question, String queryString) {
+        StringBuilder result = new StringBuilder("/questions/" + question.getId());
+
+        if (StringUtils.isNotBlank(question.getHumanUrlTitle())) {
+            result.append("/").append(question.getHumanUrlTitle());
+        }
+
+        if (StringUtils.isNotBlank(queryString)) {
+            result.append("?").append(queryString);
+        }
+
+        return result.toString();
     }
 
     @Override
     public String getQuestionnaireUrl(QuestionnaireHead questionnaire) {
-        return "/questionnaire/" + questionnaire.getId();
+        return getQuestionnaireUrl(questionnaire, null);
+    }
+
+    @Override
+    public String getQuestionnaireUrl(QuestionnaireHead questionnaire, String queryString) {
+        if (StringUtils.isBlank(queryString)) {
+            return "/questionnaire/" + questionnaire.getId();
+        } else {
+            return "/questionnaire/" + questionnaire.getId() + "?" + queryString;
+        }
     }
 }

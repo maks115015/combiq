@@ -5,11 +5,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Questionnaire;
+import ru.atott.combiq.service.bean.QuestionnaireHead;
 import ru.atott.combiq.service.question.QuestionnaireService;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.ContentRequest;
+import ru.atott.combiq.web.utils.RequestUrlResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
@@ -19,8 +23,18 @@ public class QuestionnaireController extends BaseController {
     private QuestionnaireService questionnaireService;
 
     @RequestMapping(value = "/questionnaire/{questionnaireId}")
-    public ModelAndView view(@PathVariable("questionnaireId") String questionnaireId) {
+    public Object view(
+            @PathVariable("questionnaireId") String questionnaireId,
+            HttpServletRequest request) {
         Questionnaire questionnaire = questionnaireService.getQuestionnaire(questionnaireId);
+
+        if (questionnaire == null) {
+            QuestionnaireHead questionnaireByLegacy = questionnaireService.getQuestionnaireByLegacyId(questionnaireId);
+            if (questionnaireByLegacy != null) {
+                UrlResolver urlResolver = new RequestUrlResolver(request);
+                return movedPermanently(urlResolver.getQuestionnaireUrl(questionnaireByLegacy, request.getQueryString()));
+            }
+        }
 
         ModelAndView modelAndView = new ModelAndView("questionnaire");
         modelAndView.addObject("questionnaire", questionnaire);

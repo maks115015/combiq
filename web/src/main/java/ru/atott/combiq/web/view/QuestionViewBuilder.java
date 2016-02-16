@@ -17,6 +17,8 @@ public class QuestionViewBuilder {
     private List<QuestionTag> tags;
     private String canonicalUrl;
     private List<Question> anotherQuestions;
+    private List<Question> questionsWithLatestComments;
+    private List<Question> questionsFeed;
 
     public String getDsl() {
         return dsl;
@@ -66,6 +68,22 @@ public class QuestionViewBuilder {
         this.anotherQuestions = anotherQuestions;
     }
 
+    public List<Question> getQuestionsWithLatestComments() {
+        return questionsWithLatestComments;
+    }
+
+    public void setQuestionsWithLatestComments(List<Question> questionsWithLatestComments) {
+        this.questionsWithLatestComments = questionsWithLatestComments;
+    }
+
+    public List<Question> getQuestionsFeed() {
+        return questionsFeed;
+    }
+
+    public void setQuestionsFeed(List<Question> questionsFeed) {
+        this.questionsFeed = questionsFeed;
+    }
+
     public ModelAndView build() {
         List<QuestionComment> comments = question.getComments();
         if (comments == null) {
@@ -84,6 +102,8 @@ public class QuestionViewBuilder {
         mav.addObject("landing", question.isLanding());
         mav.addObject("canonicalUrl", canonicalUrl);
         mav.addObject("anotherQuestions", anotherQuestions);
+        mav.addObject("questionsWithLatestComments", questionsWithLatestComments);
+        mav.addObject("questionsFeed", questionsFeed);
         return mav;
     }
 }

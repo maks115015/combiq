@@ -6,13 +6,22 @@ import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.service.question.impl.SearchContext;
 import ru.atott.combiq.service.question.impl.SearchResponse;
 
+import java.util.List;
 import java.util.Optional;
 
-public interface GetQuestionService {
+public interface SearchQuestionService {
 
-    SearchResponse getQuestions(SearchContext context);
+    SearchResponse searchQuestions(SearchContext context);
 
-    Optional<SearchResponse> getAnotherQuestions(Question question);
+    Optional<SearchResponse> searchAnotherQuestions(Question question);
 
     GetQuestionResponse getQuestion(GetQuestionContext context);
+
+    Question getQuestionByLegacyId(String legacyId);
+
+    List<Question> getQuestionsWithLatestComments(int count);
+
+    List<Question> get3QuestionsWithLatestComments();
+
+    List<Question> get7QuestionsWithLatestComments();
 }

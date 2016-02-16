@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.bean;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.QuestionComment;
@@ -18,6 +19,7 @@ public class Question {
     private List<QuestionComment> comments;
     private boolean landing;
     private List<String> classNames;
+    private String humanUrlTitle;
 
     public List<String> getTags() {
         return tags;
@@ -91,6 +93,14 @@ public class Question {
         this.comments = comments;
     }
 
+    public QuestionComment getLastComment() {
+        if (CollectionUtils.isEmpty(comments)) {
+            return null;
+        }
+
+        return comments.get(comments.size() - 1);
+    }
+
     public boolean isLanding() {
         return landing;
     }
@@ -107,6 +117,14 @@ public class Question {
         this.classNames = classNames;
     }
 
+    public String getHumanUrlTitle() {
+        return humanUrlTitle;
+    }
+
+    public void setHumanUrlTitle(String humanUrlTitle) {
+        this.humanUrlTitle = humanUrlTitle;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -121,6 +139,7 @@ public class Question {
                 .append("comments", comments)
                 .append("landing", landing)
                 .append("classNames", classNames)
+                .append("humanUrlTitle", humanUrlTitle)
                 .toString();
     }
 }

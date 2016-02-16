@@ -10,5 +10,8 @@ import java.util.Collection;
 
 @Component
 public interface QuestionRepository extends PagingAndSortingRepository<QuestionEntity, String> {
+
     Page<QuestionEntity> findByTagsIn(Collection<String> tags, Pageable pageable);
+
+    QuestionEntity findOneByLegacyId(String legacyId);
 }

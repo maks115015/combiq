@@ -1,20 +1,20 @@
 package ru.atott.combiq.web.controller;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
-import ru.atott.combiq.service.question.GetQuestionService;
-import ru.atott.combiq.service.question.QuestionReputationService;
 import ru.atott.combiq.service.question.QuestionService;
+import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.service.question.TagService;
 import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
-import ru.atott.combiq.web.bean.ReputationVoteBean;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.ContentRequest;
 import ru.atott.combiq.web.request.EditCommentRequest;
@@ -23,26 +23,35 @@ import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class QuestionController extends BaseController {
+
     @Autowired
     private AuthService authService;
+
     @Autowired
-    private GetQuestionService getQuestionService;
+    private SearchQuestionService searchQuestionService;
+
     @Autowired
     private QuestionService questionService;
-    @Autowired
-    private QuestionReputationService questionReputationService;
+
     @Autowired
     private TagService tagService;
 
-    @RequestMapping(value = "/questions/{questionId}")
-    public ModelAndView view(@PathVariable("questionId") String questionId,
-                             @RequestParam(value = "index", required = false) Integer index,
-                             @RequestParam(value = "dsl", required = false) String dsl,
-                             HttpServletRequest request) {
+    @RequestMapping(value = {
+            "/questions/{questionId}",
+            "/questions/{questionId}/{humanUrlTitle}"
+    })
+    public Object view(@PathVariable("questionId") String questionId,
+                       @PathVariable("humanUrlTitle") Optional<String> humanUrlTitle,
+                       @RequestParam(value = "index", required = false) Integer index,
+                       @RequestParam(value = "dsl", required = false) String dsl,
+                       HttpServletRequest request) {
         UrlResolver urlResolver = new RequestUrlResolver(request);
 
         GetQuestionContext context = new GetQuestionContext();
@@ -54,14 +63,25 @@ public class QuestionController extends BaseController {
             context.setDsl(DslParser.parse(dsl));
         }
 
-        GetQuestionResponse questionResponse = getQuestionService.getQuestion(context);
+        GetQuestionResponse questionResponse = searchQuestionService.getQuestion(context);
+
+        RedirectView redirectView = redirectToCanonicalUrlIfNeed(questionId, humanUrlTitle.orElse(null), questionResponse, request);
+
+        if (redirectView != null) {
+            return redirectView;
+        }
 
         List<Question> anotherQuestions = null;
         if (questionResponse.getQuestion().isLanding()) {
-            anotherQuestions = getQuestionService
-                    .getAnotherQuestions(questionResponse.getQuestion())
+            anotherQuestions = searchQuestionService
+                    .searchAnotherQuestions(questionResponse.getQuestion())
                     .map(response -> response.getQuestions().getContent())
                     .orElse(null);
+        }
+
+        List<Question> questionsWithLatestComments = Collections.emptyList();
+        if (CollectionUtils.isEmpty(questionResponse.getQuestion().getComments())) {
+            questionsWithLatestComments = searchQuestionService.get3QuestionsWithLatestComments();
         }
 
         QuestionViewBuilder viewBuilder = new QuestionViewBuilder();
@@ -69,8 +89,10 @@ public class QuestionController extends BaseController {
         viewBuilder.setPositionInDsl(questionResponse.getPositionInDsl());
         viewBuilder.setDsl(dsl);
         viewBuilder.setTags(tagService.getTags(questionResponse.getQuestion().getTags()));
-        viewBuilder.setCanonicalUrl(urlResolver.externalize("/questions/" + questionId));
+        viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(questionResponse.getQuestion())));
         viewBuilder.setAnotherQuestions(anotherQuestions);
+        viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
+        viewBuilder.setQuestionsFeed(searchQuestionService.get7QuestionsWithLatestComments());
         return viewBuilder.build();
     }
 
@@ -96,40 +118,32 @@ public class QuestionController extends BaseController {
         return new SuccessBean();
     }
 
-    @RequestMapping(value = "/questions/commentSave", method = RequestMethod.POST)
-    @ResponseBody
-    @Deprecated
-    public SuccessBean saveComment(@RequestParam(value = "comment", required = false) String comment,
-                                   @RequestParam(value = "questionId", required = true) String questionId) {
-        if (authService.getUser() == null) {
-            return new SuccessBean(false);
+    private RedirectView redirectToCanonicalUrlIfNeed(String questionId,
+                                                      String humanUrlTitle,
+                                                      GetQuestionResponse searchResponse,
+                                                      HttpServletRequest request) {
+        Question question = searchResponse.getQuestion();
+
+        if (question == null) {
+            question = searchQuestionService.getQuestionByLegacyId(questionId);
+
+            if (question == null) {
+                return null;
+            }
+
+            UrlResolver urlResolver = new RequestUrlResolver(request);
+            String questionUrl = urlResolver.getQuestionUrl(question, request.getQueryString());
+            return movedPermanently(questionUrl);
         }
 
-        questionService.saveUserComment(authService.getUserId(), questionId, comment);
-        return new SuccessBean();
-    }
-
-    @RequestMapping(value = "/questions/reputationVote", method = RequestMethod.POST)
-    @ResponseBody
-    @Deprecated
-    public ReputationVoteBean reputationVote(@RequestParam(value = "up", required = true) boolean up,
-                                             @RequestParam(value = "questionId", required = true) String questionId) {
-        if (authService.getUser() == null) {
-            return null;
+        if (StringUtils.isNotBlank(question.getHumanUrlTitle())
+                && !Objects.equals(question.getHumanUrlTitle(), humanUrlTitle)) {
+            UrlResolver urlResolver = new RequestUrlResolver(request);
+            String questionUrl = urlResolver.getQuestionUrl(question, request.getQueryString());
+            return movedPermanently(questionUrl);
         }
 
-        ReputationVoteBean result = new ReputationVoteBean();
-        result.setQuestionId(questionId);
-
-        if (up) {
-            result.setUserReputation(1);
-            result.setQuestionReputation(questionReputationService.voteUp(authService.getUserId(), questionId));
-        } else {
-            result.setUserReputation(-1);
-            result.setQuestionReputation(questionReputationService.voteDown(authService.getUserId(), questionId));
-        }
-
-        return result;
+        return null;
     }
     @RequestMapping(value = "/questions/new",method = RequestMethod.POST)
     public SuccessBean saveQuestion(@RequestBody Question question){

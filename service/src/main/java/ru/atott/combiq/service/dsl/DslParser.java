@@ -17,6 +17,7 @@ public class DslParser {
         if (StringUtils.isBlank(dsl)) {
             return new DslQuery();
         }
+        dsl = dsl.trim();
         if (parser == null) {
             parser = getDslQueryParser();
         }
@@ -75,6 +76,15 @@ public class DslParser {
                             case "level":
                                 query.setLevel((String) pair.getValue());
                                 break;
+                            case "comments":
+                                try {
+                                    query.setMinCommentQuantity(Long.valueOf((String) pair.getValue()));
+                                    if (query.getMinCommentQuantity() < 1) {
+                                        query.setMinCommentQuantity(null);
+                                    }
+                                } catch (Exception e) {
+                                    // Nothing to do.
+                                }
                         }
                     });
 
