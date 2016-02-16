@@ -5,14 +5,16 @@
     <co-markdownbox params="text: body" > </co-markdownbox>
     <div>Теги</div>
     <div>
-        <span  data-bind="foreach: tags"><b class="co-tag" data-bind="text: name"></b><b data-bind="click: $parent.removePerson"> x </b></span>
-        <select  data-bind="options: avaibleTag, optionsText: 'name', value: tag , click: addTag, optionsCaption: 'Выберите теги' " ></select>
+        <span  data-bind="foreach: tags"><b class="co-tag" data-bind="text: name"></b><b data-bind="click: $parent.removeTag"> x </b></span>
+        <select  data-bind="options: avaibleTag, optionsText: 'name', value: tag , click: addTag, optionsCaption: 'Выберите теги'  " ></select>
     </div>
     <div>Уровень</div>
-    <select class="lvl" data-bind="selectedOptions: lvl">
+    <div>
+    <select class="lvl" data-bind="value: lvl">
         <option value="1">D1</option>
         <option value="2">D2</option>
         <option value="3">D3</option>
     </select>
+    </div>
     <button data-bind="click: send">Сохранить</button>
 </div>

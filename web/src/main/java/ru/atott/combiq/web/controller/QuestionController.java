@@ -132,8 +132,8 @@ public class QuestionController extends BaseController {
         return result;
     }
     @RequestMapping(value = "/questions/new",method = RequestMethod.POST)
-    @ResponseBody
-    public void saveQuestion(@RequestParam(value = "up", required = true) Question question){
+    public SuccessBean saveQuestion(@RequestBody Question question){
         questionService.saveQuestion(question);
+        return new SuccessBean(true);
     }
 }

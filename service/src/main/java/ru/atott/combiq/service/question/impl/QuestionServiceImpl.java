@@ -147,10 +147,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void saveQuestion(Question question){
         QuestionEntity questionEntity=new QuestionEntity();
+        questionEntity.setTags(question.getTags());
+        questionEntity.setLevel(Integer.parseInt(question.getLevel()));
         questionEntity.setTitle(question.getTitle());
         questionEntity.setBody(question.getBody());
-        questionEntity.setLevel(Integer.parseInt(question.getLevel()));
-        questionEntity.setTags(question.getTags());
         questionRepository.save(questionEntity);
     }
 
