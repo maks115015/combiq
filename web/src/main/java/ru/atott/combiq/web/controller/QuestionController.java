@@ -5,13 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
-import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.service.question.QuestionReputationService;
 import ru.atott.combiq.service.question.QuestionService;
+import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.service.question.TagService;
 import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
@@ -41,7 +40,7 @@ public class QuestionController extends BaseController {
     private TagService tagService;
 
     @RequestMapping(value = "/questions/{questionId}")
-    public ModelAndView view(@PathVariable("questionId") String questionId,
+    public Object view(@PathVariable("questionId") String questionId,
                              @RequestParam(value = "index", required = false) Integer index,
                              @RequestParam(value = "dsl", required = false) String dsl,
                              HttpServletRequest request) {
@@ -57,6 +56,13 @@ public class QuestionController extends BaseController {
         }
 
         GetQuestionResponse questionResponse = searchQuestionService.getQuestion(context);
+
+        if (questionResponse.getQuestion() == null) {
+            Question question = searchQuestionService.getQuestionByLegacyId(questionId);
+            if (question != null) {
+                return movedPermanently(urlResolver.getQuestionUrl(question, request.getQueryString()));
+            }
+        }
 
         List<Question> anotherQuestions = null;
         if (questionResponse.getQuestion().isLanding()) {

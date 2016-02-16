@@ -7,4 +7,5 @@ import ru.atott.combiq.dao.entity.QuestionnaireEntity;
 @Component
 public interface QuestionnaireRepository extends PagingAndSortingRepository<QuestionnaireEntity, String> {
 
+    QuestionnaireEntity findOneByLegacyId(String legacyId);
 }

@@ -29,6 +29,7 @@ import ru.atott.combiq.dao.entity.QuestionAttrsEntity;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.dao.repository.QuestionAttrsRepository;
+import ru.atott.combiq.dao.repository.QuestionRepository;
 import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionAttrs;
@@ -74,6 +75,9 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
 
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private QuestionRepository questionRepository;
 
     public SearchQuestionServiceImpl() {
         SimpleElasticsearchMappingContext mappingContext = new SimpleElasticsearchMappingContext();
@@ -190,6 +194,12 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
         }
 
         return response;
+    }
+
+    @Override
+    public Question getQuestionByLegacyId(String legacyId) {
+        QuestionEntity entity = questionRepository.findOneByLegacyId(legacyId);
+        return new QuestionMapper().safeMap(entity);
     }
 
     @Override

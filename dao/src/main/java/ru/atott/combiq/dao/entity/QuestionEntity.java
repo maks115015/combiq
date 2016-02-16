@@ -20,6 +20,7 @@ public class QuestionEntity {
     private boolean landing;
     private List<String> classNames;
     private Long timestamp;
+    private String legacyId;
 
     public List<String> getTags() {
         return tags;
@@ -107,5 +108,13 @@ public class QuestionEntity {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getLegacyId() {
+        return legacyId;
+    }
+
+    public void setLegacyId(String legacyId) {
+        this.legacyId = legacyId;
     }
 }

@@ -9,5 +9,9 @@ public interface UrlResolver {
 
     String getQuestionUrl(Question question);
 
+    String getQuestionUrl(Question question, String queryString);
+
     String getQuestionnaireUrl(QuestionnaireHead questionnaire);
+
+    String getQuestionnaireUrl(QuestionnaireHead questionnaire, String queryString);
 }
