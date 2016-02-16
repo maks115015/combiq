@@ -131,7 +131,7 @@
                     <ul>
                         <#list anotherQuestions as anotherQuestion>
                             <li>
-                                <a href="/questions/${anotherQuestion.id}">
+                                <a href="${urlResolver.getQuestionUrl(anotherQuestion)}">
                                     ${anotherQuestion.title}
                                 </a>
                             </li>
@@ -216,11 +216,11 @@
                     наших пользователей к другим вопросам:
                 </div>
 
-                <ul class="co-comments co-comments-lastest">
+                <ul class="co-comments co-comments-latest">
                     <#list questionsWithLatestComments as question>
                         <li>
                             <div class="co-comments-question-title">
-                                <a href="/questions/${question.id?url}">${question.title}</a>
+                                <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
                             </div>
                             <div class="co-comments-question-comments">
                                 <@outComment comment=question.lastComment />
@@ -238,7 +238,7 @@
         <#list questionsFeed as question>
            <li>
                <div class="co-questionsFeeds-question-title">
-                   <a href="/questions/${question.id?url}">${question.title}</a>
+                   <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
                </div>
                <div class="co-comments-question-comments">
                    <@outComment comment=question.lastComment />

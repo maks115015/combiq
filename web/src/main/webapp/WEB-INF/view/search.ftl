@@ -95,7 +95,7 @@
                     </div>
                     <div class="co-component-question-content">
                         <div class="co-component-question-text">
-                            <a href="/questions/${question.id}?index=${paging.from + question_index}&dsl=${dsl?url}">${question.title}</a>
+                            <a href="${urlResolver.getQuestionUrl(question, 'index=' + (paging.from + question_index) + '&dsl=' + dsl?url)}">${question.title}</a>
                         </div>
                         <div>
                             <ul class="co-component-question-tags">

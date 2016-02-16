@@ -50,11 +50,17 @@ public class HostPortUrlResolver implements UrlResolver {
 
     @Override
     public String getQuestionUrl(Question question, String queryString) {
-        if (StringUtils.isBlank(queryString)) {
-            return "/questions/" + question.getId();
-        } else {
-            return "/questions/" + question.getId() + "?" + queryString;
+        StringBuilder result = new StringBuilder("/questions/" + question.getId());
+
+        if (StringUtils.isNotBlank(question.getHumanUrlTitle())) {
+            result.append("/").append(question.getHumanUrlTitle());
         }
+
+        if (StringUtils.isNotBlank(queryString)) {
+            result.append("?").append(queryString);
+        }
+
+        return result.toString();
     }
 
     @Override

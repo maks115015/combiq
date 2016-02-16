@@ -19,7 +19,7 @@
                             ${question_index + 1}
                             </td>
                             <td>
-                                <a href="/questions/${question.id}">${question.title}</a>
+                                <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
                                 <#if question.tip??>
                                     <div class="co-question-tip">
                                         <span class="co-question-tip-title">Подсказка:</span> ${question.tip!}

@@ -20,6 +20,12 @@ public class QuestionIndexUtilsCommands implements CommandMarker {
         return createQuestionIndexService.updateQuestionTimestamps();
     }
 
+    @CliCommand(value = "update question humanUrlTitles", help = "Set missing humanUrlTitle values for questions.")
+    public String updateHumanUrlTitles() {
+        createQuestionIndexService.updateHumanUrlTitles();
+        return "Done";
+    }
+
     @CliCommand(value = "migrate question stringIdsToNumbers")
     public String migrateIdsToNumbers() {
         createQuestionIndexService.migrateQuestionIdsToNumbers();
