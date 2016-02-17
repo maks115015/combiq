@@ -3,13 +3,27 @@ define(['ajax', 'knockout'], function(ajax, ko) {
     function ViewModel(params) {
         this.text = ko.wrap(params.text);
         this.textarea = ko.wrap();
-        this.active = ko.wrap(params.active || 'html');
+        this.active = ko.wrap(params.active || 'html'); // markdown, html
         this.preview = ko.wrap();
+
+        if (params.markdownBoxModel) {
+            params.markdownBoxModel(this);
+        }
 
         if (this.active() != 'markdown') {
             this.refreshPreview();
         }
     }
+
+    ViewModel.prototype.focus = function() {
+        var self = this;
+        if (this.active != 'markdown') {
+            this.active('markdown');
+        }
+        setTimeout(function() {
+            self.textarea().focus();
+        }, 1);
+    };
 
     ViewModel.prototype.toggleSrc = function() {
         this.active('markdown');
@@ -53,16 +67,11 @@ define(['ajax', 'knockout'], function(ajax, ko) {
     ViewModel.prototype.refreshPreview = function() {
         var self = this;
 
-        $.ajax({
-            url: '/markdown/preview',
-            datatype: 'text',
-            contentType: 'text/plain',
-            data: self.text(),
-            method: 'POST',
-            success: function(result) {
-                self.preview(result);
-            }
-        });
+        coMarkdown
+            .toHtml(self.text())
+            .done(function(html) {
+                self.preview(html);
+            });
     };
 
     return ViewModel;

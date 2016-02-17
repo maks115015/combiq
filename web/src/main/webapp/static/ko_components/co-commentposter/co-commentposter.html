@@ -4,7 +4,7 @@
               placeholder="Оставить комментарий к вопросу"></textarea>
 
     <div data-bind="visible: focused">
-        <button data-bind="click: postComment, disable: posting">Оставить комментарий</button>
+        <button class="btn btn-default" data-bind="click: postComment, disable: posting">Оставить комментарий</button>
         <span class="co-commentposter-postingtip" data-bind="visible: posting">Сохранение...</span>
 
         <div class="pull-right co-inline">

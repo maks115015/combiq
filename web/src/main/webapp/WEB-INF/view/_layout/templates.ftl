@@ -202,7 +202,11 @@
 
     <@security.authorize access="hasRole('sa')" var="allowEditConent" />
     <#if allowEditConent>
-        <co-contenteditor params="value:'${(content.markdown)!?html}' ,url: '${if(url == '', "/content/" + content.id!, url)}'"></co-contenteditor>
+        <co-contenteditor params="
+            markdown: '${(content.markdown)!?html}',
+            html: '${(content.html)!?html}',
+            url: '${if(url == '', "/content/" + content.id!, url)}'">
+        </co-contenteditor>
     <#else>
         ${(content.html)!''}
     </#if>

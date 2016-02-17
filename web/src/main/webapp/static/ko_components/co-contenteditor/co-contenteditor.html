@@ -1,3 +1,25 @@
-
-<co-markdownbox params="text: value"></co-markdownbox>
-<button data-bind="click: applyClick">Применить</button>
+<div data-bind="visible: view() == 'preview', click: previewClick" class="co-contenteditor-preview">
+    <div class="co-contenteditor-previewpane">
+        <div style="display: inline-block">
+            <div data-bind="html: html, visible: html() && html().trim()"></div>
+            <div class="co-contenteditor-tip" data-bind="visible: !(html() && html().trim())">
+                Редактируемая область
+            </div>
+        </div>
+    </div>
+    <span class="co-contenteditor-previewhandle glyphicon glyphicon-pencil"></span>
+</div>
+<div data-bind="visible: view() == 'edit'">
+    <div class="co-contenteditor-editor">
+        <co-markdownbox params="text: editorMarkdown, active: 'markdown', markdownBoxModel: editorMarkdownModel"></co-markdownbox>
+    </div>
+    <div class="co-contenteditor-controls">
+        <button class="btn btn-default" data-bind="click: applyClick">
+            <span class="glyphicon glyphicon-ok"></span>
+        </button>
+        <button class="btn btn-default" data-bind="click: cancelClick">
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>

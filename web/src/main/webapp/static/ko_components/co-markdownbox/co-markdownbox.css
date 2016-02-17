@@ -2,7 +2,8 @@
     border: solid 1px rgb(204, 204, 204);
     padding: 0;
     border-radius: 3px;
-    margin-bottom: 5px;
+    margin-bottom: 0;
+    line-height: 0;
 }
 
 .co-markdown__preview {
@@ -11,6 +12,7 @@
     min-height: 80px;
     font-size: 12px;
     padding: 10px;
+    line-height: normal;
 }
 
 .co-markdown__src {
