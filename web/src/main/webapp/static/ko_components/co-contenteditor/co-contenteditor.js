@@ -19,7 +19,7 @@ define(['ajax'], function(ajax) {
 
         $.ajax({
             url: this.url,
-            data: JSON.stringify({content: this.markdown()}),
+            data: JSON.stringify({content: this.editorMarkdown()}),
             contentType: 'application/json',
             method: 'POST'
         }).done(function() {
