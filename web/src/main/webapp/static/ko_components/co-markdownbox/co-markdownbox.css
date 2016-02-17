@@ -37,6 +37,31 @@
     padding: 5px 5px;
 }
 
+.co-markdown__aceeditor {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    bottom: 4px;
+    left: 0;
+}
+
+.co-markdown__resizehandler {
+    position: absolute;
+    height: 4px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #f5f5f5;
+    cursor: ns-resize;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.co-markdown__ace {
+    position: relative;
+    height: 300px;
+}
+
 .co-markdown__toolbar > li {
     margin: 0;
     padding: 0;

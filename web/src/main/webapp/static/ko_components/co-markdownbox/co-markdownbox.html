@@ -1,4 +1,4 @@
-<div id="element" class="co-markdown">
+<div data-bind="init: init" id="element" class="co-markdown">
     <ul class="co-markdown__toolbar">
         <li>
             <div class="btn-group" role="group">
@@ -28,9 +28,10 @@
         </li>
     </ul>
 
-    <textarea class="co-markdown__src"
-              style="min-height: 200px;"
-              data-bind="textInput: text, visible: active() == 'markdown', element: textarea"></textarea>
+    <div class="co-markdown__ace" data-bind="visible: active() == 'markdown', element: editorBoundElement">
+        <div class="co-markdown__aceeditor" data-bind="element: editorElement, ace: text"></div>
+        <div class="co-markdown__resizehandler"></div>
+    </div>
 
     <div class="co-markdown__preview" data-bind="html: preview, visible: active() == 'html'"></div>
 </div>

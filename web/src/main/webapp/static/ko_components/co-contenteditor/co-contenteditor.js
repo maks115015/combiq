@@ -38,7 +38,9 @@ define(['ajax'], function(ajax) {
     ViewModel.prototype.previewClick = function() {
         this.editorMarkdown(this.markdown());
         this.view('edit');
-        this.editorMarkdownModel().focus();
+        if (this.editorMarkdownModel()) {
+            this.editorMarkdownModel().focus();
+        }
     };
 
     return ViewModel;
