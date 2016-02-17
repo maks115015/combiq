@@ -106,6 +106,14 @@
                                      </a>
                                    </li>
                                 </#list>
+                                <#if question.comments?size != 0>
+                                    <li>
+                                        <a class="co-search-comment" href="${urlResolver.getQuestionCommentsUrl(question, 'index=' + (paging.from + question_index) + '&dsl=' + dsl?url)}" title="Перейти к комментариям вопроса">
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                            ${question.comments?size}
+                                        </a>
+                                    </li>
+                                </#if>
                             </ul>
                         </div>
                     </div>
