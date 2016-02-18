@@ -64,6 +64,16 @@ public class HostPortUrlResolver implements UrlResolver {
     }
 
     @Override
+    public String getQuestionCommentsUrl(Question question) {
+        return getQuestionUrl(question) + "#comments";
+    }
+
+    @Override
+    public String getQuestionCommentsUrl(Question question, String queryString) {
+        return getQuestionUrl(question, queryString) + "#comments";
+    }
+
+    @Override
     public String getQuestionnaireUrl(QuestionnaireHead questionnaire) {
         return getQuestionnaireUrl(questionnaire, null);
     }
