@@ -16,6 +16,7 @@ public interface QuestionService {
 
     void saveQuestionBody(String questionId, String body);
     void saveQuestion(Question question);
+    void updateQuestion(Question question);
 
     List<String> refreshMentionedClassNames(Question question);
 }

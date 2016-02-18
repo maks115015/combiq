@@ -146,8 +146,20 @@ public class QuestionController extends BaseController {
         return null;
     }
     @RequestMapping(value = "/questions/new",method = RequestMethod.POST)
+    @ResponseBody
     public SuccessBean saveQuestion(@RequestBody Question question){
         questionService.saveQuestion(question);
         return new SuccessBean(true);
+    }
+
+    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.POST)
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('sa','contenter')")
+    public SuccessBean updateQuestion(@PathVariable("questionId") String questionId,@RequestBody Question question) {
+        if (questionId.equals(question.getId())) {
+            questionService.updateQuestion(question);
+            return new SuccessBean(true);
+        }
+        return new SuccessBean(false);
     }
 }

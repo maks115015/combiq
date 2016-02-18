@@ -19,6 +19,7 @@ import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.Context;
 import ru.atott.combiq.service.site.EventService;
 import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.service.util.NumberService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -50,6 +51,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private NumberService numberService;
 
     @Override
     public void saveUserComment(String userId, String questionId, String comment) {
@@ -146,12 +150,23 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void saveQuestion(Question question){
         QuestionEntity questionEntity=new QuestionEntity();
-        questionEntity.setTags(question.getTags());
-        questionEntity.setLevel(Integer.parseInt(question.getLevel()));
-        questionEntity.setTitle(question.getTitle());
-        questionEntity.setBody(question.getBody());
+        saveQuestion(question,questionEntity);
+        questionEntity.setId(Long.toString(numberService.getUniqueNumber()));
         questionRepository.save(questionEntity);
     }
+    @Override
+    public void updateQuestion(Question question){
+        QuestionEntity questionEntity=questionRepository.findOne(question.getId());
+        saveQuestion(question,questionEntity);
+        questionRepository.save(questionEntity);
+    }
+    private void saveQuestion(Question question, QuestionEntity questionEntity){
+        questionEntity.setTags(question.getTags());
+        questionEntity.setLevel(Integer.parseInt(question.getLevel().substring(1)));
+        questionEntity.setTitle(question.getTitle());
+        questionEntity.setBody(question.getBody());
+    }
+
 
     @Override
     public List<String> refreshMentionedClassNames(Question question) {

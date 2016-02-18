@@ -166,7 +166,9 @@
             document.write(VK.Share.button({url: "${canonicalUrl}"},{type: "round", text: "Поделиться", eng: 1}));
             --></script>
         </li>
+
     </ul>
+    <a  href="#" onclick="ko.openDialog('co-questionposter',{title: '${question.title}', body: '${question.body.markdown!''}', level: '${question.level}' , id: '${question.id}', tags: [ '${question.tags?join("', '")}' ] }); return false;" >Изменить вопрос</a>
 </#macro>
 
 <#macro questionPosition>

@@ -5,12 +5,16 @@ define(['knockout','ajax'], function(ko,ajax) {
           this.buttons = [];
           this.sticked = true;
           this.posting = ko.wrap(false);
-          this.title=ko.wrap(params.title);
-          this.body=ko.wrap(params.body);
-          this.tags=ko.observableArray();
           this.tag=ko.wrap('');
           this.istag=ko.wrap(false);
-          this.lvl=ko.wrap(params.lvl);
+          this.id=ko.wrap(params.id);
+          this.lvl=ko.wrap(params.level);
+          this.title=ko.wrap(params.title);
+          this.body=ko.wrap(params.body);
+          if (this.id()!=''){
+          this.tags=ko.observableArray(params.tags.map(function(tagname,index,array) {return {name: tagname};}));
+          }
+          else{this.tags=ko.observableArray();};
           this.avaibleTag=ko.observableArray();
           var self=this;
           $.getJSON('/questions/tags', function(result) {
@@ -27,13 +31,15 @@ define(['knockout','ajax'], function(ko,ajax) {
                   this.istag(true);}
 
       ViewModel.prototype.send=function(){
-      taglist=[];
-      var size= this.tags().length;
-      for(var i=0;i<size;i++){
-      taglist.push(this.tags()[i].name);
-      };
+      taglist = this.tags().map(function(tag,index,array) {return tag.name;});
       var json={title: this.title(), body: {markdown:this.body()},level:this.lvl(), tags: taglist};
+      if(this.id()==''){
       ajax.rest('POST', '/questions/new', json).done(function() {alert('OK!');});
+      }
+      else{
+      json.id=this.id();
+      ajax.rest('POST', '/questions/'+this.id(), json).done(function() {alert('OK!');});
+      };
       }
       return ViewModel;
 });
