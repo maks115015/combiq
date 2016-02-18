@@ -168,7 +168,9 @@
         </li>
 
     </ul>
+    <#if allowEditConent>
     <a  href="#" onclick="ko.openDialog('co-questionposter',{title: '${question.title}', body: '${question.body.markdown!''}', level: '${question.level}' , id: '${question.id}', tags: [ '${question.tags?join("', '")}' ] }); return false;" >Изменить вопрос</a>
+    </#if>
 </#macro>
 
 <#macro questionPosition>

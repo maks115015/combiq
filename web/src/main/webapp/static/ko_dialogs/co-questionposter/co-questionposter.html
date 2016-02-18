@@ -9,11 +9,11 @@
         <select  data-bind="options: avaibleTag, optionsText: 'name', value: tag , click: addTag, optionsCaption: 'Выберите теги'  " ></select>
     </div>
     <div>Уровень</div>
-    <div>
+    <div style="margin: 3px">
     <select class="lvl" data-bind="value: lvl">
-        <option value="D1">D1</option>
-        <option value="D2">D2</option>
-        <option value="D3">D3</option>
+        <option value="D1">Junior</option>
+        <option value="D2">Mid</option>
+        <option value="D3">Senior</option>
     </select>
     </div>
     <button data-bind="click: send">Сохранить</button>
