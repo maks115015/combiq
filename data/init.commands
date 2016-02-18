@@ -3,3 +3,4 @@ create index site
 import dictionary jdk8classes
 update question timestamps
 migrate question stringIdsToNumbers
+update question humanUrlTitles

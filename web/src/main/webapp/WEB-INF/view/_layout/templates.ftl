@@ -196,21 +196,6 @@
     </nav>
 </#macro>
 
-<#macro contentEditor content url=''>
-    <#-- @ftlvariable name="content" type="ru.atott.combiq.dao.entity.MarkdownContent" -->
-
-    <@security.authorize access="hasRole('sa')" var="allowEditConent" />
-    <#if allowEditConent>
-        <co-contenteditor params="
-            markdown: '${(content.markdown)!?html?js_string}',
-            html: '${(content.html)!?html?js_string}',
-            url: '${if(url == '', "/content/" + content.id!, url)}'">
-        </co-contenteditor>
-    <#else>
-        ${(content.html)!''}
-    </#if>
-</#macro>
-
 <#macro showInstantMessages>
     <#if instantMessage??>
     <#-- @ftlvariable name="instantMessage" type="ru.atott.combiq.web.view.InstantMessageHolder.Message" -->
@@ -221,15 +206,6 @@
     </script>
     </#if>
 </#macro>
-
-<#function explainLevel level>
-    <#switch level>
-        <#case "D1"><#return "D1 - Junior" />
-        <#case "D2"><#return "D2 - Middle" />
-        <#case "D3"><#return "D3 - Senior" />
-    </#switch>
-    <#return level />
-</#function>
 
 <#function hasRole roleName>
     <@security.authorize access="hasRole('" + roleName + "')">

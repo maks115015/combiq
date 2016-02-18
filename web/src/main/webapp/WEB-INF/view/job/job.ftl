@@ -1,4 +1,5 @@
 <#import "../_layout/templates.ftl" as templates />
+<#import "../_layout/parts.ftl" as parts />
 <#import "job-common.ftl" as common />
 
 <#assign sidebar>
@@ -14,6 +15,6 @@
         sidebar=sidebar
         mainContainerClass='co-rightbordered'>
 
-    <@templates.contentEditor content=jobPageContent />
+    <@parts.contentEditor content=jobPageContent />
 
 </@templates.layoutWithSidebar>

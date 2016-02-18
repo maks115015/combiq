@@ -1,4 +1,5 @@
 <#import "../_layout/templates.ftl" as templates />
+<#import "../_layout/parts.ftl" as parts />
 <#import "interview-common.ftl" as common />
 
 <#assign sidebar>
@@ -12,6 +13,6 @@
         sidebar=sidebar
         mainContainerClass='co-rightbordered'>
 
-    <@templates.contentEditor content=interviewPageContent></@templates.contentEditor>
+    <@parts.contentEditor content=interviewPageContent></@parts.contentEditor>
 
 </@templates.layoutWithSidebar>

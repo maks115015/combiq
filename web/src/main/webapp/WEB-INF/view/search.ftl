@@ -1,4 +1,5 @@
 <#import "_layout/templates.ftl" as templates />
+<#import "_layout/parts.ftl" as parts />
 
 <#assign sidebar>
     <div>
@@ -87,8 +88,8 @@
               <div class="co-component-question">
                     <div class="co-component-question-level-bound">
                         <div class="co-component-question-level">
-                            <div class="co-component-question-level-title">
-                                <a href="/questions/level/${question.level}">${question.level}</a>
+                            <div>
+                                <@parts.questionLevel question.level />
                             </div>
                             <div class="co-component-question-level-desc">уровень</div>
                         </div>

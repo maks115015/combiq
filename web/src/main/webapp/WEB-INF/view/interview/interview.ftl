@@ -1,4 +1,5 @@
 <#import "../_layout/templates.ftl" as templates />
+<#import "../_layout/parts.ftl" as parts />
 <#import "interview-common.ftl" as common />
 
 <#assign sidebar>
@@ -12,7 +13,7 @@
         sidebar=sidebar
         mainContainerClass='co-rightbordered'>
 
-    <@templates.contentEditor content=questionnairesPageContent></@templates.contentEditor>
+    <@parts.contentEditor content=questionnairesPageContent></@parts.contentEditor>
 
     <ul>
         <#list questionnaires as questionnaire>
@@ -20,13 +21,13 @@
                 <a href="/questionnaire/${questionnaire.id}">
                     ${questionnaire.name}
                 </a>
-                <@templates.contentEditor
+                <@parts.contentEditor
                     content=questionnaire.title
                     url='/questionnaire/' + questionnaire.id + '/title'>
-                </@templates.contentEditor>
+                </@parts.contentEditor>
             </li>
         </#list>
     </ul>
 
-    <@templates.contentEditor content=questionnairesPageBottomContent></@templates.contentEditor>
+    <@parts.contentEditor content=questionnairesPageBottomContent></@parts.contentEditor>
 </@templates.layoutWithSidebar>
