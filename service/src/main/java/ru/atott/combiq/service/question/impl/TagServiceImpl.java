@@ -16,6 +16,7 @@ import ru.atott.combiq.dao.entity.TagEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.dao.repository.TagRepository;
 import ru.atott.combiq.service.bean.DetailedQuestionTag;
+import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionTag;
 import ru.atott.combiq.service.bean.Tag;
 import ru.atott.combiq.service.mapper.QuestionTagMapper;
@@ -28,10 +29,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class TagServiceImpl implements TagService {
+
     @Autowired
     private TagRepository tagRepository;
+
     @Autowired
     private Client client;
+
     @Autowired
     private NameVersionDomainResolver domainResolver;
 
@@ -102,5 +106,33 @@ public class TagServiceImpl implements TagService {
         });
 
         return result;
+    }
+
+    @Override
+    public QuestionTag getTag(String name) {
+        TagEntity tagEntity = tagRepository.findOne(name);
+
+        if (tagEntity == null) {
+            QuestionTag questionTag = new QuestionTag();
+            questionTag.setTag(name);
+            return questionTag;
+        }
+
+        return new QuestionTagMapper().map(tagEntity);
+    }
+
+    @Override
+    public void save(QuestionTag tag) {
+        TagEntity tagEntity = tagRepository.findOne(tag.getTag());
+
+        if (tagEntity == null) {
+            tagEntity = new TagEntity();
+            tagEntity.setName(tag.getTag());
+        }
+
+        tagEntity.setSuggestViewOthersQuestionsLabel(tag.getSuggestViewOthersQuestionsLabel());
+        tagEntity.setDescription(tag.getDescription());
+
+        tagRepository.save(tagEntity);
     }
 }

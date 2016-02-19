@@ -1,4 +1,5 @@
 <#import "../_layout/templates.ftl" as templates />
+<#import "../_layout/functions.ftl" as functions />
 
 <#macro sidebar activeMenuItem>
 <ul class="co-nav co-nav-right-bordered nav nav-pills nav-stacked">
@@ -8,7 +9,7 @@
         </a>
     </li>
 
-    <#if templates.hasRole('sa')>
+    <#if functions.hasRole('sa')>
     <li role="presentation" class="${templates.if(activeMenuItem == 'users', 'active')}">
         <a href="/admin/users">
             <span>Пользователи</span>
@@ -16,7 +17,7 @@
     </li>
     </#if>
 
-    <#if templates.hasRole('sa')>
+    <#if functions.hasRole('sa')>
         <li role="presentation" class="${templates.if(activeMenuItem == 'events', 'active')}">
             <a href="/admin/events">
                 <span>События</span>
@@ -24,7 +25,7 @@
         </li>
     </#if>
 
-    <#if templates.hasRole('sa') || templates.hasRole('contenter')>
+    <#if functions.hasRole('sa') || functions.hasRole('contenter')>
         <li role="presentation" class="${templates.if(activeMenuItem == 'posts', 'active')}">
             <a href="/admin/posts">
                 <span>Статьи</span>
