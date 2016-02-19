@@ -33,6 +33,7 @@
         <link rel="stylesheet" href="/static/css/styles.css?v=${resourceVersion}">
         <link rel="stylesheet" href="/static/font/roboto/roboto.css">
         <link rel="stylesheet" href="/static/font/comfortaa/comfortaa.css">
+        <link rel="stylesheet" href="/static/js/lib/tooltipster/tooltipster.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
@@ -40,6 +41,7 @@
         <script src="/static/js/lib/knockout.dialog.js?v=${resourceVersion}"></script>
         <script src="/static/js/lib/knockout.bindings.js?v=${resourceVersion}"></script>
         <script src="/static/js/lib/jquery-resizable.min.js"></script>
+        <script src="/static/js/lib/tooltipster/jquery.tooltipster.min.js"></script>
         <script src="/static/js/site.js?v=${resourceVersion}"></script>
         <script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
 

@@ -4,18 +4,16 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.question.impl.SearchContext;
 import ru.atott.combiq.service.question.impl.SearchResponse;
 import ru.atott.combiq.service.question.SearchQuestionService;
+import ru.atott.combiq.web.bean.CountQuestionSearchBean;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
-import ru.atott.combiq.web.utils.GetQuestionContextBuilder;
+import ru.atott.combiq.web.utils.SearchQuestionContextBuilder;
 import ru.atott.combiq.web.view.SearchViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,26 +22,38 @@ import java.util.List;
 
 @Controller
 public class SearchController extends BaseController {
+
     private PagingBeanBuilder pagingBeanBuilder = new PagingBeanBuilder();
+
     @Autowired
     private SearchQuestionService searchQuestionService;
+
     @Autowired
-    private GetQuestionContextBuilder getQuestionContextBuilder;
+    private SearchQuestionContextBuilder searchQuestionContextBuilder;
 
     @RequestMapping(value = "/questions/search", method = RequestMethod.GET)
     public ModelAndView search(HttpServletRequest request,
                                @RequestParam(defaultValue = "1") int page,
                                @RequestParam(value = "q", defaultValue = "") String dsl) {
         page = getZeroBasedPage(page);
-        SearchContext context = getQuestionContextBuilder.listByDsl(page, dsl);
+        SearchContext context = searchQuestionContextBuilder.listByDsl(page, dsl);
         return getView(request, context, dsl);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/questions/search/count", method = RequestMethod.GET)
+    public Object countSearch(HttpServletRequest request,
+                              @RequestParam(value = "q", defaultValue = "") String dsl) {
+        SearchContext context = searchQuestionContextBuilder.listByDsl(0, dsl);
+        long countQuestions = searchQuestionService.countQuestions(context);
+        return new CountQuestionSearchBean(countQuestions);
     }
 
     @RequestMapping(value = "/questions", method = RequestMethod.GET)
     public ModelAndView questions(HttpServletRequest request,
                                   @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
-        SearchContext context = getQuestionContextBuilder.list(page);
+        SearchContext context = searchQuestionContextBuilder.list(page);
         String subTitle = "Вопросы для подготовки к собеседованию Java";
         return getView(request, context, null, subTitle, true);
     }
@@ -54,7 +64,7 @@ public class SearchController extends BaseController {
                                         @PathVariable("tags") String tags) {
         page = getZeroBasedPage(page);
         ArrayList<String> tagsList = Lists.newArrayList(StringUtils.split(tags, ','));
-        SearchContext context = getQuestionContextBuilder.listByTags(page, tagsList);
+        SearchContext context = searchQuestionContextBuilder.listByTags(page, tagsList);
         return getView(request, context, null);
     }
 
@@ -63,7 +73,7 @@ public class SearchController extends BaseController {
                               @RequestParam(defaultValue = "1") int page,
                               @PathVariable("level") String level) {
         page = getZeroBasedPage(page);
-        SearchContext context = getQuestionContextBuilder.listByLevel(page, level);
+        SearchContext context = searchQuestionContextBuilder.listByLevel(page, level);
         return getView(request, context, null);
     }
 

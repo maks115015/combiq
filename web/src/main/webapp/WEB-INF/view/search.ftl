@@ -63,10 +63,7 @@
             </div>
         </div>
         <div class="co-search-help-tip">
-            <label>
-                <input onchange="coSearch.toggleCheckBoxOnlyWithComments($(this).is(':checked'))" type="checkbox" ${templates.if(searchOnlyWithComments, "checked")}>
-                Только с комментариями
-            </label>
+            <co-onlywithcomments params="enabled: ${searchOnlyWithComments?c}"></co-onlywithcomments>
             <a class="pull-right" href="https://github.com/atott/combiq/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA">
                 Вы можете задавать гибкие условия поиска, например, по тэгам или уровню <span class="co-arrow">→</span>
             </a>
