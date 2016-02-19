@@ -21,3 +21,27 @@ ko.bindingHandlers.element = {
         value($(element));
     }
 };
+
+ko.bindingHandlers.ace = {
+    init: function(element, valueAccessor, allBindingsAccessor) {
+        require(['js/lib/ace/ace'], function() {
+            var editor = window.ace.edit(element);
+            var value = valueAccessor();
+            editor.getSession().setValue(value() || '');
+
+            var silent = false;
+
+            value.subscribe(function(newValue) {
+                if (!silent) {
+                    editor.getSession().setValue(newValue || '');
+                }
+            });
+
+            editor.on('change', function() {
+                silent = true;
+                value(editor.getSession().getValue());
+                silent = false;
+            });
+        });
+    }
+};

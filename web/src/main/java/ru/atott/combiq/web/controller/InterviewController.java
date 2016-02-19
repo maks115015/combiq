@@ -35,7 +35,9 @@ public class InterviewController extends BaseController {
 
     @RequestMapping(value = "/interview/education")
     public ModelAndView interviewEducation() {
-        return new ModelAndView("/interview/education");
+        ModelAndView modelAndView = new ModelAndView("/interview/education");
+        modelAndView.addObject("educationPageContent", contentService.getContent("education-page"));
+        return modelAndView;
     }
 
     @RequestMapping(value = "/interview/competence")

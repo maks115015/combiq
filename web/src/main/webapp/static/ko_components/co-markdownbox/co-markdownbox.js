@@ -1,15 +1,51 @@
-define(['ajax', 'knockout'], function(ajax, ko) {
+define(['ajax', 'knockout', 'js/lib/ace/ace'], function(ajax, ko) {
 
     function ViewModel(params) {
         this.text = ko.wrap(params.text);
-        this.textarea = ko.wrap();
-        this.active = ko.wrap(params.active || 'html');
+        this.editorElement = ko.wrap();
+        this.editorBoundElement = ko.wrap();
+        this.active = ko.wrap(params.active || 'html'); // markdown, html
         this.preview = ko.wrap();
+
+        if (params.markdownBoxModel) {
+            params.markdownBoxModel(this);
+        }
 
         if (this.active() != 'markdown') {
             this.refreshPreview();
         }
     }
+
+    ViewModel.prototype.init = function() {
+        var self = this;
+        this.editorBoundElement().resizable({
+            handleSelector: $(this.editorBoundElement(), '.co-markdown__resizehandler'),
+            resizeWidth: false,
+            onDragEnd: function() {
+                self.editor.resize();
+            }
+        });
+        var element = this.editorElement().get()[0];
+        this.editor = ace.edit(element);
+        this.editor.getSession().setMode("ace/mode/markdown");
+        this.editor.renderer.setShowGutter(false);
+        this.editor.renderer.setShowPrintMargin(false);
+        this.editor.getSession().setUseWrapMode(true);
+        this.editor.getSession().setWrapLimitRange();
+    };
+
+    ViewModel.prototype.focus = function() {
+        var self = this;
+
+        if (this.active != 'markdown') {
+            this.active('markdown');
+            setTimeout(function() {
+                self.editor.focus();
+            }, 1);
+        } else {
+            self.editor.focus();
+        }
+    };
 
     ViewModel.prototype.toggleSrc = function() {
         this.active('markdown');
@@ -27,42 +63,22 @@ define(['ajax', 'knockout'], function(ajax, ko) {
             .done(function(location) {
                 var parts = location.split(':');
                 self.insertText('![' + parts[parts.length - 1] + '](/markdown/image?loc=' + encodeURIComponent(location) + ')');
+                self.focus();
             });
     };
 
-    ViewModel.prototype.insertText = function(myValue) {
-        var textarea = this.textarea().get(0);
-
-        if (document.selection) { //IE support
-            textarea.focus();
-            sel = document.selection.createRange();
-            sel.text = myValue;
-        } else if (textarea.selectionStart || textarea.selectionStart == '0') { //MOZILLA and others
-            var startPos = textarea.selectionStart;
-            var endPos = textarea.selectionEnd;
-            textarea.value = textarea.value.substring(0, startPos)
-                + myValue
-                + textarea.value.substring(endPos, textarea.value.length);
-        } else {
-            textarea.value += myValue;
-        }
-
-        this.textarea().change();
+    ViewModel.prototype.insertText = function(text) {
+        this.editor.insert(text);
     };
 
     ViewModel.prototype.refreshPreview = function() {
         var self = this;
 
-        $.ajax({
-            url: '/markdown/preview',
-            datatype: 'text',
-            contentType: 'text/plain',
-            data: self.text(),
-            method: 'POST',
-            success: function(result) {
-                self.preview(result);
-            }
-        });
+        coMarkdown
+            .toHtml(self.text())
+            .done(function(html) {
+                self.preview(html);
+            });
     };
 
     return ViewModel;

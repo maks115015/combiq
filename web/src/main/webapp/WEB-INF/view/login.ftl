@@ -14,7 +14,7 @@
 
                     <div class="text-center">
                         <p>
-                            <a class="btn" href="https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=user&state=${githubClientState}:">
+                            <a class="btn btn-default" href="https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=user&state=${githubClientState}:">
                                 через <b>github.com</b>
                             </a>
                         </p>
@@ -23,7 +23,7 @@
                         </p>
                         <p>
                             <#assign vkCallbackUrl = urlResolver.externalize("/login/callback/vk.do") />
-                            <a class="btn" href="https://oauth.vk.com/authorize?client_id=${vkClientId}&display=page&response_type=code&state=${vkClientState}:&redirect_uri=${vkCallbackUrl?url}">
+                            <a class="btn btn-default" href="https://oauth.vk.com/authorize?client_id=${vkClientId}&display=page&response_type=code&state=${vkClientState}:&redirect_uri=${vkCallbackUrl?url}">
                                 через <b>vk.com</b>
                             </a>
                         </p>
@@ -32,7 +32,7 @@
                         </p>
                         <p>
                             <#assign stackexchangeCallbackUrl = urlResolver.externalize("/login/callback/stackexchange.do") />
-                            <a class="btn" href="https://stackexchange.com/oauth?client_id=${stackexchangeClientId}&scope=no_expiry&redirect_uri=${stackexchangeCallbackUrl?url}&state=${stackexchangeClientState}:">
+                            <a class="btn btn-default" href="https://stackexchange.com/oauth?client_id=${stackexchangeClientId}&scope=no_expiry&redirect_uri=${stackexchangeCallbackUrl?url}&state=${stackexchangeClientState}:">
                                 через <b>stackoverflow.com</b>
                             </a>
                         </p>

@@ -2,6 +2,7 @@
 <#-- @ftlvariable name="comment" type="ru.atott.combiq.dao.entity.QuestionComment" -->
 
 <#import "_layout/templates.ftl" as templates />
+<#import "_layout/parts.ftl" as parts />
 
 <#assign head>
     <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
@@ -104,7 +105,7 @@
                     </div>
 
                     <div class="co-question-body">
-                        <@templates.contentEditor content=question.body url='/questions/${question.id}/content' />
+                        <@parts.contentEditor content=question.body url='/questions/${question.id}/content' />
                     </div>
 
                     <@questionStaff />
@@ -152,13 +153,16 @@
 <#macro questionStaff>
     <ul class="co-question-staff">
         <#list question.tags as tag>
-            <li class="co-small">
+            <li>
                 <a class="co-tag" href="/questions/tagged/${tag}">${tag}</a>
             </li>
         </#list>
         <#if question.level??>
             <li style="margin-left: 15px;" class="co-small">
-                Уровень <a href="/questions/level/${question.level}">${templates.explainLevel(question.level)}</a>
+                <@parts.questionLevel level=question.level class='co-small' />
+                <span class="inline" style="margin-left: 4px;">
+                    ${parts.explainLevel(question.level)} уровень
+                </span>
             </li>
         </#if>
         <li class="pull-right" style="padding-top: 2px;">
@@ -224,6 +228,7 @@
                     <#list questionsWithLatestComments as question>
                         <li>
                             <div class="co-comments-question-title">
+                                <@parts.questionLevel level=question.level class='co-small' />
                                 <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
                             </div>
                             <div class="co-comments-question-comments">

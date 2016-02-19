@@ -11,6 +11,10 @@ public interface UrlResolver {
 
     String getQuestionUrl(Question question, String queryString);
 
+    String getQuestionCommentsUrl(Question question);
+
+    String getQuestionCommentsUrl(Question question, String queryString);
+
     String getQuestionnaireUrl(QuestionnaireHead questionnaire);
 
     String getQuestionnaireUrl(QuestionnaireHead questionnaire, String queryString);

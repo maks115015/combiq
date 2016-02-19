@@ -1,4 +1,5 @@
 <#import "_layout/templates.ftl" as templates />
+<#import "_layout/parts.ftl" as parts />
 
 <#assign sidebar>
     <div>
@@ -87,8 +88,8 @@
               <div class="co-component-question">
                     <div class="co-component-question-level-bound">
                         <div class="co-component-question-level">
-                            <div class="co-component-question-level-title">
-                                <a href="/questions/level/${question.level}">${question.level}</a>
+                            <div>
+                                <@parts.questionLevel question.level />
                             </div>
                             <div class="co-component-question-level-desc">уровень</div>
                         </div>
@@ -106,6 +107,14 @@
                                      </a>
                                    </li>
                                 </#list>
+                                <#if question.comments?size != 0>
+                                    <li>
+                                        <a class="co-search-comment" href="${urlResolver.getQuestionCommentsUrl(question, 'index=' + (paging.from + question_index) + '&dsl=' + dsl?url)}" title="Перейти к комментариям вопроса">
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                            ${question.comments?size}
+                                        </a>
+                                    </li>
+                                </#if>
                             </ul>
                         </div>
                     </div>
