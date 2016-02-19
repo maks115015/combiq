@@ -3,6 +3,7 @@
 
 <#import "_layout/templates.ftl" as templates />
 <#import "_layout/parts.ftl" as parts />
+<#import "_layout/functions.ftl" as functions />
 
 <#assign head>
     <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
@@ -264,8 +265,8 @@
             <span class="co-comments-meta-edited" title="${comment.editUserName!comment.userName}, ${comment.editDate?string('dd MMMM yyyy, hh:mm')}">изменён</span>
         </#if>
         <#if (user.id)! == comment.userId
-                || templates.hasRole('sa')
-                || templates.hasRole('contenter') >
+                || functions.hasRole('sa')
+                || functions.hasRole('contenter') >
             <a class="pull-right" href="#"
                 onclick="ko.openDialog('co-editcomment', {
                     questionId: '${question.id?js_string}',

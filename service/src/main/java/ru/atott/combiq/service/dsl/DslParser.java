@@ -1,6 +1,5 @@
 package ru.atott.combiq.service.dsl;
 
-import org.apache.commons.collections.keyvalue.DefaultKeyValue;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jparsec.Parser;
 import org.codehaus.jparsec.Parsers;
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DslParser {
+
     private static Parser<DslQuery> parser;
 
     public static DslQuery parse(String dsl) {
@@ -29,25 +29,28 @@ public class DslParser {
 
         Terminals operators = Terminals.operators("[", "]", " ", ":");
         Parser<String> singleQuoteTokenizer = Terminals.StringLiteral.SINGLE_QUOTE_TOKENIZER;
-        Parser<?> wordTokenizer = Scanners.notAmong("[]:").many().source();
+        Parser<?> wordTokenizer = Scanners.notAmong("[]: ").many().source();
         Parser<?> tokenizer = Parsers.or(operators.tokenizer(), singleQuoteTokenizer, wordTokenizer);
 
         // ---
 
         Parser<String> wordParser = Parsers.tokenType(String.class, "string");
 
+        // key:value
+        Parser<DslPair> pairParser = wordParser
+                .followedBy(operators.token(":").times(1))
+                .next(key -> wordParser.map(value -> new DslPair(key, value)));
+
+        // [tag]
         Parser<DslTag> tagParser = wordParser
                 .between(operators.token("["), operators.token("]"))
                 .map(DslTag::new);
 
+        // term
         Parser<DslTerm> termParser = wordParser
                 .map(DslTerm::new);
 
-        Parser<DefaultKeyValue> pairParser = wordParser
-                .followedBy(operators.token(":"))
-                .next(key -> wordParser.map(value -> new DefaultKeyValue(key, value)));
-
-        Parser<Object> conditionsParser = Parsers.or(tagParser, pairParser, termParser);
+        Parser<Object> conditionsParser = Parsers.or(pairParser, tagParser, termParser);
 
         Parser<DslQuery> queryParser = conditionsParser
                 .sepBy(operators.token(" ").many())
@@ -66,19 +69,19 @@ public class DslParser {
                     query.setTags(tags);
                     query.setTerms(terms);
 
-                    List<DefaultKeyValue> pairs = conditions.stream()
-                            .filter(condition -> condition instanceof DefaultKeyValue)
-                            .map(DefaultKeyValue.class::cast)
+                    List<DslPair> pairs = conditions.stream()
+                            .filter(condition -> condition instanceof DslPair)
+                            .map(DslPair.class::cast)
                             .collect(Collectors.toList());
 
                     pairs.forEach(pair -> {
-                        switch ((String) pair.getKey()) {
+                        switch (pair.getKey()) {
                             case "level":
-                                query.setLevel((String) pair.getValue());
+                                query.setLevel(pair.getValue());
                                 break;
                             case "comments":
                                 try {
-                                    query.setMinCommentQuantity(Long.valueOf((String) pair.getValue()));
+                                    query.setMinCommentQuantity(Long.valueOf(pair.getValue()));
                                     if (query.getMinCommentQuantity() < 1) {
                                         query.setMinCommentQuantity(null);
                                     }

@@ -1,6 +1,7 @@
 package ru.atott.combiq.service.question;
 
 import ru.atott.combiq.service.bean.DetailedQuestionTag;
+import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionTag;
 
 import java.util.List;
@@ -15,5 +16,10 @@ public interface TagService {
     List<QuestionTag> getTags();
 
     List<DetailedQuestionTag> getAllQuestionTags();
+
     String[] getAllTags();
+
+    QuestionTag getTag(String name);
+
+    void save(QuestionTag tag);
 }

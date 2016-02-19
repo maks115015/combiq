@@ -34,6 +34,7 @@
     define('co-markdownbox', 'ko_components/co-markdownbox', 'co-markdownbox', {layoutSeparated: true, styles: 'css'});
     define('co-contenteditor', 'ko_components/co-contenteditor', 'co-contenteditor', {layoutSeparated: true, styles: 'css'});
     define('co-posteditor', 'ko_components/co-posteditor', 'co-posteditor', {layoutSeparated: true, styles: 'css'});
+    define('co-onlywithcomments', 'ko_components/co-onlywithcomments', 'co-onlywithcomments', {layoutSeparated: true});
 
     ko.createComponent = function(componentName, params, tag) {
         var html;

@@ -13,6 +13,8 @@ public interface SearchQuestionService {
 
     SearchResponse searchQuestions(SearchContext context);
 
+    long countQuestions(SearchContext context);
+
     Optional<SearchResponse> searchAnotherQuestions(Question question);
 
     GetQuestionResponse getQuestion(GetQuestionContext context);

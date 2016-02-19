@@ -12,6 +12,8 @@ import java.util.List;
 @Document(indexName = "#{domainResolver.resolveQuestionIndex()}", type = Types.question)
 public class QuestionEntity {
 
+    public static final String TIMESTAMP_FIELD = "timestamp";
+
     @Id
     private String id;
 

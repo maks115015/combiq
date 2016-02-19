@@ -1,6 +1,7 @@
 <#-- @ftlvariable name="tags" type="java.util.List" -->
 <#-- @ftlvariable name="tag" type="ru.atott.combiq.service.bean.DetailedQuestionTag" -->
 <#import "_layout/templates.ftl" as templates />
+<#import "_layout/functions.ftl" as functions />
 
 <@templates.layoutWithSidebar
         pageTitle="Тэги"
@@ -25,6 +26,18 @@
                             ${tag.details.description}
                         </span>
                     </#if>
+                </#if>
+                <#if functions.hasRole('sa') || functions.hasRole('contenter')>
+                    <div class="co-small">
+                        <a href="javascript:void(0)" onclick="
+                                ko.openDialog('co-edittag', {
+                                    tag: '${tag.value?html?js_string}',
+                                    description: '${(tag.details.description)!?html?js_string}',
+                                    suggestViewOthersQuestionsLabel: '${(tag.details.suggestViewOthersQuestionsLabel)!?html?js_string}'
+                                })">
+                            Изменить
+                        </a>
+                    </div>
                 </#if>
             </div>
         </#list>

@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.elasticsearch.action.count.CountRequestBuilder;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.*;
@@ -85,18 +86,23 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
     }
 
     @Override
+    public long countQuestions(SearchContext context) {
+        CountRequestBuilder query = new SearchQuestionElasticQueryBuilder()
+                .setClient(client)
+                .setDomainResolver(domainResolver)
+                .setSearchContext(context)
+                .buildCountRequest();
+
+        return query.execute().actionGet().getCount();
+    }
+
+    @Override
     public SearchResponse searchQuestions(SearchContext context) {
-        DslQuery dsl = context.getDslQuery();
-
-        SearchRequestBuilder query = client
-                .prepareSearch(domainResolver.resolveQuestionIndex())
-                .setTypes(Types.question)
-                .setQuery(QueryBuilders.filteredQuery(getQueryBuilder(dsl), getFilterBuilder(dsl, context.getQuestionIds())))
-                .addSort("timestamp", SortOrder.DESC)
-                .setFrom(context.getFrom())
-                .setSize(context.getSize());
-
-        getAggregationBuilders(dsl).stream().forEach(query::addAggregation);
+        SearchRequestBuilder query = new SearchQuestionElasticQueryBuilder()
+                .setClient(client)
+                .setDomainResolver(domainResolver)
+                .setSearchContext(context)
+                .buildSearchRequest();
 
         org.elasticsearch.action.search.SearchResponse searchResponse = query.execute().actionGet();
 
@@ -257,82 +263,6 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
         QueryBuilder queryBuilder = QueryBuilders.filteredQuery(QueryBuilders.matchAllQuery(), filterBuilder);
         Iterable<QuestionAttrsEntity> questionAttrsEntities = questionAttrsRepository.search(queryBuilder);
         return questionAttrsMapper.toList(questionAttrsEntities);
-    }
-
-    private List<AggregationBuilder> getAggregationBuilders(DslQuery dsl) {
-        GlobalBuilder global = AggregationBuilders.global("global");
-
-        TermsBuilder popularTags = AggregationBuilders
-                .terms("popularTags")
-                .field("tags")
-                .size(10);
-
-        global.subAggregation(popularTags);
-
-        return Lists.newArrayList(global);
-    }
-
-    private QueryBuilder getQueryBuilder(DslQuery dsl) {
-        QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
-
-        List<QueryBuilder> conditions = new ArrayList<>();
-
-        if (dsl != null && !dsl.getTerms().isEmpty()) {
-            BoolQueryBuilder termsQueryBuilder = QueryBuilders.boolQuery();
-            dsl.getTerms().forEach(term -> {
-                termsQueryBuilder.must(QueryBuilders.matchQuery("title", term.getValue()));
-            });
-            conditions.add(termsQueryBuilder);
-        }
-
-        if (!conditions.isEmpty()) {
-            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-            conditions.forEach(boolQueryBuilder::must);
-            queryBuilder = boolQueryBuilder;
-        }
-
-        return queryBuilder;
-    }
-
-    private FilterBuilder getFilterBuilder(DslQuery dsl, List<String> questionIds) {
-        List<FilterBuilder> filters = new ArrayList<>();
-
-        if (dsl != null && !dsl.getTags().isEmpty()) {
-            BoolFilterBuilder tagsFilter = FilterBuilders.boolFilter();
-            dsl.getTags().forEach(tag -> {
-                tagsFilter.must(FilterBuilders.termFilter("tags", tag.getValue()));
-            });
-            filters.add(tagsFilter);
-        }
-
-        if (dsl != null && StringUtils.isNoneBlank(dsl.getLevel())) {
-            long level = NumberUtils.toLong(dsl.getLevel().substring(1), -1);
-            filters.add(FilterBuilders.termFilter("level", level));
-        }
-
-        if (dsl != null && dsl.getMinCommentQuantity() != null) {
-            if (dsl.getMinCommentQuantity().equals(1L)) {
-                filters.add(FilterBuilders.existsFilter("comments.id"));
-            } else {
-                filters.add(FilterBuilders.andFilter(
-                        FilterBuilders
-                                .existsFilter("comments.id"),
-                        FilterBuilders
-                                .scriptFilter("_source.comments && _source.comments.size >= quantity")
-                                .addParam("quantity", dsl.getMinCommentQuantity())));
-            }
-        }
-
-        if (CollectionUtils.isNotEmpty(questionIds)) {
-            filters.add(FilterBuilders.idsFilter(Types.question).ids(questionIds.toArray(new String[questionIds.size()])));
-        }
-
-        FilterBuilder filterBuilder = FilterBuilders.matchAllFilter();
-        if (!filters.isEmpty()) {
-            filterBuilder = FilterBuilders.boolFilter().must(filters.toArray(new FilterBuilder[filters.size()]));
-        }
-
-        return filterBuilder;
     }
 
     private List<Tag> getPopularTags(org.elasticsearch.action.search.SearchResponse response) {

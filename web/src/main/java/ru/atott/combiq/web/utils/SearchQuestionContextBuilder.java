@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class GetQuestionContextBuilder {
+public class SearchQuestionContextBuilder {
     private static int size = 20;
     @Autowired
     private AuthService authService;

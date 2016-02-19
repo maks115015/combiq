@@ -1,4 +1,5 @@
 <#import "../_layout/templates.ftl" as templates />
+<#import "../_layout/functions.ftl" as functions />
 <#import "admin-common.ftl" as common />
 
 <#assign sidebar>
@@ -40,7 +41,7 @@
                 </#list>
             </ol>
         </li>
-        <#if templates.hasRole("sa")>
+        <#if functions.hasRole("sa")>
             <li>
                 <button onclick="dashboard.submitJob('sitemapGeneratorJob')">Перестроить sitemap.xml</button>
             </li>
