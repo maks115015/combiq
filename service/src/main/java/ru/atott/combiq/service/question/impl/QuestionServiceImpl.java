@@ -20,6 +20,7 @@ import ru.atott.combiq.service.site.Context;
 import ru.atott.combiq.service.site.EventService;
 import ru.atott.combiq.service.site.MarkdownService;
 import ru.atott.combiq.service.util.NumberService;
+import ru.atott.combiq.service.util.TransletirateService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -54,6 +55,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private NumberService numberService;
+
+    @Autowired
+    TransletirateService transletirateService;
 
     @Override
     public void saveUserComment(String userId, String questionId, String comment) {
@@ -149,23 +153,26 @@ public class QuestionServiceImpl implements QuestionService {
     }
     @Override
     public void saveQuestion(Question question){
-        QuestionEntity questionEntity=new QuestionEntity();
-        saveQuestion(question,questionEntity);
-        questionEntity.setId(Long.toString(numberService.getUniqueNumber()));
-        questionRepository.save(questionEntity);
-    }
-    @Override
-    public void updateQuestion(Question question){
-        QuestionEntity questionEntity=questionRepository.findOne(question.getId());
-        saveQuestion(question,questionEntity);
-        questionRepository.save(questionEntity);
-    }
-    private void saveQuestion(Question question, QuestionEntity questionEntity){
+        QuestionEntity questionEntity;
+        if(question.getId()==null){
+            questionEntity=new QuestionEntity();
+            questionEntity.setTimestamp(new Date().getTime());
+            questionEntity.setId(Long.toString(numberService.getUniqueNumber()));
+        }
+        else {
+            questionEntity=questionRepository.findOne(question.getId());
+            questionEntity.setClassNames(null);
+        }
+        questionEntity.setHumanUrlTitle(transletirateService.lowercaseAndTransletirate(question.getTitle(), 80));
         questionEntity.setTags(question.getTags());
         questionEntity.setLevel(Integer.parseInt(question.getLevel().substring(1)));
         questionEntity.setTitle(question.getTitle());
         questionEntity.setBody(question.getBody());
+        questionRepository.save(questionEntity);
     }
+
+
+
 
 
     @Override

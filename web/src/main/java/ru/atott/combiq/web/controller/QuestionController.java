@@ -18,6 +18,7 @@ import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.ContentRequest;
 import ru.atott.combiq.web.request.EditCommentRequest;
+import ru.atott.combiq.web.request.QuestionRequest;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
@@ -83,7 +84,6 @@ public class QuestionController extends BaseController {
         if (CollectionUtils.isEmpty(questionResponse.getQuestion().getComments())) {
             questionsWithLatestComments = searchQuestionService.get3QuestionsWithLatestComments();
         }
-
         QuestionViewBuilder viewBuilder = new QuestionViewBuilder();
         viewBuilder.setQuestion(questionResponse.getQuestion());
         viewBuilder.setPositionInDsl(questionResponse.getPositionInDsl());
@@ -147,19 +147,32 @@ public class QuestionController extends BaseController {
     }
     @RequestMapping(value = "/questions/new",method = RequestMethod.POST)
     @ResponseBody
-    public SuccessBean saveQuestion(@RequestBody Question question){
-        questionService.saveQuestion(question);
-        return new SuccessBean(true);
+    public SuccessBean saveQuestion(@RequestBody QuestionRequest questionRequest){
+        if(questionRequest.getId()==null){
+            questionService.saveQuestion(questionRequestToQuestion(questionRequest));
+            return new SuccessBean(true);
+        }
+        return new SuccessBean(false);
     }
 
     @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.POST)
     @ResponseBody
     @PreAuthorize("hasAnyRole('sa','contenter')")
-    public SuccessBean updateQuestion(@PathVariable("questionId") String questionId,@RequestBody Question question) {
-        if (questionId.equals(question.getId())) {
-            questionService.updateQuestion(question);
+    public SuccessBean updateQuestion(@PathVariable("questionId") String questionId,@RequestBody QuestionRequest questionRequest) {
+        if (questionId.equals(questionRequest.getId())) {
+            questionService.saveQuestion(questionRequestToQuestion(questionRequest));
             return new SuccessBean(true);
         }
         return new SuccessBean(false);
+    }
+    //Вынес  в отдельный метод
+    private Question questionRequestToQuestion(QuestionRequest questionRequest){// Вот мне не очень нравиться что в
+        Question question=new Question();                                       // QuestionEntity другая логика поля level
+        question.setId(questionRequest.getId());
+        question.setTitle(questionRequest.getTitle());
+        question.setBody(questionRequest.getBody());
+        question.setLevel(questionRequest.getLevel());
+        question.setTags(questionRequest.getTags());
+        return question;
     }
 }
