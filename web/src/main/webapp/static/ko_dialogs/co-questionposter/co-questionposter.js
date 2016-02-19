@@ -41,7 +41,9 @@ define(['knockout','ajax'], function(ko,ajax) {
             .map(function(tag,index,array) {return tag.name;});
         var json={title: this.title(), body: {markdown:this.body()},level:this.lvl(), tags: taglist};
         if(this.id()==''){
-            ajax.rest('POST', '/questions/new', json).done(function() {alert('OK!');});
+            ajax.rest('POST', '/questions/new', json)
+                .done(function() {alert('OK!');
+            });
         }
         else{
             json.id=this.id();

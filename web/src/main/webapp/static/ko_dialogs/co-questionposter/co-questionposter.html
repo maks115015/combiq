@@ -1,6 +1,6 @@
 <div>
     <div>Заголовок</div>
-    <textarea class="co-markdown__src" style="min-height: 200px;" data-bind="textInput: title"></textarea>
+    <textarea  style="width: 100%" data-bind="textInput: title"></textarea>
     <div>Решение</div>
     <co-markdownbox params="text: body" > </co-markdownbox>
     <div>Теги</div>
@@ -10,7 +10,7 @@
     </div>
     <div>Уровень</div>
     <div style="margin: 10px">
-        <span id='level'></span>
+        <span class='co-level' data-bind="css: {d1: lvl() == 'D1', d2: lvl() == 'D2' , d3: lvl() == 'D3' } , text: lvl"></span>
     <select class="lvl" data-bind="value: lvl">
         <option value="D1">Junior</option>
         <option value="D2">Middle</option>

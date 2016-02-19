@@ -962,3 +962,14 @@ ul.co-component-question-tags > li {
 .co-menu-top-items > li:hover > a {
     color: white;
 }
+.d1 {
+    border-left-color: #8BC34A;
+}
+
+.d2 {
+    border-left-color: #FFC107;
+}
+
+.d3 {
+    border-left-color: #F44336;
+}
