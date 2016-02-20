@@ -4,7 +4,7 @@
 <#import "_layout/templates.ftl" as templates />
 <#import "_layout/parts.ftl" as parts />
 <#import "_layout/functions.ftl" as functions />
-
+<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 <#assign head>
     <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
     <link rel="canonical" href="${canonicalUrl}" />
@@ -173,7 +173,8 @@
         </li>
 
     </ul>
-    <#if allowEditConent>
+    <@security.authorize access="hasRole('contenter') || hasRole('sa')" var="allowEditQuestion" />
+    <#if allowEditQuestion>
     <a  href="#" onclick="ko.openDialog('co-questionposter',{title: '${question.title}', body: '${question.body.markdown!''}', level: '${question.level}' , id: '${question.id}', tags: [ '${question.tags?join("', '")}' ] }); return false;" >Изменить вопрос</a>
     </#if>
 </#macro>

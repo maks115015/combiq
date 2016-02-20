@@ -149,7 +149,7 @@ public class QuestionController extends BaseController {
     @ResponseBody
     public SuccessBean saveQuestion(@RequestBody QuestionRequest questionRequest){
         if(questionRequest.getId()==null){
-            questionService.saveQuestion(questionRequestToQuestion(questionRequest));
+            questionService.saveQuestion(getContext(),questionRequestToQuestion(questionRequest));
             return new SuccessBean(true);
         }
         return new SuccessBean(false);
@@ -160,7 +160,7 @@ public class QuestionController extends BaseController {
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public SuccessBean updateQuestion(@PathVariable("questionId") String questionId,@RequestBody QuestionRequest questionRequest) {
         if (questionId.equals(questionRequest.getId())) {
-            questionService.saveQuestion(questionRequestToQuestion(questionRequest));
+            questionService.saveQuestion(getContext(),questionRequestToQuestion(questionRequest));
             return new SuccessBean(true);
         }
         return new SuccessBean(false);

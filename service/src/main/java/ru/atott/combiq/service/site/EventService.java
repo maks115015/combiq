@@ -31,4 +31,18 @@ public interface EventService {
         createEvent(null, EventType.REGISTER_USER,
                 "Зарегистрировался новый пользователь type: " + userType + ", login: " + login);
     }
+
+    default void createQuestion(Context context, QuestionEntity questionEntity){
+        String username= context.getUser().getUserName()==null ? "" : " пользователем "+context.getUser().getUserName();
+        createEvent(context, EventType.CREATE_QUESTION,
+                "Создан вопрос"+username+" <b>" + questionEntity.getTitle() + "</b>.",
+                new Link("Вопрос", "/questions/" + questionEntity.getId()));
+    }
+
+    default void editQuestion(Context context, QuestionEntity questionEntity){
+        String username=" пользователем "+context.getUser().getUserName();
+        createEvent(context, EventType.EDIT_QUESTION,
+                "Вопрос <b>" + questionEntity.getTitle() + "</b>. Изменен"+username+".",
+                new Link("Вопрос", "/questions/" + questionEntity.getId()));
+    }
 }

@@ -152,21 +152,24 @@ public class QuestionServiceImpl implements QuestionService {
         questionRepository.save(questionEntity);
     }
     @Override
-    public void saveQuestion(Question question){
+    public void saveQuestion(Context context,Question question){
         QuestionEntity questionEntity;
         if(question.getId()==null){
             questionEntity=new QuestionEntity();
             questionEntity.setTimestamp(new Date().getTime());
             questionEntity.setId(Long.toString(numberService.getUniqueNumber()));
+            questionEntity.setTitle(question.getTitle());
+            eventService.createQuestion(context,questionEntity);
         }
         else {
             questionEntity=questionRepository.findOne(question.getId());
             questionEntity.setClassNames(null);
+            questionEntity.setTitle(question.getTitle());
+            eventService.editQuestion(context,questionEntity);
         }
         questionEntity.setHumanUrlTitle(transletirateService.lowercaseAndTransletirate(question.getTitle(), 80));
         questionEntity.setTags(question.getTags());
         questionEntity.setLevel(Integer.parseInt(question.getLevel().substring(1)));
-        questionEntity.setTitle(question.getTitle());
         questionEntity.setBody(question.getBody());
         questionRepository.save(questionEntity);
     }
