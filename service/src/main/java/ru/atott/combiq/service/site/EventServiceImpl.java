@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.EventEntity;
 import ru.atott.combiq.dao.entity.EventType;
 import ru.atott.combiq.dao.entity.Link;
-import ru.atott.combiq.dao.entity.UserEntity;
 import ru.atott.combiq.dao.repository.EventRepository;
 import ru.atott.combiq.service.bean.Event;
 import ru.atott.combiq.service.mapper.EventMapper;
@@ -30,7 +29,7 @@ public class EventServiceImpl implements EventService {
         EventEntity entity = new EventEntity();
         entity.setCreateDate(new Date());
         entity.setType(type);
-        if (context != null && !context.getUser().isAnonimous()) {
+        if (context != null && !context.getUser().isAnonymous()) {
             entity.setCreatorUserId(context.getUser().getUserId());
             entity.setCreatorUserName(context.getUser().getUserName());
         }

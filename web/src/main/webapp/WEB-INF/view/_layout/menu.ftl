@@ -23,6 +23,9 @@
                             <li class="${f.if(chapter == 'job', 'active')}">
                                 <a href="/job">Работа</a>
                             </li>
+                            <li class="${f.if(chapter == 'blog', 'active')}">
+                                <a href="/blog">Блог</a>
+                            </li>
                             <@security.authorize access="hasRole('sa')">
                             <li class="${f.if(chapter == 'admin', 'active')}">
                                 <a href="/admin">Админка</a>

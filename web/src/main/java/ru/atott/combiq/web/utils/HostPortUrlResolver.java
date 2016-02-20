@@ -2,6 +2,7 @@ package ru.atott.combiq.web.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.bean.Post;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
 
@@ -85,5 +86,16 @@ public class HostPortUrlResolver implements UrlResolver {
         } else {
             return "/questionnaire/" + questionnaire.getId() + "?" + queryString;
         }
+    }
+
+    @Override
+    public String getPostUrl(Post post) {
+         StringBuilder result = new StringBuilder("/blog/" + post.getId());
+
+        if (StringUtils.isNotBlank(post.getHumanUrlTitle())) {
+            result.append("/").append(post.getHumanUrlTitle());
+        }
+
+        return result.toString();
     }
 }

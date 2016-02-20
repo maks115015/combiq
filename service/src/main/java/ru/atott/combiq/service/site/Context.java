@@ -1,6 +1,6 @@
 package ru.atott.combiq.service.site;
 
-public class Context {
+public final class Context {
 
     private UserContext user;
 

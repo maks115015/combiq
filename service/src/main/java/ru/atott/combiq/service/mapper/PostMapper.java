@@ -15,6 +15,7 @@ public class PostMapper implements Mapper<PostEntity, Post> {
         bean.setAuthorUserName(source.getAuthorUserName());
         bean.setTitle(source.getTitle());
         bean.setContent(source.getContent());
+        bean.setHumanUrlTitle(source.getHumanUrlTitle());
         return bean;
     }
 }

@@ -63,7 +63,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void saveComment(Context context, String questionId, String comment) {
-        Validate.isTrue(!context.getUser().isAnonimous());
+        Validate.isTrue(!context.getUser().isAnonymous());
         Validate.notEmpty(comment);
 
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
@@ -96,7 +96,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void updateComment(Context context, String questionId, String commentId, String commentMarkdown) {
-        Validate.isTrue(!context.getUser().isAnonimous());
+        Validate.isTrue(!context.getUser().isAnonymous());
         Validate.notEmpty(commentMarkdown);
 
         QuestionEntity questionEntity = questionRepository.findOne(questionId);

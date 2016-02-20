@@ -9,13 +9,16 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.Types;
+import ru.atott.combiq.dao.entity.PostEntity;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.dao.repository.QuestionnaireRepository;
 import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.bean.Post;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
+import ru.atott.combiq.service.mapper.PostMapper;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.mapper.QuestionnaireHeadMapper;
 
@@ -80,6 +83,26 @@ public class SitemapServiceImpl implements SitemapService {
             }
         }
 
+        // Posts.
+        searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchAllQuery())
+                .withIndices(domainResolver.resolveQuestionIndex())
+                .withTypes(Types.post)
+                .build();
+
+        scrollId = elasticsearchOperations.scan(searchQuery, TimeUnit.MINUTES.toMillis(1), false);
+        hasRecords = true;
+
+        while (hasRecords) {
+            Page<PostEntity> page = elasticsearchOperations.scroll(scrollId, TimeUnit.SECONDS.toMillis(10), PostEntity.class);
+
+            if (page != null && page.hasContent()) {
+                page.getContent().stream().forEach(entity -> writePost(writer, entity, urlResolver));
+            } else {
+                hasRecords = false;
+            }
+        }
+
         // Questionnaires.
         QuestionnaireHeadMapper<QuestionnaireHead> questionnaireHeadMapper = new QuestionnaireHeadMapper<>(QuestionnaireHead.class);
         List<QuestionnaireHead> questionnaireHeads = questionnaireHeadMapper.toList(questionnaireRepository.findAll());
@@ -131,6 +154,26 @@ public class SitemapServiceImpl implements SitemapService {
 
             writeTextElement(writer, "loc", urlResolver.externalize(urlResolver.getQuestionUrl(question)));
             writeTextElement(writer, "priority", priority);
+
+            writer.writeEndElement();
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    private void writePost(XMLStreamWriter writer, PostEntity entity, UrlResolver urlResolver) {
+        try {
+            PostMapper postMapper = new PostMapper();
+            Post post = postMapper.map(entity);
+
+            if (!post.isPublished()) {
+                return;
+            }
+
+            writer.writeStartElement("url");
+
+            writeTextElement(writer, "loc", urlResolver.externalize(urlResolver.getPostUrl(post)));
+            writeTextElement(writer, "priority", "0.5");
 
             writer.writeEndElement();
         } catch (Exception e) {

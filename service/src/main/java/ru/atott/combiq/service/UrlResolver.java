@@ -1,5 +1,6 @@
 package ru.atott.combiq.service;
 
+import ru.atott.combiq.service.bean.Post;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
 
@@ -18,4 +19,6 @@ public interface UrlResolver {
     String getQuestionnaireUrl(QuestionnaireHead questionnaire);
 
     String getQuestionnaireUrl(QuestionnaireHead questionnaire, String queryString);
+
+    String getPostUrl(Post post);
 }

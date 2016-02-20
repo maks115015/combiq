@@ -8,6 +8,8 @@ public interface PostService {
 
     Page<Post> getPosts(long page, long size);
 
+    Page<Post> getPublishedPosts(long page, long size);
+
     Post getPost(String postId);
 
     String save(Context context, String postId, String title, String content, boolean published);

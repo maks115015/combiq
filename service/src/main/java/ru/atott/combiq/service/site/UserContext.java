@@ -14,7 +14,7 @@ public class UserContext {
 
     private String userName;
 
-    private boolean anonimous;
+    private boolean anonymous;
 
     public Set<String> getRoles() {
         return roles;
@@ -48,11 +48,11 @@ public class UserContext {
         this.userName = userName;
     }
 
-    public boolean isAnonimous() {
-        return anonimous;
+    public boolean isAnonymous() {
+        return anonymous;
     }
 
-    public void setAnonimous(boolean anonimous) {
-        this.anonimous = anonimous;
+    public void setAnonymous(boolean anonymous) {
+        this.anonymous = anonymous;
     }
 }

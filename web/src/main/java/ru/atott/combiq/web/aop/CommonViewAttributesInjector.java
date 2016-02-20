@@ -10,6 +10,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.security.CombiqUser;
+import ru.atott.combiq.web.security.PermissionHelper;
 import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.utils.ViewUtils;
 import ru.atott.combiq.web.view.InstantMessageHolder;
@@ -40,6 +41,9 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
     @Autowired
     private InstantMessageHolder instantMessageHolder;
 
+    @Autowired
+    private PermissionHelper permissionHelper;
+
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null
@@ -68,6 +72,7 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("stackexchangeClientState", state);
             modelAndView.addObject("stackexchangeCallbackUrl", urlResolver.externalize("/login/callback/stackexchange.do"));
             modelAndView.addObject("instantMessage", instantMessageHolder.get());
+            modelAndView.addObject("permissionHelper", permissionHelper);
         }
     }
 }
