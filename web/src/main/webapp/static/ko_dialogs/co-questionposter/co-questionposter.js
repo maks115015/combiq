@@ -30,6 +30,7 @@ define(['knockout','ajax'], function(ko,ajax) {
         };
     }
     ViewModel.prototype.addTag=function(){
+        var self=this;
         if(this.istag() && this.tags.indexOf(this.tag())==-1){
             this.tags.push(this.tag());
         }
@@ -42,13 +43,19 @@ define(['knockout','ajax'], function(ko,ajax) {
         var json={title: this.title(), body: {markdown:this.body()},level:this.lvl(), tags: taglist};
         if(this.id()==''){
             ajax.rest('POST', '/questions/new', json)
-                .done(function() {alert('OK!');
+                .done(function() {
+                    self.posting(false);
+                    location.reload();
+                }
             });
         }
         else{
             json.id=this.id();
             ajax.rest('POST', '/questions/'+this.id(), json)
-                .done(function() {alert('OK!');});
+                .done(function() {
+                    self.posting(false);
+                    location.reload();
+                }
         };
     }
     return ViewModel;
