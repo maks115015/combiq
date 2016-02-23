@@ -148,7 +148,7 @@ public class QuestionController extends BaseController {
     @RequestMapping(value = "/questions/new",method = RequestMethod.POST)
     @ResponseBody
     public SuccessBean saveQuestion(@RequestBody QuestionRequest questionRequest){
-        if(questionRequest.getId()==null){
+        if(questionRequest.getId()==null && questionRequest.getTitle()!=null && !questionRequest.getTags().isEmpty()){
             questionService.saveQuestion(getContext(),questionRequestToQuestion(questionRequest));
             return new SuccessBean(true);
         }
