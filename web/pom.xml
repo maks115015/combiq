@@ -131,6 +131,13 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warName>ROOT</warName>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
