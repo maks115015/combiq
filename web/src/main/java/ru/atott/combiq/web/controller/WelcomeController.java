@@ -1,5 +1,6 @@
 package ru.atott.combiq.web.controller;
 
+import org.apache.commons.io.IOUtils;
 import org.parboiled.common.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import ru.atott.combiq.web.utils.EnvUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 
 @Controller
@@ -35,5 +38,13 @@ public class WelcomeController extends BaseController {
         }
 
         return new ResponseEntity<>(FileUtils.readAllText(file, Charset.forName("utf-8")), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "robots.txt", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<String> robots() throws IOException {
+        try (InputStream inputStream = EnvUtils.getEnvResourceAsStream("robots.txt")) {
+            return new ResponseEntity<>(IOUtils.toString(inputStream, "utf-8"), HttpStatus.OK);
+        }
     }
 }
