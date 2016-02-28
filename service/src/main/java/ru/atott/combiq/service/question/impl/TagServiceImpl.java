@@ -109,16 +109,7 @@ public class TagServiceImpl implements TagService {
 
         return result;
     }
-    @Override
-    public String[] getAllTags() {
-        List<DetailedQuestionTag> tags = getAllQuestionTags();
-        ArrayList<String> list = new ArrayList<String>();
-        for (DetailedQuestionTag tag : tags) {
-            list.add(tag.getValue());
-        }
-        String[] array = new String[list.size()];
-        return list.toArray(array);
-    }
+
     @Override
     public QuestionTag getTag(String name){
         TagEntity tagEntity = tagRepository.findOne(name);

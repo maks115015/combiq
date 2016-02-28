@@ -45,4 +45,10 @@ public interface EventService {
                 "Вопрос <b>" + questionEntity.getTitle() + "</b>. Изменен"+username+".",
                 new Link("Вопрос", "/questions/" + questionEntity.getId()));
     }
+
+    default void deleteQuestion(Context context, String questionId){
+        createEvent(context, EventType.DELETE_QUESTION,
+                "Вопрос <b>" + questionId + "</b>. Удален пользователем"+
+                        context.getUser().getUserName()+".");
+    }
 }

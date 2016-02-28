@@ -15,7 +15,10 @@ public interface QuestionService {
     void updateComment(Context context, String questionId, String commentId, String comment);
 
     void saveQuestionBody(String questionId, String body);
+
     void saveQuestion(Context context,Question question);
+
+    void deleteQuestion(Context context,String questionId);
 
     List<String> refreshMentionedClassNames(Question question);
 }

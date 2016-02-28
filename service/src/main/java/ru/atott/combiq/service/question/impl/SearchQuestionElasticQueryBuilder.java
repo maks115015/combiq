@@ -108,6 +108,12 @@ public class SearchQuestionElasticQueryBuilder {
 
         List<FilterBuilder> filters = new ArrayList<>();
 
+       // if(searchContext.getVisibleDeleted()){  //TODO
+            BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
+            deleteFilter.mustNot(FilterBuilders.termFilter("deleted", true));
+            filters.add(deleteFilter);
+       // }
+
         if (dsl != null && !dsl.getTags().isEmpty()) {
             BoolFilterBuilder tagsFilter = FilterBuilders.boolFilter();
             dsl.getTags().forEach(tag -> {

@@ -208,4 +208,12 @@ public class QuestionServiceImpl implements QuestionService {
 
         return actualClassNames;
     }
+
+    @Override
+    public void deleteQuestion(Context context , String questionId){
+        QuestionEntity questionEntity = questionRepository.findOne(questionId);
+        questionEntity.setDeleted(true);
+        questionRepository.save(questionEntity);
+        eventService.deleteQuestion(context,questionId);
+    }
 }

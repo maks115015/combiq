@@ -165,6 +165,14 @@ public class QuestionController extends BaseController {
         }
         return new SuccessBean(false);
     }
+
+    @RequestMapping(value = "/questions/{questionId}/delete", method = RequestMethod.POST)
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('sa','contenter')")
+    public SuccessBean deleteQuestion(@PathVariable("questionId") String questionId) {
+        questionService.deleteQuestion(getContext(),questionId);
+        return new SuccessBean(true);
+    }
     //Вынес  в отдельный метод
     private Question questionRequestToQuestion(QuestionRequest questionRequest){// Вот мне не очень нравиться что в
         Question question=new Question();                                       // QuestionEntity другая логика поля level

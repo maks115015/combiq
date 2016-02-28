@@ -39,6 +39,8 @@ public class QuestionEntity {
 
     private String legacyId;
 
+    private boolean deleted;
+
     @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
     private String humanUrlTitle;
 
@@ -145,4 +147,8 @@ public class QuestionEntity {
     public void setHumanUrlTitle(String humanUrlTitle) {
         this.humanUrlTitle = humanUrlTitle;
     }
+
+    public boolean isDeleted() {return deleted;}
+
+    public void setDeleted(boolean deleted) {this.deleted = deleted;}
 }

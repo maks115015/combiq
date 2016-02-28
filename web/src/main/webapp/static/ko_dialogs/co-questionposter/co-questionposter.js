@@ -14,7 +14,7 @@ define(['knockout','ajax'], function(ko,ajax) {
         this.body=ko.wrap(params.body);
         if (this.id()!=''){
             this.tags=ko.observableArray(params.tags.map(function(tagname,index,array) {
-                    return {name: tagname};
+                    return {value: tagname};
                 }));
         } else{
             this.tags=ko.observableArray();
@@ -23,7 +23,7 @@ define(['knockout','ajax'], function(ko,ajax) {
         var self=this;
         $.getJSON('/questions/tags', function(result) {
             for (var i = 0; i < result.length; i++) {
-                self.avaibleTag.push({name:result[i]});
+                self.avaibleTag.push(result[i]);
             };
         });
         this.removeTag = function() {
@@ -42,7 +42,7 @@ define(['knockout','ajax'], function(ko,ajax) {
     ViewModel.prototype.send=function(){
         var self=this;
         taglist = this.tags()
-            .map(function(tag,index,array) {return tag.name;});
+            .map(function(tag,index,array) {return tag.value;});
         var json={title: this.title(), body: {markdown:this.body()},level:this.lvl(), tags: taglist};
         if(this.id()==''){
             ajax.rest('POST', '/questions/new', json)
