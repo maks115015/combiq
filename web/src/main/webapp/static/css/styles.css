@@ -138,8 +138,11 @@ h1 {
 
 h2 {
     font-family: 'Roboto Slab', serif;
-    font-size: 36px;
-    margin: 40px 0 60px;
+    font-size: 30px;
+    margin-top: 40px;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 30px;
     line-height: 40px;
     letter-spacing: -1px;
     font-weight: 300;
@@ -369,6 +372,7 @@ ul.co-question-staff > li {
 
 .co-small {
     font-size: 12px;
+    line-height: 14px;
 }
 
 .co-flex {
@@ -972,4 +976,17 @@ ul.co-component-question-tags > li {
 
 .d3 {
     border-left-color: #F44336;
+}
+
+.co-project-resource img {
+    width: 60px;
+    height: 60px;
+}
+
+.co-project-resource {
+    padding: 40px;
+    border-radius: 50%;
+    border: solid 1px #EAEAEA;
+    display: inline-block;
+    margin-bottom: 20px;
 }
