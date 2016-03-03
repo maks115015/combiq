@@ -986,7 +986,9 @@ ul.co-component-question-tags > li {
 .co-project-resource {
     padding: 40px;
     border-radius: 50%;
-    border: solid 1px #EAEAEA;
     display: inline-block;
     margin-bottom: 20px;
+    background-color: #F3F3F3;
+    box-shadow: 1px 1px 6px 1px rgb(230, 230, 230);
+    border: solid 1px #E4E4E4;
 }

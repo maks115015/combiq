@@ -20,6 +20,7 @@
             </p>
         </div>
     </div>
+
     <div class="row" style="margin-top: 40px;">
         <div class="col-md-1">
             <img src="/static/images/site/Octocat.png">
@@ -34,37 +35,46 @@
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 60px;">
-        <div class="col-md-2 text-center">
-            <div class="co-project-resource">
-                <img src="/static/images/site/combiq.png">
-            </div>
-            <a class="co-inline" href="http://uat.combiq.ru/">http://uat.combiq.ru/</a>
-            <div class="co-small">
-                Здесь мы тестируем новые фичи
-            </div>
-        </div>
+</div>
 
-        <div class="col-md-2 text-center">
-            <div class="co-project-resource">
-                <img src="/static/images/site/jira.png">
-            </div>
-            <a class="co-inline" href="http://jira.combiq.ru/">http://jira.combiq.ru/</a>
-            <div class="co-small">
-                Здесь мы планируем наши задачи и общаемся
-            </div>
-        </div>
+<div style="background-color: #EDEDED;margin-bottom: -50px;padding-bottom: 40px;margin-top: 40px;">
+    <div class="container">
 
-        <div class="col-md-2 text-center">
-            <div class="co-project-resource">
-                <img src="/static/images/site/teamcity.png">
+        <div class="row" style="margin-top: 40px;">
+            <div class="col-md-2 text-center">
+                <div class="co-project-resource">
+                    <img src="/static/images/image.png">
+                </div>
+                <a class="co-inline" href="http://uat.combiq.ru/">http://uat.combiq.ru/</a>
+                <div class="co-small">
+                    Здесь мы тестируем новые фичи
+                </div>
             </div>
-            <a class="co-inline" href="http://teamcity.combiq.ru/">http://teamcity.combiq.ru/</a>
-            <div class="co-small">
-                Здесь мы собираем и деплоим наш проект
+
+            <div class="col-md-2 text-center">
+                <div class="co-project-resource">
+                    <img src="/static/images/site/jira.png">
+                </div>
+                <a class="co-inline" href="http://jira.combiq.ru/">http://jira.combiq.ru/</a>
+                <div class="co-small">
+                    Здесь мы планируем наши задачи и общаемся
+                </div>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <div class="co-project-resource">
+                    <img src="/static/images/site/teamcity.png">
+                </div>
+                <a class="co-inline" href="http://teamcity.combiq.ru/">http://teamcity.combiq.ru/</a>
+                <div class="co-small">
+                    Здесь мы собираем и деплоим наш проект
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="container">
     <div class="row" style="margin-top: 60px;">
         <div class="col-md-8">
             <h2>Для кого наш проект?</h2>
