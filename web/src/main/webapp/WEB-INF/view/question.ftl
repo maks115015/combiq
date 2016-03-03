@@ -178,9 +178,15 @@
     <a  href="#" onclick="ko.openDialog('co-questionposter',{title: '${question.title}',
         body: '${question.body.markdown!''}', level: '${question.level}' , id: '${question.id}',
         tags: [ '${question.tags?join("', '")}' ] }); return false;" >Изменить вопрос</a>
-    <a class="pull-right" href="#"
-        onclick="$.post('/questions/${question.id}/delete');
-        window.location.replace('/questions/search');">Удалить Вопрос</a>
+      <#if question.deleted>
+        <a class="pull-right" href="#"
+                onclick="$.post('/questions/${question.id}/restore');
+                window.location.replace('/questions/search');">Востановить Вопрос</a>
+      <#else>
+        <a class="pull-right" href="#"
+            onclick="$.post('/questions/${question.id}/delete');
+            window.location.replace('/questions/search');">Удалить Вопрос</a>
+      </#if>
     </#if>
 </#macro>
 

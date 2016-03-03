@@ -139,6 +139,7 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
     @Override
     public GetQuestionResponse getQuestion(GetQuestionContext context) {
         GetQuestionResponse response = new GetQuestionResponse();
+        DslQuery dsl;
 
         if (context.getDsl() != null && context.getProposedIndexInDslResponse() != null) {
             SearchContext searchContext = new SearchContext();
@@ -149,7 +150,9 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
                 searchContext.setFrom(context.getProposedIndexInDslResponse() - 1);
                 searchContext.setSize(3);
             }
-            searchContext.setDslQuery(context.getDsl());
+            dsl=context.getDsl();
+            dsl.setVisibleDeleted(true);
+            searchContext.setDslQuery(dsl);
             searchContext.setUserId(context.getUserId());
 
             SearchResponse searchResponse = searchQuestions(searchContext);
@@ -186,6 +189,9 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
             searchContext.setSize(1);
             searchContext.setUserId(context.getUserId());
             searchContext.setQuestionId(context.getId());
+            dsl=new DslQuery();
+            dsl.setVisibleDeleted(true);
+            searchContext.setDslQuery(dsl);
             SearchResponse searchResponse = searchQuestions(searchContext);
             if (searchResponse.getQuestions().getContent().size() > 0) {
                 response.setQuestion(searchResponse.getQuestions().getContent().get(0));
@@ -277,4 +283,6 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
                 })
                 .collect(Collectors.toList());
     }
+
+
 }

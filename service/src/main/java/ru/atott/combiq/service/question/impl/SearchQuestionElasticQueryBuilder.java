@@ -92,7 +92,6 @@ public class SearchQuestionElasticQueryBuilder {
             });
             conditions.add(termsQueryBuilder);
         }
-
         if (!conditions.isEmpty()) {
             BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
             conditions.forEach(boolQueryBuilder::must);
@@ -108,11 +107,20 @@ public class SearchQuestionElasticQueryBuilder {
 
         List<FilterBuilder> filters = new ArrayList<>();
 
-       // if(searchContext.getVisibleDeleted()){  //TODO
+        if (dsl!=null && dsl.getUserId()!=null){
+            BoolFilterBuilder userFilter = FilterBuilders.boolFilter();
+            userFilter.mustNot(FilterBuilders.termFilter("authorId", searchContext.getDslQuery().getUserId()));
+            filters.add(userFilter);
+            if(!dsl.isVisibleDeleted()){
+                BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
+                deleteFilter.mustNot(FilterBuilders.termFilter("deleted", true));
+                filters.add(deleteFilter);
+            }
+        } else if(dsl!=null && !dsl.isVisibleDeleted()){
             BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
             deleteFilter.mustNot(FilterBuilders.termFilter("deleted", true));
             filters.add(deleteFilter);
-       // }
+        }
 
         if (dsl != null && !dsl.getTags().isEmpty()) {
             BoolFilterBuilder tagsFilter = FilterBuilders.boolFilter();

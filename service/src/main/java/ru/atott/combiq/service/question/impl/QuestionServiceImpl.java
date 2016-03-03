@@ -159,6 +159,7 @@ public class QuestionServiceImpl implements QuestionService {
             questionEntity.setTimestamp(new Date().getTime());
             questionEntity.setId(Long.toString(numberService.getUniqueNumber()));
             questionEntity.setTitle(question.getTitle());
+            questionEntity.setAuthorID(context.getUser().getUserId());
             eventService.createQuestion(context,questionEntity);
         }
         else {
@@ -215,5 +216,13 @@ public class QuestionServiceImpl implements QuestionService {
         questionEntity.setDeleted(true);
         questionRepository.save(questionEntity);
         eventService.deleteQuestion(context,questionId);
+    }
+
+    @Override
+    public void restoreQuestion(Context context , String questionId){
+        QuestionEntity questionEntity = questionRepository.findOne(questionId);
+        questionEntity.setDeleted(false);
+        questionRepository.save(questionEntity);
+        eventService.restoreQuestion(context,questionId);
     }
 }

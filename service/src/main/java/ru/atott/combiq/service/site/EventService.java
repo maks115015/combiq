@@ -51,4 +51,10 @@ public interface EventService {
                 "Вопрос <b>" + questionId + "</b>. Удален пользователем"+
                         context.getUser().getUserName()+".");
     }
+
+    default void restoreQuestion(Context context, String questionId){
+        createEvent(context, EventType.RESTORE_QUESTION,
+                "Вопрос <b>" + questionId + "</b>. Востанновлен пользователем"+
+                        context.getUser().getUserName()+".");
+    }
 }

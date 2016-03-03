@@ -20,5 +20,7 @@ public interface QuestionService {
 
     void deleteQuestion(Context context,String questionId);
 
+    void restoreQuestion(Context context,String questionId);
+
     List<String> refreshMentionedClassNames(Question question);
 }

@@ -3,6 +3,7 @@ package ru.atott.combiq.web.controller;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,6 +76,31 @@ public class SearchController extends BaseController {
         page = getZeroBasedPage(page);
         SearchContext context = searchQuestionContextBuilder.listByLevel(page, level);
         return getView(request, context, null);
+    }
+
+    @RequestMapping(value = "/questions/deleted", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('sa','contenter')")
+    public ModelAndView deleted(HttpServletRequest request,
+                               @RequestParam(defaultValue = "1") int page,
+                               @RequestParam(value = "q", defaultValue = "") String dsl) {
+        page = getZeroBasedPage(page);
+        SearchContext context = searchQuestionContextBuilder.listByDsl(page, dsl);
+        context.getDslQuery().setVisibleDeleted(true);
+        return getView(request, context, dsl);
+    }
+
+    @RequestMapping(value = "/{userId}/questions", method = RequestMethod.GET)
+    public ModelAndView userQuestion(HttpServletRequest request,
+                               @RequestParam(defaultValue = "1") int page,
+                               @RequestParam(value = "q", defaultValue = "") String dsl,
+                               @PathVariable("userId") String userId) {
+        page = getZeroBasedPage(page);
+        SearchContext context = searchQuestionContextBuilder.listByDsl(page, dsl);
+        context.getDslQuery().setUserId(userId);
+        if(!getContext().getUser().getUserId().equals(userId)){
+            context.getDslQuery().setVisibleDeleted(true);
+        }
+        return getView(request, context, dsl);
     }
 
     private ModelAndView getView(HttpServletRequest request, SearchContext context, String dsl,

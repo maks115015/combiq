@@ -20,6 +20,8 @@ public class Question {
     private boolean landing;
     private List<String> classNames;
     private String humanUrlTitle;
+    private Boolean deleted;
+    private String authorId;
 
     public List<String> getTags() {
         return tags;
@@ -124,6 +126,14 @@ public class Question {
     public void setHumanUrlTitle(String humanUrlTitle) {
         this.humanUrlTitle = humanUrlTitle;
     }
+
+    public Boolean getDeleted() {return deleted;}
+
+    public void setDeleted(Boolean deleted) {this.deleted = deleted;}
+
+    public String getAuthorId() {return authorId;}
+
+    public void setAuthorId(String authorId) {this.authorId = authorId;}
 
     @Override
     public String toString() {

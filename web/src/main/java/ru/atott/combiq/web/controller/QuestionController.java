@@ -63,7 +63,6 @@ public class QuestionController extends BaseController {
             context.setProposedIndexInDslResponse(index);
             context.setDsl(DslParser.parse(dsl));
         }
-
         GetQuestionResponse questionResponse = searchQuestionService.getQuestion(context);
 
         RedirectView redirectView = redirectToCanonicalUrlIfNeed(questionId, humanUrlTitle.orElse(null), questionResponse, request);
@@ -171,6 +170,14 @@ public class QuestionController extends BaseController {
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public SuccessBean deleteQuestion(@PathVariable("questionId") String questionId) {
         questionService.deleteQuestion(getContext(),questionId);
+        return new SuccessBean(true);
+    }
+
+    @RequestMapping(value = "/questions/{questionId}/restore", method = RequestMethod.POST)
+    @ResponseBody
+    @PreAuthorize("hasAnyRole('sa','contenter')")
+    public SuccessBean restoreQuestion(@PathVariable("questionId") String questionId) {
+        questionService.restoreQuestion(getContext(),questionId);
         return new SuccessBean(true);
     }
     //Вынес  в отдельный метод
