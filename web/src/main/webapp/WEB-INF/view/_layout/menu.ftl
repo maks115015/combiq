@@ -1,6 +1,4 @@
-<#import 'functions.ftl' as f>
-
-<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
+<#import 'functions.ftl' as functions>
 
 <#macro topMenu chapter=''>
     <header>
@@ -14,20 +12,25 @@
                     </div>
                     <div class="col-md-7">
                         <ul class="co-menu-top-items">
-                            <li class="${f.if(chapter == 'questions', 'active')}">
+                            <li class="${functions.if(chapter == 'questions', 'active')}">
                                 <a href="/questions">Вопросы</a>
                             </li>
-                            <li class="${f.if(chapter == 'interview', 'active')}">
+                            <li class="${functions.if(chapter == 'interview', 'active')}">
                                 <a href="/interview">Собеседование</a>
                             </li>
-                            <li class="${f.if(chapter == 'job', 'active')}">
+                            <li class="${functions.if(chapter == 'job', 'active')}">
                                 <a href="/job">Работа</a>
                             </li>
-                            <@security.authorize access="hasRole('sa')">
-                            <li class="${f.if(chapter == 'admin', 'active')}">
+                            <li class="${functions.if(chapter == 'about', 'active')}">
+                                <a href="/project" title="О проекте Combiq.ru">
+                                    <img style="margin-top: -24px; margin-bottom: -10px;" src="/static/images/site/OpenSource.png" alt="О проекте Combiq.ru">
+                                </a>
+                            </li>
+                            <#if functions.hasRole("sa") || functions.hasRole("contenter")>
+                            <li class="${functions.if(chapter == 'admin', 'active')}">
                                 <a href="/admin">Админка</a>
                             </li>
-                            </@security.authorize>
+                            </#if>
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -38,7 +41,7 @@
                                         <#if user.headAvatarUrl??>
                                             <img style="position: absolute; margin-top: -12px; margin-left: -10px;" width="46" height="46" src="${user.headAvatarUrl!}">
                                         </#if>
-                                        <span class="inline" style="${f.if(user.headAvatarUrl??, 'margin-left: 50px;')}">Выйти</span>
+                                        <span class="inline" style="${functions.if(user.headAvatarUrl??, 'margin-left: 50px;')}">Выйти</span>
                                     </a>
                                 </li>
                             <#else>

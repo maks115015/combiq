@@ -9,6 +9,13 @@
     1. [CO-27 Архитектура Combiq.ru](http://jira.combiq.ru/browse/CO-27)
     2. [CO-23 Workflow JIRA, работа с кодом на github](http://jira.combiq.ru/browse/CO-23) Здесь вы можете ознакомиться с процессом работы с репозиторием гитхаб и статусной моделью JIRA.
 
+### Наши ресурсы
+
+1. Production стенд - [http://combiq.ru](http://combiq.ru)
+2. Тестовый стенд - [http://uat.combiq.ru](http://uat.combiq.ru)
+3. JIRA - [http://jira.combiq.ru](http://jira.combiq.ru)
+4. TeamCity - [http://teamcity.combiq.ru](http://teamcity.combiq.ru)
+
 ### Какие задачи брать в работу?
 
 Вы можете брать в работу любые задачи в статусе **TO DO** ни на кого не назначенные. Если вы новичок в проекте, то лучше брать задачи с типом **Task** (обычно они более конкретные чем **Story**) и меткой **small**.
