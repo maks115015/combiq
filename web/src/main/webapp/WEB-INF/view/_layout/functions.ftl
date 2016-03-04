@@ -14,3 +14,7 @@
     </@security.authorize>
     <#return false>
 </#function>
+
+<#function hasRoleSaOrContenter>
+    <#return hasRole("sa") || hasRole("contenter")>
+</#function>

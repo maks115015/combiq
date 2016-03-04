@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.question.impl;
+package ru.atott.combiq.service.search;
 
 import org.springframework.data.domain.Page;
 import ru.atott.combiq.service.bean.Question;

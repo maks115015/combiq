@@ -1,7 +1,17 @@
 <#import "_layout/templates.ftl" as templates />
 <#import "_layout/parts.ftl" as parts />
+<#import "_layout/functions.ftl" as functions />
 
 <#assign sidebar>
+
+    <#if functions.hasRole('sa') || functions.hasRole('contenter')>
+        <div>
+            <button class="btn btn-primary" onclick="ko.openDialog('co-questionposter', {id: ''});">
+                Добавить новый вопрос
+            </button>
+        </div>
+    </#if>
+
     <div>
         <h4>Интересное</h4>
         <ol class="list-unstyled co-question-aside-tips">
@@ -120,6 +130,4 @@
         </#list>
     </ul>
     <@templates.paging paging=paging />
-    <a class="pull-right" href="#" onclick="ko.openDialog('co-questionposter',{id: ''}); return false;"> Добавить новый вопрос
-        </a>
 </@templates.layoutWithSidebar>

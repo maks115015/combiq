@@ -151,18 +151,19 @@ public class QuestionServiceImpl implements QuestionService {
         questionEntity.setBody(markdownService.toMarkdownContent(body));
         questionRepository.save(questionEntity);
     }
+
     @Override
-    public void saveQuestion(Context context,Question question){
+    public void saveQuestion(Context context, Question question){
         QuestionEntity questionEntity;
-        if(question.getId()==null){
-            questionEntity=new QuestionEntity();
+        if (question.getId() == null){
+            questionEntity = new QuestionEntity();
             questionEntity.setTimestamp(new Date().getTime());
             questionEntity.setId(Long.toString(numberService.getUniqueNumber()));
             questionEntity.setTitle(question.getTitle());
             eventService.createQuestion(context,questionEntity);
         }
         else {
-            questionEntity=questionRepository.findOne(question.getId());
+            questionEntity = questionRepository.findOne(question.getId());
             questionEntity.setClassNames(null);
             questionEntity.setTitle(question.getTitle());
             eventService.editQuestion(context,questionEntity);
@@ -173,10 +174,6 @@ public class QuestionServiceImpl implements QuestionService {
         questionEntity.setBody(question.getBody());
         questionRepository.save(questionEntity);
     }
-
-
-
-
 
     @Override
     public List<String> refreshMentionedClassNames(Question question) {

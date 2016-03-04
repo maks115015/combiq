@@ -11,7 +11,7 @@ import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.question.QuestionService;
-import ru.atott.combiq.service.question.SearchQuestionService;
+import ru.atott.combiq.service.search.SearchService;
 import ru.atott.combiq.service.question.TagService;
 import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
@@ -36,7 +36,7 @@ public class QuestionController extends BaseController {
     private AuthService authService;
 
     @Autowired
-    private SearchQuestionService searchQuestionService;
+    private SearchService searchService;
 
     @Autowired
     private QuestionService questionService;
@@ -64,7 +64,7 @@ public class QuestionController extends BaseController {
             context.setDsl(DslParser.parse(dsl));
         }
 
-        GetQuestionResponse questionResponse = searchQuestionService.getQuestion(context);
+        GetQuestionResponse questionResponse = searchService.getQuestion(context);
 
         RedirectView redirectView = redirectToCanonicalUrlIfNeed(questionId, humanUrlTitle.orElse(null), questionResponse, request);
 
@@ -74,7 +74,7 @@ public class QuestionController extends BaseController {
 
         List<Question> anotherQuestions = null;
         if (questionResponse.getQuestion().isLanding()) {
-            anotherQuestions = searchQuestionService
+            anotherQuestions = searchService
                     .searchAnotherQuestions(questionResponse.getQuestion())
                     .map(response -> response.getQuestions().getContent())
                     .orElse(null);
@@ -82,7 +82,7 @@ public class QuestionController extends BaseController {
 
         List<Question> questionsWithLatestComments = Collections.emptyList();
         if (CollectionUtils.isEmpty(questionResponse.getQuestion().getComments())) {
-            questionsWithLatestComments = searchQuestionService.get3QuestionsWithLatestComments();
+            questionsWithLatestComments = searchService.get3QuestionsWithLatestComments();
         }
         QuestionViewBuilder viewBuilder = new QuestionViewBuilder();
         viewBuilder.setQuestion(questionResponse.getQuestion());
@@ -92,7 +92,7 @@ public class QuestionController extends BaseController {
         viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(questionResponse.getQuestion())));
         viewBuilder.setAnotherQuestions(anotherQuestions);
         viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
-        viewBuilder.setQuestionsFeed(searchQuestionService.get7QuestionsWithLatestComments());
+        viewBuilder.setQuestionsFeed(searchService.get7QuestionsWithLatestComments());
         return viewBuilder.build();
     }
 
@@ -125,7 +125,7 @@ public class QuestionController extends BaseController {
         Question question = searchResponse.getQuestion();
 
         if (question == null) {
-            question = searchQuestionService.getQuestionByLegacyId(questionId);
+            question = searchService.getQuestionByLegacyId(questionId);
 
             if (question == null) {
                 return null;

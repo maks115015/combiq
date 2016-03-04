@@ -10,7 +10,9 @@ import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Questionnaire;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
 import ru.atott.combiq.service.mapper.QuestionnaireHeadMapper;
-import ru.atott.combiq.service.question.SearchQuestionService;
+import ru.atott.combiq.service.search.SearchContext;
+import ru.atott.combiq.service.search.SearchResponse;
+import ru.atott.combiq.service.search.SearchService;
 import ru.atott.combiq.service.question.QuestionnaireService;
 import ru.atott.combiq.service.site.MarkdownService;
 
@@ -26,7 +28,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     private QuestionnaireRepository questionnaireRepository;
 
     @Autowired
-    private SearchQuestionService searchQuestionService;
+    private SearchService searchService;
 
     @Autowired
     private MarkdownService markdownService;
@@ -54,7 +56,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         SearchContext searchContext = new SearchContext();
         searchContext.setQuestionIds(entity.getQuestions());
         searchContext.setSize(400);
-        SearchResponse questionsSearchResponse = searchQuestionService.searchQuestions(searchContext);
+        SearchResponse questionsSearchResponse = searchService.searchQuestions(searchContext);
 
         QuestionnaireHeadMapper<Questionnaire> mapper = new QuestionnaireHeadMapper<>(Questionnaire.class);
         Questionnaire questionnaire = mapper.map(entity);
