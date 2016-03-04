@@ -41,7 +41,9 @@ public class QuestionEntity {
 
     private boolean deleted;
 
-    private String authorID;
+    private String authorId;
+
+    private String authorName;
 
     @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
     private String humanUrlTitle;
@@ -154,7 +156,11 @@ public class QuestionEntity {
 
     public void setDeleted(boolean deleted) {this.deleted = deleted;}
 
-    public String getAuthorID() {return authorID;}
+    public void setAuthorId(String authorID) {this.authorId = authorID;}
 
-    public void setAuthorID(String authorID) {this.authorID = authorID;}
+    public String getAuthorId() {return authorId;}
+
+    public String getAuthorName() {return authorName;}
+
+    public void setAuthorName(String authorName) {this.authorName = authorName;}
 }

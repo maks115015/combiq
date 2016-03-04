@@ -22,6 +22,7 @@ public class Question {
     private String humanUrlTitle;
     private Boolean deleted;
     private String authorId;
+    private String authorName;
 
     public List<String> getTags() {
         return tags;
@@ -135,21 +136,28 @@ public class Question {
 
     public void setAuthorId(String authorId) {this.authorId = authorId;}
 
+    public String getAuthorName() {return authorName;}
+
+    public void setAuthorName(String authorName) {this.authorName = authorName;}
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("title", title)
-                .append("tags", tags)
-                .append("level", level)
-                .append("reputation", reputation)
-                .append("attrs", attrs)
-                .append("tip", tip)
-                .append("body", body)
-                .append("comments", comments)
-                .append("landing", landing)
-                .append("classNames", classNames)
-                .append("humanUrlTitle", humanUrlTitle)
-                .toString();
+        return "Question{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", tags=" + tags +
+                ", level='" + level + '\'' +
+                ", reputation=" + reputation +
+                ", attrs=" + attrs +
+                ", tip='" + tip + '\'' +
+                ", body=" + body +
+                ", comments=" + comments +
+                ", landing=" + landing +
+                ", classNames=" + classNames +
+                ", humanUrlTitle='" + humanUrlTitle + '\'' +
+                ", deleted=" + deleted +
+                ", authorId='" + authorId + '\'' +
+                ", authorName='" + authorName + '\'' +
+                '}';
     }
 }

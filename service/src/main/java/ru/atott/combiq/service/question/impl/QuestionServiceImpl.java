@@ -15,6 +15,7 @@ import ru.atott.combiq.service.AccessException;
 import ru.atott.combiq.service.CombiqConstants;
 import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Question;
+import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.Context;
 import ru.atott.combiq.service.site.EventService;
@@ -159,7 +160,8 @@ public class QuestionServiceImpl implements QuestionService {
             questionEntity.setTimestamp(new Date().getTime());
             questionEntity.setId(Long.toString(numberService.getUniqueNumber()));
             questionEntity.setTitle(question.getTitle());
-            questionEntity.setAuthorID(context.getUser().getUserId());
+            questionEntity.setAuthorId(context.getUser().getUserId());
+            questionEntity.setAuthorName(context.getUser().getUserName());
             eventService.createQuestion(context,questionEntity);
         }
         else {
@@ -215,7 +217,7 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
         questionEntity.setDeleted(true);
         questionRepository.save(questionEntity);
-        eventService.deleteQuestion(context,questionId);
+        eventService.deleteQuestion(context,questionEntity);
     }
 
     @Override
@@ -223,6 +225,14 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
         questionEntity.setDeleted(false);
         questionRepository.save(questionEntity);
-        eventService.restoreQuestion(context,questionId);
+        eventService.restoreQuestion(context,questionEntity);
+    }
+
+    @Override
+    public  Question getQuestion(String id){
+        QuestionEntity questionEntity=questionRepository.findOne(id);
+        Question question=new Question();
+        QuestionMapper questionMapper=new QuestionMapper();
+        return questionMapper.map(questionEntity);
     }
 }

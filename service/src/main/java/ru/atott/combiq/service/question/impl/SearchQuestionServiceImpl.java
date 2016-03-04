@@ -110,11 +110,11 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
         Page<QuestionEntity> page = defaultResultMapper.mapResults(searchResponse, QuestionEntity.class, pageable);
 
         QuestionMapper questionMapper = new QuestionMapper();
-        if (context.getUserId() != null) {
+        if (context.getUserName() != null) {
             Set<String> questionIds = page.getContent().stream().map(QuestionEntity::getId).collect(Collectors.toSet());
-            List<QuestionAttrs> questionAttrses = getQuestionAttrses(questionIds, context.getUserId());
+            List<QuestionAttrs> questionAttrses = getQuestionAttrses(questionIds, context.getUserName());
             Map<String, QuestionAttrs> attrsMap = questionAttrses.stream().collect(Collectors.toMap(QuestionAttrs::getQuestionId, attrs -> attrs));
-            questionMapper = new QuestionMapper(context.getUserId(), attrsMap);
+            questionMapper = new QuestionMapper(context.getUserName(), attrsMap);
         }
 
         SearchResponse response = new SearchResponse();
@@ -139,7 +139,6 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
     @Override
     public GetQuestionResponse getQuestion(GetQuestionContext context) {
         GetQuestionResponse response = new GetQuestionResponse();
-        DslQuery dsl;
 
         if (context.getDsl() != null && context.getProposedIndexInDslResponse() != null) {
             SearchContext searchContext = new SearchContext();
@@ -150,9 +149,7 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
                 searchContext.setFrom(context.getProposedIndexInDslResponse() - 1);
                 searchContext.setSize(3);
             }
-            dsl=context.getDsl();
-            dsl.setVisibleDeleted(true);
-            searchContext.setDslQuery(dsl);
+            searchContext.setDslQuery(context.getDsl());
             searchContext.setUserId(context.getUserId());
 
             SearchResponse searchResponse = searchQuestions(searchContext);
@@ -187,11 +184,7 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
             SearchContext searchContext = new SearchContext();
             searchContext.setFrom(0);
             searchContext.setSize(1);
-            searchContext.setUserId(context.getUserId());
             searchContext.setQuestionId(context.getId());
-            dsl=new DslQuery();
-            dsl.setVisibleDeleted(true);
-            searchContext.setDslQuery(dsl);
             SearchResponse searchResponse = searchQuestions(searchContext);
             if (searchResponse.getQuestions().getContent().size() > 0) {
                 response.setQuestion(searchResponse.getQuestions().getContent().get(0));

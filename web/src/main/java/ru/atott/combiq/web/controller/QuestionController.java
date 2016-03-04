@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
@@ -72,23 +73,27 @@ public class QuestionController extends BaseController {
         }
 
         List<Question> anotherQuestions = null;
-        if (questionResponse.getQuestion().isLanding()) {
-            anotherQuestions = searchQuestionService
-                    .searchAnotherQuestions(questionResponse.getQuestion())
-                    .map(response -> response.getQuestions().getContent())
-                    .orElse(null);
+        Question question=questionResponse.getQuestion();
+        if(question==null){
+            question=questionService.getQuestion(questionId);
+        } else {
+            if (questionResponse.getQuestion().isLanding()) {
+                anotherQuestions = searchQuestionService
+                        .searchAnotherQuestions(questionResponse.getQuestion())
+                        .map(response -> response.getQuestions().getContent())
+                        .orElse(null);
+            }
         }
-
         List<Question> questionsWithLatestComments = Collections.emptyList();
-        if (CollectionUtils.isEmpty(questionResponse.getQuestion().getComments())) {
+        if (CollectionUtils.isEmpty(question.getComments())) {
             questionsWithLatestComments = searchQuestionService.get3QuestionsWithLatestComments();
         }
         QuestionViewBuilder viewBuilder = new QuestionViewBuilder();
-        viewBuilder.setQuestion(questionResponse.getQuestion());
+        viewBuilder.setQuestion(question);
         viewBuilder.setPositionInDsl(questionResponse.getPositionInDsl());
         viewBuilder.setDsl(dsl);
-        viewBuilder.setTags(tagService.getTags(questionResponse.getQuestion().getTags()));
-        viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(questionResponse.getQuestion())));
+        viewBuilder.setTags(tagService.getTags(question.getTags()));
+        viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(question)));
         viewBuilder.setAnotherQuestions(anotherQuestions);
         viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
         viewBuilder.setQuestionsFeed(searchQuestionService.get7QuestionsWithLatestComments());
@@ -190,4 +195,5 @@ public class QuestionController extends BaseController {
         question.setTags(questionRequest.getTags());
         return question;
     }
+
 }

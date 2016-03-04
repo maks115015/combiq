@@ -46,15 +46,17 @@ public interface EventService {
                 new Link("Вопрос", "/questions/" + questionEntity.getId()));
     }
 
-    default void deleteQuestion(Context context, String questionId){
+    default void deleteQuestion(Context context, QuestionEntity questionEntity){
         createEvent(context, EventType.DELETE_QUESTION,
-                "Вопрос <b>" + questionId + "</b>. Удален пользователем"+
-                        context.getUser().getUserName()+".");
+                "Вопрос <b>" + questionEntity.getTitle()+ "</b>. Удален пользователем "+
+                        context.getUser().getUserName()+".",
+                new Link("Вопрос", "/questions/" + questionEntity.getId()));
     }
 
-    default void restoreQuestion(Context context, String questionId){
+    default void restoreQuestion(Context context, QuestionEntity questionEntity){
         createEvent(context, EventType.RESTORE_QUESTION,
-                "Вопрос <b>" + questionId + "</b>. Востанновлен пользователем"+
-                        context.getUser().getUserName()+".");
+                "Вопрос <b>" + questionEntity.getTitle() + "</b>. Востанновлен пользователем"+
+                        context.getUser().getUserName()+".",
+                new Link("Вопрос", "/questions/" + questionEntity.getId()));
     }
 }

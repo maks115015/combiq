@@ -107,18 +107,22 @@ public class SearchQuestionElasticQueryBuilder {
 
         List<FilterBuilder> filters = new ArrayList<>();
 
-        if (dsl!=null && dsl.getUserId()!=null){
+        if (dsl!=null && dsl.getUserName()!=null){
             BoolFilterBuilder userFilter = FilterBuilders.boolFilter();
-            userFilter.mustNot(FilterBuilders.termFilter("authorId", searchContext.getDslQuery().getUserId()));
+            userFilter.must(FilterBuilders.termFilter("authorName", searchContext.getDslQuery().getUserName()));
             filters.add(userFilter);
-            if(!dsl.isVisibleDeleted()){
+            if(!searchContext.isVisibleDeleted()){
                 BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
                 deleteFilter.mustNot(FilterBuilders.termFilter("deleted", true));
                 filters.add(deleteFilter);
             }
-        } else if(dsl!=null && !dsl.isVisibleDeleted()){
+        } else if(!searchContext.isVisibleDeleted()){
             BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
             deleteFilter.mustNot(FilterBuilders.termFilter("deleted", true));
+            filters.add(deleteFilter);
+        } else {
+            BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
+            deleteFilter.must(FilterBuilders.termFilter("deleted", true));
             filters.add(deleteFilter);
         }
 

@@ -85,20 +85,20 @@ public class SearchController extends BaseController {
                                @RequestParam(value = "q", defaultValue = "") String dsl) {
         page = getZeroBasedPage(page);
         SearchContext context = searchQuestionContextBuilder.listByDsl(page, dsl);
-        context.getDslQuery().setVisibleDeleted(true);
+        context.setVisibleDeleted(true);
         return getView(request, context, dsl);
     }
 
-    @RequestMapping(value = "/{userId}/questions", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userName}/questions", method = RequestMethod.GET)
     public ModelAndView userQuestion(HttpServletRequest request,
                                @RequestParam(defaultValue = "1") int page,
                                @RequestParam(value = "q", defaultValue = "") String dsl,
-                               @PathVariable("userId") String userId) {
+                               @PathVariable("userName") String userName) {
         page = getZeroBasedPage(page);
         SearchContext context = searchQuestionContextBuilder.listByDsl(page, dsl);
-        context.getDslQuery().setUserId(userId);
-        if(!getContext().getUser().getUserId().equals(userId)){
-            context.getDslQuery().setVisibleDeleted(true);
+        context.getDslQuery().setUserName(userName);
+        if(!getContext().getUser().getUserName().equals(userName)){
+            context.setVisibleDeleted(true);
         }
         return getView(request, context, dsl);
     }

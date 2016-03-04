@@ -10,8 +10,7 @@ public class DslQuery {
     private List<DslTerm> terms = Collections.emptyList();
     private String level;
     private Long minCommentQuantity;
-    private boolean visibleDeleted;
-    private String userId;
+    private String userName;
 
     public List<DslTag> getTags() {
         return tags;
@@ -50,26 +49,18 @@ public class DslQuery {
         this.minCommentQuantity = minCommentQuantity;
     }
 
-    public boolean isVisibleDeleted() {
-        return visibleDeleted;
-    }
+    public String getUserName() {return userName;}
 
-    public void setVisibleDeleted(boolean visibleDeleted) {
-        this.visibleDeleted = visibleDeleted;
-    }
-
-    public String getUserId() {return userId;}
-
-    public void setUserId(String userId) {this.userId = userId;}
+    public void setUserName(String userName) {this.userName = userName;}
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("tags", tags)
-                .append("terms", terms)
-                .append("level", level)
-                .append("minCommentQuantity", minCommentQuantity)
-                .append("Deleted",visibleDeleted)
-                .toString();
+        return "DslQuery{" +
+                "tags=" + tags +
+                ", terms=" + terms +
+                ", level='" + level + '\'' +
+                ", minCommentQuantity=" + minCommentQuantity +
+                ", userName='" + userName + '\'' +
+                '}';
     }
 }
