@@ -1,6 +1,7 @@
 package ru.atott.combiq.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,9 +32,9 @@ public class TagsController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "questions/tags")
+    @RequestMapping(value = "/tags", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public List<DetailedQuestionTag> getAvaibleTags(){
+    public List<DetailedQuestionTag> getAvailableTags(){
         return tagService.getAllQuestionTags();
     }
 

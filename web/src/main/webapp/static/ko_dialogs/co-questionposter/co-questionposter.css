@@ -1,0 +1,40 @@
+.co-questionposter .co-markdown__ace {
+    height: 120px;
+}
+
+.co-questionposter .co-level-option.active {
+    opacity: 1;
+    border: solid 1px #A5B4BF;
+}
+
+.co-questionposter .co-level-option {
+    display: inline-block;
+    padding: 3px;
+    border: solid 1px rgb(204, 204, 204);
+    opacity: 0.2;
+    margin-right: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.co-questionposter .co-level-option:hover {
+    opacity: 1;
+}
+
+.co-questionposter-footer {
+    background-color: #ededed;
+    margin: -20px;
+    margin-top: 20px;
+    padding: 20px;
+    transition: background-color 300ms linear;
+}
+
+.co-questionposter-footer-savelabel {
+    margin-left: 15px;
+    vertical-align: middle;
+}
+
+.co-questionposter-footer-done {
+    /*background-color: #C5E1A5;*/
+    transition: background-color 300ms linear;
+}

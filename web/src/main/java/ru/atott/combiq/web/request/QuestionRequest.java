@@ -1,16 +1,22 @@
 package ru.atott.combiq.web.request;
-import ru.atott.combiq.dao.entity.MarkdownContent;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.List;
 
-/**
- * Created by Леонид on 19.02.2016.
- */
-public class QuestionRequest extends ContentRequest{
+public class QuestionRequest {
+
     private String id;
+
+    @NotEmpty
     private String title;
+
     private List<String> tags;
+
+    @NotEmpty
     private String level;
-    private MarkdownContent body;
+
+    private String body;
 
     public String getId() {
         return id;
@@ -44,11 +50,11 @@ public class QuestionRequest extends ContentRequest{
         this.level = level;
     }
 
-    public MarkdownContent getBody() {
+    public String getBody() {
         return body;
     }
 
-    public void setBody(MarkdownContent body) {
+    public void setBody(String body) {
         this.body = body;
     }
 }

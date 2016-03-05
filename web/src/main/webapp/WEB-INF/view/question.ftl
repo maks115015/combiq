@@ -12,7 +12,7 @@
 <#assign sidebar>
     <#if functions.hasRoleSaOrContenter()>
         <div>
-            <button class="btn btn-primary" onclick="ko.openDialog('co-questionposter', {id: ''});">
+            <button class="btn btn-primary" onclick="ko.openDialog('co-questionposter');">
                 Добавить новый вопрос
             </button>
         </div>
@@ -180,9 +180,10 @@
 
     </ul>
     <#if functions.hasRoleSaOrContenter()>
-        <a  href="#" onclick="ko.openDialog('co-questionposter',{title: '${question.title}',
-            body: '${question.body.markdown!''}', level: '${question.level}' , id: '${question.id}',
-            tags: [ '${question.tags?join("', '")}' ] }); return false;" >Изменить вопрос</a>
+        <a  href="#" onclick="ko.openDialog('co-questionposter',{id: '${question.id?js_string}'}); return false;">
+            Изменить вопрос
+        </a>
+
         <#if question.deleted>
             <a class="pull-right" href="#"
                     onclick="$.post('/questions/${question.id}/restore');

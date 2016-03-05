@@ -3,6 +3,8 @@ package ru.atott.combiq.web.controller;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +13,12 @@ import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.question.QuestionService;
-import ru.atott.combiq.service.search.SearchService;
 import ru.atott.combiq.service.question.TagService;
 import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
+import ru.atott.combiq.service.search.SearchService;
+import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.web.bean.QuestionBean;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.ContentRequest;
 import ru.atott.combiq.web.request.EditCommentRequest;
@@ -24,6 +28,7 @@ import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.view.QuestionViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -43,6 +48,21 @@ public class QuestionController extends BaseController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private MarkdownService markdownService;
+
+    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Object view(@PathVariable("questionId") String questionId) {
+        Question question = questionService.getQuestion(questionId);
+
+        if (question == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return QuestionBean.of(question);
+    }
 
     @RequestMapping(value = {
             "/questions/{questionId}",
@@ -150,25 +170,30 @@ public class QuestionController extends BaseController {
         return null;
     }
 
-    @RequestMapping(value = "/questions/new",method = RequestMethod.POST)
-    @ResponseBody
-    public SuccessBean saveQuestion(@RequestBody QuestionRequest questionRequest){
-        if(questionRequest.getId()==null && questionRequest.getTitle()!=null && !questionRequest.getTags().isEmpty()){
-            questionService.saveQuestion(getUc(), questionRequestToQuestion(questionRequest));
-            return new SuccessBean(true);
-        }
-        return new SuccessBean(false);
-    }
-
-    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/questions",method = RequestMethod.POST)
     @ResponseBody
     @PreAuthorize("hasAnyRole('sa','contenter')")
-    public SuccessBean updateQuestion(@PathVariable("questionId") String questionId,@RequestBody QuestionRequest questionRequest) {
-        if (questionId.equals(questionRequest.getId())) {
-            questionService.saveQuestion(getUc(), questionRequestToQuestion(questionRequest));
-            return new SuccessBean(true);
+    public Object saveQuestion(@Valid @RequestBody QuestionRequest questionRequest) {
+        Question question;
+
+        if (questionRequest.getId() != null) {
+            question = questionService.getQuestion(questionRequest.getId());
+        } else {
+            question = new Question();
         }
-        return new SuccessBean(false);
+
+        if (question == null) {
+            return new SuccessBean(false, "Question " + questionRequest.getId() + " is not found.");
+        }
+
+        question.setTitle(questionRequest.getTitle());
+        question.setBody(markdownService.toMarkdownContent(questionRequest.getBody()));
+        question.setLevel(questionRequest.getLevel());
+        question.setTags(questionRequest.getTags() != null ? questionRequest.getTags() : Collections.emptyList());
+
+        questionService.saveQuestion(getUc(), question);
+
+        return QuestionBean.of(question);
     }
 
     @RequestMapping(value = "/questions/{questionId}/delete", method = RequestMethod.POST)
@@ -185,16 +210,6 @@ public class QuestionController extends BaseController {
     public SuccessBean restoreQuestion(@PathVariable("questionId") String questionId) {
         questionService.restoreQuestion(getUc(),questionId);
         return new SuccessBean(true);
-    }
-
-    private Question questionRequestToQuestion(QuestionRequest questionRequest) {// Вот мне не очень нравиться что в
-        Question question = new Question();                                      // QuestionEntity другая логика поля level
-        question.setId(questionRequest.getId());
-        question.setTitle(questionRequest.getTitle());
-        question.setBody(questionRequest.getBody());
-        question.setLevel(questionRequest.getLevel());
-        question.setTags(questionRequest.getTags());
-        return question;
     }
 
 }

@@ -1,21 +1,67 @@
-<div>
-    <div>Заголовок</div>
-    <textarea  style="width: 100%" data-bind="textInput: title"></textarea>
-    <div>Решение</div>
-    <co-markdownbox params="text: body" > </co-markdownbox>
-    <div>Теги</div>
-    <div>
-        <span  data-bind="foreach: tags"><b class="co-tag" data-bind="text: value"></b><b data-bind="click: $parent.removeTag"> x </b></span>
-        <select  data-bind="options: avaibleTag, optionsText: 'value', value: tag , click: addTag, optionsCaption: 'Выберите теги'  " ></select>
+<div class="co-questionposter" data-bind="init: init">
+
+    <fieldset class="form-group">
+        <label for="title">Заголовок</label>
+        <input data-bind="textInput: title" type="text" class="form-control" id="title">
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label>Решение</label>
+        <co-markdownbox params="text: body, active: 'markdown'"></co-markdownbox>
+    </fieldset>
+
+
+    <div class="form-group row">
+        <label class="col-sm-1 form-control-label" style="margin-top: 7px;">Тэги</label>
+        <div class="col-sm-6">
+            <select style="width: 100%"
+                    data-bind="element: tagsElement, options: availableTags" multiple="multiple"></select>
+        </div>
+        <label class="col-sm-1 form-control-label" style="margin-top: 7px;">Уровень</label>
+        <div class="col-sm-4">
+            <div class="co-level-option"
+                 data-bind="click: function() { $data.level('D1'); }, css: {active: level() == 'D1'}">
+                <div class="co-level co-level-d1">
+                    <span>D1</span>
+                </div>
+            </div>
+            <div class="co-level-option"
+                 data-bind="click: function() { $data.level('D2'); }, css: {active: level() == 'D2'}">
+                <div class="co-level co-level-d2">
+                    <span>D2</span>
+                </div>
+            </div>
+            <div class="co-level-option"
+                 data-bind="click: function() { $data.level('D3'); }, css: {active: level() == 'D3'}">
+                <div class="co-level co-level-d3">
+                    <span>D3</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>Уровень</div>
-    <div style="margin: 10px">
-        <span class='co-level' data-bind="css: {d1: lvl() == 'D1', d2: lvl() == 'D2' , d3: lvl() == 'D3' } , text: lvl"></span>
-    <select class="lvl" data-bind="value: lvl">
-        <option value="D1">Junior</option>
-        <option value="D2">Middle</option>
-        <option value="D3">Senior</option>
-    </select>
+
+    <div class="co-questionposter-footer"
+         data-bind="css: {'co-questionposter-footer-done': saved}">
+        <input type="button"
+               class="btn btn-primary"
+               value="Сохранить вопрос"
+               data-bind="click: save, disable: saving">
+
+        <span class="co-inline co-small co-questionposter-footer-savelabel"
+              data-bind="visible: saving">
+            Сохранение...
+        </span>
+
+        <span class="co-inline co-small co-questionposter-footer-savelabel"
+              data-bind="visible: !saving() && saved()">
+            <span class="glyphicon glyphicon-ok"></span>
+            Сохранено
+        </span>
+
+        <span class="co-questionposter-footer-savelabel pull-right co-small co-inline"
+              style="margin-top: 10px;"
+              data-bind="visible: id">
+            <a data-bind="attr: {'href': '/questions/' + id()}">Открыть вопрос →</a>
+        </span>
     </div>
-    <button data-bind="click: send">Сохранить</button>
 </div>

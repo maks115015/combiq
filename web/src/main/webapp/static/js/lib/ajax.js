@@ -117,6 +117,9 @@ define([], function() {
         if (method == 'GET') {
             var defaultAjaxOptions = {
                 method: method,
+                headers: {
+                    'Accept': 'application/json, text/javascript, */*'
+                },
                 smSuccessResponseResolver: restSuccessResponseResolver,
                 smErrorMessageResolver: restErrorMessageResolver,
                 smRequestErrorMessageResolver: restRequestErrorMessageResolver

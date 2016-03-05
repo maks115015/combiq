@@ -1,12 +1,9 @@
 <#import "functions.ftl" as functions />
-<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
 <#macro contentEditor content url=''>
     <#-- @ftlvariable name="content" type="ru.atott.combiq.dao.entity.MarkdownContent" -->
 
-    <@security.authorize access="hasRole('sa')" var="allowEditConent" />
-
-    <#if allowEditConent>
+    <#if functions.hasRoleSaOrContenter()>
         <co-contenteditor params="
                 markdown: '${(content.markdown)!?html?js_string}',
                 html: '${(content.html)!?html?js_string}',

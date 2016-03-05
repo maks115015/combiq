@@ -6,7 +6,7 @@
 
     <#if functions.hasRole('sa') || functions.hasRole('contenter')>
         <div>
-            <button class="btn btn-primary" onclick="ko.openDialog('co-questionposter', {id: ''});">
+            <button class="btn btn-primary" onclick="ko.openDialog('co-questionposter');">
                 Добавить новый вопрос
             </button>
         </div>

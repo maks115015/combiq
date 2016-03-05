@@ -47,7 +47,6 @@
     ko.components.defaultLoader.originalLoadComponent = ko.components.defaultLoader.loadComponent;
     ko.components.defaultLoader.loadComponent = function(componentName, config, callback) {
         if (config && config.styles) {
-            console.log('load:', config.styles.engine);
             require([config.styles.engine], function() {
                 require(['requirejs.' + config.styles.engine + '!' + config.styles.path], function() {
                     // Nothing to do.
