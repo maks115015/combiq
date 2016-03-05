@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<configuration debug="true">
 
     <appender name="sout" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</Pattern>
         </layout>
-    </appender>
-
-    <appender name="stash" class="net.logstash.logback.appender.LogstashSocketAppender">
-        <host>logs.combiq.ru</host>
-        <port>5044</port>
-        <customFields>{"env":"${env}"}</customFields>
     </appender>
 
     <if condition='property("env").equals("dev")'>
@@ -20,6 +14,12 @@
             </root>
         </then>
         <else>
+            <appender name="stash" class="net.logstash.logback.appender.LogstashSocketAppender">
+                <host>logs.combiq.ru</host>
+                <port>5044</port>
+                <customFields>{"env":"${env}"}</customFields>
+            </appender>
+
             <root level="info">
                 <appender-ref ref="sout"/>
                 <appender-ref ref="stash" />
