@@ -80,6 +80,15 @@
         ${head}
     </head>
     <body class="${bodyClass}">
+        <#if toolboxVisible>
+            <div class="co-toolbox">
+                <div class="container">
+                    Это тестовый стенд проекта <a href="http://combiq.ru/project">combiq.ru</a>,
+                    окружение <strong>${env}</strong>
+                </div>
+            </div>
+        </#if>
+
         <#if env == 'prod'>
             <@stats.metrika />
             <@stats.commonGtmInitialization gtmPageName />

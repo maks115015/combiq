@@ -1019,3 +1019,9 @@ ul.co-component-question-tags > li {
     border: solid 1px rgb(204, 204, 204);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
+
+.co-toolbox {
+    background-color: #FFC107;
+    padding: 8px;
+    font-size: 12px;
+}
