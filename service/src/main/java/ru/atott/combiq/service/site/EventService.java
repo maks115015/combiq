@@ -45,4 +45,18 @@ public interface EventService {
                 "Вопрос <b>" + questionEntity.getTitle() + "</b>. Изменен"+username+".",
                 new Link("Вопрос", "/questions/" + questionEntity.getId()));
     }
+
+    default void deleteQuestion(Context context, QuestionEntity questionEntity){
+        createEvent(context, EventType.DELETE_QUESTION,
+                "Вопрос <b>" + questionEntity.getTitle()+ "</b>. Удален пользователем "+
+                        context.getUser().getUserName()+".",
+                new Link("Вопрос", "/questions/" + questionEntity.getId()));
+    }
+
+    default void restoreQuestion(Context context, QuestionEntity questionEntity){
+        createEvent(context, EventType.RESTORE_QUESTION,
+                "Вопрос <b>" + questionEntity.getTitle() + "</b>. Востанновлен пользователем"+
+                        context.getUser().getUserName()+".",
+                new Link("Вопрос", "/questions/" + questionEntity.getId()));
+    }
 }

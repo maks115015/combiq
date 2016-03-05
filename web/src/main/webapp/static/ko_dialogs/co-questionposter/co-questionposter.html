@@ -5,8 +5,8 @@
     <co-markdownbox params="text: body" > </co-markdownbox>
     <div>Теги</div>
     <div>
-        <span  data-bind="foreach: tags"><b class="co-tag" data-bind="text: name"></b><b data-bind="click: $parent.removeTag"> x </b></span>
-        <select  data-bind="options: avaibleTag, optionsText: 'name', value: tag , click: addTag, optionsCaption: 'Выберите теги'  " ></select>
+        <span  data-bind="foreach: tags"><b class="co-tag" data-bind="text: value"></b><b data-bind="click: $parent.removeTag"> x </b></span>
+        <select  data-bind="options: avaibleTag, optionsText: 'value', value: tag , click: addTag, optionsCaption: 'Выберите теги'  " ></select>
     </div>
     <div>Уровень</div>
     <div style="margin: 10px">

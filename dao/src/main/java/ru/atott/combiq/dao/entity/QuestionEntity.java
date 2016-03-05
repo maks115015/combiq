@@ -39,6 +39,12 @@ public class QuestionEntity {
 
     private String legacyId;
 
+    private boolean deleted;
+
+    private String authorId;
+
+    private String authorName;
+
     @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
     private String humanUrlTitle;
 
@@ -145,4 +151,16 @@ public class QuestionEntity {
     public void setHumanUrlTitle(String humanUrlTitle) {
         this.humanUrlTitle = humanUrlTitle;
     }
+
+    public boolean isDeleted() {return deleted;}
+
+    public void setDeleted(boolean deleted) {this.deleted = deleted;}
+
+    public void setAuthorId(String authorID) {this.authorId = authorID;}
+
+    public String getAuthorId() {return authorId;}
+
+    public String getAuthorName() {return authorName;}
+
+    public void setAuthorName(String authorName) {this.authorName = authorName;}
 }

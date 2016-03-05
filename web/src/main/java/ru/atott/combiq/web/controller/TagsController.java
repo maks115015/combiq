@@ -33,8 +33,8 @@ public class TagsController extends BaseController {
 
     @RequestMapping(value = "questions/tags")
     @ResponseBody
-    public String[] getAvaibleTags(){
-        return tagService.getAllTags();
+    public List<DetailedQuestionTag> getAvaibleTags(){
+        return tagService.getAllQuestionTags();
     }
 
     @RequestMapping(value = "/tags", method = RequestMethod.POST)

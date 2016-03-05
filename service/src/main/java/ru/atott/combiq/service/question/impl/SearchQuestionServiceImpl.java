@@ -110,11 +110,11 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
         Page<QuestionEntity> page = defaultResultMapper.mapResults(searchResponse, QuestionEntity.class, pageable);
 
         QuestionMapper questionMapper = new QuestionMapper();
-        if (context.getUserId() != null) {
+        if (context.getUserName() != null) {
             Set<String> questionIds = page.getContent().stream().map(QuestionEntity::getId).collect(Collectors.toSet());
-            List<QuestionAttrs> questionAttrses = getQuestionAttrses(questionIds, context.getUserId());
+            List<QuestionAttrs> questionAttrses = getQuestionAttrses(questionIds, context.getUserName());
             Map<String, QuestionAttrs> attrsMap = questionAttrses.stream().collect(Collectors.toMap(QuestionAttrs::getQuestionId, attrs -> attrs));
-            questionMapper = new QuestionMapper(context.getUserId(), attrsMap);
+            questionMapper = new QuestionMapper(context.getUserName(), attrsMap);
         }
 
         SearchResponse response = new SearchResponse();
@@ -184,7 +184,6 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
             SearchContext searchContext = new SearchContext();
             searchContext.setFrom(0);
             searchContext.setSize(1);
-            searchContext.setUserId(context.getUserId());
             searchContext.setQuestionId(context.getId());
             SearchResponse searchResponse = searchQuestions(searchContext);
             if (searchResponse.getQuestions().getContent().size() > 0) {
@@ -277,4 +276,6 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
                 })
                 .collect(Collectors.toList());
     }
+
+
 }

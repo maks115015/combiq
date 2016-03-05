@@ -92,7 +92,6 @@ public class SearchQuestionElasticQueryBuilder {
             });
             conditions.add(termsQueryBuilder);
         }
-
         if (!conditions.isEmpty()) {
             BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
             conditions.forEach(boolQueryBuilder::must);
@@ -107,6 +106,25 @@ public class SearchQuestionElasticQueryBuilder {
         List<String> questionIds = searchContext.getQuestionIds();
 
         List<FilterBuilder> filters = new ArrayList<>();
+
+        if (dsl!=null && dsl.getUserName()!=null){
+            BoolFilterBuilder userFilter = FilterBuilders.boolFilter();
+            userFilter.must(FilterBuilders.termFilter("authorName", searchContext.getDslQuery().getUserName()));
+            filters.add(userFilter);
+            if(!searchContext.isVisibleDeleted()){
+                BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
+                deleteFilter.mustNot(FilterBuilders.termFilter("deleted", true));
+                filters.add(deleteFilter);
+            }
+        } else if(!searchContext.isVisibleDeleted()){
+            BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
+            deleteFilter.mustNot(FilterBuilders.termFilter("deleted", true));
+            filters.add(deleteFilter);
+        } else {
+            BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
+            deleteFilter.must(FilterBuilders.termFilter("deleted", true));
+            filters.add(deleteFilter);
+        }
 
         if (dsl != null && !dsl.getTags().isEmpty()) {
             BoolFilterBuilder tagsFilter = FilterBuilders.boolFilter();

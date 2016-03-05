@@ -51,6 +51,9 @@ public class QuestionMapper implements Mapper<QuestionEntity, Question> {
         if (question.getComments() == null) {
             question.setComments(Collections.emptyList());
         }
+        question.setDeleted(source.isDeleted());
+        question.setAuthorId(source.getAuthorId());
+        question.setAuthorName(source.getAuthorName());
         question.setLanding(source.isLanding());
         question.setClassNames(source.getClassNames());
         question.setHumanUrlTitle(source.getHumanUrlTitle());

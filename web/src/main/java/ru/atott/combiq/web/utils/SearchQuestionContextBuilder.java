@@ -29,7 +29,6 @@ public class SearchQuestionContextBuilder {
     public SearchContext listByTags(int page, List<String> tags) {
         DslQuery query = new DslQuery();
         query.setTags(tags.stream().map(DslTag::new).collect(Collectors.toList()));
-
         SearchContext context = new SearchContext();
         context.setFrom(page * size);
         context.setSize(size);

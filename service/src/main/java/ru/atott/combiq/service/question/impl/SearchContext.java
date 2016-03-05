@@ -10,8 +10,10 @@ public class SearchContext {
     private int from = 0;
     private int size = 20;
     private DslQuery dslQuery;
+    private String userName;
     private String userId;
     private List<String> questionIds;
+    private boolean VisibleDeleted;
 
     public void setQuestionId(String questionId) {
         this.questionIds = Collections.singletonList(questionId);
@@ -49,22 +51,28 @@ public class SearchContext {
         this.dslQuery = dslQuery;
     }
 
-    public String getUserId() {
-        return userId;
-    }
+    public String getUserName() {return userName;}
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    public void setUserName(String userName) {this.userName = userName;}
+
+    public boolean isVisibleDeleted() {return VisibleDeleted;}
+
+    public void setVisibleDeleted(boolean visibleDeleted) {VisibleDeleted = visibleDeleted;}
+
+    public String getUserId() {return userId;}
+
+    public void setUserId(String userId) {this.userId = userId;}
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("from", from)
-                .append("size", size)
-                .append("dslQuery", dslQuery)
-                .append("userId", userId)
-                .append("questionIds", questionIds)
-                .toString();
+        return "SearchContext{" +
+                "from=" + from +
+                ", size=" + size +
+                ", dslQuery=" + dslQuery +
+                ", userName='" + userName + '\'' +
+                ", userId='" + userId + '\'' +
+                ", questionIds=" + questionIds +
+                ", VisibleDeleted=" + VisibleDeleted +
+                '}';
     }
 }

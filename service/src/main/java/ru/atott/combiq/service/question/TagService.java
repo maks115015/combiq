@@ -17,8 +17,6 @@ public interface TagService {
 
     List<DetailedQuestionTag> getAllQuestionTags();
 
-    String[] getAllTags();
-
     QuestionTag getTag(String name);
 
     void save(QuestionTag tag);
