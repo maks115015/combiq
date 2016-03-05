@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.bean.Question;
-import ru.atott.combiq.service.question.impl.SearchContext;
-import ru.atott.combiq.service.question.impl.SearchResponse;
-import ru.atott.combiq.service.question.SearchQuestionService;
+import ru.atott.combiq.service.search.SearchContext;
+import ru.atott.combiq.service.search.SearchResponse;
+import ru.atott.combiq.service.search.SearchService;
 import ru.atott.combiq.web.bean.CountQuestionSearchBean;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
@@ -27,7 +27,7 @@ public class SearchController extends BaseController {
     private PagingBeanBuilder pagingBeanBuilder = new PagingBeanBuilder();
 
     @Autowired
-    private SearchQuestionService searchQuestionService;
+    private SearchService searchService;
 
     @Autowired
     private SearchQuestionContextFactory searchQuestionContextFactory;
@@ -98,7 +98,7 @@ public class SearchController extends BaseController {
 
     private ModelAndView getView(HttpServletRequest request, SearchContext context, String dsl,
                                  String subTitle, boolean questionsCatalog) {
-        SearchResponse questionsResponse = searchQuestionService.searchQuestions(context);
+        SearchResponse questionsResponse = searchService.searchQuestions(context);
 
         PagingBean paging = pagingBeanBuilder.build(questionsResponse.getQuestions(), questionsResponse.getQuestions().getNumber(), request);
         List<Question> questions = questionsResponse.getQuestions().getContent();

@@ -11,7 +11,7 @@ import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.question.QuestionService;
-import ru.atott.combiq.service.question.SearchQuestionService;
+import ru.atott.combiq.service.search.SearchService;
 import ru.atott.combiq.service.question.TagService;
 import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
@@ -36,7 +36,7 @@ public class QuestionController extends BaseController {
     private AuthService authService;
 
     @Autowired
-    private SearchQuestionService searchQuestionService;
+    private SearchService searchService;
 
     @Autowired
     private QuestionService questionService;
@@ -63,6 +63,7 @@ public class QuestionController extends BaseController {
             context.setProposedIndexInDslResponse(index);
             context.setDsl(DslParser.parse(dsl));
         }
+
         GetQuestionResponse questionResponse = searchQuestionService.getQuestion(getUc(), context);
 
         RedirectView redirectView = redirectToCanonicalUrlIfNeed(questionId, humanUrlTitle.orElse(null), questionResponse, request);
@@ -95,7 +96,7 @@ public class QuestionController extends BaseController {
         viewBuilder.setCanonicalUrl(urlResolver.externalize(urlResolver.getQuestionUrl(question)));
         viewBuilder.setAnotherQuestions(anotherQuestions);
         viewBuilder.setQuestionsWithLatestComments(questionsWithLatestComments);
-        viewBuilder.setQuestionsFeed(searchQuestionService.get7QuestionsWithLatestComments());
+        viewBuilder.setQuestionsFeed(searchService.get7QuestionsWithLatestComments());
         return viewBuilder.build();
     }
 
@@ -128,7 +129,7 @@ public class QuestionController extends BaseController {
         Question question = searchResponse.getQuestion();
 
         if (question == null) {
-            question = searchQuestionService.getQuestionByLegacyId(questionId);
+            question = searchService.getQuestionByLegacyId(questionId);
 
             if (question == null) {
                 return null;

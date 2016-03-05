@@ -1,4 +1,4 @@
-package ru.atott.combiq.service.question.impl;
+package ru.atott.combiq.service.search;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -41,13 +41,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
-public class SearchQuestionServiceImpl implements SearchQuestionService {
+public class SearchServiceImpl implements SearchService {
 
     private DefaultResultMapper defaultResultMapper;
 
     private QuestionAttrsMapper questionAttrsMapper = new QuestionAttrsMapper();
 
-    private LoadingCache<Integer, List<Question>> questionsQithLatestCommentsCache =
+    private LoadingCache<Integer, List<Question>> questionsWithLatestCommentsCache =
             CacheBuilder
                     .newBuilder()
                     .refreshAfterWrite(30, TimeUnit.MINUTES)
@@ -73,14 +73,14 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public SearchQuestionServiceImpl() {
+    public SearchServiceImpl() {
         SimpleElasticsearchMappingContext mappingContext = new SimpleElasticsearchMappingContext();
         defaultResultMapper = new DefaultResultMapper(mappingContext);
     }
 
     @Override
     public long countQuestions(SearchContext context) {
-        CountRequestBuilder query = new SearchQuestionElasticQueryBuilder()
+        CountRequestBuilder query = new SearchQueryBuilder()
                 .setClient(client)
                 .setDomainResolver(domainResolver)
                 .setSearchContext(context)
@@ -91,7 +91,7 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
 
     @Override
     public SearchResponse searchQuestions(SearchContext context) {
-        SearchRequestBuilder query = new SearchQuestionElasticQueryBuilder()
+        SearchRequestBuilder query = new SearchQueryBuilder()
                 .setClient(client)
                 .setDomainResolver(domainResolver)
                 .setSearchContext(context)
@@ -231,7 +231,7 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
     @Override
     public List<Question> get3QuestionsWithLatestComments() {
         try {
-            return questionsQithLatestCommentsCache.get(3);
+            return questionsWithLatestCommentsCache.get(3);
         } catch (ExecutionException e) {
             throw new ServiceException(e.getMessage(), e);
         }
@@ -240,7 +240,7 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
     @Override
     public List<Question> get7QuestionsWithLatestComments() {
         try {
-            return questionsQithLatestCommentsCache.get(7);
+            return questionsWithLatestCommentsCache.get(7);
         } catch (ExecutionException e) {
             throw new ServiceException(e.getMessage(), e);
         }

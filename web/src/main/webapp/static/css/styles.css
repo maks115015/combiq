@@ -429,6 +429,7 @@ html /deep/ .co-ok-button {
 
 .co-search-help-tip {
     margin-bottom: 45px;
+    min-height: 28px;
 }
 
 .co-search-help-tip label,

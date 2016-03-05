@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.dsl.DslTag;
-import ru.atott.combiq.service.question.impl.SearchContext;
+import ru.atott.combiq.service.search.SearchContext;
 import ru.atott.combiq.web.security.AuthService;
 
 import java.util.List;

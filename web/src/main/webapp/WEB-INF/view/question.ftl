@@ -4,14 +4,20 @@
 <#import "_layout/templates.ftl" as templates />
 <#import "_layout/parts.ftl" as parts />
 <#import "_layout/functions.ftl" as functions />
-<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
+
 <#assign head>
     <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
-    <link rel="canonical" href="${canonicalUrl}" />
-    <#--<link rel="canonical" href="${canonicalUrl}" />-->
 </#assign>
 
 <#assign sidebar>
+    <#if functions.hasRoleSaOrContenter()>
+        <div>
+            <button class="btn btn-primary" onclick="ko.openDialog('co-questionposter', {id: ''});">
+                Добавить новый вопрос
+            </button>
+        </div>
+    </#if>
+
     <div>
         <h4>Полезное</h4>
         <ol class="list-unstyled co-question-aside-tips">
@@ -173,20 +179,19 @@
         </li>
 
     </ul>
-    <@security.authorize access="hasRole('contenter') || hasRole('sa')" var="allowEditQuestion" />
-    <#if allowEditQuestion>
-    <a  href="#" onclick="ko.openDialog('co-questionposter',{title: '${question.title}',
-        body: '${question.body.markdown!''}', level: '${question.level}' , id: '${question.id}',
-        tags: [ '${question.tags?join("', '")}' ] }); return false;" >Изменить вопрос</a>
-      <#if question.deleted>
-        <a class="pull-right" href="#"
-                onclick="$.post('/questions/${question.id}/restore');
-                window.location.replace('/questions/search');">Востановить Вопрос</a>
-      <#else>
-        <a class="pull-right" href="#"
-            onclick="$.post('/questions/${question.id}/delete');
-            window.location.replace('/questions/search');">Удалить Вопрос</a>
-      </#if>
+    <#if functions.hasRoleSaOrContenter()>
+        <a  href="#" onclick="ko.openDialog('co-questionposter',{title: '${question.title}',
+            body: '${question.body.markdown!''}', level: '${question.level}' , id: '${question.id}',
+            tags: [ '${question.tags?join("', '")}' ] }); return false;" >Изменить вопрос</a>
+        <#if question.deleted>
+            <a class="pull-right" href="#"
+                    onclick="$.post('/questions/${question.id}/restore');
+                    window.location.replace('/questions/search');">Востановить Вопрос</a>
+        <#else>
+            <a class="pull-right" href="#"
+                onclick="$.post('/questions/${question.id}/delete');
+                window.location.replace('/questions/search');">Удалить Вопрос</a>
+        </#if>
     </#if>
 </#macro>
 
