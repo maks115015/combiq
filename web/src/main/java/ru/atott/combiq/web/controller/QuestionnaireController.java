@@ -26,7 +26,7 @@ public class QuestionnaireController extends BaseController {
     public Object view(
             @PathVariable("questionnaireId") String questionnaireId,
             HttpServletRequest request) {
-        Questionnaire questionnaire = questionnaireService.getQuestionnaire(questionnaireId);
+        Questionnaire questionnaire = questionnaireService.getQuestionnaire(getUc(), questionnaireId);
 
         if (questionnaire == null) {
             QuestionnaireHead questionnaireByLegacy = questionnaireService.getQuestionnaireByLegacyId(questionnaireId);
@@ -45,7 +45,7 @@ public class QuestionnaireController extends BaseController {
     public void view(@PathVariable("questionnaireId") String questionnaireId,
                      @PathVariable("title") String title,
                      HttpServletResponse response) throws Exception {
-        Questionnaire questionnaire = questionnaireService.getQuestionnaire(questionnaireId);
+        Questionnaire questionnaire = questionnaireService.getQuestionnaire(getUc(), questionnaireId);
 
         response.setContentType("application/pdf");
 

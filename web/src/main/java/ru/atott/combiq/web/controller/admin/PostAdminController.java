@@ -62,7 +62,7 @@ public class PostAdminController extends BaseController {
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public Object postComment(@RequestBody EditPostRequest request) {
         String postId = postService.save(
-                getContext(), request.getPostId(), request.getTitle(), request.getContent(), request.isPublished());
+                getUc(), request.getPostId(), request.getTitle(), request.getContent(), request.isPublished());
         return new IdBean(postId);
     }
 }

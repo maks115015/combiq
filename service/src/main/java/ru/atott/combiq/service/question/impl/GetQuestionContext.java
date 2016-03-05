@@ -3,9 +3,13 @@ package ru.atott.combiq.service.question.impl;
 import ru.atott.combiq.service.dsl.DslQuery;
 
 public class GetQuestionContext {
+
     private String id;
+
     private DslQuery dsl;
+
     private Integer proposedIndexInDslResponse;
+
     private String userId;
 
     public String getUserId() {

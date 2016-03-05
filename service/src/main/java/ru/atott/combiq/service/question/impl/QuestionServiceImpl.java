@@ -17,9 +17,9 @@ import ru.atott.combiq.service.ServiceException;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.question.QuestionService;
-import ru.atott.combiq.service.site.Context;
 import ru.atott.combiq.service.site.EventService;
 import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.service.util.NumberService;
 import ru.atott.combiq.service.util.TransletirateService;
 
@@ -71,8 +71,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void saveComment(Context context, String questionId, String comment) {
-        Validate.isTrue(!context.getUser().isAnonimous());
+    public void saveComment(UserContext uc, String questionId, String comment) {
+        Validate.isTrue(!uc.isAnonimous());
         Validate.notEmpty(comment);
 
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
@@ -87,25 +87,25 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionComment questionComment = new QuestionComment();
         questionComment.setContent(markdownService.toMarkdownContent(comment));
         questionComment.setPostDate(new Date());
-        questionComment.setUserId(context.getUser().getUserId());
+        questionComment.setUserId(uc.getUserId());
         questionComment.setId(UUID.randomUUID().toString());
 
-        if (context.getUser().getRoles().contains(sa)) {
+        if (uc.getRoles().contains(sa)) {
             questionComment.setUserName(CombiqConstants.combiqUserName);
         } else {
-            questionComment.setUserName(context.getUser().getUserName());
+            questionComment.setUserName(uc.getUserName());
         }
         comments.add(questionComment);
 
         questionEntity.setComments(comments);
         questionRepository.save(questionEntity);
 
-        eventService.createPostQuestionCommentEvent(context, questionEntity, questionComment.getId());
+        eventService.createPostQuestionCommentEvent(uc, questionEntity, questionComment.getId());
     }
 
     @Override
-    public void updateComment(Context context, String questionId, String commentId, String commentMarkdown) {
-        Validate.isTrue(!context.getUser().isAnonimous());
+    public void updateComment(UserContext uc, String questionId, String commentId, String commentMarkdown) {
+        Validate.isTrue(!uc.isAnonimous());
         Validate.notEmpty(commentMarkdown);
 
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
@@ -123,9 +123,9 @@ public class QuestionServiceImpl implements QuestionService {
             throw new ServiceException("Question comment " + commentId + " not found.");
         }
 
-        if (!Objects.equals(questionComment.getUserId(), context.getUser().getUserId())) {
+        if (!Objects.equals(questionComment.getUserId(), uc.getUserId())) {
 
-            if (Sets.intersection(context.getUser().getRoles(), Sets.newHashSet(sa, contenter)).size() == 0) {
+            if (Sets.intersection(uc.getRoles(), Sets.newHashSet(sa, contenter)).size() == 0) {
                 throw new AccessException();
             }
         }
@@ -133,9 +133,9 @@ public class QuestionServiceImpl implements QuestionService {
         questionComment.setContent(markdownService.toMarkdownContent(commentMarkdown));
         questionComment.setEditDate(new Date());
 
-        if (!Objects.equals(questionComment.getUserId(), context.getUser().getUserId())) {
-            questionComment.setEditUserId(context.getUser().getUserId());
-            questionComment.setEditUserName(context.getUser().getUserName());
+        if (!Objects.equals(questionComment.getUserId(), uc.getUserId())) {
+            questionComment.setEditUserId(uc.getUserId());
+            questionComment.setEditUserName(uc.getUserName());
         } else {
             questionComment.setEditUserId(null);
             questionComment.setEditUserName(null);
@@ -143,7 +143,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         questionRepository.save(questionEntity);
 
-        eventService.createEditQuestionCommentEvent(context, questionEntity, commentId);
+        eventService.createEditQuestionCommentEvent(uc, questionEntity, commentId);
     }
 
     @Override
@@ -152,23 +152,26 @@ public class QuestionServiceImpl implements QuestionService {
         questionEntity.setBody(markdownService.toMarkdownContent(body));
         questionRepository.save(questionEntity);
     }
+
     @Override
-    public void saveQuestion(Context context,Question question){
+    public void saveQuestion(UserContext uc, Question question){
+        Validate.isTrue(!uc.isAnonimous());
+
         QuestionEntity questionEntity;
-        if(question.getId()==null){
-            questionEntity=new QuestionEntity();
+
+        if (question.getId() == null){
+            questionEntity = new QuestionEntity();
             questionEntity.setTimestamp(new Date().getTime());
             questionEntity.setId(Long.toString(numberService.getUniqueNumber()));
             questionEntity.setTitle(question.getTitle());
-            questionEntity.setAuthorId(context.getUser().getUserId());
-            questionEntity.setAuthorName(context.getUser().getUserName());
-            eventService.createQuestion(context,questionEntity);
-        }
-        else {
-            questionEntity=questionRepository.findOne(question.getId());
+            questionEntity.setAuthorId(uc.getUserId());
+            questionEntity.setAuthorName(uc.getUserName());
+            eventService.createQuestion(uc, questionEntity);
+        } else {
+            questionEntity = questionRepository.findOne(question.getId());
             questionEntity.setClassNames(null);
             questionEntity.setTitle(question.getTitle());
-            eventService.editQuestion(context,questionEntity);
+            eventService.editQuestion(uc, questionEntity);
         }
         questionEntity.setHumanUrlTitle(transletirateService.lowercaseAndTransletirate(question.getTitle(), 80));
         questionEntity.setTags(question.getTags());
@@ -176,10 +179,6 @@ public class QuestionServiceImpl implements QuestionService {
         questionEntity.setBody(question.getBody());
         questionRepository.save(questionEntity);
     }
-
-
-
-
 
     @Override
     public List<String> refreshMentionedClassNames(Question question) {
@@ -213,26 +212,25 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void deleteQuestion(Context context , String questionId){
+    public void deleteQuestion(UserContext uc, String questionId){
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
         questionEntity.setDeleted(true);
         questionRepository.save(questionEntity);
-        eventService.deleteQuestion(context,questionEntity);
+        eventService.deleteQuestion(uc, questionEntity);
     }
 
     @Override
-    public void restoreQuestion(Context context , String questionId){
+    public void restoreQuestion(UserContext uc, String questionId){
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
         questionEntity.setDeleted(false);
         questionRepository.save(questionEntity);
-        eventService.restoreQuestion(context,questionEntity);
+        eventService.restoreQuestion(uc, questionEntity);
     }
 
     @Override
     public  Question getQuestion(String id){
-        QuestionEntity questionEntity=questionRepository.findOne(id);
-        Question question=new Question();
-        QuestionMapper questionMapper=new QuestionMapper();
+        QuestionEntity questionEntity = questionRepository.findOne(id);
+        QuestionMapper questionMapper = new QuestionMapper();
         return questionMapper.map(questionEntity);
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.dsl.DslParser;
@@ -64,7 +63,7 @@ public class QuestionController extends BaseController {
             context.setProposedIndexInDslResponse(index);
             context.setDsl(DslParser.parse(dsl));
         }
-        GetQuestionResponse questionResponse = searchQuestionService.getQuestion(context);
+        GetQuestionResponse questionResponse = searchQuestionService.getQuestion(getUc(), context);
 
         RedirectView redirectView = redirectToCanonicalUrlIfNeed(questionId, humanUrlTitle.orElse(null), questionResponse, request);
 
@@ -79,7 +78,7 @@ public class QuestionController extends BaseController {
         } else {
             if (questionResponse.getQuestion().isLanding()) {
                 anotherQuestions = searchQuestionService
-                        .searchAnotherQuestions(questionResponse.getQuestion())
+                        .searchAnotherQuestions(getUc(), questionResponse.getQuestion())
                         .map(response -> response.getQuestions().getContent())
                         .orElse(null);
             }
@@ -115,9 +114,9 @@ public class QuestionController extends BaseController {
     public Object postComment(@PathVariable("questionId") String questionId,
                               @RequestBody EditCommentRequest request) {
         if (request.getCommentId() == null) {
-            questionService.saveComment(getContext(), questionId, request.getContent());
+            questionService.saveComment(getUc(), questionId, request.getContent());
         } else {
-            questionService.updateComment(getContext(), questionId, request.getCommentId(), request.getContent());
+            questionService.updateComment(getUc(), questionId, request.getCommentId(), request.getContent());
         }
         return new SuccessBean();
     }
@@ -149,11 +148,12 @@ public class QuestionController extends BaseController {
 
         return null;
     }
+
     @RequestMapping(value = "/questions/new",method = RequestMethod.POST)
     @ResponseBody
     public SuccessBean saveQuestion(@RequestBody QuestionRequest questionRequest){
         if(questionRequest.getId()==null && questionRequest.getTitle()!=null && !questionRequest.getTags().isEmpty()){
-            questionService.saveQuestion(getContext(),questionRequestToQuestion(questionRequest));
+            questionService.saveQuestion(getUc(), questionRequestToQuestion(questionRequest));
             return new SuccessBean(true);
         }
         return new SuccessBean(false);
@@ -164,7 +164,7 @@ public class QuestionController extends BaseController {
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public SuccessBean updateQuestion(@PathVariable("questionId") String questionId,@RequestBody QuestionRequest questionRequest) {
         if (questionId.equals(questionRequest.getId())) {
-            questionService.saveQuestion(getContext(),questionRequestToQuestion(questionRequest));
+            questionService.saveQuestion(getUc(), questionRequestToQuestion(questionRequest));
             return new SuccessBean(true);
         }
         return new SuccessBean(false);
@@ -174,7 +174,7 @@ public class QuestionController extends BaseController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public SuccessBean deleteQuestion(@PathVariable("questionId") String questionId) {
-        questionService.deleteQuestion(getContext(),questionId);
+        questionService.deleteQuestion(getUc(),questionId);
         return new SuccessBean(true);
     }
 
@@ -182,12 +182,12 @@ public class QuestionController extends BaseController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public SuccessBean restoreQuestion(@PathVariable("questionId") String questionId) {
-        questionService.restoreQuestion(getContext(),questionId);
+        questionService.restoreQuestion(getUc(),questionId);
         return new SuccessBean(true);
     }
-    //Вынес  в отдельный метод
-    private Question questionRequestToQuestion(QuestionRequest questionRequest){// Вот мне не очень нравиться что в
-        Question question=new Question();                                       // QuestionEntity другая логика поля level
+
+    private Question questionRequestToQuestion(QuestionRequest questionRequest) {// Вот мне не очень нравиться что в
+        Question question = new Question();                                      // QuestionEntity другая логика поля level
         question.setId(questionRequest.getId());
         question.setTitle(questionRequest.getTitle());
         question.setBody(questionRequest.getBody());

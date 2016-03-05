@@ -12,13 +12,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class SearchQuestionContextBuilder {
+public class SearchQuestionContextFactory {
+
     private static int size = 20;
+
     @Autowired
     private AuthService authService;
 
     public SearchContext list(int page) {
         SearchContext context = new SearchContext();
+        context.setUserContext(authService.getUserContext());
         context.setFrom(page * size);
         context.setSize(size);
         context.setDslQuery(new DslQuery());
@@ -30,6 +33,7 @@ public class SearchQuestionContextBuilder {
         DslQuery query = new DslQuery();
         query.setTags(tags.stream().map(DslTag::new).collect(Collectors.toList()));
         SearchContext context = new SearchContext();
+        context.setUserContext(authService.getUserContext());
         context.setFrom(page * size);
         context.setSize(size);
         context.setDslQuery(query);
@@ -42,6 +46,7 @@ public class SearchQuestionContextBuilder {
         query.setLevel(level);
 
         SearchContext context = new SearchContext();
+        context.setUserContext(authService.getUserContext());
         context.setFrom(page * size);
         context.setSize(size);
         context.setDslQuery(query);
@@ -53,9 +58,36 @@ public class SearchQuestionContextBuilder {
         DslQuery dslQuery = DslParser.parse(dsl);
 
         SearchContext context = new SearchContext();
+        context.setUserContext(authService.getUserContext());
         context.setFrom(page * size);
         context.setSize(size);
         context.setDslQuery(dslQuery);
+        context.setUserId(authService.getUserId());
+        return context;
+    }
+
+    public SearchContext listByDeleted(int page, boolean deleted) {
+        DslQuery query = new DslQuery();
+        query.setDeleted(deleted);
+
+        SearchContext context = new SearchContext();
+        context.setUserContext(authService.getUserContext());
+        context.setFrom(page * size);
+        context.setSize(size);
+        context.setDslQuery(query);
+        context.setUserId(authService.getUserId());
+        return context;
+    }
+
+    public SearchContext listByUser(int page, String userId) {
+        DslQuery query = new DslQuery();
+        query.setUser(userId);
+
+        SearchContext context = new SearchContext();
+        context.setUserContext(authService.getUserContext());
+        context.setFrom(page * size);
+        context.setSize(size);
+        context.setDslQuery(query);
         context.setUserId(authService.getUserId());
         return context;
     }

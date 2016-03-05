@@ -18,6 +18,7 @@ import ru.atott.combiq.dao.Types;
 import ru.atott.combiq.dao.entity.QuestionEntity;
 import ru.atott.combiq.dao.es.NameVersionDomainResolver;
 import ru.atott.combiq.service.dsl.DslQuery;
+import ru.atott.combiq.service.user.UserRoles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,23 +108,29 @@ public class SearchQuestionElasticQueryBuilder {
 
         List<FilterBuilder> filters = new ArrayList<>();
 
-        if (dsl!=null && dsl.getUserName()!=null){
-            BoolFilterBuilder userFilter = FilterBuilders.boolFilter();
-            userFilter.must(FilterBuilders.termFilter("authorName", searchContext.getDslQuery().getUserName()));
-            filters.add(userFilter);
-            if(!searchContext.isVisibleDeleted()){
-                BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
-                deleteFilter.mustNot(FilterBuilders.termFilter("deleted", true));
-                filters.add(deleteFilter);
+        if (dsl != null && dsl.getDeleted() != null && dsl.getDeleted()) {
+            if (!searchContext.getUserContext().isAnonimous()) {
+                // Только неанонимные пользователи могут просматривать удаленные вопросы.
+
+                if (searchContext.getUserContext().getRoles().contains(UserRoles.sa)
+                        || searchContext.getUserContext().getRoles().contains(UserRoles.contenter)) {
+                    // Администраторы могут просматривать удаленные вопросы всех пользователей.
+
+                    filters.add(FilterBuilders.termFilter("deleted", true));
+                } else {
+                    // Пользователи могут просматривать только свои удаленные вопросы.
+
+                    filters.add(FilterBuilders.andFilter(
+                            FilterBuilders.termFilter("deleted", true),
+                            FilterBuilders.termFilter("authorId", searchContext.getUserContext().getUserId())));
+                }
+            } else {
+                filters.add(FilterBuilders.termFilter("nothingToFind", true));
             }
-        } else if(!searchContext.isVisibleDeleted()){
-            BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
-            deleteFilter.mustNot(FilterBuilders.termFilter("deleted", true));
-            filters.add(deleteFilter);
-        } else {
-            BoolFilterBuilder deleteFilter = FilterBuilders.boolFilter();
-            deleteFilter.must(FilterBuilders.termFilter("deleted", true));
-            filters.add(deleteFilter);
+        }
+
+        if (dsl != null && StringUtils.isNotBlank(dsl.getUser())) {
+            filters.add(FilterBuilders.termFilter("authorId", dsl.getUser()));
         }
 
         if (dsl != null && !dsl.getTags().isEmpty()) {

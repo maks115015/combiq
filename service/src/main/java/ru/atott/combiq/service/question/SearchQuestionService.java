@@ -5,6 +5,7 @@ import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.service.question.impl.SearchContext;
 import ru.atott.combiq.service.question.impl.SearchResponse;
+import ru.atott.combiq.service.site.UserContext;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +16,9 @@ public interface SearchQuestionService {
 
     long countQuestions(SearchContext context);
 
-    Optional<SearchResponse> searchAnotherQuestions(Question question);
+    Optional<SearchResponse> searchAnotherQuestions(UserContext uc, Question question);
 
-    GetQuestionResponse getQuestion(GetQuestionContext context);
+    GetQuestionResponse getQuestion(UserContext uc, GetQuestionContext context);
 
     Question getQuestionByLegacyId(String legacyId);
 

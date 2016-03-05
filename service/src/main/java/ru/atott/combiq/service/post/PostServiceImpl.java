@@ -7,13 +7,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.PostEntity;
 import ru.atott.combiq.dao.repository.PostRepository;
 import ru.atott.combiq.service.bean.Post;
 import ru.atott.combiq.service.mapper.PostMapper;
-import ru.atott.combiq.service.site.Context;
 import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.service.site.UserContext;
 
 import java.util.Date;
 
@@ -41,15 +40,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public String save(Context context, String postId, String title, String content, boolean published) {
-        Validate.isTrue(!context.getUser().isAnonimous());
+    public String save(UserContext uc, String postId, String title, String content, boolean published) {
+        Validate.isTrue(!uc.isAnonimous());
 
         PostEntity postEntity = null;
 
         if (postId == null) {
             postEntity = new PostEntity();
-            postEntity.setAuthorUserId(context.getUser().getUserId());
-            postEntity.setAuthorUserName(context.getUser().getUserName());
+            postEntity.setAuthorUserId(uc.getUserId());
+            postEntity.setAuthorUserName(uc.getUserName());
             postEntity.setCreateDate(new Date());
         } else {
             postEntity = postRepository.findOne(postId);

@@ -1,6 +1,7 @@
 package ru.atott.combiq.service.site;
 
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -120,6 +121,10 @@ public class SitemapServiceImpl implements SitemapService {
 
     private void writeQuestion(XMLStreamWriter writer, QuestionEntity questionEntity, UrlResolver urlResolver) {
         try {
+            if (questionEntity.isDeleted()) {
+                return;
+            }
+
             QuestionMapper questionMapper = new QuestionMapper();
             Question question = questionMapper.map(questionEntity);
             String priority = "0.5";

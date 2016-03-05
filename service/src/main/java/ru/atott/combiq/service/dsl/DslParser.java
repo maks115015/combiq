@@ -1,5 +1,6 @@
 package ru.atott.combiq.service.dsl;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jparsec.Parser;
 import org.codehaus.jparsec.Parsers;
@@ -88,6 +89,15 @@ public class DslParser {
                                 } catch (Exception e) {
                                     // Nothing to do.
                                 }
+                                break;
+                            case "deleted":
+                                query.setDeleted(BooleanUtils.toBoolean(pair.getValue()));
+                                break;
+                            case "user":
+                                if (StringUtils.isNotBlank(pair.getValue())) {
+                                    query.setUser(pair.getValue());
+                                }
+                                break;
                         }
                     });
 

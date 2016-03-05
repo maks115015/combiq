@@ -161,7 +161,7 @@
             <td>Peers can understand what is being said. Good spelling and grammar.</td>
             <td>Is able to effectively communicate with peers</td>
             <td>Able to understand and communicate thoughts/design/ideas/specs in a unambiguous manner and adjusts
-                communication as per the context
+                communication as per the userContext
             </td>
             <td>This is an often under rated but very critical criteria for judging a programmer. With the increase in
                 outsourcing of programming tasks to places where English is not the native tongue this issue has become more

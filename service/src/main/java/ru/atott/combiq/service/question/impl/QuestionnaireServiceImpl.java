@@ -13,6 +13,7 @@ import ru.atott.combiq.service.mapper.QuestionnaireHeadMapper;
 import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.service.question.QuestionnaireService;
 import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.service.site.UserContext;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,7 +45,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     }
 
     @Override
-    public Questionnaire getQuestionnaire(String id) {
+    public Questionnaire getQuestionnaire(UserContext uc, String id) {
         QuestionnaireEntity entity = questionnaireRepository.findOne(id);
 
         if (entity == null) {
@@ -52,6 +53,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         }
 
         SearchContext searchContext = new SearchContext();
+        searchContext.setUserContext(uc);
         searchContext.setQuestionIds(entity.getQuestions());
         searchContext.setSize(400);
         SearchResponse questionsSearchResponse = searchQuestionService.searchQuestions(searchContext);
@@ -65,8 +67,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     }
 
     @Override
-    public Questionnaire exportQuestionnareToPdf(String id, OutputStream outputStream) {
-        Questionnaire questionnaire = getQuestionnaire(id);
+    public Questionnaire exportQuestionnareToPdf(UserContext uc, String id, OutputStream outputStream) {
+        Questionnaire questionnaire = getQuestionnaire(uc, id);
         exportQuestionnareToPdf(questionnaire, outputStream);
         return questionnaire;
     }

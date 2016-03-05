@@ -3,7 +3,11 @@ package ru.atott.combiq.web.security;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import ru.atott.combiq.service.bean.UserQualifier;
+import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.web.filter.RequestHolderFilter;
+
+import java.util.HashSet;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -23,6 +27,23 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
+    }
+
+    @Override
+    public UserContext getUserContext() {
+        CombiqUser user = getUser();
+
+        UserContext uc = new UserContext();
+        uc.setAnonimous(user == null);
+
+        if (user != null) {
+            uc.setUserName(user.getName());
+            uc.setUserQualifier(new UserQualifier(user.getType(), user.getLogin()));
+            uc.setUserId(user.getId());
+            uc.setRoles(new HashSet<>(user.getRoles()));
+        }
+
+        return uc;
     }
 
     @Override

@@ -1,8 +1,7 @@
 package ru.atott.combiq.service.question;
 
-import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.service.bean.Question;
-import ru.atott.combiq.service.site.Context;
+import ru.atott.combiq.service.site.UserContext;
 
 import java.util.List;
 
@@ -10,17 +9,17 @@ public interface QuestionService {
 
     void saveUserComment(String userId, String questionId, String comment);
 
-    void saveComment(Context context, String questionId, String comment);
+    void saveComment(UserContext uc, String questionId, String comment);
 
-    void updateComment(Context context, String questionId, String commentId, String comment);
+    void updateComment(UserContext uc, String questionId, String commentId, String comment);
 
     void saveQuestionBody(String questionId, String body);
 
-    void saveQuestion(Context context,Question question);
+    void saveQuestion(UserContext uc, Question question);
 
-    void deleteQuestion(Context context,String questionId);
+    void deleteQuestion(UserContext uc, String questionId);
 
-    void restoreQuestion(Context context,String questionId);
+    void restoreQuestion(UserContext uc, String questionId);
 
     Question getQuestion(String id);
 

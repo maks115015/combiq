@@ -3,20 +3,13 @@ package ru.atott.combiq.service.question.impl;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.elasticsearch.action.count.CountRequestBuilder;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.*;
-import org.elasticsearch.search.aggregations.AggregationBuilder;
-import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.bucket.global.GlobalBuilder;
 import org.elasticsearch.search.aggregations.bucket.global.InternalGlobal;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
-import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,11 +29,11 @@ import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionAttrs;
 import ru.atott.combiq.service.bean.Tag;
 import ru.atott.combiq.service.dsl.DslParser;
-import ru.atott.combiq.service.dsl.DslQuery;
 import ru.atott.combiq.service.mapper.QuestionAttrsMapper;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.question.SearchQuestionService;
+import ru.atott.combiq.service.site.UserContext;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -110,11 +103,11 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
         Page<QuestionEntity> page = defaultResultMapper.mapResults(searchResponse, QuestionEntity.class, pageable);
 
         QuestionMapper questionMapper = new QuestionMapper();
-        if (context.getUserName() != null) {
+        if (context.getUserId() != null) {
             Set<String> questionIds = page.getContent().stream().map(QuestionEntity::getId).collect(Collectors.toSet());
-            List<QuestionAttrs> questionAttrses = getQuestionAttrses(questionIds, context.getUserName());
+            List<QuestionAttrs> questionAttrses = getQuestionAttrses(questionIds, context.getUserId());
             Map<String, QuestionAttrs> attrsMap = questionAttrses.stream().collect(Collectors.toMap(QuestionAttrs::getQuestionId, attrs -> attrs));
-            questionMapper = new QuestionMapper(context.getUserName(), attrsMap);
+            questionMapper = new QuestionMapper(context.getUserId(), attrsMap);
         }
 
         SearchResponse response = new SearchResponse();
@@ -124,12 +117,13 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
     }
 
     @Override
-    public Optional<SearchResponse> searchAnotherQuestions(Question question) {
+    public Optional<SearchResponse> searchAnotherQuestions(UserContext uc, Question question) {
         if (CollectionUtils.isEmpty(question.getTags())) {
             return Optional.empty();
         }
 
         SearchContext searchContext = new SearchContext();
+        searchContext.setUserContext(uc);
         searchContext.setDslQuery(DslParser.parse("[" + question.getTags().get(0) + "]"));
         searchContext.setSize(5);
 
@@ -137,11 +131,12 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
     }
 
     @Override
-    public GetQuestionResponse getQuestion(GetQuestionContext context) {
+    public GetQuestionResponse getQuestion(UserContext uc, GetQuestionContext context) {
         GetQuestionResponse response = new GetQuestionResponse();
 
         if (context.getDsl() != null && context.getProposedIndexInDslResponse() != null) {
             SearchContext searchContext = new SearchContext();
+            searchContext.setUserContext(uc);
             if (context.getProposedIndexInDslResponse() == 0) {
                 searchContext.setFrom(0);
                 searchContext.setSize(2);
@@ -182,8 +177,10 @@ public class SearchQuestionServiceImpl implements SearchQuestionService {
 
         if (response.getQuestion() == null) {
             SearchContext searchContext = new SearchContext();
+            searchContext.setUserContext(uc);
             searchContext.setFrom(0);
             searchContext.setSize(1);
+            searchContext.setUserId(context.getUserId());
             searchContext.setQuestionId(context.getId());
             SearchResponse searchResponse = searchQuestions(searchContext);
             if (searchResponse.getQuestions().getContent().size() > 0) {

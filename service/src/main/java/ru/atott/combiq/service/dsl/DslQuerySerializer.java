@@ -27,6 +27,16 @@ public class DslQuerySerializer {
             builder.append("comments:").append(query.getMinCommentQuantity());
         }
 
+        if (query.getDeleted() != null) {
+            builder.append(" ");
+            builder.append("deleted:").append(query.getDeleted().booleanValue());
+        }
+
+        if (StringUtils.isNotBlank(query.getUser())) {
+            builder.append(" ");
+            builder.append("user:").append(query.getUser());
+        }
+
         return builder.toString().trim();
     }
 }

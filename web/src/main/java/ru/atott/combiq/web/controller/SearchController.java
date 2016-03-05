@@ -14,7 +14,7 @@ import ru.atott.combiq.service.question.SearchQuestionService;
 import ru.atott.combiq.web.bean.CountQuestionSearchBean;
 import ru.atott.combiq.web.bean.PagingBean;
 import ru.atott.combiq.web.bean.PagingBeanBuilder;
-import ru.atott.combiq.web.utils.SearchQuestionContextBuilder;
+import ru.atott.combiq.web.utils.SearchQuestionContextFactory;
 import ru.atott.combiq.web.view.SearchViewBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,14 +30,14 @@ public class SearchController extends BaseController {
     private SearchQuestionService searchQuestionService;
 
     @Autowired
-    private SearchQuestionContextBuilder searchQuestionContextBuilder;
+    private SearchQuestionContextFactory searchQuestionContextFactory;
 
     @RequestMapping(value = "/questions/search", method = RequestMethod.GET)
     public ModelAndView search(HttpServletRequest request,
                                @RequestParam(defaultValue = "1") int page,
                                @RequestParam(value = "q", defaultValue = "") String dsl) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextBuilder.listByDsl(page, dsl);
+        SearchContext context = searchQuestionContextFactory.listByDsl(page, dsl);
         return getView(request, context, dsl);
     }
 
@@ -45,7 +45,7 @@ public class SearchController extends BaseController {
     @RequestMapping(value = "/questions/search/count", method = RequestMethod.GET)
     public Object countSearch(HttpServletRequest request,
                               @RequestParam(value = "q", defaultValue = "") String dsl) {
-        SearchContext context = searchQuestionContextBuilder.listByDsl(0, dsl);
+        SearchContext context = searchQuestionContextFactory.listByDsl(0, dsl);
         long countQuestions = searchQuestionService.countQuestions(context);
         return new CountQuestionSearchBean(countQuestions);
     }
@@ -54,7 +54,7 @@ public class SearchController extends BaseController {
     public ModelAndView questions(HttpServletRequest request,
                                   @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextBuilder.list(page);
+        SearchContext context = searchQuestionContextFactory.list(page);
         String subTitle = "Вопросы для подготовки к собеседованию Java";
         return getView(request, context, null, subTitle, true);
     }
@@ -65,7 +65,7 @@ public class SearchController extends BaseController {
                                         @PathVariable("tags") String tags) {
         page = getZeroBasedPage(page);
         ArrayList<String> tagsList = Lists.newArrayList(StringUtils.split(tags, ','));
-        SearchContext context = searchQuestionContextBuilder.listByTags(page, tagsList);
+        SearchContext context = searchQuestionContextFactory.listByTags(page, tagsList);
         return getView(request, context, null);
     }
 
@@ -74,33 +74,26 @@ public class SearchController extends BaseController {
                               @RequestParam(defaultValue = "1") int page,
                               @PathVariable("level") String level) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextBuilder.listByLevel(page, level);
+        SearchContext context = searchQuestionContextFactory.listByLevel(page, level);
         return getView(request, context, null);
     }
 
     @RequestMapping(value = "/questions/deleted", method = RequestMethod.GET)
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public ModelAndView deleted(HttpServletRequest request,
-                               @RequestParam(defaultValue = "1") int page,
-                               @RequestParam(value = "q", defaultValue = "") String dsl) {
+                                @RequestParam(defaultValue = "1") int page) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextBuilder.listByDsl(page, dsl);
-        context.setVisibleDeleted(true);
-        return getView(request, context, dsl);
+        SearchContext context = searchQuestionContextFactory.listByDeleted(page, true);
+        return getView(request, context, null);
     }
 
-    @RequestMapping(value = "/{userName}/questions", method = RequestMethod.GET)
+    @RequestMapping(value = "/questions/user/{userId}", method = RequestMethod.GET)
     public ModelAndView userQuestion(HttpServletRequest request,
                                @RequestParam(defaultValue = "1") int page,
-                               @RequestParam(value = "q", defaultValue = "") String dsl,
-                               @PathVariable("userName") String userName) {
+                               @PathVariable("userId") String userId) {
         page = getZeroBasedPage(page);
-        SearchContext context = searchQuestionContextBuilder.listByDsl(page, dsl);
-        context.getDslQuery().setUserName(userName);
-        if(!getContext().getUser().getUserName().equals(userName)){
-            context.setVisibleDeleted(true);
-        }
-        return getView(request, context, dsl);
+        SearchContext context = searchQuestionContextFactory.listByUser(page, userId);
+        return getView(request, context, null);
     }
 
     private ModelAndView getView(HttpServletRequest request, SearchContext context, String dsl,

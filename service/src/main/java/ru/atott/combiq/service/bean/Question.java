@@ -1,27 +1,41 @@
 package ru.atott.combiq.service.bean;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.entity.QuestionComment;
 
 import java.util.List;
 
 public class Question {
+
     private String id;
+
     private String title;
+
     private List<String> tags;
+
     private String level;
+
     private long reputation;
+
     private QuestionAttrs attrs;
+
     private String tip;
+
     private MarkdownContent body;
+
     private List<QuestionComment> comments;
+
     private boolean landing;
+
     private List<String> classNames;
+
     private String humanUrlTitle;
-    private Boolean deleted;
+
+    private boolean deleted;
+
     private String authorId;
+
     private String authorName;
 
     public List<String> getTags() {
@@ -128,17 +142,29 @@ public class Question {
         this.humanUrlTitle = humanUrlTitle;
     }
 
-    public Boolean getDeleted() {return deleted;}
+    public boolean isDeleted() {
+        return deleted;
+    }
 
-    public void setDeleted(Boolean deleted) {this.deleted = deleted;}
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
-    public String getAuthorId() {return authorId;}
+    public String getAuthorId() {
+        return authorId;
+    }
 
-    public void setAuthorId(String authorId) {this.authorId = authorId;}
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
 
-    public String getAuthorName() {return authorName;}
+    public String getAuthorName() {
+        return authorName;
+    }
 
-    public void setAuthorName(String authorName) {this.authorName = authorName;}
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
 
     @Override
     public String toString() {

@@ -2,18 +2,24 @@ package ru.atott.combiq.service.question.impl;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import ru.atott.combiq.service.dsl.DslQuery;
+import ru.atott.combiq.service.site.UserContext;
 
 import java.util.Collections;
 import java.util.List;
 
 public class SearchContext {
+
     private int from = 0;
+
     private int size = 20;
+
     private DslQuery dslQuery;
-    private String userName;
+
     private String userId;
+
     private List<String> questionIds;
-    private boolean VisibleDeleted;
+
+    private UserContext userContext;
 
     public void setQuestionId(String questionId) {
         this.questionIds = Collections.singletonList(questionId);
@@ -51,28 +57,31 @@ public class SearchContext {
         this.dslQuery = dslQuery;
     }
 
-    public String getUserName() {return userName;}
+    public String getUserId() {
+        return userId;
+    }
 
-    public void setUserName(String userName) {this.userName = userName;}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-    public boolean isVisibleDeleted() {return VisibleDeleted;}
+    public UserContext getUserContext() {
+        return userContext;
+    }
 
-    public void setVisibleDeleted(boolean visibleDeleted) {VisibleDeleted = visibleDeleted;}
-
-    public String getUserId() {return userId;}
-
-    public void setUserId(String userId) {this.userId = userId;}
+    public void setUserContext(UserContext userContext) {
+        this.userContext = userContext;
+    }
 
     @Override
     public String toString() {
-        return "SearchContext{" +
-                "from=" + from +
-                ", size=" + size +
-                ", dslQuery=" + dslQuery +
-                ", userName='" + userName + '\'' +
-                ", userId='" + userId + '\'' +
-                ", questionIds=" + questionIds +
-                ", VisibleDeleted=" + VisibleDeleted +
-                '}';
+        return new ToStringBuilder(this)
+                .append("from", from)
+                .append("size", size)
+                .append("dslQuery", dslQuery)
+                .append("userId", userId)
+                .append("questionIds", questionIds)
+                .append("userContext", userContext)
+                .toString();
     }
 }

@@ -26,13 +26,13 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
 
     @Override
-    public void createEvent(Context context, EventType type, String text, Link... relevantLinks) {
+    public void createEvent(UserContext uc, EventType type, String text, Link... relevantLinks) {
         EventEntity entity = new EventEntity();
         entity.setCreateDate(new Date());
         entity.setType(type);
-        if (context != null && !context.getUser().isAnonimous()) {
-            entity.setCreatorUserId(context.getUser().getUserId());
-            entity.setCreatorUserName(context.getUser().getUserName());
+        if (uc != null && !uc.isAnonimous()) {
+            entity.setCreatorUserId(uc.getUserId());
+            entity.setCreatorUserName(uc.getUserName());
         }
         entity.setMessage(text);
         if (relevantLinks != null) {

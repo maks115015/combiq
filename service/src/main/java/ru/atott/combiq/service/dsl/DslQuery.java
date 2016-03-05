@@ -6,11 +6,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class DslQuery {
+
     private List<DslTag> tags = Collections.emptyList();
+
     private List<DslTerm> terms = Collections.emptyList();
+
     private String level;
+
     private Long minCommentQuantity;
-    private String userName;
+
+    private String user;
+
+    private Boolean deleted;
 
     public List<DslTag> getTags() {
         return tags;
@@ -49,18 +56,31 @@ public class DslQuery {
         this.minCommentQuantity = minCommentQuantity;
     }
 
-    public String getUserName() {return userName;}
+    public String getUser() {
+        return user;
+    }
 
-    public void setUserName(String userName) {this.userName = userName;}
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
 
     @Override
     public String toString() {
-        return "DslQuery{" +
-                "tags=" + tags +
-                ", terms=" + terms +
-                ", level='" + level + '\'' +
-                ", minCommentQuantity=" + minCommentQuantity +
-                ", userName='" + userName + '\'' +
-                '}';
+        return new ToStringBuilder(this)
+                .append("tags", tags)
+                .append("terms", terms)
+                .append("level", level)
+                .append("minCommentQuantity", minCommentQuantity)
+                .append("user", user)
+                .append("deleted", deleted)
+                .toString();
     }
 }
