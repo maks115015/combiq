@@ -61,6 +61,14 @@ public class FacetBuilder {
             });
         }
 
+        // Фасет по пользователю.
+        if (dslQuery != null && StringUtils.isNotBlank(dslQuery.getUser())) {
+            facets.add(new UserFacet(dslQuery.getUser()));
+        }
+
+        // Фасет по удаленным вопросам.
+        facets.add(new DeletedFacet(dslQuery != null && dslQuery.getDeleted() != null && dslQuery.getDeleted()));
+
         return facets;
     }
 }

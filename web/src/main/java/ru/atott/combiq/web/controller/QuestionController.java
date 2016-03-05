@@ -64,7 +64,7 @@ public class QuestionController extends BaseController {
             context.setDsl(DslParser.parse(dsl));
         }
 
-        GetQuestionResponse questionResponse = searchQuestionService.getQuestion(getUc(), context);
+        GetQuestionResponse questionResponse = searchService.getQuestion(getUc(), context);
 
         RedirectView redirectView = redirectToCanonicalUrlIfNeed(questionId, humanUrlTitle.orElse(null), questionResponse, request);
 
@@ -78,7 +78,7 @@ public class QuestionController extends BaseController {
             question=questionService.getQuestion(questionId);
         } else {
             if (questionResponse.getQuestion().isLanding()) {
-                anotherQuestions = searchQuestionService
+                anotherQuestions = searchService
                         .searchAnotherQuestions(getUc(), questionResponse.getQuestion())
                         .map(response -> response.getQuestions().getContent())
                         .orElse(null);
@@ -86,7 +86,7 @@ public class QuestionController extends BaseController {
         }
         List<Question> questionsWithLatestComments = Collections.emptyList();
         if (CollectionUtils.isEmpty(question.getComments())) {
-            questionsWithLatestComments = searchQuestionService.get3QuestionsWithLatestComments();
+            questionsWithLatestComments = searchService.get3QuestionsWithLatestComments();
         }
         QuestionViewBuilder viewBuilder = new QuestionViewBuilder();
         viewBuilder.setQuestion(question);

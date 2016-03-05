@@ -2,6 +2,7 @@ package ru.atott.combiq.service.site;
 
 import ru.atott.combiq.service.bean.UserQualifier;
 
+import java.util.Arrays;
 import java.util.Set;
 
 public class UserContext {
@@ -54,5 +55,9 @@ public class UserContext {
 
     public void setAnonimous(boolean anonimous) {
         this.anonimous = anonimous;
+    }
+
+    public boolean hasAnyRole(String... roles) {
+        return Arrays.asList(roles).stream().anyMatch(role -> this.roles.contains(role));
     }
 }

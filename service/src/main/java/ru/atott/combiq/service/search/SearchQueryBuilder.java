@@ -83,6 +83,7 @@ public class SearchQueryBuilder {
 
         FacetContext facetContext = new FacetContext();
         facetContext.setAllFacets(facets);
+        facetContext.setUserContext(searchContext.getUserContext());
 
         List<FilterBuilder> filters = new ArrayList<>();
         List<QueryBuilder> queries = new ArrayList<>();

@@ -32,7 +32,9 @@ import ru.atott.combiq.service.dsl.DslParser;
 import ru.atott.combiq.service.mapper.QuestionAttrsMapper;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.question.QuestionService;
-import ru.atott.combiq.service.question.SearchQuestionService;
+import ru.atott.combiq.service.question.impl.GetQuestionContext;
+import ru.atott.combiq.service.question.impl.GetQuestionResponse;
+import ru.atott.combiq.service.question.impl.QuestionPositionInDsl;
 import ru.atott.combiq.service.site.UserContext;
 
 import java.util.*;

@@ -46,7 +46,7 @@ public class SearchController extends BaseController {
     public Object countSearch(HttpServletRequest request,
                               @RequestParam(value = "q", defaultValue = "") String dsl) {
         SearchContext context = searchQuestionContextFactory.listByDsl(0, dsl);
-        long countQuestions = searchQuestionService.countQuestions(context);
+        long countQuestions = searchService.countQuestions(context);
         return new CountQuestionSearchBean(countQuestions);
     }
 
