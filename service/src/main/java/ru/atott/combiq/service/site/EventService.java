@@ -42,7 +42,7 @@ public interface EventService {
     default void editQuestion(UserContext uc, QuestionEntity questionEntity){
         String username = " пользователем " + uc.getUserName();
         createEvent(uc, EventType.EDIT_QUESTION,
-                "Вопрос <b>" + questionEntity.getTitle() + "</b>. Изменен" + username + ".",
+                "Вопрос <b>" + questionEntity.getTitle() + "</b>. Изменен " + username + ".",
                 new Link("Вопрос", "/questions/" + questionEntity.getId()));
     }
 
@@ -55,7 +55,7 @@ public interface EventService {
 
     default void restoreQuestion(UserContext uc, QuestionEntity questionEntity){
         createEvent(uc, EventType.RESTORE_QUESTION,
-                "Вопрос <b>" + questionEntity.getTitle() + "</b>. Востанновлен пользователем" +
+                "Вопрос <b>" + questionEntity.getTitle() + "</b>. Востанновлен пользователем " +
                         uc.getUserName() + ".",
                 new Link("Вопрос", "/questions/" + questionEntity.getId()));
     }
