@@ -7,18 +7,27 @@ import java.util.Optional;
 
 public class UserFacet implements Facet {
 
-    private String userId;
+    private String user;
 
-    public UserFacet(String userId) {
-        this.userId = userId;
+    public UserFacet(String user) {
+        this.user = user;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUser() {
+        return user;
     }
 
     @Override
     public Optional<FilterBuilder> getFilter(FacetContext context) {
-        return Optional.of(FilterBuilders.termFilter("authorId", userId));
+
+        if ("me".equals(user)) {
+            if (context.getUserContext().isAnonimous()) {
+                return Optional.of(FacetUtils.getNothingToFindFilter());
+            } else {
+                return Optional.of(FilterBuilders.termFilter("authorId", context.getUserContext().getUserId()));
+            }
+        }
+
+        return Optional.of(FilterBuilders.termFilter("authorId", user));
     }
 }

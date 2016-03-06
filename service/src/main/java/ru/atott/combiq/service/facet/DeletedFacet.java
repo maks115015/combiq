@@ -35,7 +35,7 @@ public class DeletedFacet implements Facet {
                                     FilterBuilders.termFilter("authorId", context.getUserContext().getUserId())));
                 }
             } else {
-                return Optional.of(FilterBuilders.termFilter("nothingToFind", true));
+                return Optional.of(FacetUtils.getNothingToFindFilter());
             }
         } else {
             return Optional.of(
