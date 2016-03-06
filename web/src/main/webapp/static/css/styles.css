@@ -984,6 +984,15 @@ ul.co-component-question-tags > li {
     border: solid 1px #E4E4E4;
 }
 
+.co-project-resource-meta {
+    font-size: 11px;
+    color: gray;
+    line-height: 14px;
+    font-style: italic;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .select2-results__option {
     padding: 2px 6px;
 }
