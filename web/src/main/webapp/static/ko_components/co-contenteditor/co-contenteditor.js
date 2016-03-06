@@ -43,5 +43,12 @@ define(['ajax'], function(ajax) {
         }
     };
 
+    ViewModel.prototype.keySend = function(data, event) {
+         if (event.ctrlKey && (event.keyCode == 13 || event.keyCode == 10)) {
+            this.applyClick();
+          } else{
+          return true;
+          }
+    }
     return ViewModel;
 });
