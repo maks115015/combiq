@@ -2,8 +2,6 @@ package ru.atott.combiq.web.controller;
 
 import org.apache.commons.io.IOUtils;
 import org.parboiled.common.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +20,11 @@ import java.nio.charset.Charset;
 @Controller
 public class WelcomeController extends BaseController {
 
-    private static Logger logger = LoggerFactory.getLogger(WelcomeController.class);
-
     @Value("${web.sitemap.location}")
     private String sitemapLocation;
 
     @RequestMapping(value = {"/", "index.do"}, method = RequestMethod.GET)
     public ModelAndView index() {
-        logger.info("Hello Combiq.ru!");
-
         return new ModelAndView("index");
     }
 
