@@ -1,4 +1,4 @@
-package ru.atott.combiq.web.controller;
+package ru.atott.combiq.web.controller.question;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +20,7 @@ import ru.atott.combiq.service.search.SearchService;
 import ru.atott.combiq.service.site.MarkdownService;
 import ru.atott.combiq.web.bean.QuestionBean;
 import ru.atott.combiq.web.bean.SuccessBean;
+import ru.atott.combiq.web.controller.BaseController;
 import ru.atott.combiq.web.request.ContentRequest;
 import ru.atott.combiq.web.request.EditCommentRequest;
 import ru.atott.combiq.web.request.QuestionRequest;
@@ -93,9 +94,9 @@ public class QuestionController extends BaseController {
         }
 
         List<Question> anotherQuestions = null;
-        Question question=questionResponse.getQuestion();
-        if(question==null){
-            question=questionService.getQuestion(questionId);
+        Question question = questionResponse.getQuestion();
+        if (question == null) {
+            question = questionService.getQuestion(questionId);
         } else {
             if (questionResponse.getQuestion().isLanding()) {
                 anotherQuestions = searchService
@@ -104,6 +105,11 @@ public class QuestionController extends BaseController {
                         .orElse(null);
             }
         }
+
+        if (question == null) {
+            throw new QuestionNotFoundException();
+        }
+
         List<Question> questionsWithLatestComments = Collections.emptyList();
         if (CollectionUtils.isEmpty(question.getComments())) {
             questionsWithLatestComments = searchService.get3QuestionsWithLatestComments();

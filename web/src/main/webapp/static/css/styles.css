@@ -375,13 +375,9 @@ ul.co-question-staff > li {
     line-height: 14px;
 }
 
-.co-flex {
-    display: flex;
-}
-
-html /deep/ .co-ok-button {
-    background-color: #00A0D8;
-    color: white;
+.co-large {
+    font-size: 18px;
+    line-height: 24px;
 }
 
 .co-search {

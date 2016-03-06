@@ -36,6 +36,7 @@ import ru.atott.combiq.web.security.CombiqUserDetailsService;
 import ru.atott.combiq.web.security.ElasticSearchTokenRepositoryImpl;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletRegistration;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -72,6 +73,11 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
                 requestHolderFilter,
                 new DelegatingFilterProxy("springSecurityFilterChain")
         };
+    }
+
+    @Override
+    public void customizeRegistration(ServletRegistration.Dynamic registration) {
+        registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
     }
 
     @Configuration

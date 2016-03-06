@@ -233,6 +233,6 @@ public class QuestionServiceImpl implements QuestionService {
     public  Question getQuestion(String id){
         QuestionEntity questionEntity = questionRepository.findOne(id);
         QuestionMapper questionMapper = new QuestionMapper();
-        return questionMapper.map(questionEntity);
+        return questionMapper.safeMap(questionEntity);
     }
 }
