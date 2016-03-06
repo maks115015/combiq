@@ -4,8 +4,8 @@
 
 <#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
-<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true showHeader=true gtmPageName='' ogDescription='' ogTitle=''
-            bodyClass=''>
+<#macro layoutHtml head='' dsl='' chapter='' subTitle='' showFooter=true showHeader=true gtmPageName=''
+        ogDescription='' ogTitle='' bodyClass=''>
 <!DOCTYPE html>
 <!--    Дорогой друг!
         Мы спалили тебя ;)
@@ -30,10 +30,11 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/css/styles.css?v=${resourceVersion}">
         <link rel="stylesheet" href="/static/font/roboto/roboto.css">
         <link rel="stylesheet" href="/static/font/comfortaa/comfortaa.css">
         <link rel="stylesheet" href="/static/js/lib/tooltipster/tooltipster.css">
+        <link rel="stylesheet" href="/static/js/lib/select2-4.0.2-rc.1/css/select2.min.css">
+        <link rel="stylesheet" href="/static/css/styles.css?v=${resourceVersion}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
@@ -43,6 +44,7 @@
         <script src="/static/js/lib/jquery-resizable.min.js"></script>
         <script src="/static/js/lib/tooltipster/jquery.tooltipster.min.js"></script>
         <script src="/static/js/site.js?v=${resourceVersion}"></script>
+        <#--<script src="/static/js/lib/select2-4.0.2-rc.1/js/select2.min.js"></script>-->
         <script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
 
         <!--[if lt IE 9]>
@@ -55,8 +57,12 @@
                     text: 'js/lib/text',
                     css: 'js/lib/css',
                     ajax: 'js/lib/ajax'
-                }
+                },
+                urlArgs: '${resourceVersion}'
             });
+
+            define('jquery', [], function() { return $; });
+
             window.co = {
                 userId: ${if(userId??, '"' + (userId!'') + '"', 'null')},
                 userEmail: '${userEmail!''}',
@@ -71,10 +77,18 @@
             };
         </script>
         <script src="/static/ko_components/components.js?v=${resourceVersion}"></script>
-        <@security.authorize access="hasRole('sa')" var="allowEditConent" />
         ${head}
     </head>
     <body class="${bodyClass}">
+        <#if toolboxVisible>
+            <div class="co-toolbox">
+                <div class="container">
+                    Это тестовый стенд проекта <a href="http://combiq.ru/project">combiq.ru</a>,
+                    окружение <strong>${env}</strong>
+                </div>
+            </div>
+        </#if>
+
         <#if env == 'prod'>
             <@stats.metrika />
             <@stats.commonGtmInitialization gtmPageName />

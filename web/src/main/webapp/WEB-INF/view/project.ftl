@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<div style="background-color: #EDEDED;margin-bottom: -50px;padding-bottom: 40px;margin-top: 40px;">
+<div style="background-color: #EDEDED;padding-bottom: 20px;margin-top: 40px;">
     <div class="container">
 
         <div class="row" style="margin-top: 40px;">
@@ -68,6 +68,47 @@
                 <a class="co-inline" href="http://teamcity.combiq.ru/">http://teamcity.combiq.ru/</a>
                 <div class="co-small">
                     Здесь мы собираем и деплоим наш проект
+                </div>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <div class="co-project-resource">
+                    <img src="/static/images/site/kibana.png">
+                </div>
+                <a class="co-inline" href="http://kibana.combiq.ru/">http://kibana.combiq.ru/</a>
+                <div class="co-small">
+                    Здесь мы собираем логи с наших стендов
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-bottom: -50px; background-color: #E4E4E4;">
+    <div class="container">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="col-md-2 text-center">
+                <div class="co-project-resource-meta">
+                    Заходи и делай что хочешь
+                </div>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <div class="co-project-resource-meta">
+                    Регистрируйся и пользуйся
+                </div>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <div class="co-project-resource-meta">
+                    Регистрируйся и наблюдай,
+                    или <a href="mailto:atott@yandex.ru">запроси доступ</a> и собирай
+                </div>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <div class="co-project-resource-meta">
+                    <a href="mailto:atott@yandex.ru">Запроси доступ</a> и анализируй
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 package ru.atott.combiq.service.facet;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import ru.atott.combiq.service.dsl.DslQuery;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class FacetBuilder {
 
         // Фасет по уровню.
         if (dslQuery != null && StringUtils.isNotBlank(dslQuery.getLevel())) {
-            facets.add(new LevelFacet(dslQuery.getLevel()));
+            facets.add(new LevelFacet(NumberUtils.toLong(StringUtils.substring(dslQuery.getLevel(), 1))));
         }
 
         // Фасет по тэгам.

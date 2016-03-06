@@ -205,30 +205,40 @@
 
 
     if (!ko.openDialog) {
-        ko.openDialog = function(dialogName, dialogParams) {
-            var deferred = new $.Deferred();
-
-            var templateFile = 'text!ko_dialogs/' + dialogName + '/' + dialogName + '.html';
-            var viewModelFile = require.toUrl('ko_dialogs/' + dialogName + '/' + dialogName + '.js');
-
-            var deps = [templateFile, viewModelFile];
-
-            require(deps, function(template, ViewModel) {
-                dialogParams = dialogParams || {};
-                var viewModel = new ViewModel(dialogParams);
-                viewModel.content = $('<div />').append(template).get()[0];
-                ko.applyBindings(viewModel, viewModel.content);
-                viewModel.content = $(viewModel.content).contents();
-                viewModel.name = (viewModel.name || '') + ' ' + dialogName;
-                var dialog = new Dialog(viewModel);
-                dialog.resultPromise.done(function(result) {
-                    deferred.resolve(result);
-                });
-            });
-
-            return deferred.promise();
+        var styles = {
+            'co-questionposter': 'css'
         };
-    }
+
+        require(['css'], function() {
+            ko.openDialog = function (dialogName, dialogParams) {
+                var deferred = new $.Deferred();
+
+                var templateFile = 'text!ko_dialogs/' + dialogName + '/' + dialogName + '.html';
+                var viewModelFile = require.toUrl('ko_dialogs/' + dialogName + '/' + dialogName + '.js');
+
+                var deps = [templateFile, viewModelFile];
+
+                if (styles[dialogName]) {
+                    deps.push('requirejs.css!ko_dialogs/' + dialogName + '/' + dialogName + '.css');
+                }
+
+                require(deps, function (template, ViewModel) {
+                    dialogParams = dialogParams || {};
+                    var viewModel = new ViewModel(dialogParams);
+                    viewModel.content = $('<div />').append(template).get()[0];
+                    ko.applyBindings(viewModel, viewModel.content);
+                    viewModel.content = $(viewModel.content).contents();
+                    viewModel.name = (viewModel.name || '') + ' ' + dialogName;
+                    var dialog = new Dialog(viewModel);
+                    dialog.resultPromise.done(function (result) {
+                        deferred.resolve(result);
+                    });
+                });
+
+                return deferred.promise();
+            };
+        });
+    };
 
     window.Dialog = Dialog;
 

@@ -37,6 +37,9 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
     @Value("${auth.stackexchange.clientId}")
     private String stackexchangeClientId;
 
+    @Value("${web.toolbox.visible}")
+    private boolean toolboxVisible;
+
     @Autowired
     private InstantMessageHolder instantMessageHolder;
 
@@ -68,6 +71,7 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("stackexchangeClientState", state);
             modelAndView.addObject("stackexchangeCallbackUrl", urlResolver.externalize("/login/callback/stackexchange.do"));
             modelAndView.addObject("instantMessage", instantMessageHolder.get());
+            modelAndView.addObject("toolboxVisible", toolboxVisible);
         }
     }
 }

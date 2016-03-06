@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <property resource="env/${env}/web.properties" />
+
+    <appender name="sout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <if condition='property("web.log.files.enable").equals("true")'>
+        <then>
+            <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>${web.log.files.directory}/combiq.log</file>
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                    <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</Pattern>
+                </encoder>
+
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>${web.log.files.directory}/archive/combiq.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                        <maxFileSize>10MB</maxFileSize>
+                    </timeBasedFileNamingAndTriggeringPolicy>
+                </rollingPolicy>
+            </appender>
+        </then>
+    </if>
+
+    <if condition='property("web.log.logstash.enable").equals("true")'>
+        <then>
+            <appender name="stash" class="net.logstash.logback.appender.LogstashSocketAppender">
+                <host>${web.log.logstash.host}</host>
+                <port>${web.log.logstash.port}</port>
+                <customFields>{"env":"${env}"}</customFields>
+            </appender>
+        </then>
+    </if>
+
+    <root level="info">
+        <appender-ref ref="sout"/>
+
+        <if condition='property("web.log.files.enable").equals("true")'>
+            <then>
+                <appender-ref ref="file"/>
+            </then>
+        </if>
+
+        <if condition='property("web.log.logstash.enable").equals("true")'>
+            <then>
+                <appender-ref ref="stash" />
+            </then>
+        </if>
+    </root>
+
+</configuration>

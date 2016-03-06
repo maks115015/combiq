@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public class LevelFacet implements Facet {
 
-    private String level;
+    private long level;
 
-    public LevelFacet(String level) {
+    public LevelFacet(long level) {
         this.level = level;
     }
 
-    public String getLevel() {
+    public long getLevel() {
         return level;
     }
 

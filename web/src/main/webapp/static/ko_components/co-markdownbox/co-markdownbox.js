@@ -19,7 +19,7 @@ define(['ajax', 'knockout', 'js/lib/ace/ace'], function(ajax, ko) {
     ViewModel.prototype.init = function() {
         var self = this;
         this.editorBoundElement().resizable({
-            handleSelector: $(this.editorBoundElement(), '.co-markdown__resizehandler'),
+            handleSelector: $('.co-markdown__resizehandler', this.editorBoundElement()),
             resizeWidth: false,
             onDragEnd: function() {
                 self.editor.resize();
