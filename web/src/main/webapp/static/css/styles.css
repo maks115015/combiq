@@ -351,6 +351,13 @@ ul.co-question-position {
 ul.co-question-position > li {
     display: inline-block;
     margin-left: 20px;
+    vertical-align: top;
+}
+
+.co-question-position-keyboardtip {
+    color: #d6d6d6;
+    padding-top: 5px;
+    cursor: default;
 }
 
 .co-arrow {

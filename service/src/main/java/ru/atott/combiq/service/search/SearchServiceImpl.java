@@ -157,8 +157,9 @@ public class SearchServiceImpl implements SearchService {
                     QuestionPositionInDsl positionInDsl = new QuestionPositionInDsl();
                     positionInDsl.setIndex(context.getProposedIndexInDslResponse());
                     positionInDsl.setTotal(searchResponse.getQuestions().getTotalElements());
+                    positionInDsl.setDslQuery(context.getDsl());
                     if (questions.size() > 1) {
-                        positionInDsl.setNextQuestionId(questions.get(1).getId());
+                        positionInDsl.setNextQuestion(questions.get(1));
                     }
                     response.setPositionInDsl(positionInDsl);
                 }
@@ -168,9 +169,10 @@ public class SearchServiceImpl implements SearchService {
                     QuestionPositionInDsl positionInDsl = new QuestionPositionInDsl();
                     positionInDsl.setIndex(context.getProposedIndexInDslResponse());
                     positionInDsl.setTotal(searchResponse.getQuestions().getTotalElements());
-                    positionInDsl.setPreviosQuestionId(questions.get(0).getId());
+                    positionInDsl.setDslQuery(context.getDsl());
+                    positionInDsl.setPreviousQuestion(questions.get(0));
                     if (questions.size() > 2) {
-                        positionInDsl.setNextQuestionId(questions.get(2).getId());
+                        positionInDsl.setNextQuestion(questions.get(2));
                     }
                     response.setPositionInDsl(positionInDsl);
                 }

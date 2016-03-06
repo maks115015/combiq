@@ -1,7 +1,10 @@
 package ru.atott.combiq.service;
 
+import org.apache.commons.lang3.StringUtils;
 import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
+
+import java.net.URLEncoder;
 
 public interface UrlResolver {
 
@@ -18,4 +21,16 @@ public interface UrlResolver {
     String getQuestionnaireUrl(QuestionnaireHead questionnaire);
 
     String getQuestionnaireUrl(QuestionnaireHead questionnaire, String queryString);
+
+    static String encodeUrlComponent(String urlComponent) {
+        try {
+            if (StringUtils.isEmpty(urlComponent)) {
+                return urlComponent;
+            }
+
+            return URLEncoder.encode(urlComponent, "utf-8");
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
 }

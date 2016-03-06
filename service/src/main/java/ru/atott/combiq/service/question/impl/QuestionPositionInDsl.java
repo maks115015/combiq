@@ -1,10 +1,21 @@
 package ru.atott.combiq.service.question.impl;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import ru.atott.combiq.service.UrlResolver;
+import ru.atott.combiq.service.bean.Question;
+import ru.atott.combiq.service.dsl.DslQuery;
+
 public class QuestionPositionInDsl {
+
     private long index;
+
     private long total;
-    private String nextQuestionId;
-    private String previosQuestionId;
+
+    private Question nextQuestion;
+
+    private Question previousQuestion;
+
+    private DslQuery dslQuery;
 
     public long getIndex() {
         return index;
@@ -22,19 +33,56 @@ public class QuestionPositionInDsl {
         this.total = total;
     }
 
-    public String getNextQuestionId() {
-        return nextQuestionId;
+    public Question getNextQuestion() {
+        return nextQuestion;
     }
 
-    public void setNextQuestionId(String nextQuestionId) {
-        this.nextQuestionId = nextQuestionId;
+    public void setNextQuestion(Question nextQuestion) {
+        this.nextQuestion = nextQuestion;
     }
 
-    public String getPreviosQuestionId() {
-        return previosQuestionId;
+    public Question getPreviousQuestion() {
+        return previousQuestion;
     }
 
-    public void setPreviosQuestionId(String previosQuestionId) {
-        this.previosQuestionId = previosQuestionId;
+    public void setPreviousQuestion(Question previousQuestion) {
+        this.previousQuestion = previousQuestion;
+    }
+
+    public DslQuery getDslQuery() {
+        return dslQuery;
+    }
+
+    public void setDslQuery(DslQuery dslQuery) {
+        this.dslQuery = dslQuery;
+    }
+
+    public String resolveNextQuestionUrl(UrlResolver urlResolver) {
+        if (nextQuestion == null) {
+            return null;
+        }
+
+        return urlResolver.getQuestionUrl(nextQuestion,
+                "index=" + (index + 1) + "&dsl=" + UrlResolver.encodeUrlComponent(dslQuery.toDsl()));
+    }
+
+    public String resolvePreviouesQuestionUrl(UrlResolver urlResolver) {
+        if (previousQuestion == null) {
+            return null;
+        }
+
+        return urlResolver.getQuestionUrl(previousQuestion,
+                "index=" + (index - 1) + "&dsl=" + UrlResolver.encodeUrlComponent(dslQuery.toDsl()));
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("index", index)
+                .append("total", total)
+                .append("nextQuestion", nextQuestion)
+                .append("previousQuestion", previousQuestion)
+                .append("dslQuery", dslQuery)
+                .toString();
     }
 }

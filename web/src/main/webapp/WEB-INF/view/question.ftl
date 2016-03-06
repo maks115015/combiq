@@ -1,5 +1,6 @@
 <#-- @ftlvariable name="question" type="ru.atott.combiq.service.bean.Question" -->
 <#-- @ftlvariable name="comment" type="ru.atott.combiq.dao.entity.QuestionComment" -->
+<#-- @ftlvariable name="position" type="ru.atott.combiq.service.question.impl.QuestionPositionInDsl" -->
 
 <#import "_layout/templates.ftl" as templates />
 <#import "_layout/parts.ftl" as parts />
@@ -7,6 +8,23 @@
 
 <#assign head>
     <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
+
+    <#if position??>
+    <script>
+        $(document).keydown(function(event) {
+            var previousUrl = '${position.resolvePreviouesQuestionUrl(urlResolver)!?js_string}';
+            var nextUrl = '${position.resolveNextQuestionUrl(urlResolver)!?js_string}';
+
+            if (event.ctrlKey && event.keyCode == 39 && nextUrl) {
+                location.href = nextUrl;
+            }
+
+            if (event.ctrlKey && event.keyCode == 37 && previousUrl) {
+                location.href = previousUrl;
+            }
+        });
+    </script>
+    </#if>
 </#assign>
 
 <#assign sidebar>
@@ -200,21 +218,31 @@
     <#if position??>
         <div >
             <ul class="co-question-position">
-                <#if position.previosQuestionId??>
+                <#if position.previousQuestion??>
                     <li>
-                        <a href="/questions/${position.previosQuestionId}?index=${position.index - 1}&dsl=${dsl!''?url}">
-                            <span class="co-arrow">←</span> предыдущий
-                        </a>
+                        <div>
+                            <a href="${position.resolvePreviouesQuestionUrl(urlResolver)}">
+                                <span class="co-arrow">←</span> предыдущий
+                            </a>
+                        </div>
+                        <div class="co-small pull-right co-question-position-keyboardtip">
+                            ctrl + <span class="co-arrow">←</span>
+                        </div>
                     </li>
                 </#if>
                 <li>
-                    <strong>${position.index + 1}</strong> из <a href="/questions/search?q=${dsl!''?url}">${position.total}</a>
+                    <strong>${position.index + 1}</strong> из <a href="/questions/search?q=${dsl!?url}">${position.total}</a>
                 </li>
-                <#if position.nextQuestionId??>
+                <#if position.nextQuestion??>
                     <li>
-                        <a href="/questions/${position.nextQuestionId}?index=${position.index + 1}&dsl=${dsl!''?url}">
-                            следующий <span class="co-arrow">→</span>
-                        </a>
+                        <div>
+                            <a href="${position.resolveNextQuestionUrl(urlResolver)}">
+                                следующий <span class="co-arrow">→</span>
+                            </a>
+                        </div>
+                        <div class="co-small co-question-position-keyboardtip">
+                            ctrl + <span class="co-arrow">→</span>
+                        </div>
                     </li>
                 </#if>
             </ul>
