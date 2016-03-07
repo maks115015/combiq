@@ -12,6 +12,11 @@
     <#if position??>
     <script>
         $(document).keydown(function(event) {
+            if (document.activeElement &&
+                    ['input', 'textarea', 'select'].indexOf((document.activeElement.tagName || '').toLowerCase()) != -1) {
+                return;
+            }
+
             var previousUrl = '${position.resolvePreviouesQuestionUrl(urlResolver)!?js_string}';
             var nextUrl = '${position.resolveNextQuestionUrl(urlResolver)!?js_string}';
 
