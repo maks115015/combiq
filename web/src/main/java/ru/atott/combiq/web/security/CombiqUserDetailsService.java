@@ -29,6 +29,10 @@ public class CombiqUserDetailsService implements UserDetailsService {
                         break;
                     case stackexchange:
                         passwordHash = DigestUtils.sha1Hex("stackexchange");
+                        break;
+                    case facebook:
+                        passwordHash = DigestUtils.sha1Hex("facebook");
+                        break;
                 }
 
                 CombiqUser combiqUser = new CombiqUser(qualifier, passwordHash, user.getRoles());

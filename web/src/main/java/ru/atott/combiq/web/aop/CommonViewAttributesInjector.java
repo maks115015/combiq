@@ -37,6 +37,9 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
     @Value("${auth.stackexchange.clientId}")
     private String stackexchangeClientId;
 
+    @Value("${auth.facebook.clientId}")
+    private String facebookClientId;
+
     @Value("${web.toolbox.visible}")
     private boolean toolboxVisible;
 
@@ -74,6 +77,9 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             modelAndView.addObject("stackexchangeClientId", stackexchangeClientId);
             modelAndView.addObject("stackexchangeClientState", state);
             modelAndView.addObject("stackexchangeCallbackUrl", urlResolver.externalize("/login/callback/stackexchange.do"));
+            modelAndView.addObject("facebookClientId", facebookClientId);
+            modelAndView.addObject("facebookClientState", state);
+            modelAndView.addObject("facebookCallbackUrl", urlResolver.externalize("/login/callback/facebook.do"));
             modelAndView.addObject("instantMessage", instantMessageHolder.get());
             modelAndView.addObject("toolboxVisible", toolboxVisible);
         }

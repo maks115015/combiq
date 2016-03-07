@@ -26,6 +26,11 @@
                             <a class="btn btn-default" href="https://oauth.vk.com/authorize?client_id=${vkClientId}&display=page&response_type=code&state=${vkClientState}:&redirect_uri=${vkCallbackUrl?url}">
                                 через <b>vk.com</b>
                             </a>
+
+                            <#assign facebookCallbackUrl = urlResolver.externalize("/login/callback/facebook.do") />
+                            <a class="btn btn-default" href="https://www.facebook.com/dialog/oauth?client_id=${facebookClientId}&scope=public_profile&redirect_uri=${facebookCallbackUrl?url}&state=${facebookClientState}:">
+                                через <b>fb.com</b>
+                            </a>
                         </p>
                         <p class="co-login-delimiter">
                             - или -

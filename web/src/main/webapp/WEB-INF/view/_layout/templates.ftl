@@ -71,6 +71,9 @@
                 vkClientId: '${vkClientId?js_string}',
                 vkClientState: '${vkClientState?js_string}',
                 vkCallbackUrl: '${vkCallbackUrl?js_string}',
+                facebookClientId: '${facebookClientId?js_string}',
+                facebookClientState: '${facebookClientState?js_string}',
+                facebookCallbackUrl: '${facebookCallbackUrl?js_string}',
                 stackexchangeClientId: '${stackexchangeClientId?js_string}',
                 stackexchangeClientState: '${stackexchangeClientState?js_string}',
                 stackexchangeCallbackUrl: '${stackexchangeCallbackUrl?js_string}'

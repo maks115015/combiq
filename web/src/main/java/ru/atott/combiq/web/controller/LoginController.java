@@ -25,10 +25,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.User;
 import ru.atott.combiq.service.bean.UserType;
-import ru.atott.combiq.service.user.GithubRegistrationContext;
-import ru.atott.combiq.service.user.StackexchangeRegistrationContext;
-import ru.atott.combiq.service.user.UserService;
-import ru.atott.combiq.service.user.VkRegistrationContext;
+import ru.atott.combiq.service.user.*;
 import ru.atott.combiq.web.security.AuthService;
 import ru.atott.combiq.web.utils.RequestUrlResolver;
 import ru.atott.combiq.web.utils.ViewUtils;
@@ -62,6 +59,12 @@ public class LoginController extends BaseController {
 
     @Value("${auth.stackexchange.clientKey}")
     private String stackexchangeClientKey;
+
+    @Value("${auth.facebook.clientId}")
+    private String facebookClientId;
+
+    @Value("${auth.facebook.clientSecret}")
+    private String facebookClientSecret;
 
     @Autowired
     private UserService userService;
@@ -307,6 +310,84 @@ public class LoginController extends BaseController {
         }
 
         httpRequest.login(user.getQualifier().toString(), "stackexchange");
+        rememberMeServices.loginSuccess(httpRequest, httpResponse, authService.getAuthentication());
+
+        return new RedirectView(redirectUrl);
+    }
+
+    @RequestMapping(value = "/login/callback/facebook.do", method = RequestMethod.GET)
+    public RedirectView facebookCallback(@RequestParam(value = "code") String code,
+                                         @RequestParam(value = "state") String state,
+                                         HttpServletRequest httpRequest,
+                                         HttpServletResponse httpResponse) throws IOException, ServletException {
+        UrlResolver urlResolver = new RequestUrlResolver(httpRequest);
+
+        String sessionId = httpRequest.getSession(true).getId();
+        String stateHash = StringUtils.substringBefore(state, ":");
+        String actualStateHash = DigestUtils.sha256Hex(sessionId + authService.getLaunchDependentSalt());
+        String redirectUrl = StringUtils.defaultIfBlank(StringUtils.substringAfter(state, ":"), "/");
+
+        if (!Objects.equals(stateHash, actualStateHash)) {
+            return new RedirectView("/");
+        }
+
+        String exchangeUrl = UriComponentsBuilder
+                .fromHttpUrl("https://graph.facebook.com/v2.3/oauth/access_token")
+                .queryParam("client_id", facebookClientId)
+                .queryParam("client_secret", facebookClientSecret)
+                .queryParam("code", code)
+                .queryParam("redirect_uri", urlResolver.externalize("/login/callback/facebook.do"))
+                .build()
+                .toString();
+
+        HttpClient client = HttpClients.createDefault();
+
+        HttpPost httpPost = new HttpPost(exchangeUrl);
+        httpPost.setHeader("Accept", "application/json");
+        HttpResponse response = client.execute(httpPost);
+        String responseJson = IOUtils.toString(response.getEntity().getContent());
+        JsonObject responseJsonObject = ViewUtils.parseJson(responseJson);
+        String accessToken = responseJsonObject.get("access_token").getAsString();
+
+        String getUrl = UriComponentsBuilder
+                .fromHttpUrl("https://graph.facebook.com/v2.5/me")
+                .queryParam("access_token", accessToken)
+                .queryParam("fields", UrlResolver.encodeUrlComponent("name,link,picture{url}"))
+                .queryParam("format", "json")
+                .build()
+                .toUriString();
+        HttpGet httpGet = new HttpGet(getUrl);
+        httpGet.setHeader("Accept", "application/json");
+        response = client.execute(httpGet);
+        responseJson = IOUtils.toString(response.getEntity().getContent(), "utf-8");
+
+        JsonObject userInfo = ViewUtils.parseJson(responseJson);
+        String uid = userInfo.get("id").getAsString();
+        String name = userInfo.get("name").getAsString();
+        String photo = null;
+        if (userInfo.get("picture") != null && userInfo.get("picture").isJsonObject()) {
+            JsonObject picture = userInfo.get("picture").getAsJsonObject();
+            if (picture.get("data") != null && picture.get("data").isJsonObject()) {
+                JsonObject data = picture.get("data").getAsJsonObject();
+                photo = getDefaultString(data.get("url"));
+            }
+        }
+        String site = getDefaultString(userInfo.get("link"));
+
+        User user = userService.findByLoginAndType(uid, UserType.facebook);
+
+        FacebookRegistrationContext facebookRegistrationContext = new FacebookRegistrationContext();
+        facebookRegistrationContext.setId(uid);
+        facebookRegistrationContext.setName(name);
+        facebookRegistrationContext.setAvatarUrl(photo);
+
+        if (user == null) {
+            user = userService.registerUserViaFacebook(facebookRegistrationContext);
+        } else {
+            user = userService.updateFacebookUser(facebookRegistrationContext);
+        }
+
+        httpRequest.login(user.getQualifier().toString(), "facebook");
         rememberMeServices.loginSuccess(httpRequest, httpResponse, authService.getAuthentication());
 
         return new RedirectView(redirectUrl);

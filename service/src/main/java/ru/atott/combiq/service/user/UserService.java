@@ -24,11 +24,15 @@ public interface UserService {
 
     User registerUserViaVk(VkRegistrationContext context);
 
+    User registerUserViaFacebook(FacebookRegistrationContext context);
+
     User registerUserViaStackexchange(StackexchangeRegistrationContext context);
 
     User updateGithubUser(GithubRegistrationContext registrationContext);
 
     User updateVkUser(VkRegistrationContext registrationContext);
+
+    User updateFacebookUser(FacebookRegistrationContext registrationContext);
 
     User updateStackexchangeUser(StackexchangeRegistrationContext registrationContext);
 

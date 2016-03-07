@@ -15,6 +15,14 @@ define([], function() {
             + window.co.vkClientState
             + ':' + encodeURIComponent(location.pathname + (location.search || ''));
 
+        this.fbUrl = 'https://www.facebook.com/dialog/oauth?client_id='
+            + window.co.facebookClientId
+            + '&scope=public_profile&redirect_uri='
+            + encodeURIComponent(window.co.facebookCallbackUrl)
+            + '&state='
+            + window.co.facebookClientState
+            + ':' + encodeURIComponent(location.pathname + (location.search || ''));
+
         this.stackexchangeUrl = 'https://stackexchange.com/oauth?client_id='
             + window.co.stackexchangeClientId
             + '&scope=no_expiry&redirect_uri='

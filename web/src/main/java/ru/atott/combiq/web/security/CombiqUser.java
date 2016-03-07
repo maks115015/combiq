@@ -72,6 +72,8 @@ public class CombiqUser extends User {
                 return avatarUrl;
             case stackexchange:
                 return avatarUrl;
+            case facebook:
+                return avatarUrl;
         }
 
         return null;

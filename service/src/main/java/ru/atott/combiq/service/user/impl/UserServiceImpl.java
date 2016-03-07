@@ -78,6 +78,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User registerUserViaFacebook(FacebookRegistrationContext context) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLogin(context.getId());
+        userEntity.setName(context.getName());
+        userEntity.setType(UserType.facebook.name());
+        userEntity.setAvatarUrl(context.getAvatarUrl());
+        userEntity.setRegisterDate(new Date());
+
+        eventService.createRegisterUserEvent(UserType.facebook, context.getId());
+
+        userEntity = userRepository.index(userEntity);
+        return userMapper.map(userEntity);
+    }
+
+    @Override
     public User registerUserViaStackexchange(StackexchangeRegistrationContext context) {
         UserEntity userEntity = new UserEntity();
         userEntity.setLogin(context.getUid());
@@ -120,6 +135,23 @@ public class UserServiceImpl implements UserService {
         userEntity.setLocation(context.getLocation());
         userEntity.setName(context.getName());
         userEntity.setType(UserType.vk.name());
+        userEntity.setAvatarUrl(context.getAvatarUrl());
+
+        if (userEntity.getRegisterDate() == null) {
+            userEntity.setRegisterDate(new Date());
+        }
+
+        userRepository.save(userEntity);
+        return userMapper.map(userEntity);
+    }
+
+    @Override
+    public User updateFacebookUser(FacebookRegistrationContext context) {
+        UserEntity userEntity = userRepository.findByLoginAndType(context.getId(), UserType.facebook.name()).get(0);
+
+        userEntity.setLogin(context.getId());
+        userEntity.setName(context.getName());
+        userEntity.setType(UserType.facebook.name());
         userEntity.setAvatarUrl(context.getAvatarUrl());
 
         if (userEntity.getRegisterDate() == null) {
