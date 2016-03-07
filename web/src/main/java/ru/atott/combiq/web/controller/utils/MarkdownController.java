@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.atott.combiq.service.file.FileDescriptor;
 import ru.atott.combiq.service.file.FileService;
 import ru.atott.combiq.service.file.Location;
-import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.web.bean.UploadFileBean;
 import ru.atott.combiq.web.controller.BaseController;
 
@@ -36,7 +36,7 @@ public class MarkdownController extends BaseController {
             return markdown;
         }
 
-        return markdownService.toHtml(markdown);
+        return markdownService.toHtml(getUc(), markdown);
     }
 
     @RequestMapping(value="/markdown/image/upload", method=RequestMethod.POST)

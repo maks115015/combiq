@@ -18,7 +18,7 @@
                     data-bind="element: tagsElement, options: availableTags" multiple="multiple"></select>
         </div>
         <label class="col-sm-1 form-control-label" style="margin-top: 7px;">Уровень</label>
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-right">
             <div class="co-level-option"
                  data-bind="click: function() { $data.level('D1'); }, css: {active: level() == 'D1'}">
                 <div class="co-level co-level-d1">
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="co-questionposter-footer"
+    <div class="co-dialog-footer"
          data-bind="css: {'co-questionposter-footer-done': saved}">
         <input type="button"
                class="btn btn-primary"

@@ -9,6 +9,7 @@ import ru.atott.combiq.service.UrlResolver;
 import ru.atott.combiq.service.bean.Questionnaire;
 import ru.atott.combiq.service.bean.QuestionnaireHead;
 import ru.atott.combiq.service.question.QuestionnaireService;
+import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.ContentRequest;
 import ru.atott.combiq.web.utils.RequestUrlResolver;
@@ -58,7 +59,8 @@ public class QuestionnaireController extends BaseController {
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public Object updateTitle(@PathVariable("questionnaireId") String questionnaireId,
                               @RequestBody ContentRequest title) {
-        questionnaireService.updateQuestionnaireTitle(questionnaireId, title.getContent());
+        UserContext uc = getUc();
+        questionnaireService.updateQuestionnaireTitle(uc, questionnaireId, title.getContent());
         return new SuccessBean();
     }
 }

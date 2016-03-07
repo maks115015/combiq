@@ -4,7 +4,7 @@ import ru.atott.combiq.dao.entity.MarkdownContent;
 
 public interface ContentService {
 
-    MarkdownContent getContent(String id);
+    MarkdownContent getContent(UserContext uc, String id);
 
-    void updateContent(String id, String content);
+    void updateContent(UserContext uc, String id, String content);
 }

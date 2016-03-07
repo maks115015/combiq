@@ -12,21 +12,13 @@
     padding: 3px;
     border: solid 1px rgb(204, 204, 204);
     opacity: 0.2;
-    margin-right: 4px;
+    margin-left: 4px;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .co-questionposter .co-level-option:hover {
     opacity: 1;
-}
-
-.co-questionposter-footer {
-    background-color: #ededed;
-    margin: -20px;
-    margin-top: 20px;
-    padding: 20px;
-    transition: background-color 300ms linear;
 }
 
 .co-questionposter-footer-savelabel {

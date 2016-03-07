@@ -13,7 +13,7 @@ public interface QuestionService {
 
     void updateComment(UserContext uc, String questionId, String commentId, String comment);
 
-    void saveQuestionBody(String questionId, String body);
+    void saveQuestionBody(UserContext uc, String questionId, String body);
 
     void saveQuestion(UserContext uc, Question question);
 

@@ -15,12 +15,11 @@ body {
     }
 }
 
-html /deep/ a,
 a {
     color: #007fb6;
     text-decoration: none;
 }
-html /deep/ a:hover,
+
 a:hover {
     color: #00b7ff;
     text-decoration: none;
@@ -259,11 +258,11 @@ footer {
     padding: 35px 0;
 }
 
-footer /deep/ a {
+footer a {
     color: #97999b;
 }
 
-footer /deep/ a:hover {
+footer a:hover {
     color: #49c3fb;
 }
 
@@ -1054,4 +1053,12 @@ ul.co-component-question-tags > li {
     color: #000000;
     background-color: #FFF8E1;
     border-color: #FFECB3;
+}
+
+.co-dialog-footer {
+    background-color: #ededed;
+    margin: -20px;
+    margin-top: 20px;
+    padding: 20px;
+    transition: background-color 300ms linear;
 }

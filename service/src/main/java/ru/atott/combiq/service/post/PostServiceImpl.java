@@ -11,7 +11,7 @@ import ru.atott.combiq.dao.entity.PostEntity;
 import ru.atott.combiq.dao.repository.PostRepository;
 import ru.atott.combiq.service.bean.Post;
 import ru.atott.combiq.service.mapper.PostMapper;
-import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.service.site.UserContext;
 
 import java.util.Date;
@@ -59,7 +59,7 @@ public class PostServiceImpl implements PostService {
         }
 
         postEntity.setTitle(title);
-        postEntity.setContent(markdownService.toMarkdownContent(content));
+        postEntity.setContent(markdownService.toMarkdownContent(uc, content));
         postEntity.setPublished(published);
         postEntity = postRepository.save(postEntity);
         return postEntity.getId();

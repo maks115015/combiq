@@ -18,7 +18,7 @@ import ru.atott.combiq.service.bean.Question;
 import ru.atott.combiq.service.mapper.QuestionMapper;
 import ru.atott.combiq.service.question.QuestionService;
 import ru.atott.combiq.service.site.EventService;
-import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.service.util.NumberService;
 import ru.atott.combiq.service.util.TransletirateService;
@@ -85,7 +85,7 @@ public class QuestionServiceImpl implements QuestionService {
         }
 
         QuestionComment questionComment = new QuestionComment();
-        questionComment.setContent(markdownService.toMarkdownContent(comment));
+        questionComment.setContent(markdownService.toMarkdownContent(uc, comment));
         questionComment.setPostDate(new Date());
         questionComment.setUserId(uc.getUserId());
         questionComment.setId(UUID.randomUUID().toString());
@@ -130,7 +130,7 @@ public class QuestionServiceImpl implements QuestionService {
             }
         }
 
-        questionComment.setContent(markdownService.toMarkdownContent(commentMarkdown));
+        questionComment.setContent(markdownService.toMarkdownContent(uc, commentMarkdown));
         questionComment.setEditDate(new Date());
 
         if (!Objects.equals(questionComment.getUserId(), uc.getUserId())) {
@@ -147,9 +147,9 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void saveQuestionBody(String questionId, String body) {
+    public void saveQuestionBody(UserContext uc, String questionId, String body) {
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
-        questionEntity.setBody(markdownService.toMarkdownContent(body));
+        questionEntity.setBody(markdownService.toMarkdownContent(uc, body));
         questionRepository.save(questionEntity);
     }
 

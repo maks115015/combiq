@@ -17,7 +17,7 @@ import ru.atott.combiq.service.question.TagService;
 import ru.atott.combiq.service.question.impl.GetQuestionContext;
 import ru.atott.combiq.service.question.impl.GetQuestionResponse;
 import ru.atott.combiq.service.search.SearchService;
-import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.web.bean.QuestionBean;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.controller.BaseController;
@@ -131,7 +131,7 @@ public class QuestionController extends BaseController {
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public Object postContent(@PathVariable("questionId") String questionId,
                               @RequestBody ContentRequest contentRequest) {
-        questionService.saveQuestionBody(questionId, contentRequest.getContent());
+        questionService.saveQuestionBody(getUc(), questionId, contentRequest.getContent());
         return new SuccessBean();
     }
 
@@ -193,7 +193,7 @@ public class QuestionController extends BaseController {
         }
 
         question.setTitle(questionRequest.getTitle());
-        question.setBody(markdownService.toMarkdownContent(questionRequest.getBody()));
+        question.setBody(markdownService.toMarkdownContent(getUc(), questionRequest.getBody()));
         question.setLevel(questionRequest.getLevel());
         question.setTags(questionRequest.getTags() != null ? questionRequest.getTags() : Collections.emptyList());
 

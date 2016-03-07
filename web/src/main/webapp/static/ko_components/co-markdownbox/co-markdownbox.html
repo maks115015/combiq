@@ -3,16 +3,18 @@
         <li>
             <div class="btn-group" role="group">
                 <button data-bind="css: {active: active() == 'markdown'}, click: toggleSrc"
-                        type="button" class="btn btn-default">
-                    Markdown
+                        type="button" class="btn btn-default"
+                        title="Markdown разметка">
+                    <img style="margin-top: -3px;" src="/static/images/icons/markdown-16.png">
                 </button>
                 <button data-bind="css: {active: active() == 'html'}, click: togglePreview"
-                        type="button" class="btn btn-default">
-                    HTML
+                        type="button" class="btn btn-default"
+                        title="HTML предпросмотр">
+                    <img style="margin-top: -3px;" src="/static/images/icons/html-16.png">
                 </button>
             </div>
         </li>
-        <li>
+        <li data-bind="visible: visibleInsert">
             <div class="btn-group" role="group">
                 <button data-bind="disable: active() != 'markdown'"
                         type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,7 +22,7 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li>
+                    <li data-bind="visible: visibleInsertImage">
                         <a href="#" data-bind="click: insertImage">Изображение</a>
                     </li>
                 </ul>

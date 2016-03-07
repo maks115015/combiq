@@ -1,11 +1,22 @@
-define(['ajax', 'knockout', 'js/lib/ace/ace'], function(ajax, ko) {
+define(['ajax', 'knockout'], function(ajax, ko) {
 
     function ViewModel(params) {
+        var self = this;
         this.text = ko.wrap(params.text);
         this.editorElement = ko.wrap();
         this.editorBoundElement = ko.wrap();
         this.active = ko.wrap(params.active || 'html'); // markdown, html
         this.preview = ko.wrap();
+        this.visibleInsertImage = ko.wrap(false);
+
+        if (['sa', 'contenter']
+                .some(function(role) {return window.co.userRoles.indexOf(role) != -1;})) {
+            this.visibleInsertImage(true);
+        }
+
+        this.visibleInsert = ko.computed(function() {
+            return self.visibleInsertImage();
+        });
 
         if (params.markdownBoxModel) {
             params.markdownBoxModel(this);
@@ -49,6 +60,7 @@ define(['ajax', 'knockout', 'js/lib/ace/ace'], function(ajax, ko) {
 
     ViewModel.prototype.toggleSrc = function() {
         this.active('markdown');
+        this.focus();
     };
 
     ViewModel.prototype.togglePreview = function() {

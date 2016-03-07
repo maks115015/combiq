@@ -8,12 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.atott.combiq.service.site.ContentService;
 import ru.atott.combiq.service.site.SubscriptionService;
 import ru.atott.combiq.service.site.SubscriptionType;
+import ru.atott.combiq.service.site.UserContext;
 import ru.atott.combiq.web.bean.SuccessBean;
 import ru.atott.combiq.web.request.JobSubscribeRequest;
 import ru.atott.combiq.web.security.AuthService;
 
 @Controller
-public class JobController {
+public class JobController extends BaseController {
     @Autowired
     private ContentService contentService;
     @Autowired
@@ -23,15 +24,17 @@ public class JobController {
 
     @RequestMapping(value = "/job")
     public ModelAndView job() {
+        UserContext uc = getUc();
         ModelAndView modelAndView = new ModelAndView("job/job");
-        modelAndView.addObject("jobPageContent", contentService.getContent("job-page"));
+        modelAndView.addObject("jobPageContent", contentService.getContent(uc, "job-page"));
         return modelAndView;
     }
 
     @RequestMapping(value = "/job/opinions")
     public ModelAndView opinions() {
+        UserContext uc = getUc();
         ModelAndView modelAndView = new ModelAndView("job/opinions");
-        modelAndView.addObject("jobOpinionsPageContent", contentService.getContent("job-opinions-page"));
+        modelAndView.addObject("jobOpinionsPageContent", contentService.getContent(uc, "job-opinions-page"));
         return modelAndView;
     }
 

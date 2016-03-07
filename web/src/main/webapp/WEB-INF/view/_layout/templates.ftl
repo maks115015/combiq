@@ -43,8 +43,8 @@
         <script src="/static/js/lib/knockout.bindings.js?v=${resourceVersion}"></script>
         <script src="/static/js/lib/jquery-resizable.min.js"></script>
         <script src="/static/js/lib/tooltipster/jquery.tooltipster.min.js"></script>
+        <script src="/static/js/lib/ace/ace.js"></script>
         <script src="/static/js/site.js?v=${resourceVersion}"></script>
-        <#--<script src="/static/js/lib/select2-4.0.2-rc.1/js/select2.min.js"></script>-->
         <script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
 
         <!--[if lt IE 9]>
@@ -66,6 +66,7 @@
             window.co = {
                 userId: ${if(userId??, '"' + (userId!'') + '"', 'null')},
                 userEmail: '${userEmail!''}',
+                userRoles: ${utils.serializeToJson(roles)},
                 githubClientId: '${githubClientId?js_string}',
                 githubClientState: '${githubClientState?js_string}',
                 vkClientId: '${vkClientId?js_string}',

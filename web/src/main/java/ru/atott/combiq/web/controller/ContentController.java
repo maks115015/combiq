@@ -18,7 +18,7 @@ public class ContentController extends BaseController {
     @PreAuthorize("hasAnyRole('sa','contenter')")
     public Object preview(@PathVariable("contentId") String contentId,
                           @RequestBody ContentRequest contentRequest) {
-        contentService.updateContent(contentId, contentRequest.getContent());
+        contentService.updateContent(getUc(), contentId, contentRequest.getContent());
         return new SuccessBean();
     }
 }

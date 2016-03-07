@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.atott.combiq.service.question.QuestionnaireService;
 import ru.atott.combiq.service.site.ContentService;
+import ru.atott.combiq.service.site.UserContext;
 
 @Controller
 public class InterviewController extends BaseController {
@@ -19,24 +20,27 @@ public class InterviewController extends BaseController {
 
     @RequestMapping(value = "/interview")
     public ModelAndView interview() {
+        UserContext uc = getUc();
         ModelAndView modelAndView = new ModelAndView("interview/interview");
         modelAndView.addObject("questionnaires", questionnaireService.getQuestionnaires());
-        modelAndView.addObject("questionnairesPageContent", contentService.getContent("questionnaires-page"));
-        modelAndView.addObject("questionnairesPageBottomContent", contentService.getContent("questionnaires-page-bottom"));
+        modelAndView.addObject("questionnairesPageContent", contentService.getContent(uc, "questionnaires-page"));
+        modelAndView.addObject("questionnairesPageBottomContent", contentService.getContent(uc, "questionnaires-page-bottom"));
         return modelAndView;
     }
 
     @RequestMapping(value = "/interview/arrange")
     public ModelAndView interviewArrange() {
+        UserContext uc = getUc();
         ModelAndView modelAndView = new ModelAndView("interview/arrange");
-        modelAndView.addObject("interviewPageContent", contentService.getContent("interview-page"));
+        modelAndView.addObject("interviewPageContent", contentService.getContent(uc, "interview-page"));
         return modelAndView;
     }
 
     @RequestMapping(value = "/interview/education")
     public ModelAndView interviewEducation() {
+        UserContext uc = getUc();
         ModelAndView modelAndView = new ModelAndView("/interview/education");
-        modelAndView.addObject("educationPageContent", contentService.getContent("education-page"));
+        modelAndView.addObject("educationPageContent", contentService.getContent(uc, "education-page"));
         return modelAndView;
     }
 

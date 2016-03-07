@@ -16,6 +16,8 @@ import ru.atott.combiq.web.view.InstantMessageHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Collections;
+import java.util.Set;
 
 @Component
 public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
@@ -58,11 +60,17 @@ public class CommonViewAttributesInjector extends HandlerInterceptorAdapter {
             CombiqUser user = authService.getUser();
             UrlResolver urlResolver = new RequestUrlResolver(request);
 
+            Set<String> roles = Collections.emptySet();
+            if (user != null) {
+                roles = user.getRoles();
+            }
+
             modelAndView.addObject("utils", viewUtils);
             modelAndView.addObject("env", System.getProperty("env"));
             modelAndView.addObject("resourceVersion", resourceVersion);
             modelAndView.addObject("user", user);
             modelAndView.addObject("userId", authService.getUserId());
+            modelAndView.addObject("roles", roles);
             modelAndView.addObject("userEmail", user != null ? user.getEmail() : null);
             modelAndView.addObject("urlResolver", new RequestUrlResolver(request));
 

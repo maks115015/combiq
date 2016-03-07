@@ -2,13 +2,13 @@
     Изменить комментарий:
 </div>
 
-<co-markdownbox params="text: markdown"></co-markdownbox>
+<co-markdownbox params="text: markdown, active: 'markdown'"></co-markdownbox>
 
-<div>
-    <button data-bind="click: saveButtonClick, disable: posting">Сохранить</button>
+<div class="co-dialog-footer">
+    <button class="btn btn-primary" data-bind="click: saveButtonClick, disable: posting">Сохранить</button>
     <span class="co-commentposter-postingtip" data-bind="visible: posting">Сохранение...</span>
 
-    <div class="pull-right co-inline">
+    <div class="pull-right co-inline" style="padding-top: 5px;">
         <span class="co-commentposter-markdowntip">Используйте <a target="_blank" href="http://daringfireball.net/projects/markdown/">markdown</a> разметку</span>
     </div>
 </div>

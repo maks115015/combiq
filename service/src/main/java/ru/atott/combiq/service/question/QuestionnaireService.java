@@ -17,7 +17,7 @@ public interface QuestionnaireService {
 
     Questionnaire exportQuestionnareToPdf(UserContext uc, String id, OutputStream outputStream);
 
-    void updateQuestionnaireTitle(String id, String title);
+    void updateQuestionnaireTitle(UserContext uc, String id, String title);
 
     void exportQuestionnareToPdf(Questionnaire questionnaire, OutputStream outputStream);
 }

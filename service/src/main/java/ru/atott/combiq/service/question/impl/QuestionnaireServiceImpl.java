@@ -14,7 +14,7 @@ import ru.atott.combiq.service.search.SearchContext;
 import ru.atott.combiq.service.search.SearchResponse;
 import ru.atott.combiq.service.search.SearchService;
 import ru.atott.combiq.service.question.QuestionnaireService;
-import ru.atott.combiq.service.site.MarkdownService;
+import ru.atott.combiq.service.markdown.MarkdownService;
 import ru.atott.combiq.service.site.UserContext;
 
 import java.io.InputStream;
@@ -76,14 +76,14 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     }
 
     @Override
-    public void updateQuestionnaireTitle(String id, String title) {
+    public void updateQuestionnaireTitle(UserContext uc, String id, String title) {
         QuestionnaireEntity entity = questionnaireRepository.findOne(id);
 
         if (entity == null) {
             return;
         }
 
-        entity.setTitle(markdownService.toMarkdownContent(title));
+        entity.setTitle(markdownService.toMarkdownContent(uc, title));
 
         questionnaireRepository.save(entity);
     }

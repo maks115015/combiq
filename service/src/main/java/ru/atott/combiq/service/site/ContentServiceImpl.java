@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.atott.combiq.dao.entity.ContentEntity;
 import ru.atott.combiq.dao.entity.MarkdownContent;
 import ru.atott.combiq.dao.repository.ContentRepository;
+import ru.atott.combiq.service.markdown.MarkdownService;
 
 @Service
 public class ContentServiceImpl implements ContentService {
@@ -16,11 +17,11 @@ public class ContentServiceImpl implements ContentService {
     private MarkdownService markdownService;
 
     @Override
-    public MarkdownContent getContent(String id) {
+    public MarkdownContent getContent(UserContext uc, String id) {
         ContentEntity contentEntity = contentRepository.findOne(id);
 
         if (contentEntity == null) {
-            return markdownService.toMarkdownContent(id, null);
+            return markdownService.toMarkdownContent(uc, id, null);
         }
 
         MarkdownContent content = contentEntity.getContent();
@@ -34,7 +35,7 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public void updateContent(String id, String content) {
+    public void updateContent(UserContext uc, String id, String content) {
         ContentEntity contentEntity = contentRepository.findOne(id);
 
         if (contentEntity == null) {
@@ -42,7 +43,7 @@ public class ContentServiceImpl implements ContentService {
             contentEntity.setId(id);
         }
 
-        contentEntity.setContent(markdownService.toMarkdownContent(id, content));
+        contentEntity.setContent(markdownService.toMarkdownContent(uc, id, content));
         contentRepository.save(contentEntity);
     }
 }
