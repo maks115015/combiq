@@ -202,6 +202,7 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
                         .tokenValiditySeconds((int) Duration.ofDays(30).getSeconds())
                         .and()
                     .logout()
+                        .logoutSuccessHandler(new CombiqLogoutHandler())
                         .logoutUrl("/logout.do");
         }
 

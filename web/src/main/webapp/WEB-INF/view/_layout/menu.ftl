@@ -46,7 +46,7 @@
                                 </li>
                             <#else>
                                 <li class="co-auth">
-                                    <a href="/login.do">Войти</a>
+                                    <a onclick="ko.openDialog('co-login'); return false;" href="/login.do">Войти</a>
                                 </li>
                             </#if>
                         </ul>
