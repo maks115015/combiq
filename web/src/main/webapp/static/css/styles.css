@@ -1037,3 +1037,21 @@ ul.co-component-question-tags > li {
     padding: 8px;
     font-size: 12px;
 }
+
+.label {
+    display: inline-block;
+    margin-bottom: 5px;
+    padding: 4px 6px;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.label-warning {
+    background-color: #FF9800;
+}
+
+.alert-warning {
+    color: #000000;
+    background-color: #FFF8E1;
+    border-color: #FFECB3;
+}

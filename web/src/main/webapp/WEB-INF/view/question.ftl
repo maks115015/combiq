@@ -144,7 +144,6 @@
             <@landingBlock />
         </#if>
 
-
         <@listQuestionComments />
 </@templates.layoutWithSidebar>
 
@@ -256,34 +255,59 @@
         <h4 id="comments">Комментарии</h4>
         <co-commentposter params="questionId: '${question.id?js_string}'"></co-commentposter>
         <div style="margin-top: 25px;">
-            <#if comments?? && comments?size &gt; 0>
-                <ul class="co-comments">
-                    <#list comments as comment>
-                        <li>
-                            <@outComment comment=comment />
-                        </li>
-                    </#list>
-                </ul>
 
-            <#else>
-                <div class="co-comments-notfound">
-                    Комментариев к этому вопросу пока нет. Возможно, вам будут интересны комментарии
-                    наших пользователей к другим вопросам:
+            <#if !user?? && question.level == 'D3'>
+
+                <div class="alert alert-warning">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                Просматривать комментарии к вопросам уровня D3 могут только аутентифицированные пользователи.
+                                <br>
+                                Пожалуйста, войдите на Combiq.ru.
+                            </div>
+                            <div style="margin-top: 15px;">
+                                <button onclick="ko.openDialog('co-login');" class="btn btn-primary">Войти на Combiq.ru</button>
+                            </div>
+                            <div class="co-small" style="margin-top: 15px;">
+                                Для входа на Combiq.ru регистрация и подтверждение email не требуются.
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <ul class="co-comments co-comments-latest">
-                    <#list questionsWithLatestComments as question>
-                        <li>
-                            <div class="co-comments-question-title">
-                                <@parts.questionLevel level=question.level class='co-small' />
-                                <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
-                            </div>
-                            <div class="co-comments-question-comments">
-                                <@outComment comment=question.lastComment />
-                            </div>
-                        </li>
-                    </#list>
-                </ul>
+            <#else>
+
+                <#if comments?? && comments?size &gt; 0>
+                    <ul class="co-comments">
+                        <#list comments as comment>
+                            <li>
+                                <@outComment comment=comment />
+                            </li>
+                        </#list>
+                    </ul>
+
+                <#else>
+                    <div class="co-comments-notfound">
+                        Комментариев к этому вопросу пока нет. Возможно, вам будут интересны комментарии
+                        наших пользователей к другим вопросам:
+                    </div>
+
+                    <ul class="co-comments co-comments-latest">
+                        <#list questionsWithLatestComments as question>
+                            <li>
+                                <div class="co-comments-question-title">
+                                    <@parts.questionLevel level=question.level class='co-small' />
+                                    <a href="${urlResolver.getQuestionUrl(question)}">${question.title}</a>
+                                </div>
+                                <div class="co-comments-question-comments">
+                                    <@outComment comment=question.lastComment />
+                                </div>
+                            </li>
+                        </#list>
+                    </ul>
+                </#if>
+
             </#if>
         </div>
     </div>
