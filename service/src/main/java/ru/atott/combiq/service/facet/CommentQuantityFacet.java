@@ -19,7 +19,9 @@ public class CommentQuantityFacet implements Facet {
 
     @Override
     public Optional<FilterBuilder> getFilter(FacetContext context) {
-        if (minCount == 1) {
+        if (minCount <= 0) {
+            return Optional.of(FilterBuilders.missingFilter("comments.id"));
+        } else if (minCount == 1) {
             return Optional.of(FilterBuilders.existsFilter("comments.id"));
         } else {
             return Optional.of(

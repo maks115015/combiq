@@ -83,9 +83,6 @@ public class DslParser {
                             case "comments":
                                 try {
                                     query.setMinCommentQuantity(Long.valueOf(pair.getValue()));
-                                    if (query.getMinCommentQuantity() < 1) {
-                                        query.setMinCommentQuantity(null);
-                                    }
                                 } catch (Exception e) {
                                     // Nothing to do.
                                 }

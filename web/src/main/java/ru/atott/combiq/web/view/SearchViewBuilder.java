@@ -85,7 +85,9 @@ public class SearchViewBuilder {
         mav.addObject("subTitle", subTitle);
         mav.addObject("questionsCatalog", questionsCatalog);
         mav.addObject("showMatrixCompetenceAdvice", dslQuery != null && isNotBlank(dslQuery.getLevel()));
-        mav.addObject("searchOnlyWithComments", dslQuery != null && dslQuery.getMinCommentQuantity() != null);
+        mav.addObject("searchOnlyWithComments", dslQuery != null
+                && dslQuery.getMinCommentQuantity() != null
+                && dslQuery.getMinCommentQuantity() > 0);
         return mav;
     }
 }
